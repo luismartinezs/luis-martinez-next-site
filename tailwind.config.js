@@ -9,8 +9,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: colors.sky,
-        secondary: colors.emerald
+        primary: colors.indigo,
+        secondary: colors.fuchsia
       },
       fontFamily: {
         'sans': ['Inter', ...defaultTheme.fontFamily.sans]
