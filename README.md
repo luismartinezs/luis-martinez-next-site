@@ -16,6 +16,9 @@ Alternative:
 Way forward
 
 - Setup Storyblok and get the blog content from there
+  - [x] Storyblok space
+  - [ ] Use storyblok in NextJS
+  - [ ] Render blog posts from Storyblok
 - Components I need
   - Video component
   - Rich text component
