@@ -1,5 +1,6 @@
 import { storyblokInit, apiPlugin, getStoryblokApi } from "@storyblok/react";
 import StoryblokPage from "components/StoryblokPage";
+import Post from "components/Post";
 import RichText from "components/RichText";
 import YoutubeVideo from "components/YoutubeVideo";
 
@@ -10,6 +11,7 @@ export function initStoryblok() {
     RichText,
     YoutubeVideo,
     page: StoryblokPage,
+    post: Post,
   };
 
   storyblokInit({
@@ -53,4 +55,19 @@ export async function getAllPosts({ version }: { version?: Version } = {}) {
     starts_with: `${siteSlug}/blog/`,
   });
   return { posts: stories };
+}
+
+export async function getPost({
+  slug,
+  version,
+}: {
+  slug: string;
+  version?: Version;
+}) {
+  let _version = version || "draft";
+  let { story } = await getStory({
+    slug: `blog/${slug}`,
+    version: _version,
+  });
+  return { post: story };
 }

@@ -1,36 +1,33 @@
-import fs from "fs";
-import matter from "gray-matter";
-import md from "markdown-it";
+import { getAllPosts, getPost } from "lib/storyblok";
+import { StoryblokComponent, useStoryblokState } from "@storyblok/react";
 
-export async function getStaticPaths() {
-  const files = fs.readdirSync("posts");
-  const paths = files.map((fileName) => ({
-    params: {
-      slug: fileName.replace(".md", ""),
-    },
-  }));
+export async function getStaticPaths(): Promise<{
+  paths: { params: { slug: string } }[];
+  fallback: true | false | "blocking";
+}> {
+  const { posts } = await getAllPosts({ version: "draft" });
+
   return {
-    paths,
-    fallback: false,
+    paths: posts.map(({ slug }) => ({ params: { slug } })),
+    fallback: false, // false or 'blocking'
   };
 }
 
 export async function getStaticProps({ params: { slug } }) {
-  const fileName = fs.readFileSync(`posts/${slug}.md`, "utf-8");
-  const { data: frontmatter, content } = matter(fileName);
+  const { post } = await getPost({ slug, version: "draft" });
+
   return {
     props: {
-      frontmatter,
-      content,
+      post,
     },
   };
 }
 
-export default function PostPage({ frontmatter, content }) {
+export default function PostPage({ post }) {
+  post = useStoryblokState(post);
   return (
     <div className="prose mx-auto">
-      <h1>{frontmatter.title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: md().render(content) }} />
+      <StoryblokComponent blok={post.content} />
     </div>
   );
 }
