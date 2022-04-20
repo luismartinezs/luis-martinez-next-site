@@ -22,3 +22,7 @@ Way forward
 - Components I need
   - Video component
   - Rich text component
+
+## Documentation
+
+- [Storyblok client api](https://github.com/storyblok/storyblok-js-client#class-storyblok)
