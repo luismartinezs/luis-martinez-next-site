@@ -3,6 +3,7 @@ import StoryblokPage from "blocks/StoryblokPage";
 import Post from "blocks/Post";
 import RichText from "blocks/RichText";
 import YoutubeVideo from "blocks/YoutubeVideo";
+import CloudinaryImage from "blocks/CloudinaryImage";
 
 const siteSlug = "luis-martinez-net";
 
@@ -12,6 +13,7 @@ export function initStoryblok() {
     YoutubeVideo,
     page: StoryblokPage,
     post: Post,
+    CloudinaryImage
   };
 
   storyblokInit({

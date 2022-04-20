@@ -1,22 +1,15 @@
 import Image from "next/image";
-
-type CloudinaryImageProps = {
-  src: string;
-  width?: number;
-  height?: number;
-  loading?: "lazy" | "eager";
-  alt?: string
-};
+import { CloudinaryImageProps } from "types/types";
 
 const CloudinaryImage: React.FC<CloudinaryImageProps> = ({
   src,
-  width = 240,
-  height = 750,
+  width,
+  height,
   loading = "lazy",
-  alt = ''
+  alt = "",
+  layout = "responsive",
 }) => {
   const hostUrl = `https://res.cloudinary.com/dicyllvry/image/upload/q_100,w_${width},h_${height}/luis-martinez`;
-  // https://res.cloudinary.com/dicyllvry/image/upload/luis-martinez/galen-crout-fItRJ7AHak8-unsplash_h5yt9m
 
   return (
     <Image
@@ -25,7 +18,7 @@ const CloudinaryImage: React.FC<CloudinaryImageProps> = ({
       alt={alt}
       width={width}
       height={height}
-      layout="responsive"
+      layout={layout}
       quality={10}
       loading={loading}
     />
