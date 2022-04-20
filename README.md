@@ -20,6 +20,9 @@ Way forward
   - [x] Use storyblok in NextJS
   - [x] Render blog posts from Storyblok
   - [ ] Add hero image with title in blog posts
+  - [ ] Render about content
+  - [ ] Render resume content
+  - [ ] Visual editor shows blogpost
 - Components I need
   - [ ] Video component
   - [x] Rich text component
