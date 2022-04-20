@@ -27,6 +27,7 @@ export default function PostPage({ post }) {
   post = useStoryblokState(post);
   return (
     <div className="prose mx-auto">
+      <h1>{post.content.postTitle}</h1>
       <StoryblokComponent blok={post.content} />
     </div>
   );
