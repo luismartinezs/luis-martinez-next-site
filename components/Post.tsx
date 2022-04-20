@@ -1,6 +1,6 @@
 import { storyblokEditable, StoryblokComponent } from "@storyblok/react";
 
-const Page = ({ blok }) => (
+const Post = ({ blok }) => (
   <main className="px-6" {...storyblokEditable(blok)} key={blok._uid}>
     {blok.body.map((nestedBlok) => (
       <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} />
@@ -8,4 +8,4 @@ const Page = ({ blok }) => (
   </main>
 );
 
-export default Page;
+export default Post;
