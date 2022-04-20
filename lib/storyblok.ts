@@ -1,8 +1,8 @@
 import { storyblokInit, apiPlugin, getStoryblokApi } from "@storyblok/react";
-import StoryblokPage from "components/StoryblokPage";
-import Post from "components/Post";
-import RichText from "components/RichText";
-import YoutubeVideo from "components/YoutubeVideo";
+import StoryblokPage from "blocks/StoryblokPage";
+import Post from "blocks/Post";
+import RichText from "blocks/RichText";
+import YoutubeVideo from "blocks/YoutubeVideo";
 
 const siteSlug = "luis-martinez-net";
 

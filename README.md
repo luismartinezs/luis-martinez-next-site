@@ -20,6 +20,8 @@ Way forward
   - [x] Use storyblok in NextJS
   - [x] Render blog posts from Storyblok
   - [ ] Add hero image with title in blog posts
+  - [ ] Blog posts can have videos
+  - [ ] Blog posts can have cloudinary images
   - [ ] Render about content
   - [ ] Render resume content
   - [ ] Visual editor shows blogpost

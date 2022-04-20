@@ -1,11 +1,8 @@
 import Header from "components/Header";
 import Footer from "components/Footer";
+import type { PropsWithChildren } from "types/types";
 
-type LayoutProps = {
-  children: React.ReactNode;
-};
-
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout: React.FC<Required<PropsWithChildren>> = ({ children }) => {
   return (
     <div className="flex flex-col justify-between h-screen">
       <div>

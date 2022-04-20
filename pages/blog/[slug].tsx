@@ -1,6 +1,7 @@
 import { getAllPosts, getPost } from "lib/storyblok";
 import { StoryblokComponent, useStoryblokState } from "@storyblok/react";
 import Head from "next/head";
+import WidthWrapper from "components/WidthWrapper";
 
 export async function getStaticPaths(): Promise<{
   paths: { params: { slug: string } }[];
@@ -34,7 +35,9 @@ export default function PostPage({ post }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="prose mx-auto">
-        <h1>{post.content.postTitle}</h1>
+        <WidthWrapper width="text">
+          <h1>{post.content.postTitle}</h1>
+        </WidthWrapper>
         <StoryblokComponent blok={post.content} />
       </div>
     </>
