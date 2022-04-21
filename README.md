@@ -22,12 +22,12 @@ Way forward
   - [ ] Add hero image with title in blog posts
   - [x] Blog posts can have videos
   - [x] Blog posts can have cloudinary images
-  - [ ] Render about content
-  - [ ] Render resume content
+  - [x] Render about content
+  - [x] Render resume content
   - [x] Visual editor shows blogpost
   - [ ] Tweak inline code snippets in posts
 - Components I need
-  - [ ] Video component
+  - [x] Video component
   - [x] Rich text component
 
 ## Documentation

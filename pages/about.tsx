@@ -1,31 +1,14 @@
-import Head from "next/head";
-import fs from "fs";
-import matter from "gray-matter";
-import md from "markdown-it";
+import { getMarkdownContent } from "lib/markdown";
+import MarkdownContent from "components/MarkdownContent";
 
 export async function getStaticProps() {
-  const fileName = fs.readFileSync("content/about.md", "utf-8");
-  const { data: frontmatter, content } = matter(fileName);
-
   return {
-    props: {
-      frontmatter,
-      content,
-    },
+    props: getMarkdownContent("content/about.md"),
   };
 }
 
-const AboutPage = ({ frontmatter, content }) => {
-  return (
-    <>
-      <Head>
-        <title>{frontmatter.title}</title>
-      </Head>
-      <div className="prose mx-auto">
-        <div dangerouslySetInnerHTML={{ __html: md().render(content) }} />
-      </div>
-    </>
-  );
+const ResumePage = ({ frontmatter, content }) => {
+  return <MarkdownContent frontmatter={frontmatter} content={content} />;
 };
 
-export default AboutPage;
+export default ResumePage;
