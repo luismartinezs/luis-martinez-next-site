@@ -1,18 +1,27 @@
-import CloudinaryImage from "components/CloudinaryImage";
+import { useRef, useEffect } from "react";
 
-const HeroTitle = ({ blok, featuredImage, postTitle }) => {
+const HeroTitle = ({ blok, postTitle }) => {
+  const heroRef = useRef<HTMLInputElement>(null);
+  const wrapperRef = useRef(null);
+  useEffect(() => {
+    if (heroRef && heroRef.current && wrapperRef && wrapperRef.current) {
+      const heroHeight = heroRef.current.offsetHeight;
+      wrapperRef.current.style.paddingBottom = `${heroHeight}px`;
+    }
+  }, [heroRef]);
+
   const _title = blok.title || postTitle;
-  const _imgSrc = blok.bgImageSrc || featuredImage;
 
   return (
-    <div className="rounded-xl relative flex items-center overflow-hidden w-full h-[25rem]">
-      <div className="absolute overflow-hidden min-h-full">
-        <div className="z-10 bg-gradient-to-t from-gray-900 to-transparent absolute inset-0"></div>
-        <CloudinaryImage src={_imgSrc} alt="" />
+    <div ref={wrapperRef} className="-mt-6">
+      <div
+        className="bg-gradient-to-r from-primary-500 to-secondary-500 px-10 py-8 w-screen absolute inset-x-0"
+        ref={heroRef}
+      >
+        <h1 className="mb-0 text-white tracking-wide leading-tight mx-2 md:max-w-3xl md:mx-auto">
+          {_title}
+        </h1>
       </div>
-      <h1 className="absolute bottom-0 z-10 text-white px-10 pb-6 tracking-wide leading-tight mb-0 text-7xl">
-        {_title}
-      </h1>
     </div>
   );
 };

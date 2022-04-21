@@ -19,7 +19,7 @@ Way forward
   - [x] Storyblok space
   - [x] Use storyblok in NextJS
   - [x] Render blog posts from Storyblok
-  - [ ] Add hero image with title in blog posts
+  - [x] Add hero image with title in blog posts
   - [x] Blog posts can have videos
   - [x] Blog posts can have cloudinary images
   - [x] Render about content
