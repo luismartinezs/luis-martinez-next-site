@@ -29,6 +29,13 @@ Way forward
   - [x] Redesign post card
   - [x] Tweak styles of blogpost links
   - [x] Sticky header
+  - [ ] Add remaining blog posts
+  - [ ] Setup analytics and tracking
+  - [ ] Setup cookie popup
+  - [ ] Setup SEO
+    - [ ] Robots
+    - [ ] Sitemap
+  - [ ] Deploy to netlify
 - Components I need
   - [x] Video component
   - [x] Rich text component
