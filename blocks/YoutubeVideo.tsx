@@ -18,8 +18,7 @@ const YoutubeVideo = ({ blok }) => {
         <div {...storyblokEditable(blok)} key={blok._uid}>
           <div className="max-w-3xl mx-auto">
             <iframe
-              className="w-full"
-              style={{ aspectRatio: "16/9" }}
+              className="w-full aspect-video"
               src={videoUrl}
               title={caption}
               frameBorder="0"
