@@ -34,12 +34,12 @@ export default function PostPage({ post }) {
         <meta name="description" content={post.content.description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="prose custom-prose">
+      <article className="prose custom-prose">
         <WidthWrapper width="text">
           <h1>{post.content.postTitle}</h1>
         </WidthWrapper>
         <StoryblokComponent blok={post.content} />
-      </div>
+      </article>
     </>
   );
 }
