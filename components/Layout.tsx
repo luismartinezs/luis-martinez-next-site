@@ -1,17 +1,22 @@
 import Header from "components/Header";
 import Footer from "components/Footer";
+import TopBand from "components/TopBand";
 import type { PropsWithChildren } from "types/types";
 
 const Layout: React.FC<Required<PropsWithChildren>> = ({ children }) => {
   return (
     <div className="flex flex-col justify-between h-screen">
-      <div>
-        <div className="flex h-1">
-          <div className="flex-1 h-full bg-primary-500" />
-          <div className="flex-1 h-full bg-secondary-500" />
+      <div className="relative">
+        <div className="sticky top-0 left-0 right-0 z-20">
+
+        <div className="relative">
+          <TopBand />
         </div>
-        <Header />
-        <main className="w-full mx-auto mt-6">{children}</main>
+        <div className="relative">
+          <Header />
+        </div>
+        </div>
+        <main className="w-full mx-auto">{children}</main>
       </div>
       <Footer />
     </div>

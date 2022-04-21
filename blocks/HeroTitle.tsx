@@ -13,7 +13,7 @@ const HeroTitle = ({ blok, postTitle }) => {
   const _title = blok.title || postTitle;
 
   return (
-    <div ref={wrapperRef} className="-mt-6">
+    <div ref={wrapperRef}>
       <div
         className="bg-gradient-to-r from-primary-500 to-secondary-500 px-10 py-8 w-screen absolute inset-x-0"
         ref={heroRef}

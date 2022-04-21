@@ -23,24 +23,26 @@ const Header = () => {
   ];
 
   return (
-    <header className="container flex items-center justify-between p-4 mx-auto">
-      <Link href="/" passHref={true}>
-        <a>
-          <CssLogo />
-        </a>
-      </Link>
-      <nav className="flex justify-end space-x-8">
-        {links.map(({ href, label }) => {
-          return (
-            <Link key={href} href={href} passHref={true}>
-              <a className={`${activeLinkClass(href)} ${baseLinkClass}`}>
-                {label}
-              </a>
-            </Link>
-          );
-        })}
-      </nav>
-    </header>
+    <div className="sticky top-0 left-0 right-0 w-full bg-white border-b-2 border-gray-200">
+      <header className="p-4 flex items-center justify-between container">
+        <Link href="/" passHref={true}>
+          <a>
+            <CssLogo />
+          </a>
+        </Link>
+        <nav className="flex justify-end space-x-8">
+          {links.map(({ href, label }) => {
+            return (
+              <Link key={href} href={href} passHref={true}>
+                <a className={`${activeLinkClass(href)} ${baseLinkClass}`}>
+                  {label}
+                </a>
+              </Link>
+            );
+          })}
+        </nav>
+      </header>
+    </div>
   );
 };
 
