@@ -2,11 +2,19 @@ import PostThumbnail from "components/PostThumbnail";
 import BlockWrapper from "components/BlockWrapper";
 
 const PostsGrid = ({ posts }) => {
+  const sortedPosts = posts.sort((a, b) => {
+    return b.content.createdAt < a.content.createdAt
+      ? -1
+      : b.content.createdAt > a.content.createdAt
+      ? 1
+      : 0;
+  });
+  sortedPosts.forEach((post) => console.log(post.content.createdAt));
   return (
     <BlockWrapper>
       <h2 className="text-3xl font-semibold text-gray-800">Blog posts</h2>
       <ul className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mt-6 gap-4">
-        {posts.map(({ slug, content: { postTitle, featuredImage } }) => (
+        {sortedPosts.map(({ slug, content: { postTitle, featuredImage } }) => (
           <PostThumbnail
             key={slug}
             slug={slug}

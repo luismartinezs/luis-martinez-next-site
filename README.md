@@ -29,7 +29,7 @@ Way forward
   - [x] Redesign post card
   - [x] Tweak styles of blogpost links
   - [x] Sticky header
-  - [ ] Add remaining blog posts
+  - [x] Add remaining blog posts
   - [ ] Setup analytics and tracking
   - [ ] Setup cookie popup
   - [ ] Setup SEO
@@ -39,6 +39,8 @@ Way forward
 - Components I need
   - [x] Video component
   - [x] Rich text component
+  - [ ] Add twittable sentences
+  - [ ] Style nicely italics and bolds in posts
 
 ## Documentation
 

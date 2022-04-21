@@ -2,6 +2,11 @@ import { storyblokEditable, StoryblokComponent } from "@storyblok/react";
 
 const Post = ({ blok }) => {
   const { body, ...postData } = blok;
+
+  if (!body) {
+    return null;
+  }
+
   return (
     <div {...storyblokEditable(blok)} key={blok._uid}>
       {blok.body.map((nestedBlok) => (
