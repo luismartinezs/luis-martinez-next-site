@@ -5,3 +5,7 @@
 html {
   @apply font-sans;
 }
+
+code {
+  @apply bg-gray-100 rounded-sm;
+}
