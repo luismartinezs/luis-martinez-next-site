@@ -24,7 +24,7 @@ Way forward
   - [x] Blog posts can have cloudinary images
   - [ ] Render about content
   - [ ] Render resume content
-  - [ ] Visual editor shows blogpost
+  - [x] Visual editor shows blogpost
   - [ ] Tweak inline code snippets in posts
 - Components I need
   - [ ] Video component
