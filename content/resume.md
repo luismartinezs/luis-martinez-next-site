@@ -2,8 +2,6 @@
 title: Resume - Luis Martinez Web Developer
 ---
 
-# Resume
-
 ## tl,dr;
 
 Name: Luis Martinez Suarez

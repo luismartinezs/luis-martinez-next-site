@@ -14,7 +14,7 @@ const YoutubeVideo = ({ blok }) => {
 
   return (
     <ClientOnly>
-      <BlockWrapper width="text">
+      <BlockWrapper width="text" noPadding>
         <div {...storyblokEditable(blok)} key={blok._uid}>
           <div className="max-w-3xl mx-auto">
             <iframe

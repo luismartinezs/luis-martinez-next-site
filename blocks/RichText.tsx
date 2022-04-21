@@ -4,7 +4,7 @@ import BlockWrapper from "components/BlockWrapper";
 
 const RichText = ({ blok }) => {
   return (
-    <BlockWrapper width="text">
+    <BlockWrapper width="text" noPadding>
       <div {...storyblokEditable(blok)} key={blok._uid}>
         <RichTextRenderer richTextContent={blok.content} />
       </div>

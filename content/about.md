@@ -2,8 +2,6 @@
 title: About me - Luis Martinez Web Developer
 ---
 
-# About me
-
 > I've been a scientist and an artist, now I'm a developer, which needs a bit of both
 
 Hi! My name is Luis Martínez.
