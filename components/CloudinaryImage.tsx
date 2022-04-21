@@ -1,27 +1,28 @@
-import Image from "next/image";
-import { CloudinaryImageProps } from "types/types";
+// import Image from "next/image";
+// import { CloudinaryImageProps } from "types/types";
 
-const CloudinaryImage: React.FC<CloudinaryImageProps> = ({
+const CloudinaryImage = ({
   src,
-  width,
-  height,
-  loading = "lazy",
+  // width,
+  // height,
+  // loading = "lazy",
   alt = "",
-  layout = "responsive",
+  // layout = "responsive",
 }) => {
-  const hostUrl = `https://res.cloudinary.com/dicyllvry/image/upload/q_100,w_${width},h_${height}/luis-martinez`;
+  const hostUrl = `https://res.cloudinary.com/dicyllvry/image/upload/q_100/luis-martinez`;
 
   return (
-    <Image
-      className="object-center object-cover w-full h-full"
-      src={`${hostUrl}/${src}`}
-      alt={alt}
-      width={width}
-      height={height}
-      layout={layout}
-      quality={10}
-      loading={loading}
-    />
+    <img src={`${hostUrl}/${src}`} alt={alt} className="max-w-full h-auto object-fit" />
+    // <Image
+    //   className="object-center object-cover w-full h-full"
+    //   src={`${hostUrl}/${src}`}
+    //   alt={alt}
+    //   width={width}
+    //   height={height}
+    //   layout={layout}
+    //   quality={10}
+    //   loading={loading}
+    // />
   );
 };
 
