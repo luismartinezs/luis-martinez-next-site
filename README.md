@@ -25,8 +25,9 @@ Way forward
   - [x] Render about content
   - [x] Render resume content
   - [x] Visual editor shows blogpost
-  - [ ] Tweak inline code snippets in posts
+  - [x] Tweak inline code snippets in posts
   - [ ] Redesign post card
+  - [ ] Tweak styles of blogpost links
 - Components I need
   - [x] Video component
   - [x] Rich text component
