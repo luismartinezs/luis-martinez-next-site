@@ -34,7 +34,7 @@ export default function PostPage({ post }) {
         <meta name="description" content={post.content.description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="prose mx-auto">
+      <div className="prose custom-prose">
         <WidthWrapper width="text">
           <h1>{post.content.postTitle}</h1>
         </WidthWrapper>
