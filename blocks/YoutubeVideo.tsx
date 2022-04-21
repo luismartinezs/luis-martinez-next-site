@@ -17,17 +17,15 @@ const YoutubeVideo = ({ blok }) => {
       <BlockWrapper width="text">
         <div {...storyblokEditable(blok)} key={blok._uid}>
           <div className="max-w-3xl mx-auto">
-            <div className="relative">
-              <iframe
-                width="560"
-                height="315"
-                src={videoUrl}
-                title={caption}
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              ></iframe>
-            </div>
+            <iframe
+              className="w-full"
+              style={{ aspectRatio: "16/9" }}
+              src={videoUrl}
+              title={caption}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
             <div className="mt-2 leading-loose prose md:prose-lg md:leading-normal prose-blue">
               <caption className="block text-left text-sm text-center text-gray-800">
                 {caption}

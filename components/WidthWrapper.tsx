@@ -36,6 +36,7 @@ const WidthWrapper: React.FC<
     return _widthClass;
   };
   const classes = `${baseClass} ${widthClass()}`;
+
   return <div className={classes}>{children}</div>;
 };
 
