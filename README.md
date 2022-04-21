@@ -28,6 +28,7 @@ Way forward
   - [x] Tweak inline code snippets in posts
   - [x] Redesign post card
   - [x] Tweak styles of blogpost links
+  - [ ] Sticky header
 - Components I need
   - [x] Video component
   - [x] Rich text component

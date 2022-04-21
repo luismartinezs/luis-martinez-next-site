@@ -1,18 +1,14 @@
 import Link from "next/link";
-import CloudinaryImage from "components/CloudinaryImage";
 
-const PostThumbnail = ({ slug, title, image }) => {
+const PostThumbnail = ({ slug, title }) => {
   return (
-    <div className="border border-gray-200 rounded-xl shadow-lg overflow-hidden flex flex-col hover:scale-[1.02] transition ease-in-out hover:text-primary-500 text-gray-700 hover:border-primary-500 hover:shadow-xl focus-within:text-primary-500 focus-within:border-primary-500">
+    <li className="overflow-hidden flex rounded-xl hover:scale-[1.02] transition ease-in-out bg-gradient-to-r from-primary-500 to-secondary-500 focus-within:ring-offset-2 focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-primary-100">
       <Link href={`/blog/${slug}`}>
-        <a className="w-full h-full">
-          <div className="w-full h-1/2 overflow-hidden flex items-center">
-            <CloudinaryImage alt={title} src={image} />
-          </div>
+        <a className="w-full h-full text-white font-bold tracking-wide text-lg">
           <h1 className="p-4">{title}</h1>
         </a>
       </Link>
-    </div>
+    </li>
   );
 };
 
