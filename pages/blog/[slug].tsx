@@ -11,7 +11,7 @@ export async function getStaticPaths(): Promise<{
 
   return {
     paths: posts.map(({ slug }) => ({ params: { slug } })),
-    fallback: false, // false or 'blocking'
+    fallback: false,
   };
 }
 

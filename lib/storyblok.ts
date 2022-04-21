@@ -5,15 +5,13 @@ import RichText from "blocks/RichText";
 import YoutubeVideo from "blocks/YoutubeVideo";
 import CloudinaryImage from "blocks/CloudinaryImage";
 
-const siteSlug = "luis-martinez-net";
-
 export function initStoryblok() {
   const components = {
     RichText,
     YoutubeVideo,
     page: StoryblokPage,
     post: Post,
-    CloudinaryImage
+    CloudinaryImage,
   };
 
   storyblokInit({
@@ -33,7 +31,7 @@ export async function getStory({
   version?: Version;
 }) {
   const storyblokApi = getStoryblokApi();
-  let { data } = await storyblokApi.get(`cdn/stories/${siteSlug}/${slug}`, {
+  let { data } = await storyblokApi.get(`cdn/stories/${slug}`, {
     version,
   });
   return {
@@ -54,7 +52,7 @@ export async function getAllPosts({ version }: { version?: Version } = {}) {
   let _version = version || "draft";
   let { stories } = await getAllStories({
     version: _version,
-    starts_with: `${siteSlug}/blog/`,
+    starts_with: `blog/`,
   });
   return { posts: stories };
 }

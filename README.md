@@ -39,6 +39,6 @@ Way forward
 - This project uses Storyblok as a headless CMS for the blog posts. When developing open the following sites:
 
 - http://app.storyblok.com/
-- https://github.com/storyblok/getting-started: reference to use the `@storyblok/react` library
-- https://github.com/storyblok/storyblok-js-client: reference for the Storyblok client
-- https://www.storyblok.com/docs/api/content-delivery: Storyblok content deliver API docs
+- https://github.com/storyblok/storyblok-react : reference to use the `@storyblok/react` library
+- https://github.com/storyblok/storyblok-js-client : reference for the Storyblok client
+- https://www.storyblok.com/docs/api/content-delivery : Storyblok content deliver API docs
