@@ -35,9 +35,6 @@ export default function PostPage({ post }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <article className="prose custom-prose">
-        <WidthWrapper width="text">
-          <h1>{post.content.postTitle}</h1>
-        </WidthWrapper>
         <StoryblokComponent blok={post.content} />
       </article>
     </>
