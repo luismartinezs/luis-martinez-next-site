@@ -25,7 +25,7 @@ const Home: NextPage = ({ posts }) => {
       <Head>
         <title>Luis Martinez - Web Developer</title>
         <meta name="description" content="Luis Martinez - Web Developer" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <PostsGrid posts={posts} />
     </div>

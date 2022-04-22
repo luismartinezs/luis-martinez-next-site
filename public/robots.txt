@@ -1,0 +1,6 @@
+Sitemap: https://www.luis-martinez.net/api/make-sitemap
+
+User-agent: *
+Allow: /*
+
+Disallow: /api/*

@@ -32,7 +32,7 @@ export default function PostPage({ post }) {
       <Head>
         <title>{post.content.title}</title>
         <meta name="description" content={post.content.description} />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <article className="prose custom-prose">
         <StoryblokComponent blok={post.content} />

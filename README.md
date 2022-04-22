@@ -31,14 +31,15 @@ Way forward
   - [x] Sticky header
   - [x] Add remaining blog posts
   - [x] Setup analytics and tracking
-  - [ ] Setup cookie popup
-  - [ ] Setup SEO
-    - [ ] Robots
-    - [ ] Sitemap
+  - [x] Setup cookie popup
+  - [x] Setup SEO
+    - [x] Robots
+    - [x] Sitemap
   - [ ] Fix horizontal scrollbar
   - [ ] Style nicely italics and bolds in posts
   - [ ] Refactor sticky header
   - [ ] Make post list nicer and less flashy. Less colorful. Something basic
+  - [x] Setup favicon
   - [ ] Deploy to netlify
 - Components I need
   - [x] Video component

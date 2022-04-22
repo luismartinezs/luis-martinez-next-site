@@ -9,7 +9,6 @@ const PostsGrid = ({ posts }) => {
       ? 1
       : 0;
   });
-  sortedPosts.forEach((post) => console.log(post.content.createdAt));
   return (
     <BlockWrapper>
       <h2 className="text-3xl font-semibold text-gray-800">Blog posts</h2>
