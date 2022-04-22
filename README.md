@@ -37,8 +37,8 @@ Way forward
     - [x] Sitemap
   - [x] Fix horizontal scrollbar
   - [x] Style nicely italics and bolds in posts
-  - [ ] Refactor sticky header
-  - [ ] Make post list nicer and less flashy. Less colorful. Something basic
+  - [x] Refactor sticky header
+  - [x] Make post list nicer and less flashy. Less colorful. Something basic
   - [x] Setup favicon
   - [ ] Deploy to netlify
 - Components I need
