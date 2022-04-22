@@ -4,6 +4,7 @@ import TopBand from "components/TopBand";
 import type { PropsWithChildren } from "types/types";
 import CookieModal from "components/CookieModal";
 import ClientOnly from "components/ClientOnly";
+import StickyTop from "components/StickyTop";
 
 const Layout: React.FC<Required<PropsWithChildren>> = ({ children }) => {
   const cookieMessage = (
@@ -23,14 +24,10 @@ const Layout: React.FC<Required<PropsWithChildren>> = ({ children }) => {
         />
       </ClientOnly>
       <div className="relative">
-        <div className="sticky top-0 left-0 right-0 z-20">
-          <div className="relative">
-            <TopBand />
-          </div>
-          <div className="relative">
-            <Header />
-          </div>
-        </div>
+        <StickyTop>
+          <TopBand />
+          <Header />
+        </StickyTop>
         <main className="w-full mx-auto">{children}</main>
       </div>
       <Footer />

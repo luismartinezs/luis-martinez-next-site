@@ -23,8 +23,8 @@ const Header = () => {
   ];
 
   return (
-    <div className="sticky top-0 left-0 right-0 w-full bg-white border-b-2 border-gray-200">
-      <header className="p-4 flex items-center justify-between container">
+    <div className="w-full bg-white border-b-2 border-gray-200">
+      <header className="p-4 flex items-center justify-between container mx-auto">
         <Link href="/" passHref={true}>
           <a>
             <CssLogo />
