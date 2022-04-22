@@ -7,7 +7,7 @@ const MarkdownContent = ({ frontmatter, content }) => {
     <Head>
       <title>{frontmatter.title}</title>
     </Head>
-    <div className="prose custom-prose mx-auto">
+    <div className="prose dark:prose-invert custom-prose mx-auto">
       <div dangerouslySetInnerHTML={{ __html: md().render(content) }} />
     </div>
   </>

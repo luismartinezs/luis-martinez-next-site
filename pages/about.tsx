@@ -12,7 +12,7 @@ export async function getStaticProps() {
 const ResumePage = ({ frontmatter, content }) => {
   return (
     <div>
-      <div className="prose custom-prose">
+      <div className="prose dark:prose-invert custom-prose">
         <HeroTitle postTitle="About me" />
       </div>
       <BlockWrapper>

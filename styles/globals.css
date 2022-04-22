@@ -12,12 +12,49 @@ code {
 
 @layer components {
   .custom-prose {
-    @apply prose-slate lg:prose-lg dark:prose-invert mx-auto prose-code:after:content-none prose-code:before:content-none prose-code:text-primary-500 prose-code:bg-primary-50 prose-pre:bg-primary-50 prose-pre:shadow-inner prose-a:text-primary-600 hover:prose-a:text-primary-500;
+    /* General styles */
+    @apply prose-slate lg:prose-lg dark:prose-invert mx-auto;
+    /* inline code styles */
+    @apply prose-code:after:content-none prose-code:before:content-none prose-code:text-primary-500 prose-code:bg-primary-50 dark:prose-code:text-primary-200 dark:prose-code:bg-gray-900;
+    /* a styles */
+    @apply prose-a:text-primary-600 hover:prose-a:text-primary-500 dark:prose-a:text-primary-300 dark:hover:prose-a:text-primary-200;
+    /* pre styles (block code) */
+    @apply prose-pre:bg-primary-50 prose-pre:shadow-inner    dark:prose-pre:text-primary-200 dark:prose-pre:bg-gray-900 prose-pre:overflow-x-auto;
   }
   .custom-prose b {
-    @apply text-primary-700;
+    @apply text-primary-700 dark:text-primary-200;
   }
   .custom-prose i {
-    @apply text-primary-600;
+    @apply text-primary-600 dark:text-primary-300;
   }
+}
+
+/* theme-switch */
+button.switch {
+  --width: 52px;
+  @apply rounded-full border border-gray-300 flex items-center justify-between bg-gray-200 dark:bg-gray-600 dark:border-gray-400 transition duration-300;
+  width: var(--width);
+  height: calc(var(--width) / 2);
+}
+
+button.switch span {
+  pointer-events: none;
+}
+
+[role='switch'] > span {
+  @apply p-px h-6 w-6 flex items-center justify-center relative;
+}
+
+[role='switch'] > span > * {
+  @apply h-4 w-4 text-gray-400 dark:text-gray-200;
+}
+
+/* OFF STATE - LIGHT MODE */
+[role='switch'] > :first-child {
+  @apply bg-white rounded-full border text-gray-400 transition-transform dark:bg-gray-800 dark:border-none;
+}
+
+/* ON STATE - DARK MODE */
+[role='switch'][aria-checked='true'] > :first-child {
+  @apply translate-x-[26px];
 }

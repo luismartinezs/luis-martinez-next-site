@@ -6,6 +6,7 @@ import { GTM_ID, pageview } from "lib/gtm";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Script from "next/script";
+import ThemeProvider from "store/Theme";
 
 initStoryblok();
 
@@ -53,9 +54,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       {getGtmScript()}
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <ThemeProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ThemeProvider>
     </>
   );
 }

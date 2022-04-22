@@ -1,10 +1,11 @@
 import Link from "next/link";
 import CssLogo from "components/CssLogo";
 import { useRouter } from "next/router";
+import ThemeSwitch from "components/ThemeSwitch/ThemeSwitch";
 
 const Header = () => {
   const router = useRouter();
-  const baseLinkClass = "text-gray-700 hover:underline hover:text-primary-500";
+  const baseLinkClass = "text-gray-700 hover:underline hover:text-primary-500 dark:text-white dark:hover:text-primary-200";
   const activeLinkClass = (href: string) =>
     router.asPath === href ? "underline" : "";
   const links = [
@@ -23,7 +24,7 @@ const Header = () => {
   ];
 
   return (
-    <div className="w-full bg-white border-b-2 border-gray-200">
+    <div className="w-full bg-white border-b-2 border-gray-200 dark:bg-gray-800 dark:border-gray-700 transition duration-300">
       <header className="p-4 flex items-center justify-between container mx-auto">
         <Link href="/" passHref={true}>
           <a>
@@ -40,6 +41,7 @@ const Header = () => {
               </Link>
             );
           })}
+          <ThemeSwitch />
         </nav>
       </header>
     </div>

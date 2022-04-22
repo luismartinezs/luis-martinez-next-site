@@ -25,8 +25,8 @@ const YoutubeVideo = ({ blok }) => {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             ></iframe>
-            <div className="mt-2 leading-loose prose custom-prose md:leading-normal">
-              <span className="block text-left text-sm text-center text-gray-800">
+            <div className="mt-2 leading-loose prose dark:prose-invert custom-prose md:leading-normal">
+              <span className="block text-left text-sm text-center text-gray-800 dark:text-white">
                 {caption}
               </span>
             </div>
