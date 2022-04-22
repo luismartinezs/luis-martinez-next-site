@@ -44,7 +44,7 @@ const CookieModal = ({
   }
 
   return (
-    <div className="z-50 fixed bottom-0 bg-indigo-500 text-white w-full">
+    <div className="z-50 fixed bottom-0 bg-primary-500 text-white w-full">
       <div className="p-4">
         <div className="flex justify-center items-center space-x-2">
           {/* <InfoIcon className="h-8 w-8 min-w-max" /> */}
@@ -65,7 +65,7 @@ const CookieModal = ({
             >
               {acceptLabel}
             </button>
-            <button className="py-1 px-3 hover:text-indigo-100" onClick={deny}>
+            <button className="py-1 px-3 hover:text-primary-100" onClick={deny}>
               {denyLabel}
             </button>
           </div>
