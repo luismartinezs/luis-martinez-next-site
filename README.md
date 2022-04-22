@@ -41,8 +41,9 @@ Way forward
   - [x] Make post list nicer and less flashy. Less colorful. Something basic
   - [x] Setup favicon
   - [x] Add dark mode
-  - [ ] Production fetches published content from storyblok
+  - [x] Production fetches published content from storyblok
   - [ ] Deploy to netlify
+  - [ ] Use types everywhere
 - Components I need
   - [x] Video component
   - [x] Rich text component

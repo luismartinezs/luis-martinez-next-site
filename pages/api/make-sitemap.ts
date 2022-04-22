@@ -22,7 +22,7 @@ const makeSitemap = async (req, res) => {
     });
 
     // List of posts
-    const posts = await getAllPosts({ version: "published" });
+    const posts = await getAllPosts();
 
     // Create each URL row
     if (posts && posts.length) {

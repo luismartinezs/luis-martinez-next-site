@@ -13,7 +13,7 @@ export function initStoryblok() {
     page: StoryblokPage,
     post: Post,
     CloudinaryImage,
-    HeroTitle
+    HeroTitle,
   };
 
   storyblokInit({
@@ -25,13 +25,10 @@ export function initStoryblok() {
 
 type Version = "draft" | "published";
 
-export async function getStory({
-  slug,
-  version = "draft",
-}: {
-  slug: string;
-  version?: Version;
-}) {
+const version: Version =
+  process.env.NODE_ENV === "production" ? "published" : "draft";
+
+export async function getStory({ slug }: { slug: string }) {
   const storyblokApi = getStoryblokApi();
   let { data } = await storyblokApi.get(`cdn/stories/${slug}`, {
     version,
@@ -50,26 +47,18 @@ export async function getAllStories(options) {
   };
 }
 
-export async function getAllPosts({ version }: { version?: Version } = {}) {
-  let _version = version || "draft";
+export async function getAllPosts() {
   let { stories } = await getAllStories({
-    version: _version,
+    version,
     starts_with: `blog/`,
   });
   return { posts: stories };
 }
 
-export async function getPost({
-  slug,
-  version,
-}: {
-  slug: string;
-  version?: Version;
-}) {
-  let _version = version || "draft";
+export async function getPost({ slug }: { slug: string }) {
   let { story } = await getStory({
     slug: `blog/${slug}`,
-    version: _version,
+    version,
   });
   return { post: story };
 }

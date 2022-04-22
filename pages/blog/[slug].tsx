@@ -7,7 +7,7 @@ export async function getStaticPaths(): Promise<{
   paths: { params: { slug: string } }[];
   fallback: true | false | "blocking";
 }> {
-  const { posts } = await getAllPosts({ version: "draft" });
+  const { posts } = await getAllPosts();
 
   return {
     paths: posts.map(({ slug }) => ({ params: { slug } })),
@@ -16,7 +16,7 @@ export async function getStaticPaths(): Promise<{
 }
 
 export async function getStaticProps({ params: { slug } }) {
-  const { post } = await getPost({ slug, version: "draft" });
+  const { post } = await getPost({ slug });
 
   return {
     props: {
