@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import InfoIcon from "components/InfoIcon";
 
 const defaultMessage =
   "We use cookies to provide our services and for analytics and marketing. To find out more about our use of cookies, please see our Privacy Policy. By continuing to browse our website, you agree to our use of cookies.";
@@ -47,7 +48,9 @@ const CookieModal = ({
     <div className="z-50 fixed bottom-0 bg-primary-500 text-white w-full">
       <div className="p-4">
         <div className="flex justify-center items-center space-x-2">
-          {/* <InfoIcon className="h-8 w-8 min-w-max" /> */}
+          <div className="h-8 w-8 min-w-max">
+            <InfoIcon />
+          </div>
           <div className="flex-grow">
             <div>{message}</div>
           </div>
