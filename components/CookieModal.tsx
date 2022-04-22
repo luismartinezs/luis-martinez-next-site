@@ -1,0 +1,78 @@
+import { useState, useEffect } from "react";
+
+const defaultMessage =
+  "We use cookies to provide our services and for analytics and marketing. To find out more about our use of cookies, please see our Privacy Policy. By continuing to browse our website, you agree to our use of cookies.";
+
+const CookieModal = ({
+  message = defaultMessage,
+  acceptLabel = "Accept",
+  denyLabel = "Deny",
+}) => {
+  const [open, setOpen] = useState(true);
+
+  const getGdpr = () => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("GDPR:accepted");
+    }
+    return null;
+  };
+
+  useEffect(() => {
+    if (!getGdpr()) {
+      setOpen(true);
+    } else {
+      setOpen(false);
+    }
+  });
+
+  const accept = () => {
+    if (typeof window !== "undefined") {
+      setOpen(false);
+      localStorage.setItem("GDPR:accepted", "true");
+    }
+  };
+
+  const deny = () => {
+    if (typeof window !== "undefined") {
+      setOpen(false);
+      localStorage.setItem("GDPR:accepted", "false");
+    }
+  };
+
+  if (!open) {
+    return null;
+  }
+
+  return (
+    <div className="z-50 fixed bottom-0 bg-indigo-500 text-white w-full">
+      <div className="p-4">
+        <div className="flex justify-center items-center space-x-2">
+          {/* <InfoIcon className="h-8 w-8 min-w-max" /> */}
+          <div className="flex-grow">
+            <div>{message}</div>
+          </div>
+          <div className="flex-shrink flex justify-end">
+            <button
+              className="
+                py-1
+                px-3
+                rounded
+                text-gray-200
+                bg-gray-900
+                hover:bg-gray-800
+              "
+              onClick={accept}
+            >
+              {acceptLabel}
+            </button>
+            <button className="py-1 px-3 hover:text-indigo-100" onClick={deny}>
+              {denyLabel}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CookieModal;
