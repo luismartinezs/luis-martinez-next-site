@@ -41,6 +41,8 @@ Way forward
   - [x] Rich text component
   - [ ] Add twittable sentences
   - [ ] Style nicely italics and bolds in posts
+  - [ ] Refactor sticky header
+  - [ ] Make post list nicer and less flashy. Less colorful. Something basic
 
 ## Documentation
 
