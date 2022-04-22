@@ -14,4 +14,10 @@ code {
   .custom-prose {
     @apply prose-slate lg:prose-lg dark:prose-invert mx-auto prose-code:after:content-none prose-code:before:content-none prose-code:text-primary-500 prose-code:bg-primary-50 prose-pre:bg-primary-50 prose-pre:shadow-inner prose-a:text-primary-600 hover:prose-a:text-primary-500;
   }
+  .custom-prose b {
+    @apply text-primary-700;
+  }
+  .custom-prose i {
+    @apply text-primary-600;
+  }
 }

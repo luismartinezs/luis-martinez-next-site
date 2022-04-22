@@ -15,7 +15,7 @@ module.exports = {
         gray: colors.slate,
       },
       fontFamily: {
-        'sans': ['Inter', ...defaultTheme.fontFamily.sans]
+        'sans': ['Inter', ...defaultTheme.fontFamily.sans],
       },
     },
   },

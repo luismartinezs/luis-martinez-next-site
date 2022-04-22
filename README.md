@@ -36,7 +36,7 @@ Way forward
     - [x] Robots
     - [x] Sitemap
   - [x] Fix horizontal scrollbar
-  - [ ] Style nicely italics and bolds in posts
+  - [x] Style nicely italics and bolds in posts
   - [ ] Refactor sticky header
   - [ ] Make post list nicer and less flashy. Less colorful. Something basic
   - [x] Setup favicon

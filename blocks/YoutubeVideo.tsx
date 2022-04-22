@@ -26,9 +26,9 @@ const YoutubeVideo = ({ blok }) => {
               allowFullScreen
             ></iframe>
             <div className="mt-2 leading-loose prose custom-prose md:leading-normal">
-              <caption className="block text-left text-sm text-center text-gray-800">
+              <span className="block text-left text-sm text-center text-gray-800">
                 {caption}
-              </caption>
+              </span>
             </div>
           </div>
         </div>
