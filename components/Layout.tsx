@@ -14,7 +14,7 @@ const Layout: React.FC<Required<PropsWithChildren>> = ({ children }) => {
   );
 
   return (
-    <div className="flex flex-col justify-between h-screen">
+    <div className="flex flex-col justify-between h-screen overflow-x-hidden">
       <ClientOnly>
         <CookieModal
           message={cookieMessage}

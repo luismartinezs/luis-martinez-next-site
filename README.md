@@ -35,7 +35,7 @@ Way forward
   - [x] Setup SEO
     - [x] Robots
     - [x] Sitemap
-  - [ ] Fix horizontal scrollbar
+  - [x] Fix horizontal scrollbar
   - [ ] Style nicely italics and bolds in posts
   - [ ] Refactor sticky header
   - [ ] Make post list nicer and less flashy. Less colorful. Something basic
