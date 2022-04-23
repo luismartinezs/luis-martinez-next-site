@@ -3,7 +3,7 @@ import type { PropsWithChildren } from "types/types";
 
 const ClientOnly: React.FC<PropsWithChildren> = ({ children }) => {
   const [shouldRender, setRenderState] = useState(false);
-  useEffect(() => setRenderState(true));
+  useEffect(() => setRenderState(true), []);
 
   if (shouldRender) {
     return <>{children}</>;

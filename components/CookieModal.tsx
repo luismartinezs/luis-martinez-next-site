@@ -24,7 +24,7 @@ const CookieModal = ({
     } else {
       setOpen(false);
     }
-  });
+  }, []);
 
   const accept = () => {
     if (typeof window !== "undefined") {

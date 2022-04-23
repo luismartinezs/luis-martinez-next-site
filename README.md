@@ -44,6 +44,7 @@ Way forward
   - [x] Production fetches published content from storyblok
   - [ ] Deploy to netlify
   - [ ] Use types everywhere
+    - https://nextjs.org/docs/basic-features/typescript
 - Components I need
   - [x] Video component
   - [x] Rich text component
