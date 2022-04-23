@@ -49,6 +49,7 @@ Way forward
   - [ ] Use SWR for data fetching
   - [ ] Mobile menu
   - [ ] Update my resume
+  - [ ] netlify/plugin-lighthouse
 
 - Components I need
   - [x] Video component
