@@ -45,6 +45,8 @@ Way forward
   - [ ] Deploy to netlify
   - [ ] Use types everywhere
     - https://nextjs.org/docs/basic-features/typescript
+  - [ ] Use SWR for data fetching
+
 - Components I need
   - [x] Video component
   - [x] Rich text component

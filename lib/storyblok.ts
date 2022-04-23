@@ -58,7 +58,6 @@ export async function getAllPosts() {
 export async function getPost({ slug }: { slug: string }) {
   let { story } = await getStory({
     slug: `blog/${slug}`,
-    version,
   });
   return { post: story };
 }

@@ -15,9 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [gdpr, setGdpr] = useState(null);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setGdpr(localStorage.getItem("GDPR:accepted"));
-    }
+    setGdpr(localStorage.getItem("GDPR:accepted"));
   }, []);
 
   const getGtmScript = () => {
