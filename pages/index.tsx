@@ -15,7 +15,7 @@ export async function getStaticProps() {
 }
 
 const Home: NextPage = ({ posts }) => {
-  const postsData = posts ? useStoryblokState(posts) : null;
+  const postsData = useStoryblokState(posts);
 
   if (!postsData) {
     return <div>Loading...</div>;
