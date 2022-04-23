@@ -34,7 +34,7 @@ export default function PostPage({ post }) {
         <meta name="description" content={post.content.description} />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <article className=" dark:prose-invert custom-prose">
+      <article className="prose dark:prose-invert custom-prose">
         <StoryblokComponent blok={post.content} />
       </article>
     </>
