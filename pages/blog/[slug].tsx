@@ -28,7 +28,7 @@ export async function getStaticProps({ params: { slug } }) {
 
 export default function PostPage({ post }) {
   const postData = useStoryblokState(post);
-  if (!postData) {
+  if (!postData?.content) {
     return <div>Loading...</div>;
   }
 
