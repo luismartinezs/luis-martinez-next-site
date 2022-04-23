@@ -27,16 +27,20 @@ export async function getStaticProps({ params: { slug } }) {
 }
 
 export default function PostPage({ post }) {
-  post = useStoryblokState(post);
+  const postData = post ? useStoryblokState(post) : null;
+  if (!postData) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <Head>
-        <title>{post.content.title}</title>
-        <meta name="description" content={post.content.description} />
+        <title>{postData.content.title}</title>
+        <meta name="description" content={postData.content.description} />
         <link rel="icon" href="/favicon.png" />
       </Head>
       <article className="prose dark:prose-invert custom-prose">
-        <StoryblokComponent blok={post.content} />
+        <StoryblokComponent blok={postData.content} />
       </article>
     </>
   );

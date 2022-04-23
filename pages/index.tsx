@@ -15,10 +15,10 @@ export async function getStaticProps() {
 }
 
 const Home: NextPage = ({ posts }) => {
-  posts = useStoryblokState(posts);
+  const postsData = posts ? useStoryblokState(posts) : null;
 
-  if (!posts) {
-    return <div>No posts</div>;
+  if (!postsData) {
+    return <div>Loading...</div>;
   }
 
   return (
@@ -28,7 +28,7 @@ const Home: NextPage = ({ posts }) => {
         <meta name="description" content="Luis Martinez - Web Developer" />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <PostsGrid posts={posts} />
+      <PostsGrid posts={postsData} />
     </div>
   );
 };
