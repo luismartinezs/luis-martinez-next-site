@@ -11,7 +11,7 @@ export async function getStaticPaths(): Promise<{
 
   return {
     paths: posts.map(({ slug }) => ({ params: { slug } })),
-    fallback: false,
+    fallback: true,
   };
 }
 
@@ -22,6 +22,7 @@ export async function getStaticProps({ params: { slug } }) {
     props: {
       post,
     },
+    revalidate: 10,
   };
 }
 

@@ -42,10 +42,13 @@ Way forward
   - [x] Setup favicon
   - [x] Add dark mode
   - [x] Production fetches published content from storyblok
-  - [ ] Deploy to netlify
+  - [x] Deploy to netlify
+  - [ ] Show draft in Storyblok context
   - [ ] Use types everywhere
     - https://nextjs.org/docs/basic-features/typescript
   - [ ] Use SWR for data fetching
+  - [ ] Mobile menu
+  - [ ] Update my resume
 
 - Components I need
   - [x] Video component
