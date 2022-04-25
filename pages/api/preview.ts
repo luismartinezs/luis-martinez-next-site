@@ -1,4 +1,5 @@
 import { initStoryblok, getPost } from "lib/storyblok";
+import { withSentry } from "@sentry/nextjs";
 
 /**
 references:
@@ -6,7 +7,7 @@ https://nextjs.org/docs/advanced-features/preview-mode
 https://github.com/vercel/next.js/blob/canary/examples/cms-storyblok/pages/api/preview.js
 */
 
-export default async function preview(req, res) {
+async function preview(req, res) {
   if (
     req.query.secret !== process.env.STORYBLOK_PREVIEW_SECRET ||
     !req.query.slug
@@ -32,3 +33,5 @@ export default async function preview(req, res) {
   res.writeHead(307, { Location: redirectLocation });
   res.end("Preview mode enabled");
 }
+
+export default withSentry(preview);
