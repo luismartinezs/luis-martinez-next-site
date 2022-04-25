@@ -87,6 +87,11 @@ export async function getPost({
   slug: string;
   preview: Preview;
 }) {
+  if (typeof slug !== "string") {
+    return {
+      post: false,
+    };
+  }
   const _slug = slug.split("blog/").at(-1);
   let { story } = await getStory({
     slug: `blog/${_slug}`,
