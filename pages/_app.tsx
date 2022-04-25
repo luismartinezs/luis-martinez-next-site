@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   const getGtmScript = () => {
-    if (process.env.NODE_ENV !== "production") {
+    if (process.env.APP_ENV !== "production") {
       return <></>;
     }
     if (typeof gdpr !== "undefined" && gdpr === "true") {

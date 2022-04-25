@@ -15,7 +15,7 @@ const Layout: React.FC<Required<PropsWithChildren>> = ({ children }) => {
     </p>
   );
 
-  const isProd = process.env.NODE_ENV === "production";
+  const isProd = process.env.APP_ENV === "production";
 
   return (
     <div className="flex flex-col justify-between h-screen overflow-x-hidden dark:bg-gray-800 dark:text-white transition duration-300">
