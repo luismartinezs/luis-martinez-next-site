@@ -5,6 +5,7 @@ import type { PropsWithChildren } from "types/types";
 import CookieModal from "components/CookieModal";
 import ClientOnly from "components/ClientOnly";
 import StickyTop from "components/StickyTop";
+import FloatPill from "components/FloatPill";
 
 const Layout: React.FC<Required<PropsWithChildren>> = ({ children }) => {
   const cookieMessage = (
@@ -14,8 +15,11 @@ const Layout: React.FC<Required<PropsWithChildren>> = ({ children }) => {
     </p>
   );
 
+  const isProd = process.env.NODE_ENV === "production";
+
   return (
     <div className="flex flex-col justify-between h-screen overflow-x-hidden dark:bg-gray-800 dark:text-white transition duration-300">
+      {!isProd && <FloatPill label="development" />}
       <ClientOnly>
         <CookieModal
           message={cookieMessage}

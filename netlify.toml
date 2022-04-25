@@ -1,5 +1,8 @@
 [[plugins]]
 package = "@netlify/plugin-nextjs"
 
-[context.branch-deploy.environment]
-  NODE_ENV = "development"
+[context.production]
+  environment = { NODE_ENV = "production" }
+
+[context.development]
+  environment = { NODE_ENV = "development" }
