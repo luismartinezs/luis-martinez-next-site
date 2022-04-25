@@ -1,5 +1,18 @@
 [[plugins]]
-package = "@netlify/plugin-nextjs"
+package = "netlify-plugin-lighthouse"
+
+  [plugins.inputs]
+  output_path = "reports/lighthouse.html"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[[plugins]]
+  package = "@sentry/netlify-build-plugin"
+
+  [plugins.inputs]
+    sentryOrg = "luis-martinez-suarez"
+    sentryProject = "nextjs"
 
 [context.main]
   environment = { NEXT_PUBLIC_APP_ENV = "production" }
