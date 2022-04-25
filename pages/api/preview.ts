@@ -1,4 +1,4 @@
-import { getPost } from "lib/storyblok";
+import { initStoryblok, getPost } from "lib/storyblok";
 
 /**
 references:
@@ -17,6 +17,7 @@ export default async function preview(req, res) {
   let post;
 
   if (/\/blog\/\w/.test(req.query.slug)) {
+    initStoryblok();
     post = (await getPost({ slug: req.query.slug, preview: true })).post;
     if (!post) {
       return res.status(401).json({ message: "Invalid slug" });
