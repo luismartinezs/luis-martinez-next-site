@@ -101,7 +101,7 @@ export async function getPost({
     };
   }
 
-  const _slug = slugParts.at(-1);
+  const _slug = slugParts[slugParts.length - 1];
 
   let { story } = await getStory({
     slug: `blog/${_slug}`,
