@@ -10,7 +10,7 @@ const HeroTitle = ({ blok, postTitle }) => {
     }
   }, [heroRef]);
 
-  const _title = blok?.title || postTitle;
+  const _title = postTitle || blok?.title;
 
   return (
     <div ref={wrapperRef}>
