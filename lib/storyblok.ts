@@ -92,10 +92,21 @@ export async function getPost({
       post: false,
     };
   }
-  const _slug = slug.split("blog/").at(-1);
+
+  const slugParts = slug.split("blog/");
+
+  if (slugParts.length === 0 || !Array.isArray(slugParts)) {
+    return {
+      post: false,
+    };
+  }
+
+  const _slug = slugParts.at(-1);
+
   let { story } = await getStory({
     slug: `blog/${_slug}`,
     preview,
   });
+
   return { post: story };
 }
