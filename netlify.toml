@@ -11,8 +11,8 @@ package = "@netlify/plugin-lighthouse"
   package = "@sentry/netlify-build-plugin"
 
   [plugins.inputs]
-    sentryOrg = "luis-martinez-suarez"
-    sentryProject = "nextjs"
+    sentryOrg = ""
+    sentryProject = ""
 
 [context.main]
   environment = { NEXT_PUBLIC_APP_ENV = "production" }
