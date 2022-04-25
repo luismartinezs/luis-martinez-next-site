@@ -1,7 +1,7 @@
 import Link from "next/link";
 import CssLogo from "components/CssLogo";
 import { useRouter } from "next/router";
-import ThemeSwitch from "components/ThemeSwitch/ThemeSwitch";
+import ThemeSwitch from "components/ThemeSwitch";
 
 const Header = () => {
   const router = useRouter();

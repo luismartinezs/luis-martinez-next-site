@@ -6,8 +6,7 @@ export async function getStaticPaths(): Promise<{
   paths: { params: { slug: string } }[];
   fallback: true | false | "blocking";
 }> {
-  const isProd = process.env.NEXT_PUBLIC_APP_ENV === "production";
-  const { posts } = await getAllPosts({ preview: isProd ? null : true });
+  const { posts } = await getAllPosts({ preview: true });
 
   return {
     paths: posts.map(({ slug }) => ({ params: { slug } })),
