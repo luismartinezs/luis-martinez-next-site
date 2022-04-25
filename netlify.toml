@@ -2,7 +2,7 @@
 package = "@netlify/plugin-nextjs"
 
 [context.main]
-  environment = { APP_ENV = "production" }
+  environment = { NEXT_PUBLIC_APP_ENV = "production" }
 
 [context.development]
-  environment = { APP_ENV = "development" }
+  environment = { NEXT_PUBLIC_APP_ENV = "development" }

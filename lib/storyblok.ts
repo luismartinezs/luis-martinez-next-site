@@ -26,7 +26,7 @@ export function initStoryblok() {
 type Version = "draft" | "published";
 
 const version: Version =
-  process.env.APP_ENV === "production" ? "published" : "draft";
+  process.env.NEXT_PUBLIC_APP_ENV === "production" ? "published" : "draft";
 
 export async function getStory({ slug }: { slug: string }) {
   const storyblokApi = getStoryblokApi();
