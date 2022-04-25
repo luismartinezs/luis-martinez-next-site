@@ -70,5 +70,3 @@ Way forward
 - https://github.com/storyblok/storyblok-react : reference to use the `@storyblok/react` library
 - https://github.com/storyblok/storyblok-js-client : reference for the Storyblok client
 - https://www.storyblok.com/docs/api/content-delivery : Storyblok content deliver API docs
-
-Trigger dev branch deploy

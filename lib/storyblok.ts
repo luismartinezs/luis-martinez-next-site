@@ -24,12 +24,18 @@ export function initStoryblok() {
 }
 
 type Version = "draft" | "published";
+type Preview = true | null;
 
-const version: Version =
-  process.env.NEXT_PUBLIC_APP_ENV === "production" ? "published" : "draft";
-
-export async function getStory({ slug }: { slug: string }) {
+export async function getStory({
+  slug,
+  preview,
+}: {
+  slug: string;
+  preview: null | true;
+}) {
   const storyblokApi = getStoryblokApi();
+  const version: Version = preview ? "draft" : "published";
+
   let { data } = await storyblokApi.get(`cdn/stories/${slug}`, {
     version,
   });
@@ -39,25 +45,44 @@ export async function getStory({ slug }: { slug: string }) {
   };
 }
 
-export async function getAllStories(options) {
+export async function getAllStories({
+  preview,
+  ...rest
+}: {
+  preview: Preview;
+  [index: string]: any;
+}) {
   const storyblokApi = getStoryblokApi();
-  let stories = await storyblokApi.getAll(`cdn/stories`, options);
+  const version: Version = preview ? "draft" : "published";
+
+  let stories = await storyblokApi.getAll(`cdn/stories`, {
+    version,
+    ...rest,
+  });
   return {
     stories,
   };
 }
 
-export async function getAllPosts() {
+export async function getAllPosts({ preview }: { preview: Preview }) {
   let { stories } = await getAllStories({
-    version,
+    preview,
     starts_with: `blog/`,
   });
   return { posts: stories };
 }
 
-export async function getPost({ slug }: { slug: string }) {
+export async function getPost({
+  slug,
+  preview,
+}: {
+  slug: string;
+  preview: Preview;
+}) {
+  const _slug = slug.split("blog/").at(-1);
   let { story } = await getStory({
-    slug: `blog/${slug}`,
+    slug: `blog/${_slug}`,
+    preview,
   });
   return { post: story };
 }

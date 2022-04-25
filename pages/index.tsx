@@ -4,11 +4,12 @@ import { useStoryblokState } from "@storyblok/react";
 import { getAllPosts } from "lib/storyblok";
 import PostsGrid from "components/PostsGrid";
 
-export async function getStaticProps() {
-  const { posts } = await getAllPosts();
+export async function getStaticProps({ preview = null }) {
+  const { posts } = await getAllPosts({ preview });
   return {
     props: {
       posts,
+      preview
     },
     revalidate: 60,
   };

@@ -1,13 +1,13 @@
 import { getAllPosts, getPost } from "lib/storyblok";
 import { StoryblokComponent, useStoryblokState } from "@storyblok/react";
 import Head from "next/head";
-import WidthWrapper from "components/WidthWrapper";
 
 export async function getStaticPaths(): Promise<{
   paths: { params: { slug: string } }[];
   fallback: true | false | "blocking";
 }> {
-  const { posts } = await getAllPosts();
+  const isProd = process.env.NEXT_PUBLIC_APP_ENV === "production";
+  const { posts } = await getAllPosts({ preview: isProd ? null : true });
 
   return {
     paths: posts.map(({ slug }) => ({ params: { slug } })),
@@ -15,14 +15,14 @@ export async function getStaticPaths(): Promise<{
   };
 }
 
-export async function getStaticProps({ params: { slug } }) {
-  const { post } = await getPost({ slug });
+export async function getStaticProps({ params: { slug }, preview = null }) {
+  const { post } = await getPost({ slug, preview });
 
   return {
     props: {
+      preview,
       post,
     },
-    revalidate: 60,
   };
 }
 
