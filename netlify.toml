@@ -1,5 +1,5 @@
 [[plugins]]
-package = "netlify-plugin-lighthouse"
+package = "@netlify/plugin-lighthouse"
 
   [plugins.inputs]
   output_path = "reports/lighthouse.html"
