@@ -36,14 +36,21 @@ export async function getStory({
   const storyblokApi = getStoryblokApi();
   const version: Version = preview ? "draft" : "published";
 
-  let { data } = await storyblokApi.get(`cdn/stories/${slug}`, {
-    version,
-  });
-
-  return {
-    story: data ? data.story : false,
-    key: data ? data.story.id : false,
-  };
+  let data;
+  try {
+    ({ data } = await storyblokApi.get(`cdn/stories/${slug}`, {
+      version,
+    }));
+    return {
+      story: data ? data.story : false,
+      key: data ? data.story.id : false,
+    };
+  } catch (err) {
+    return {
+      story: false,
+      key: false,
+    };
+  }
 }
 
 export async function getAllStories({
