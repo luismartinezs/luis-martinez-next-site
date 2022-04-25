@@ -14,14 +14,18 @@ export default async function preview(req, res) {
     return res.status(401).json({ message: "Invalid token" });
   }
 
+  let post;
+
   if (/\/blog\/\w/.test(req.query.slug)) {
-    const { post } = await getPost({ slug: req.query.slug, preview: true });
+    post = (await getPost({ slug: req.query.slug, preview: true })).post;
     if (!post) {
       return res.status(401).json({ message: "Invalid slug" });
     }
   }
 
+  const redirectLocation = post ? `/blog/${post.slug}` : "/";
+
   res.setPreviewData({});
-  res.writeHead(307, { Location: `${req.query.slug}` });
+  res.writeHead(307, { Location: redirectLocation });
   res.end("Preview mode enabled");
 }

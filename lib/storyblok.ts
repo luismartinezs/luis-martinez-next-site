@@ -26,6 +26,8 @@ export function initStoryblok() {
 type Version = "draft" | "published";
 type Preview = true | null;
 
+const isProd = process.env.NEXT_PUBLIC_APP_ENV === "production";
+
 export async function getStory({
   slug,
   preview,
@@ -34,11 +36,12 @@ export async function getStory({
   preview: null | true;
 }) {
   const storyblokApi = getStoryblokApi();
-  const version: Version = preview ? "draft" : "published";
+  const version: Version = preview || !isProd ? "draft" : "published";
 
   let { data } = await storyblokApi.get(`cdn/stories/${slug}`, {
     version,
   });
+
   return {
     story: data ? data.story : false,
     key: data ? data.story.id : false,
@@ -53,7 +56,7 @@ export async function getAllStories({
   [index: string]: any;
 }) {
   const storyblokApi = getStoryblokApi();
-  const version: Version = preview ? "draft" : "published";
+  const version: Version = preview || !isProd ? "draft" : "published";
 
   let stories = await storyblokApi.getAll(`cdn/stories`, {
     version,
