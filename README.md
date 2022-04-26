@@ -50,9 +50,9 @@ Way forward
     - https://nextjs.org/docs/basic-features/typescript
   - [ ] Use SWR for data fetching
   - [ ] Mobile menu
-  - [ ] Fix environment pill mobile style, and don't show in production
+  - [x] Fix environment pill mobile style, and don't show in production
   - [ ] Update my resume
-  - [ ] netlify/plugin-lighthouse
+  - [ ] Configure netlify/plugin-lighthouse
 
 - Components I need
   - [x] Video component

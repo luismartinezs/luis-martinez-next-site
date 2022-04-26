@@ -7,7 +7,8 @@ import ClientOnly from "components/ClientOnly";
 import StickyTop from "components/StickyTop";
 import FloatPill from "components/FloatPill";
 
-const appEnv = process.env.NEXT_PUBLIC_APP_ENV
+const appEnv = process.env.NEXT_PUBLIC_APP_ENV;
+const isProd = process.env.NEXT_PUBLIC_APP_ENV === "production";
 
 const Layout: React.FC<Required<PropsWithChildren>> = ({ children }) => {
   const cookieMessage = (
@@ -20,7 +21,7 @@ const Layout: React.FC<Required<PropsWithChildren>> = ({ children }) => {
   return (
     <div className="flex flex-col justify-between h-screen overflow-x-hidden dark:bg-gray-800 dark:text-white transition duration-300">
       <ClientOnly>
-        <FloatPill label={appEnv} />
+        {!isProd && <FloatPill label={appEnv} />}
         <CookieModal
           message={cookieMessage}
           acceptLabel="ACCEPT"
