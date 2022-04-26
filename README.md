@@ -44,7 +44,7 @@ Way forward
   - [x] Production fetches published content from storyblok
   - [x] Deploy to netlify
   - [x] Show draft in Storyblok context
-    - [ ] Production: doesn't show drafts. Might need to rebuild site (SSG)
+    - [x] Production: doesn't show drafts. Might need to rebuild site (SSG)
     - [x] Development: shows drafts immediately as they are creatd, without need to rebuild site (SSR)
   - [ ] Use types everywhere
     - https://nextjs.org/docs/basic-features/typescript

@@ -5,7 +5,8 @@ import ThemeSwitch from "components/ThemeSwitch";
 
 const Header = () => {
   const router = useRouter();
-  const baseLinkClass = "text-gray-700 hover:underline hover:text-primary-500 dark:text-white dark:hover:text-primary-200";
+  const baseLinkClass =
+    "text-gray-700 hover:underline hover:text-primary-500 dark:text-white dark:hover:text-primary-200";
   const activeLinkClass = (href: string) =>
     router.asPath === href ? "underline" : "";
   const links = [
@@ -31,7 +32,7 @@ const Header = () => {
             <CssLogo />
           </a>
         </Link>
-        <nav className="flex justify-end space-x-8">
+        <nav className="flex justify-end items-center space-x-6 md:space-x-8 text-sm md:text-base">
           {links.map(({ href, label }) => {
             return (
               <Link key={href} href={href} passHref={true}>
