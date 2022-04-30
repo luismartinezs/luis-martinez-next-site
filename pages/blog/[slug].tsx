@@ -15,7 +15,9 @@ export async function getStaticPaths(): Promise<{
 }
 
 export async function getStaticProps({ params: { slug }, preview = null }) {
-  const { post } = await getPost({ slug, preview });
+  const _preview = process.env.APP_ENV === "local" || preview;
+
+  const { post } = await getPost({ slug, preview: _preview });
 
   return {
     props: {
