@@ -53,6 +53,7 @@ Way forward
   - [x] Fix environment pill mobile style, and don't show in production
   - [ ] Update my resume
   - [ ] Configure netlify/plugin-lighthouse
+  - [ ] Improve post loading and error states
 
 - Components I need
   - [x] Video component

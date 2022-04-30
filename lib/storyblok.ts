@@ -5,6 +5,7 @@ import RichText from "blocks/RichText";
 import YoutubeVideo from "blocks/YoutubeVideo";
 import CloudinaryImage from "blocks/CloudinaryImage";
 import HeroTitle from "blocks/HeroTitle";
+import SideNote from "blocks/SideNote";
 
 export function initStoryblok() {
   const components = {
@@ -14,6 +15,7 @@ export function initStoryblok() {
     post: Post,
     CloudinaryImage,
     HeroTitle,
+    SideNote
   };
 
   storyblokInit({
