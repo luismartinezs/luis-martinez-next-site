@@ -54,6 +54,10 @@ Way forward
   - [ ] Update my resume
   - [ ] Configure netlify/plugin-lighthouse
   - [ ] Improve post loading and error states
+  - [ ] Add links to social media and youtube
+
+- Content
+  - [ ] Update resume and about
 
 - Components I need
   - [x] Video component
