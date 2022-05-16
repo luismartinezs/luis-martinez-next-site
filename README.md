@@ -53,8 +53,17 @@ Way forward
   - [x] Fix environment pill mobile style, and don't show in production
   - [ ] Update my resume
   - [ ] Configure netlify/plugin-lighthouse
-  - [ ] Improve post loading and error states
+  - [ ] Improve post loading and error states (https://www.luis-martinez.net/blog/404, https://www.luis-martinez.net/404)
   - [ ] Add links to social media and youtube
+  - [ ] Use storybook https://storybook.js.org/blog/interaction-testing-with-storybook/
+  - [ ] Follow this checklist https://nextjs.org/docs/going-to-production
+  - [ ] Do this https://nextjs.org/docs/advanced-features/measuring-performance
+  - [ ] Do this https://nextjs.org/docs/advanced-features/debugging
+  - [ ] Use Error boundaries https://nextjs.org/docs/advanced-features/error-handling
+  - [ ] PWA https://github.com/vercel/next.js/tree/canary/examples/progressive-web-app
+  - [ ] Trigger a netlify deploy on Storyblok publish
+  - [ ] Files should export only React components, or only non React components, not both
+  - [ ] Exported constants should be in a separate file
 
 - Content
   - [ ] Update resume and about
