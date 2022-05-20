@@ -64,6 +64,7 @@ Way forward
   - [ ] Trigger a netlify deploy on Storyblok publish
   - [ ] Files should export only React components, or only non React components, not both
   - [ ] Exported constants should be in a separate file
+  - [ ] Add "bionic reading" option / config
 
 - Content
   - [ ] Update resume and about
