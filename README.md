@@ -46,9 +46,10 @@ Way forward
   - [x] Show draft in Storyblok context
     - [x] Production: doesn't show drafts. Might need to rebuild site (SSG)
     - [x] Development: shows drafts immediately as they are creatd, without need to rebuild site (SSR)
+  - [ ] Improve web vitals https://nextjs.org/learn/seo/web-performance
   - [ ] Use types everywhere
     - https://nextjs.org/docs/basic-features/typescript
-  - [ ] Use SWR for data fetching
+  - [ ] Use react-query for data fetching
   - [ ] Mobile menu
   - [x] Fix environment pill mobile style, and don't show in production
   - [ ] Update my resume
@@ -86,5 +87,3 @@ Way forward
 - https://github.com/storyblok/storyblok-react : reference to use the `@storyblok/react` library
 - https://github.com/storyblok/storyblok-js-client : reference for the Storyblok client
 - https://www.storyblok.com/docs/api/content-delivery : Storyblok content deliver API docs
-
-Trigger deploy
