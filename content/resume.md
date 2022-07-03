@@ -8,7 +8,7 @@ Name: Luis Martinez Suarez
 
 Frontend developer since 2019
 
-- The tech stack I feel at home with: Vue, Nuxt, Tailwind CSS, Storyblok (headless CMS)
+- The tech stack I feel at home with: React, Next, Firebase, Vue, Nuxt, Tailwind CSS, Storyblok (headless CMS)
 
 - My strenghts:
   - Create component-based, SEO-friendly and accessible user interfaces
@@ -30,7 +30,7 @@ LinkedIn: [linkedin.com/in/luismarsu](linkedin.com/in/luismarsu)
 
 ### Frontend Developer @ [_Passionate People_](https://passionatepeople.io/)
 
-Amsterdam. Oct/2021-Present
+Amsterdam. Oct/2021-Jun/2021
 
 - Maintain Nuxt internal platform
   - Tech: Nuxt 2 + composition API, tailwind CSS, Storybook

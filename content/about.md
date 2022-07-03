@@ -6,15 +6,16 @@ title: About me - Luis Martinez Web Developer
 
 Hi! My name is Luis Martínez.
 
-In August 2018 I decided to become a web developer (<nuxt-link to="/blog/from-jobless-to-junior-frontend-developer-in-5-months">learn about how I did it</nuxt-link>).
+In August 2018 I decided to become a web developer ([learn about how I did it](/blog/from-jobless-to-junior-frontend-developer-in-5-months)).
 
 Things I've done as a web developer:
 
-- Web apps with **VueJS**
-- SSR sites with **Nuxt**
+- Web apps with **React** and VueJS
+- Sites with **NextJS** and NuxtJS
+- **Google Firebase** backends
 - Styling with **Tailwind CSS** and Bootstrap 4 / Vue Bootstrap
 
-I also know a little about PostCSS, React, NodeJS/Express, serverless and AWS, SCSS and Google sheets / Google Apps Script.
+I also know about PostCSS, NodeJS/Express, serverless and AWS, SCSS and Google sheets / Google Apps Script.
 
 Things I've done in past lives:
 
