@@ -2,7 +2,7 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import Layout from "components/Layout";
 import { initStoryblok } from "lib/storyblok";
-import { GTM_ID, pageview } from "lib/gtm";
+import { GTM_ID, pageview, gtmVirtualPageView } from "lib/gtm";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Script from "next/script";
@@ -11,8 +11,8 @@ import ThemeProvider from "store/Theme";
 initStoryblok();
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const router = useRouter();
   const [gdpr, setGdpr] = useState(null);
+  const router = useRouter()
 
   useEffect(() => {
     setGdpr(localStorage.getItem("GDPR:accepted"));
@@ -48,6 +48,16 @@ function MyApp({ Component, pageProps }: AppProps) {
       router.events.off("routeChangeComplete", pageview);
     };
   }, [router.events]);
+
+  useEffect(() => {
+    const mainDataLayer = {
+      pageTypeName: pageProps.page || null,
+      url: router.pathname,
+    };
+
+    gtmVirtualPageView(mainDataLayer);
+
+  }, [pageProps])
 
   return (
     <>
