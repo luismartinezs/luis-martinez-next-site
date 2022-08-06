@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 const PrivacyPolicyPage = () => {
   return (
     <div className="prose dark:prose-invert mx-auto">
