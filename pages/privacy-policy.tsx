@@ -1,6 +1,6 @@
 const PrivacyPolicyPage = () => {
   return (
-    <div className="prose prose-invert mx-auto">
+    <div className="prose dark:prose-invert mx-auto">
       <p>
         <strong>Privacy Policy</strong>
       </p>
