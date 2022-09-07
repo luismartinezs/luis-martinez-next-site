@@ -1,8 +1,11 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, type FC } from "react";
 
-const HeroTitle = ({ blok, postTitle }) => {
+const HeroTitle: FC<{ blok?: any; postTitle: string }> = ({
+  blok,
+  postTitle,
+}) => {
   const heroRef = useRef<HTMLInputElement>(null);
-  const wrapperRef = useRef(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (heroRef && heroRef.current && wrapperRef && wrapperRef.current) {
       const heroHeight = heroRef.current.offsetHeight;
