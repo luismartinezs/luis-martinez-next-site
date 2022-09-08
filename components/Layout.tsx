@@ -8,7 +8,7 @@ import StickyTop from "components/StickyTop";
 import FloatPill from "components/FloatPill";
 import Link from "next/link";
 
-const appEnv = process.env.NEXT_PUBLIC_APP_ENV;
+const appEnv = process.env.NEXT_PUBLIC_APP_ENV as string;
 const isProd = process.env.NEXT_PUBLIC_APP_ENV === "production";
 
 const Layout: React.FC<Required<PropsWithChildren>> = ({ children }) => {
