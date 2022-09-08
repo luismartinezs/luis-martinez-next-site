@@ -11,7 +11,7 @@ const SideNote = ({ blok }) => {
   const iconClass = "h-7 w-7";
 
   const classBase = {
-    block: "border-l-2 rounded-r pl-8 py-1 relative",
+    block: "border-l-2 rounded-r pl-8 pr-4 py-1 relative",
     icon: "rounded-full bg-white dark:bg-gray-800 max-w-min p-1 absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2",
   };
 

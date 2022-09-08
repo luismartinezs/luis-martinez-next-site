@@ -7,12 +7,16 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Script from "next/script";
 import ThemeProvider from "store/Theme";
+import { wrapper } from "store/store";
+import { setOpen } from "store/menuSlice";
+import { useDispatch } from "react-redux";
 
 initStoryblok();
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [gdpr, setGdpr] = useState(null);
-  const router = useRouter()
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setGdpr(localStorage.getItem("GDPR:accepted"));
@@ -56,8 +60,18 @@ function MyApp({ Component, pageProps }: AppProps) {
     };
 
     gtmVirtualPageView(mainDataLayer);
+  }, [pageProps]);
 
-  }, [pageProps])
+  useEffect(() => {
+    const handleCloseMenu = () => {
+      dispatch(setOpen(false));
+    };
+
+    router.events.on("routeChangeStart", handleCloseMenu);
+    return () => {
+      router.events.off("routeChangeStart", handleCloseMenu);
+    };
+  }, []);
 
   return (
     <>
@@ -71,4 +85,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);

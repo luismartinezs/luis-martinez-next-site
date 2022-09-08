@@ -21,7 +21,7 @@ const HeroTitle: FC<{ blok?: any; postTitle: string }> = ({
         className="bg-gradient-to-r from-primary-500 to-secondary-500 px-10 py-8 w-screen absolute inset-x-0"
         ref={heroRef}
       >
-        <h1 className="mb-0 text-white tracking-wide leading-tight mx-2 md:max-w-3xl md:mx-auto">
+        <h1 className="mb-0 text-white text-2xl lg:text-4xl tracking-wide leading-tight mx-2 md:max-w-3xl md:mx-auto">
           {_title}
         </h1>
       </div>
