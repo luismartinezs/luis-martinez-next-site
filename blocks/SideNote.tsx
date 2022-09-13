@@ -2,9 +2,10 @@ import { storyblokEditable } from "@storyblok/react";
 import BlockWrapper from "components/BlockWrapper";
 import RichTextRenderer from "components/RichTextRenderer";
 import IconInformationCircle from "~icons/heroicons-outline/information-circle.jsx";
+import IconExclamationCircle from "~icons/heroicons-outline/exclamation-circle.jsx";
 
 const SideNote = ({ blok }) => {
-  const { type }: { type: "note" } = blok;
+  const { type }: { type: "note" | "warning" } = blok;
 
   const _type = type || "note";
 
@@ -18,14 +19,20 @@ const SideNote = ({ blok }) => {
   const classMap = {
     note: {
       block: "bg-primary-100 dark:bg-gray-700 border-primary-500",
-      icon: "text-primary-500 ",
+      icon: "text-primary-500",
     },
+    warning: {
+      block: "bg-yellow-100 dark:bg-gray-700 border-yellow-500",
+      icon: "text-yellow-500",
+    }
   };
 
   const getIcon = () => {
     switch (_type) {
       case "note":
         return <IconInformationCircle className={iconClass} />;
+      case "warning":
+        return <IconExclamationCircle className={iconClass} />;
       default:
         return null;
     }
