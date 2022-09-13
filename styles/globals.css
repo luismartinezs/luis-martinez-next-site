@@ -22,10 +22,10 @@ code {
     @apply prose-pre:bg-primary-50 prose-pre:shadow-inner    dark:prose-pre:text-primary-200 dark:prose-pre:bg-gray-900 prose-pre:overflow-x-auto;
   }
   .custom-prose b {
-    @apply text-primary-700 dark:text-primary-200;
+    @apply text-gray-700 dark:text-gray-200;
   }
   .custom-prose i {
-    @apply text-primary-600 dark:text-primary-300;
+    @apply text-gray-600 dark:text-gray-300;
   }
 }
 
