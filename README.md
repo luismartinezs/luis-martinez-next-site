@@ -50,9 +50,8 @@ Way forward
   - [ ] Use types everywhere
     - https://nextjs.org/docs/basic-features/typescript
   - [ ] Use react-query for data fetching
-  - [ ] Mobile menu
+  - [x] Mobile menu
   - [x] Fix environment pill mobile style, and don't show in production
-  - [ ] Update my resume
   - [ ] Configure netlify/plugin-lighthouse
   - [ ] Improve post loading and error states (https://www.luis-martinez.net/blog/404, https://www.luis-martinez.net/404)
   - [ ] Add links to social media and youtube
@@ -66,9 +65,12 @@ Way forward
   - [ ] Files should export only React components, or only non React components, not both
   - [ ] Exported constants should be in a separate file
   - [ ] Add "bionic reading" option / config
+  - [ ] Improve style of blog posts list
 
 - Content
-  - [ ] Update resume and about
+  - [ ] Update resume
+  - [ ] Update about
+  - [ ] Update skills
 
 - Components I need
   - [x] Video component

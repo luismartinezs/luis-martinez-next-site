@@ -22,10 +22,10 @@ code {
     @apply prose-pre:bg-primary-50 prose-pre:shadow-inner    dark:prose-pre:text-primary-200 dark:prose-pre:bg-gray-900 prose-pre:overflow-x-auto;
   }
   .custom-prose b {
-    @apply text-primary-700 dark:text-primary-200;
+    @apply text-gray-700 dark:text-gray-200;
   }
   .custom-prose i {
-    @apply text-primary-600 dark:text-primary-300;
+    @apply text-gray-600 dark:text-gray-300;
   }
 }
 
@@ -41,20 +41,24 @@ button.switch span {
   pointer-events: none;
 }
 
-[role='switch'] > span {
+[role="switch"] > span {
   @apply p-px h-6 w-6 flex items-center justify-center relative;
 }
 
-[role='switch'] > span > * {
+[role="switch"] > span > * {
   @apply h-4 w-4 text-gray-400 dark:text-gray-200;
 }
 
 /* OFF STATE - LIGHT MODE */
-[role='switch'] > :first-child {
+[role="switch"] > :first-child {
   @apply bg-white rounded-full border text-gray-400 transition-transform dark:bg-gray-800 dark:border-none;
 }
 
 /* ON STATE - DARK MODE */
-[role='switch'][aria-checked='true'] > :first-child {
+[role="switch"][aria-checked="true"] > :first-child {
   @apply translate-x-[26px];
+}
+
+a {
+  @apply hover:underline text-primary-600 hover:text-primary-500 dark:text-primary-300 dark:hover:text-primary-200;
 }
