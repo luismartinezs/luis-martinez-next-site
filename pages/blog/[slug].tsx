@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { getAllPosts, getPost } from "lib/storyblok";
 import { StoryblokComponent, useStoryblokState } from "@storyblok/react";
 import Head from "next/head";
@@ -28,6 +29,11 @@ export async function getStaticProps({ params: { slug }, preview = null }) {
 }
 
 export default function PostPage({ post = null }) {
+  const [url, setUrl] = useState("https://www.luis-martinez.net");
+  useEffect(() => {
+    setUrl(window.location.href);
+  });
+
   const postData = useStoryblokState(post || {});
   if (!postData?.content) {
     return <div>Loading...</div>;
@@ -41,12 +47,7 @@ export default function PostPage({ post = null }) {
         <meta name="description" content={postData.content.description} />
         <link rel="icon" href="/favicon.png" />
         {/* Facebook meta tags */}
-        <meta
-          property="og:url"
-          content={
-            window ? window.location.href : "https://www.luis-martinez.net/"
-          }
-        />
+        <meta property="og:url" content={url} />
         <meta property="og:type" content="website" />
         <meta property="og:title" content={postData.content.title} />
         <meta
@@ -57,12 +58,7 @@ export default function PostPage({ post = null }) {
         {/* Twitter meta tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="luis-martinez.net" />
-        <meta
-          property="twitter:url"
-          content={
-            window ? window.location.href : "https://www.luis-martinez.net/"
-          }
-        />
+        <meta property="twitter:url" content={url} />
         <meta name="twitter:title" content={postData.content.title} />
         <meta
           name="twitter:description"
