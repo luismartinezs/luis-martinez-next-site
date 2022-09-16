@@ -36,9 +36,39 @@ export default function PostPage({ post = null }) {
   return (
     <>
       <Head>
+        {/* Meta tags generated with https://www.opengraph.xyz/ */}
         <title>{postData.content.title}</title>
         <meta name="description" content={postData.content.description} />
         <link rel="icon" href="/favicon.png" />
+        {/* Facebook meta tags */}
+        <meta
+          property="og:url"
+          content={
+            window ? window.location.href : "https://www.luis-martinez.net/"
+          }
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={postData.content.title} />
+        <meta
+          property="og:description"
+          content={postData.content.description}
+        />
+        <meta property="og:image" content={postData.content.socialImage} />
+        {/* Twitter meta tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="luis-martinez.net" />
+        <meta
+          property="twitter:url"
+          content={
+            window ? window.location.href : "https://www.luis-martinez.net/"
+          }
+        />
+        <meta name="twitter:title" content={postData.content.title} />
+        <meta
+          name="twitter:description"
+          content={postData.content.description}
+        />
+        <meta name="twitter:image" content={postData.content.socialImage} />
       </Head>
       <article className="prose dark:prose-invert custom-prose break-words">
         <StoryblokComponent blok={postData.content} />
