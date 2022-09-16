@@ -7,7 +7,7 @@ const defaultMessage = (
     We use cookies to provide our services and for analytics and marketing. To
     find out more about our use of cookies, please see our{" "}
     <Link href="/privacy-policy" passHref={true}>
-      <a>Privacy Policy</a>
+      <a className="underline text-primary-100 hover:text-primary-200">Privacy Policy</a>
     </Link>
     . By continuing to browse our website, you agree to our use of cookies.
   </p>
