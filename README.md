@@ -66,6 +66,8 @@ Way forward
   - [ ] Exported constants should be in a separate file
   - [ ] Add "bionic reading" option / config
   - [ ] Improve style of blog posts list
+  - [x] Works on Firefox
+  - [x] Only show publication date in posts
 
 - Content
   - [ ] Update resume

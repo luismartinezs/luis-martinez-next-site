@@ -15,7 +15,7 @@ const Layout: React.FC<Required<PropsWithChildren>> = ({ children }) => {
   const cookieMessage = (
     <p>
       I use cookies for Google Analytics. By clicking on <i>Accept</i>, you
-      consent to this.  To find out more about my use of cookies, please see the <Link href="/privacy-policy" passHref={true}><a className="underline">Privacy Policy</a></Link>
+      consent to this.  To find out more about my use of cookies, please see the <Link href="/privacy-policy" passHref={true}><a className="underline text-primary-100 hover:text-primary-200">Privacy Policy</a></Link>
     </p>
   );
 
