@@ -14,6 +14,7 @@ const Post = ({ blok }) => {
           blok={nestedBlok}
           key={nestedBlok._uid}
           {...postData}
+          isPost={true}
         />
       ))}
     </div>

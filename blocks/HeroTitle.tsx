@@ -1,10 +1,11 @@
 import PostMetadata from "components/PostMetadata";
 import { useRef, useEffect, type FC } from "react";
 
-const HeroTitle: FC<{ blok?: any; postTitle: string }> = ({
+const HeroTitle: FC<{ blok?: any; postTitle: string; createdAt: 'string'; isPost?: boolean }> = ({
   blok,
   postTitle,
   createdAt,
+  isPost = false
 }) => {
   const heroRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -29,7 +30,7 @@ const HeroTitle: FC<{ blok?: any; postTitle: string }> = ({
           </h1>
         </div>
       </div>
-      <PostMetadata createdAt={createdAt} />
+      {isPost && <PostMetadata createdAt={createdAt} />}
     </>
   );
 };
