@@ -40,7 +40,7 @@ export default function PostPage({ post = null }) {
         <meta name="description" content={postData.content.description} />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <article className="prose dark:prose-invert custom-prose">
+      <article className="prose dark:prose-invert custom-prose break-words">
         <StoryblokComponent blok={postData.content} />
       </article>
     </>
