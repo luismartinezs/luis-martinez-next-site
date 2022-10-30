@@ -7,6 +7,7 @@ overrides:
 
 specifiers:
   '@iconify/json': ^2.1.130
+  '@netlify/functions': ^1.3.0
   '@netlify/plugin-lighthouse': ^4.0.2
   '@netlify/plugin-nextjs': ^4.28.3
   '@reduxjs/toolkit': ^1.8.6
@@ -54,6 +55,7 @@ dependencies:
 
 devDependencies:
   '@iconify/json': 2.1.130
+  '@netlify/functions': 1.3.0
   '@netlify/plugin-lighthouse': 4.0.2
   '@netlify/plugin-nextjs': 4.28.3
   '@svgr/core': 6.5.1
