@@ -1,3 +1,5 @@
+import Head from "next/head";
+
 import HeroTitle from "blocks/HeroTitle";
 import BlockWrapper from "components/BlockWrapper";
 import CloudinaryImage from "components/CloudinaryImage";
@@ -59,23 +61,28 @@ const portfolioItems: Array<IPortfolioItem> = [
     url: "https://ahtleanx-home-workout.netlify.app/",
     githubUrl: "https://github.com/luismartinezs/ahtleanx-home-workout-app",
     imageSide: "right",
-  }
+  },
 ];
 
 const PortfolioPage = () => {
   return (
-    <div>
-      <div className="prose dark:prose-invert custom-prose">
-        <HeroTitle postTitle="Explore my portfolio" />
-      </div>
-      <BlockWrapper>
-        <div className="flex flex-col space-y-6">
-          {portfolioItems.map((item) => (
-            <PortfolioItem key={item.id} {...item} />
-          ))}
+    <>
+      <Head>
+        <title>Portfolio - Luis Martinez Web Developer</title>
+      </Head>
+      <div>
+        <div className="prose dark:prose-invert custom-prose">
+          <HeroTitle postTitle="Explore my portfolio" />
         </div>
-      </BlockWrapper>
-    </div>
+        <BlockWrapper>
+          <div className="flex flex-col space-y-6">
+            {portfolioItems.map((item) => (
+              <PortfolioItem key={item.id} {...item} />
+            ))}
+          </div>
+        </BlockWrapper>
+      </div>
+    </>
   );
 };
 
