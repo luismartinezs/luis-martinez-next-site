@@ -66,7 +66,7 @@ export default function PostPage({ post = null }) {
         />
         <meta name="twitter:image" content={postData.content.socialImage} />
       </Head>
-      <article className="prose dark:prose-invert custom-prose break-words">
+      <article className="prose break-words dark:prose-invert custom-prose">
         <StoryblokComponent blok={postData.content} />
       </article>
     </>

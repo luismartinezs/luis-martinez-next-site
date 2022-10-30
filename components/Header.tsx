@@ -33,16 +33,19 @@ const Header = () => {
   const links = linksList.map(({ href, label }) => {
     return (
       <li key={href}>
-        <Link href={href} passHref={true}>
-          <a className={`${activeLinkClass(href)} ${baseLinkClass}`}>{label}</a>
+        <Link
+          href={href}
+          className={`${activeLinkClass(href)} ${baseLinkClass}`}
+        >
+          {label}
         </Link>
       </li>
     );
   });
 
   return (
-    <div className="w-full bg-white border-b-2 border-gray-200 dark:bg-gray-800 dark:border-gray-700 transition duration-300">
-      <header className="p-4 flex items-center justify-between container mx-auto">
+    <div className="w-full transition duration-300 bg-white border-b-2 border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+      <header className="container flex items-center justify-between p-4 mx-auto">
         <div className="flex items-center">
           <div className="lg:hidden">
             <CollapsibleMenu>
@@ -51,13 +54,11 @@ const Header = () => {
             </CollapsibleMenu>
           </div>
           <Link href="/" passHref={true}>
-            <a>
-              <CssLogo />
-            </a>
+            <CssLogo />
           </Link>
         </div>
         <nav>
-          <ul className="hidden lg:flex justify-end items-center space-x-6 md:space-x-8 text-sm md:text-base">
+          <ul className="items-center justify-end hidden space-x-6 text-sm lg:flex md:space-x-8 md:text-base">
             {links}
             <ThemeSwitch />
           </ul>

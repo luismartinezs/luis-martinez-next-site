@@ -1,15 +1,17 @@
-import "../styles/globals.css";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import type { AppProps } from "next/app";
+import { useRouter } from "next/router";
+import Script from "next/script";
+
 import Layout from "components/Layout";
 import { initStoryblok } from "lib/storyblok";
 import { GTM_ID, pageview, gtmVirtualPageView } from "lib/gtm";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import Script from "next/script";
 import ThemeProvider from "store/Theme";
 import { wrapper } from "store/store";
 import { setOpen } from "store/menuSlice";
-import { useDispatch } from "react-redux";
+
+import "../styles/globals.css";
 
 initStoryblok();
 

@@ -15,12 +15,18 @@ const Layout: React.FC<Required<PropsWithChildren>> = ({ children }) => {
   const cookieMessage = (
     <p>
       I use cookies for Google Analytics. By clicking on <i>Accept</i>, you
-      consent to this.  To find out more about my use of cookies, please see the <Link href="/privacy-policy" passHref={true}><a className="underline text-primary-100 hover:text-primary-200">Privacy Policy</a></Link>
+      consent to this. To find out more about my use of cookies, please see the{" "}
+      <Link
+        href="/privacy-policy"
+        className="underline text-primary-100 hover:text-primary-200"
+      >
+        Privacy Policy
+      </Link>
     </p>
   );
 
   return (
-    <div className="flex flex-col justify-between h-screen overflow-x-hidden dark:bg-gray-800 dark:text-white transition duration-300">
+    <div className="flex flex-col justify-between h-screen overflow-x-hidden transition duration-300 dark:bg-gray-800 dark:text-white">
       <ClientOnly>
         {!isProd && <FloatPill label={appEnv} />}
         <CookieModal
