@@ -15,14 +15,22 @@ import "../styles/globals.css";
 
 initStoryblok();
 
+function useGDPRAccepted() {
+  const [gdprAccepted, setGdprAccepted] = useState<string | null>(null);
+
+  useEffect(() => {
+    const gdprValue = localStorage.getItem("GDPR:accepted");
+    setGdprAccepted(gdprValue);
+  }, []);
+
+  return gdprAccepted;
+}
+
 function MyApp({ Component, pageProps }: AppProps) {
-  const [gdpr, setGdpr] = useState(null);
   const router = useRouter();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    setGdpr(localStorage.getItem("GDPR:accepted"));
-  }, []);
+  const gdpr = useGDPRAccepted();
 
   const getGtmScript = () => {
     if (process.env.NEXT_PUBLIC_APP_ENV !== "production") {
