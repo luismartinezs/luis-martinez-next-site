@@ -11,7 +11,7 @@ export default function plopGenerator(plop) {
     actions: [
       {
         type: "add",
-        path: "../components/{{pascalCase name}}/index.ts",
+        path: "../components/{{pascalCase name}}/index.tsx",
         templateFile: "templates/component/index.ts.hbs",
       },
       {
