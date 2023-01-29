@@ -1,7 +1,7 @@
-import { storyblokEditable } from "@storyblok/react";
+import { SbBlokData, storyblokEditable } from "@storyblok/react";
 import BlockWrapper from "components/BlockWrapper";
 
-const BlockName = ({ blok }) => {
+const BlockName = ({ blok }: {blok: SbBlokData}) => {
   return (
     <BlockWrapper width="text">
       <div {...storyblokEditable(blok)} key={blok._uid}>

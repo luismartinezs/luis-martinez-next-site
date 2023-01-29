@@ -9,7 +9,10 @@ export async function getStaticProps() {
   };
 }
 
-const ResumePage = ({ frontmatter, content }) => {
+const ResumePage = ({
+  frontmatter,
+  content,
+}: ReturnType<typeof getMarkdownContent>) => {
   return (
     <div>
       <div className="prose dark:prose-invert custom-prose">

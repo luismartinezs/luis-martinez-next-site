@@ -1,4 +1,8 @@
-import { storyblokEditable, StoryblokComponent } from "@storyblok/react";
+import {
+  storyblokEditable,
+  StoryblokComponent,
+  SbBlokData,
+} from "@storyblok/react";
 
 const Post = ({ blok }) => {
   const { body, ...postData } = blok;
