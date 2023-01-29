@@ -2,32 +2,28 @@
 title: About me - Luis Martinez Web Developer
 ---
 
-> I've been a scientist and an artist, now I'm a developer, which needs a bit of both
+I am a web developer with a passion for creating beautiful and functional digital experiences. I have a background in science and IT project management, and my diverse skillset allows me to bring a unique perspective to web development.
 
-Hi! My name is Luis Martínez.
+Technical Skills:
 
-In August 2018 I decided to become a web developer ([learn about how I did it](/blog/from-jobless-to-junior-frontend-developer-in-5-months)).
+- React, VueJS
+- NextJS, NuxtJS
+- Firebase
+- Tailwind CSS, Bootstrap 4, Vue Bootstrap, SCSS, PostCSS
+- NodeJS/Express, Serverless, AWS
+- Google Sheets, Google Apps Script
 
-Things I've done as a web developer:
+Before development
 
-- Web apps with **React** and VueJS
-- Sites with **NextJS** and NuxtJS
-- **Google Firebase** backends
-- Styling with **Tailwind CSS** and Bootstrap 4 / Vue Bootstrap
-
-I also know about PostCSS, NodeJS/Express, serverless and AWS, SCSS and Google sheets / Google Apps Script.
-
-Things I've done in past lives:
-
-- a PhD in science. 🤓
-- Working as a project manager in IT.
-- [A card game](https://www.kickstarter.com/projects/rafaelgonzalez/final-boss-the-card-game). 🎲
+- PhD in science
+- IT Project Manager
+- [Card game](https://www.kickstarter.com/projects/rafaelgonzalez/final-boss-the-card-game) creator
 - As a little kid I loved drawing. 🎨 [I still do](https://www.artstation.com/luismartinez).
 
 I like:
 
 - Greek salad
-- Wim hof
+- Wim hof method
 - Dark souls
 - Jojo's bizarre adventure
 

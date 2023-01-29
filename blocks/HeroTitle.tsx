@@ -1,12 +1,12 @@
 import PostMetadata from "components/PostMetadata";
 import { useRef, useEffect, type FC } from "react";
 
-const HeroTitle: FC<{ blok?: any; postTitle: string; createdAt: 'string'; isPost?: boolean }> = ({
-  blok,
-  postTitle,
-  createdAt,
-  isPost = false
-}) => {
+const HeroTitle: FC<{
+  blok?: any;
+  postTitle: string;
+  createdAt?: string;
+  isPost?: boolean;
+}> = ({ blok, postTitle, createdAt, isPost = false }) => {
   const heroRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -22,10 +22,10 @@ const HeroTitle: FC<{ blok?: any; postTitle: string; createdAt: 'string'; isPost
     <>
       <div ref={wrapperRef}>
         <div
-          className="bg-gradient-to-r from-primary-500 to-secondary-500 px-10 py-8 w-screen absolute inset-x-0"
+          className="absolute inset-x-0 w-screen px-10 py-8 bg-gradient-to-r from-primary-500 to-secondary-500"
           ref={heroRef}
         >
-          <h1 className="mb-0 text-white text-2xl lg:text-4xl tracking-wide leading-tight mx-2 md:max-w-3xl md:mx-auto">
+          <h1 className="mx-2 mb-0 text-2xl leading-tight tracking-wide text-white lg:text-4xl md:max-w-3xl md:mx-auto">
             {_title}
           </h1>
         </div>

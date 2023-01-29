@@ -9,11 +9,14 @@ export async function getStaticProps() {
   };
 }
 
-const ResumePage = ({ frontmatter, content }) => {
+const ResumePage = ({
+  frontmatter,
+  content,
+}: ReturnType<typeof getMarkdownContent>) => {
   return (
     <div>
       <div className="prose dark:prose-invert custom-prose">
-        <HeroTitle postTitle="About me" />
+        <HeroTitle postTitle="About Luis Martínez" />
       </div>
       <BlockWrapper>
         <MarkdownContent frontmatter={frontmatter} content={content} />
