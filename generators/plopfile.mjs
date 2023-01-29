@@ -1,0 +1,24 @@
+export default function plopGenerator(plop) {
+  plop.setGenerator("component", {
+    description: "Standalone component",
+    prompts: [
+      {
+        type: "input",
+        name: "name",
+        message: "component name",
+      },
+    ],
+    actions: [
+      {
+        type: "add",
+        path: "../components/{{pascalCase name}}/index.ts",
+        templateFile: "templates/component/index.ts.hbs",
+      },
+      {
+        type: "add",
+        path: "../components/{{pascalCase name}}/{{pascalCase name}}.tsx",
+        templateFile: "templates/component/component.tsx.hbs",
+      }
+    ],
+  });
+}

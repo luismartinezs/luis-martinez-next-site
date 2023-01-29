@@ -13,7 +13,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "clean": "trash .next node_modules pnpm-lock.yaml"
+    "clean": "trash .next node_modules pnpm-lock.yaml",
+    "plop": "plop  --plopfile ./generators/plopfile.mjs"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.2",
@@ -45,6 +46,7 @@
     "eslint": "8.33.0",
     "eslint-config-next": "13.1.6",
     "follow-redirects": "^1.15.2",
+    "plop": "^3.1.1",
     "postcss": "^8.4.21",
     "prettier": "^2.8.3",
     "tailwindcss": "^3.2.4",
