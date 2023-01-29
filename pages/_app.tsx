@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { Provider } from "react-redux";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import Script from "next/script";
@@ -9,7 +9,7 @@ import { initStoryblok } from "lib/storyblok";
 import { GTM_ID, pageview, gtmVirtualPageView } from "lib/gtm";
 import ThemeProvider from "store/Theme";
 import { wrapper } from "store/store";
-import { setOpen } from "store/menuSlice";
+import MobileMenuHandler from "components/MobileMenuHandler";
 
 import "../styles/globals.css";
 
@@ -26,9 +26,10 @@ function useGDPRAccepted() {
   return gdprAccepted;
 }
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, ...rest }: AppProps) {
+  const { store, props } = wrapper.useWrappedStore(rest);
+  const { pageProps } = props;
   const router = useRouter();
-  const dispatch = useDispatch();
 
   const gdpr = useGDPRAccepted();
 
@@ -72,27 +73,19 @@ function MyApp({ Component, pageProps }: AppProps) {
     gtmVirtualPageView(mainDataLayer);
   }, [pageProps]);
 
-  useEffect(() => {
-    const handleCloseMenu = () => {
-      dispatch(setOpen(false));
-    };
-
-    router.events.on("routeChangeStart", handleCloseMenu);
-    return () => {
-      router.events.off("routeChangeStart", handleCloseMenu);
-    };
-  }, []);
-
   return (
     <>
       {getGtmScript()}
-      <ThemeProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ThemeProvider>
+      <Provider store={store}>
+        <MobileMenuHandler />
+        <ThemeProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ThemeProvider>
+      </Provider>
     </>
   );
 }
 
-export default wrapper.withRedux(MyApp);
+export default MyApp;
