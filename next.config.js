@@ -19,7 +19,10 @@ const nextConfig = {
   },
   typescript: {
     ignoreBuildErrors: true,
-  }
+  },
+  sentry: {
+    hideSourceMaps: true,
+  },
 }
 
 const sentryWebpackPluginOptions = {

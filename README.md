@@ -16,6 +16,7 @@ Alternative:
 Way forward
 
 - Setup Storyblok and get the blog content from there
+
   - [x] Storyblok space
   - [x] Use storyblok in NextJS
   - [x] Render blog posts from Storyblok
@@ -46,6 +47,7 @@ Way forward
   - [x] Show draft in Storyblok context
     - [x] Production: doesn't show drafts. Might need to rebuild site (SSG)
     - [x] Development: shows drafts immediately as they are creatd, without need to rebuild site (SSR)
+  - [ ] replace redux by zustand (?)
   - [ ] Improve web vitals https://nextjs.org/learn/seo/web-performance
   - [ ] Use types everywhere
     - https://nextjs.org/docs/basic-features/typescript
@@ -70,6 +72,7 @@ Way forward
   - [x] Only show publication date in posts
 
 - Content
+
   - [ ] Update resume
   - [ ] Update about
   - [ ] Update skills
