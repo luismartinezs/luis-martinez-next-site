@@ -17,6 +17,7 @@ module.exports = {
       },
       fontFamily: {
         'sans': ['Inter', ...defaultTheme.fontFamily.sans],
+        'display': ['DM Serif Display', ...defaultTheme.fontFamily.serif],
       },
     },
   },
