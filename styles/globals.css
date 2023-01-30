@@ -62,3 +62,7 @@ button.switch span {
 a {
   @apply hover:underline text-primary-600 hover:text-primary-500 dark:text-primary-300 dark:hover:text-primary-200;
 }
+
+*:focus {
+  @apply outline-none ring-offset-2 ring-2 ring-primary-500 ring-offset-primary-100 dark:ring-primary-300 dark:ring-offset-primary-900 rounded;
+}
