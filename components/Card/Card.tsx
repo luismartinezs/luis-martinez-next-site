@@ -1,8 +1,7 @@
 import { FC } from "react";
 
 const styles = {
-  textShadow:
-    "0 0 2px rgba(0,0,0,0.8), 0 0 1em rgba(0,0,0,0.8), 0 0 0.2em rgba(0,0,0,0.5)",
+  textShadow: "0 0 4px rgba(0,0,0,0.8), 0 0 6px rgba(0,0,0,0.6)",
   background:
     "linear-gradient(180deg, rgba(0, 0, 0, 0.63) 0%, rgba(0, 0, 0, 0.29) 42.19%, rgba(0, 0, 0, 0) 54.69%, rgba(0, 0, 0, 0) 90.62%, rgba(0, 0, 0, 0.33) 100%);",
 };
@@ -15,7 +14,11 @@ const mockImg = [
 const Card: FC = (): JSX.Element => {
   return (
     <div className="h-[300px] w-[300px] rounded-xl overflow-hidden m-2 relative drop-shadow-lg hover:scale-[1.02] transition ease-in-out">
-      <img src={mockImg[1]} className="absolute object-cover w-full h-full" />
+      <img
+        src={mockImg[1]}
+        className="absolute object-cover w-full h-full"
+        alt=""
+      />
       <div
         className="absolute object-cover w-full h-full"
         style={{
@@ -24,7 +27,7 @@ const Card: FC = (): JSX.Element => {
       ></div>
       <div className="relative flex flex-col justify-between w-full h-full p-5">
         <h2
-          className="text-3xl text-white font-display drop-shadow"
+          className="text-3xl text-white font-display"
           style={{
             textShadow: styles.textShadow,
           }}
@@ -32,7 +35,7 @@ const Card: FC = (): JSX.Element => {
           Building the Flatten Type with Typescript
         </h2>
         <span
-          className="text-right text-white drop-shadow"
+          className="text-right text-white"
           style={{
             textShadow: styles.textShadow,
           }}
