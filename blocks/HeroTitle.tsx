@@ -25,7 +25,7 @@ const HeroTitle: FC<{
           className="absolute inset-x-0 w-screen px-10 py-8 bg-gradient-to-r from-primary-500 to-secondary-500"
           ref={heroRef}
         >
-          <h1 className="mx-2 mb-0 text-2xl leading-tight tracking-wide text-white lg:text-4xl md:max-w-3xl md:mx-auto">
+          <h1 className="mx-2 mb-0 text-3xl leading-tight tracking-wide text-white lg:text-4xl md:max-w-3xl md:mx-auto font-display">
             {_title}
           </h1>
         </div>

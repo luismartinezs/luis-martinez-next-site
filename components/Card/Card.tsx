@@ -7,13 +7,15 @@ const styles = {
     "linear-gradient(180deg, rgba(0, 0, 0, 0.63) 0%, rgba(0, 0, 0, 0.29) 42.19%, rgba(0, 0, 0, 0) 54.69%, rgba(0, 0, 0, 0) 90.62%, rgba(0, 0, 0, 0.33) 100%);",
 };
 
+const mockImg = [
+  "https://cdn.midjourney.com/8981dc16-452b-40df-bc4b-87f215d477d1/grid_0.png",
+  "https://cdn.midjourney.com/d4279d5d-a986-4ff4-8563-fb2ffe6e95ae/grid_0.png",
+];
+
 const Card: FC = (): JSX.Element => {
   return (
     <div className="h-[300px] w-[300px] rounded-xl overflow-hidden m-2 relative drop-shadow-lg hover:scale-[1.02] transition ease-in-out">
-      <img
-        src="https://cdn.midjourney.com/8981dc16-452b-40df-bc4b-87f215d477d1/grid_0.png"
-        className="absolute object-cover w-full h-full"
-      />
+      <img src={mockImg[1]} className="absolute object-cover w-full h-full" />
       <div
         className="absolute object-cover w-full h-full"
         style={{

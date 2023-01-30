@@ -16,8 +16,8 @@ module.exports = {
         gray: colors.slate,
       },
       fontFamily: {
-        'sans': ['Inter', ...defaultTheme.fontFamily.sans],
-        'display': ['DM Serif Display', ...defaultTheme.fontFamily.serif],
+        'sans': ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
+        'display': ['var(--font-lora)', ...defaultTheme.fontFamily.serif],
       },
     },
   },

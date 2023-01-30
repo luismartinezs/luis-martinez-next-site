@@ -10,6 +10,7 @@ specifiers:
   '@netlify/functions': ^1.4.0
   '@netlify/plugin-lighthouse': ^4.0.7
   '@netlify/plugin-nextjs': ^4.30.2
+  '@next/font': ^13.1.6
   '@reduxjs/toolkit': ^1.9.2
   '@sentry/nextjs': ^7.34.0
   '@storyblok/react': ^2.0.8
@@ -20,6 +21,7 @@ specifiers:
   '@types/react-dom': 18.0.10
   autoprefixer: ^10.4.13
   axios: ^1.2.6
+  classnames: ^2.3.2
   eslint: 8.33.0
   eslint-config-next: 13.1.6
   follow-redirects: ^1.15.2
@@ -41,10 +43,12 @@ specifiers:
   unplugin-icons: ^0.15.2
 
 dependencies:
+  '@next/font': 13.1.6
   '@reduxjs/toolkit': 1.9.2_k4ae6lp43ej6mezo3ztvx6pykq
   '@sentry/nextjs': 7.34.0_next@13.1.6+react@18.2.0
-  '@storyblok/react': 2.0.8_biqbaboplfbrettd7655fr4n2y
+  '@storyblok/react': 2.0.9_biqbaboplfbrettd7655fr4n2y
   axios: 1.2.6
+  classnames: 2.3.2
   gray-matter: 4.0.3
   next: 13.1.6_pjwopsidmaokadturxaafygjp4
   next-redux-wrapper: 8.1.0_4rc3fhkizgzmqy7p7vghukrrdq
@@ -57,7 +61,7 @@ dependencies:
   storyblok-rich-text-react-renderer: 2.6.1_react@18.2.0
 
 devDependencies:
-  '@iconify/json': 2.2.13
+  '@iconify/json': 2.2.14
   '@netlify/functions': 1.4.0
   '@netlify/plugin-lighthouse': 4.0.7
   '@netlify/plugin-nextjs': 4.30.2
@@ -313,8 +317,8 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
-  /@iconify/json/2.2.13:
-    resolution: {integrity: sha512-TgTGzEhU2o0gGrkke3hVbkVtZB8EcbCdNR4X6ZbXJsApMuFghS4s+yuEbGHw+mMa3sp40L5qRi7wFU6Q47ysfw==}
+  /@iconify/json/2.2.14:
+    resolution: {integrity: sha512-mwdnybfFZOGQpCnEW/i/YW3G7Spb8c3XqhjngO/WVrFcr73os0dZmMiJxs79FAqxOQ8gxJc4FevnwqfSq9JIrA==}
     dependencies:
       '@iconify/types': 2.0.0
       pathe: 1.1.0
@@ -670,6 +674,10 @@ packages:
     dependencies:
       glob: 7.1.7
     dev: true
+
+  /@next/font/13.1.6:
+    resolution: {integrity: sha512-AITjmeb1RgX1HKMCiA39ztx2mxeAyxl4ljv2UoSBUGAbFFMg8MO7YAvjHCgFhD39hL7YTbFjol04e/BPBH5RzQ==}
+    dev: false
 
   /@next/swc-android-arm-eabi/13.1.6:
     resolution: {integrity: sha512-F3/6Z8LH/pGlPzR1AcjPFxx35mPqjE5xZcf+IL+KgbW9tMkp7CYi1y7qKrEWU7W4AumxX/8OINnDQWLiwLasLQ==}
@@ -1085,19 +1093,19 @@ packages:
       - supports-color
     dev: false
 
-  /@storyblok/js/2.0.11:
-    resolution: {integrity: sha512-VdhpLwkKO+y7526JbePZWBrNeQy9Tf8CHEa87BjA6bERD583cHS7fn7jMa3wTJDc6O6pYsxFvPB9+hzc97hwew==}
+  /@storyblok/js/2.0.12:
+    resolution: {integrity: sha512-OeAdR7GRSORzi/wTsZO72gpI23BQT4ZH2n+GcfiPqbUKtZr0iSlts/UMj56hhivNUUWD9XxNkq65awKuPl1Uaw==}
     dependencies:
       storyblok-js-client: 5.3.6
     dev: false
 
-  /@storyblok/react/2.0.8_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-vRZSFUiA507wDXmt3dY0QHyL9gQmau7fvT8H3BGZ0G9Xxyy1vHCAyxkanAiyJY0a34lO8E0j18XI5c/rQKzZ3w==}
+  /@storyblok/react/2.0.9_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-gCoEZY14o6aZEas4c0q0iV7k7GdqkizPcc6Vc6JNnIB5Cl7OlQlI+A6hTHo7gT03SYCqS8Ma8cmpMBN9LGQkbw==}
     peerDependencies:
       react: ^17.0.0 || ^18.0.0
       react-dom: ^17.0.0 || ^18.0.0
     dependencies:
-      '@storyblok/js': 2.0.11
+      '@storyblok/js': 2.0.12
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
@@ -1721,7 +1729,7 @@ packages:
     engines: {node: '>= 0.8', npm: 1.2.8000 || >= 1.4.16}
     dependencies:
       bytes: 3.1.2
-      content-type: 1.0.4
+      content-type: 1.0.5
       debug: 2.6.9
       depd: 2.0.0
       destroy: 1.2.0
@@ -1938,6 +1946,10 @@ packages:
       - supports-color
     dev: true
 
+  /classnames/2.3.2:
+    resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==}
+    dev: false
+
   /clean-css/4.2.4:
     resolution: {integrity: sha512-EJUDT7nDVFDvaQgAo2G/PJvxmp1o/c6iXLbswsBbUFXi1Nr+AjA2cKmfbKDMjMvzEe75g3P6JkaDDAKk96A85A==}
     engines: {node: '>= 4.0'}
@@ -2127,8 +2139,8 @@ packages:
       safe-buffer: 5.2.1
     dev: true
 
-  /content-type/1.0.4:
-    resolution: {integrity: sha512-hIP3EEPs8tB9AT1L+NUqtwOAps4mk2Zob89MWXMHjHWg9milF/j4osnnQLXBCBFBk/tvIG/tUc9mOUJiPBhPXA==}
+  /content-type/1.0.5:
+    resolution: {integrity: sha512-nTjqfcBFEipKdXCv4YDQWCfmcLZKm81ldF0pAopTvyrFGVbcR6P/VAAd5G7N+0tTr8QqiU0tFadD6FK4NtJwOA==}
     engines: {node: '>= 0.6'}
     dev: true
 
@@ -2935,7 +2947,7 @@ packages:
       array-flatten: 1.1.1
       body-parser: 1.20.1
       content-disposition: 0.5.4
-      content-type: 1.0.4
+      content-type: 1.0.5
       cookie: 0.5.0
       cookie-signature: 1.0.6
       debug: 2.6.9

@@ -1,16 +1,12 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
+
 import { GTM_ID } from "lib/gtm";
 
 class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <Head>
-          <link
-            href="https://fonts.googleapis.com/css2?family=Inter;DM+Serif+Display&display=swap"
-            rel="stylesheet"
-          />
-        </Head>
+        <Head></Head>
         <body>
           <noscript>
             <iframe

@@ -3,6 +3,8 @@ import { Provider } from "react-redux";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import Script from "next/script";
+import { Inter, Lora } from "@next/font/google";
+import classnames from "classnames";
 
 import Layout from "components/Layout";
 import { initStoryblok } from "lib/storyblok";
@@ -12,6 +14,9 @@ import { wrapper } from "store/store";
 import MobileMenuHandler from "components/MobileMenuHandler";
 
 import "../styles/globals.css";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const lora = Lora({ subsets: ["latin"], variable: "--font-lora" });
 
 initStoryblok();
 
@@ -74,7 +79,7 @@ function MyApp({ Component, ...rest }: AppProps) {
   }, [pageProps]);
 
   return (
-    <>
+    <div className={classnames(inter.variable, "font-sans", lora.variable)}>
       {getGtmScript()}
       <Provider store={store}>
         <MobileMenuHandler />
@@ -84,7 +89,7 @@ function MyApp({ Component, ...rest }: AppProps) {
           </Layout>
         </ThemeProvider>
       </Provider>
-    </>
+    </div>
   );
 }
 
