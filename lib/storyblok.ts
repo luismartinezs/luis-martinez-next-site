@@ -7,6 +7,9 @@ import CloudinaryImage from "blocks/CloudinaryImage";
 import HeroTitle from "blocks/HeroTitle";
 import SideNote from "blocks/SideNote";
 
+type Version = "draft" | "published";
+type Preview = true | null;
+
 export function initStoryblok() {
   const components = {
     RichText,
@@ -24,9 +27,6 @@ export function initStoryblok() {
     components,
   });
 }
-
-type Version = "draft" | "published";
-type Preview = true | null;
 
 export async function getStory({
   slug,
