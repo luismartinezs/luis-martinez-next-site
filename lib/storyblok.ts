@@ -69,6 +69,13 @@ export async function getAllStories({
     version,
     ...rest,
   });
+
+  if (stories === null) {
+    return {
+      stories: [],
+    };
+  }
+
   return {
     stories,
   };
