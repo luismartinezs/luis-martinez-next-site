@@ -25,10 +25,10 @@ const Card: FC = ({
     <div
       className="
     h-[300px]
-    w-[300px]
+    w-full
+    max-w-[500px]
     rounded-xl
     overflow-hidden
-    m-2
     relative
     shadow
     shadow-black/30
