@@ -1,19 +1,16 @@
 import { SbBlokData, storyblokEditable } from "@storyblok/react";
 import BlockWrapper from "components/BlockWrapper";
+
+import { getImgUrl } from "lib/image";
 // TODO having trouble with making image responsive with next/image!
 // import Image from "next/image";
 
 const CloudinaryImage = ({ blok }: { blok: SbBlokData }) => {
   let { src, alt } = blok;
-  const hostUrl = `https://res.cloudinary.com/dicyllvry/image/upload/q_100/luis-martinez`;
   return (
     <BlockWrapper width="text" noPadding>
       <div {...storyblokEditable(blok)} key={blok._uid}>
-        <img
-          src={`${hostUrl}/${src}`}
-          alt={alt}
-          className="h-auto max-w-full"
-        />
+        <img src={getImgUrl(src)} alt={alt} className="h-auto max-w-full" />
         {/* <Image
           src={`${hostUrl}/${src}`}
           alt={alt}

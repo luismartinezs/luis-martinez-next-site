@@ -1,0 +1,1 @@
+export const HOST_IMG_URL = `https://res.cloudinary.com/dicyllvry/image/upload/q_100/luis-martinez`;

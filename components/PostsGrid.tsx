@@ -11,17 +11,21 @@ const PostsGrid = ({ posts }) => {
   });
   return (
     <BlockWrapper>
-      <h2 className="text-3xl font-semibold text-gray-800 dark:text-white">Blog posts</h2>
-      <ul className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mt-6 gap-4">
-        {sortedPosts.map(({ slug, content: { postTitle, featuredImage, createdAt } }) => (
-          <PostThumbnail
-            key={slug}
-            slug={slug}
-            title={postTitle}
-            image={featuredImage}
-            createdAt={createdAt}
-          />
-        ))}
+      <h2 className="text-3xl font-semibold text-gray-800 dark:text-white">
+        Blog posts
+      </h2>
+      <ul className="flex flex-wrap justify-center gap-4 mt-6">
+        {sortedPosts.map(
+          ({ slug, content: { postTitle, featuredImage, createdAt } }) => (
+            <PostThumbnail
+              key={slug}
+              slug={slug}
+              title={postTitle}
+              image={featuredImage}
+              createdAt={createdAt}
+            />
+          )
+        )}
       </ul>
     </BlockWrapper>
   );
