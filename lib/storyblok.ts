@@ -85,6 +85,7 @@ export async function getAllPosts({ preview }: { preview: Preview }) {
   let { stories } = await getAllStories({
     preview,
     starts_with: `blog/`,
+    excluding_fields: "body, socialImage, description",
   });
   return { posts: stories };
 }

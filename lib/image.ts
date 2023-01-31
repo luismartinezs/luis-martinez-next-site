@@ -1,8 +1,11 @@
-import { HOST_IMG_URL } from 'constants/index'
+import { HOST_IMG_URL, THUMBNAIL_IMG_URL } from 'constants/index'
 
 function getImgUrl(src: string) {
-  // if src starts with https return src otherwise prepend HOST_IMG_URL
-  return src.startsWith('https') ? src : `${HOST_IMG_URL}/${src}`
+  return src.startsWith('http') ? src : `${HOST_IMG_URL}/${src}`
 }
 
-export { getImgUrl }
+function getThumbnailImgUrl(src: string) {
+  return src.startsWith('http') ? src : `${THUMBNAIL_IMG_URL}/${src}`
+}
+
+export { getImgUrl, getThumbnailImgUrl }

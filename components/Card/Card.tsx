@@ -2,7 +2,7 @@ import { FC } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { getImgUrl } from "lib/image";
+import { getThumbnailImgUrl } from "lib/image";
 
 const styles = {
   textShadow: "0 0 4px rgba(0,0,0,0.8), 0 0 6px rgba(0,0,0,0.6)",
@@ -48,7 +48,7 @@ const Card: FC = ({
       {imgUrl ? (
         <>
           <Image
-            src={getImgUrl(imgUrl)}
+            src={getThumbnailImgUrl(imgUrl)}
             className="absolute object-cover object-center w-full h-full"
             alt=""
             fill

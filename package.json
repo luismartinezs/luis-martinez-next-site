@@ -11,9 +11,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "clean-cache": "trash .next",
     "start": "next start",
     "lint": "next lint",
-    "clean": "trash .next node_modules pnpm-lock.yaml",
+    "clean": "trash node_modules pnpm-lock.yaml",
     "plop": "plop  --plopfile ./generators/plopfile.mjs"
   },
   "dependencies": {
