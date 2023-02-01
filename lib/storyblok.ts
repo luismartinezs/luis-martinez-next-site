@@ -65,20 +65,17 @@ export async function getAllStories({
   const storyblokApi = getStoryblokApi();
   const version: Version = preview ? "draft" : "published";
 
-  let stories = await storyblokApi.getAll(`cdn/stories`, {
-    version,
-    ...rest,
-  });
-
-  if (stories === null) {
+  try {
+    let stories = await storyblokApi.getAll(`cdn/stories`, {
+      version,
+      ...rest,
+    });
+    return stories ? { stories } : { stories: [] };
+  } catch (err) {
     return {
       stories: [],
-    };
+    }
   }
-
-  return {
-    stories,
-  };
 }
 
 export async function getAllPosts({ preview }: { preview: Preview }) {
