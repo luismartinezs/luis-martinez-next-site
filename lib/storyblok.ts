@@ -1,4 +1,4 @@
-import { storyblokInit, apiPlugin, getStoryblokApi } from "@storyblok/react";
+import { storyblokInit, apiPlugin, getStoryblokApi, ISbStoriesParams } from "@storyblok/react";
 import StoryblokPage from "blocks/StoryblokPage";
 import Post from "blocks/Post";
 import RichText from "blocks/RichText";
@@ -57,18 +57,17 @@ export async function getStory({
 
 export async function getAllStories({
   preview,
-  ...rest
+  ...params
 }: {
   preview: Preview;
-  [index: string]: any;
-}) {
+} & Omit<ISbStoriesParams, 'version'>) {
   const storyblokApi = getStoryblokApi();
   const version: Version = preview ? "draft" : "published";
 
   try {
     let stories = await storyblokApi.getAll(`cdn/stories`, {
       version,
-      ...rest,
+      ...params,
     });
     return stories ? { stories } : { stories: [] };
   } catch (err) {
@@ -78,11 +77,14 @@ export async function getAllStories({
   }
 }
 
-export async function getAllPosts({ preview }: { preview: Preview }) {
+export async function getAllPosts({ preview, ...params }: { preview: Preview } & Omit<ISbStoriesParams, 'version' | 'starts_with'>) {
+  const { excluding_fields } = params
+  const baseExcludingFields = "body, socialImage, description"
   let { stories } = await getAllStories({
     preview,
     starts_with: `blog/`,
-    excluding_fields: "body, socialImage, description",
+    excluding_fields: excluding_fields ? `${excluding_fields}, ${baseExcludingFields}` : baseExcludingFields,
+    ...params
   });
   return { posts: stories };
 }

@@ -7,7 +7,11 @@ export async function getStaticPaths(): Promise<{
   paths: { params: { slug: string } }[];
   fallback: true | false | "blocking";
 }> {
-  const { posts } = await getAllPosts({ preview: true });
+  const { posts } = await getAllPosts({
+    preview: true,
+    excluding_fields:
+      "_uid, tags, title, createdAt, postTitle, description, socialImage, featuredImage",
+  });
 
   return {
     paths: posts.map(({ slug }) => ({ params: { slug } })),
