@@ -15,7 +15,12 @@ const nextConfig = {
     return config;
   },
   images: {
-    domains: ["res.cloudinary.com", "cdn.midjourney.com"],
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'res.cloudinary.com',
+      },
+    ],
   },
   typescript: {
     ignoreBuildErrors: true,

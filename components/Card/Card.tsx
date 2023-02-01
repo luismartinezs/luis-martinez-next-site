@@ -10,8 +10,9 @@ const styles = {
     "linear-gradient(180deg, rgba(0, 0, 0, 0.63) 0%, rgba(0, 0, 0, 0.29) 42.19%, rgba(0, 0, 0, 0) 54.69%, rgba(0, 0, 0, 0) 90.62%, rgba(0, 0, 0, 0.33) 100%);",
 };
 
-const Card: FC = ({
+const Card = ({
   imgUrl,
+  imgProps = {},
   title,
   footer,
   href,
@@ -20,6 +21,7 @@ const Card: FC = ({
   title: string;
   footer: string;
   href: string;
+  imgProps: Omit<React.ComponentProps<typeof Image>, "src" | "alt" | "fill">;
 }): JSX.Element => {
   return (
     <div
@@ -52,6 +54,7 @@ const Card: FC = ({
             className="absolute object-cover object-center w-full h-full"
             alt=""
             fill
+            {...imgProps}
           />
           <div
             className="absolute object-cover w-full h-full"
