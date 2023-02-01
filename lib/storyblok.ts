@@ -8,7 +8,7 @@ import HeroTitle from "blocks/HeroTitle";
 import SideNote from "blocks/SideNote";
 
 type Version = "draft" | "published";
-type Preview = true | null;
+type Preview = boolean;
 
 export function initStoryblok() {
   const components = {
@@ -33,7 +33,7 @@ export async function getStory({
   preview,
 }: {
   slug: string;
-  preview: null | true;
+  preview: Preview;
 }) {
   const storyblokApi = getStoryblokApi();
   const version: Version = preview ? "draft" : "published";
