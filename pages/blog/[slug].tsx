@@ -2,11 +2,7 @@ import { useEffect, useState } from "react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { ParsedUrlQuery } from "querystring";
 import Head from "next/head";
-import {
-  ISbStoryData,
-  StoryblokComponent,
-  useStoryblokState,
-} from "@storyblok/react";
+import { StoryblokComponent, useStoryblokState } from "@storyblok/react";
 
 import { getAllPosts, getPost } from "lib/storyblok";
 

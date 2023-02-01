@@ -17,10 +17,10 @@ export async function getStaticProps({ preview = null }) {
   };
 }
 
-const Home: NextPage = ({ posts }) => {
-  const postsData = useStoryblokState(posts);
+const Home: NextPage<{ posts: any[] }> = ({ posts = [] }) => {
+  const postsData = useStoryblokState<any[]>(posts);
 
-  if (!postsData) {
+  if (!posts.length || !postsData) {
     return <div>Loading...</div>;
   }
 

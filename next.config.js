@@ -23,6 +23,7 @@ const nextConfig = {
   sentry: {
     hideSourceMaps: true,
   },
+  staticPageGenerationTimeout: 1000
 }
 
 const sentryWebpackPluginOptions = {
