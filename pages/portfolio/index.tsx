@@ -5,6 +5,11 @@ import BlockWrapper from "components/BlockWrapper";
 import CloudinaryImage from "components/CloudinaryImage";
 import PortfolioItem, { type IPortfolioItem } from "components/PortfolioItem";
 
+const commonImgProps = {
+  width: 500,
+  height: 300,
+};
+
 const portfolioItems: Array<IPortfolioItem> = [
   {
     id: "1",
@@ -12,6 +17,7 @@ const portfolioItems: Array<IPortfolioItem> = [
       <CloudinaryImage
         src="rotations-screenshot_glpinw"
         alt="Rotations Project Screenshot"
+        {...commonImgProps}
       />
     ),
     title: "Rotations React Web App",
@@ -41,6 +47,7 @@ const portfolioItems: Array<IPortfolioItem> = [
       <CloudinaryImage
         src="athleanx-home-workout-screenshot_qnyazl"
         alt="Athlean-X Home Workout App Screenshot"
+        {...commonImgProps}
       />
     ),
     title: "AthleanX Home Workout App",
