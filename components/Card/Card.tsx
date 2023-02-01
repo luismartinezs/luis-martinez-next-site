@@ -1,8 +1,8 @@
-import { FC } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 import { getThumbnailImgUrl } from "lib/image";
+import CardOverlay from "components/CardOverlay";
 
 const styles = {
   textShadow: "0 0 4px rgba(0,0,0,0.8), 0 0 6px rgba(0,0,0,0.6)",
@@ -56,12 +56,7 @@ const Card = ({
             fill
             {...imgProps}
           />
-          <div
-            className="absolute object-cover w-full h-full"
-            style={{
-              background: styles.background,
-            }}
-          ></div>
+          <CardOverlay />
         </>
       ) : (
         <div className="absolute object-cover w-full h-full bg-black" />
