@@ -1,12 +1,20 @@
 import { useEffect, useState } from "react";
-import { getAllPosts, getPost } from "lib/storyblok";
-import { StoryblokComponent, useStoryblokState } from "@storyblok/react";
+import { GetStaticPaths, GetStaticProps } from "next";
+import { ParsedUrlQuery } from "querystring";
 import Head from "next/head";
+import {
+  ISbStoryData,
+  StoryblokComponent,
+  useStoryblokState,
+} from "@storyblok/react";
 
-export async function getStaticPaths(): Promise<{
-  paths: { params: { slug: string } }[];
-  fallback: true | false | "blocking";
-}> {
+import { getAllPosts, getPost } from "lib/storyblok";
+
+interface IParams extends ParsedUrlQuery {
+  slug: string;
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
   const { posts } = await getAllPosts({
     preview: true,
     excluding_fields:
@@ -17,29 +25,31 @@ export async function getStaticPaths(): Promise<{
     paths: posts.map(({ slug }) => ({ params: { slug } })),
     fallback: true,
   };
-}
+};
 
-export async function getStaticProps({ params: { slug }, preview = null }) {
+export const getStaticProps: GetStaticProps = async (ctx) => {
+  const { preview } = ctx;
+  const { slug } = ctx.params as IParams;
   const _preview = process.env.APP_ENV === "local" || !!preview;
-
   const { post } = await getPost({ slug, preview: _preview });
 
   return {
     props: {
-      preview,
+      preview: preview || null,
       post,
     },
   };
-}
+};
 
-export default function PostPage({ post = null }) {
+const PostPage = ({ post = {} }) => {
   const [url, setUrl] = useState("https://www.luis-martinez.net");
+
   useEffect(() => {
     setUrl(window.location.href);
   }, []);
 
-  const postData = useStoryblokState(post || {});
-  if (!postData?.content) {
+  const postData = useStoryblokState<any>(post);
+  if (!post || !postData?.content) {
     return <div>Loading...</div>;
   }
 
@@ -75,4 +85,6 @@ export default function PostPage({ post = null }) {
       </article>
     </>
   );
-}
+};
+
+export default PostPage;
