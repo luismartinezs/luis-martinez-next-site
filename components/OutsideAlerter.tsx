@@ -29,7 +29,7 @@ function useOutsideAlerter(
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [ref]);
+  }, [ref, onClickOutside]);
 }
 
 const OutsideAlerter: React.FC<IOutsideAlerterProps> = ({

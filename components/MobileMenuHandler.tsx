@@ -16,7 +16,7 @@ const MobileMenuHandler = () => {
     return () => {
       router.events.off("routeChangeStart", handleCloseMenu);
     };
-  }, []);
+  }, [dispatch, router.events]);
 
   return <></>;
 };

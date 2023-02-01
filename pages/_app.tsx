@@ -76,7 +76,7 @@ function MyApp({ Component, ...rest }: AppProps) {
     };
 
     gtmVirtualPageView(mainDataLayer);
-  }, [pageProps]);
+  }, [pageProps, router.pathname]);
 
   return (
     <div className={classnames(inter.variable, "font-sans", lora.variable)}>

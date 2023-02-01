@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "dev": "next dev",
-    "build-site": "next build",
+    "build": "next build",
     "clean-cache": "rm -rf .next",
     "start": "next start",
     "lint": "next lint",

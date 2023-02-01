@@ -32,7 +32,7 @@ export default function PostPage({ post = null }) {
   const [url, setUrl] = useState("https://www.luis-martinez.net");
   useEffect(() => {
     setUrl(window.location.href);
-  });
+  }, []);
 
   const postData = useStoryblokState(post || {});
   if (!postData?.content) {
