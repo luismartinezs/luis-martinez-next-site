@@ -5,9 +5,10 @@ import { getAllPosts } from "lib/storyblok";
 import PostsGrid from "components/PostsGrid";
 
 export async function getStaticProps({ preview = null }) {
-  const _preview = process.env.APP_ENV === "local" || !!preview;
+  const { posts } = await getAllPosts({
+    preview: process.env.APP_ENV === "local" || !!preview,
+  });
 
-  const { posts } = await getAllPosts({ preview: _preview });
   return {
     props: {
       posts,

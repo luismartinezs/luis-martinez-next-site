@@ -12,7 +12,7 @@ interface IParams extends ParsedUrlQuery {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const { posts } = await getAllPosts({
-    preview: true,
+    preview: process.env.APP_ENV === "local",
     excluding_fields:
       "_uid, tags, title, createdAt, postTitle, description, socialImage, featuredImage",
   });
@@ -23,15 +23,17 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
-  const { preview } = ctx;
-  const { slug } = ctx.params as IParams;
+export const getStaticProps: GetStaticProps = async ({
+  params,
+  preview = null,
+}) => {
+  const { slug } = params as IParams;
   const _preview = process.env.APP_ENV === "local" || !!preview;
   const { post } = await getPost({ slug, preview: _preview });
 
   return {
     props: {
-      preview: preview || null,
+      preview: preview,
       post,
     },
   };

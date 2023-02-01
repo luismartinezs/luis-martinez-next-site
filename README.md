@@ -53,6 +53,7 @@ Way forward
   - [x] Show draft in Storyblok context
     - [x] Production: doesn't show drafts. Might need to rebuild site (SSG)
     - [x] Development: shows drafts immediately as they are creatd, without need to rebuild site (SSR)
+  - [ ] I should really take this as reference because my code is a mess: https://github.com/vercel/next.js/tree/canary/examples/cms-storyblok
   - [ ] replace redux by zustand (?)
   - [ ] Improve web vitals https://nextjs.org/learn/seo/web-performance
   - [ ] Use types everywhere
