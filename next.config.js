@@ -14,16 +14,6 @@ const nextConfig = {
 
     return config;
   },
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'res.cloudinary.com',
-        port: '',
-        pathname: '/dicyllvry/**',
-      },
-    ],
-  },
   typescript: {
     ignoreBuildErrors: true,
   },

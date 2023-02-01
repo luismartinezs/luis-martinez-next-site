@@ -1,10 +1,9 @@
 import Image from "next/image";
-// import { CloudinaryImageProps } from "types/types";
 
-import { getImgUrl } from "lib/image";
+import { cloudinaryLoader, getImgUrl } from "lib/image";
 
 const CloudinaryImage = (
-  props: Omit<React.ComponentProps<typeof Image>, "src"> & {
+  props: Omit<React.ComponentProps<typeof Image>, "src" | "loader"> & {
     src: string;
   }
 ) => {
@@ -15,6 +14,7 @@ const CloudinaryImage = (
       className="object-cover object-center w-full h-full"
       src={getImgUrl(src)}
       alt={alt}
+      loader={cloudinaryLoader}
       {...rest}
     />
   );

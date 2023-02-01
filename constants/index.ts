@@ -1,5 +1,5 @@
 const HOST = 'https://res.cloudinary.com'
-const CLOUD_NAME = 'dicyllvry'
+export const CLOUD_NAME = 'dicyllvry'
 const ASSET_TYPE = 'image'
 const DELIVERY_TYPE = 'upload'
 const TRANFORMATIONS = {
@@ -9,5 +9,5 @@ const TRANFORMATIONS = {
 const PUBLIC_ID = 'luis-martinez'
 const BASE_IMG_URL = `${HOST}/${CLOUD_NAME}/${ASSET_TYPE}/${DELIVERY_TYPE}`
 
-export const HOST_IMG_URL = `${BASE_IMG_URL}/${TRANFORMATIONS.default}/${PUBLIC_ID}`
-export const THUMBNAIL_IMG_URL = `${BASE_IMG_URL}/${TRANFORMATIONS.thumbnail}/${PUBLIC_ID}`
+export const HOST_IMG_URL = `/${TRANFORMATIONS.default}/${PUBLIC_ID}`
+export const THUMBNAIL_IMG_URL = `/${TRANFORMATIONS.thumbnail}/${PUBLIC_ID}`
