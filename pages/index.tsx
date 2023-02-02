@@ -35,6 +35,7 @@ const Home: NextPage<{ posts: any[] }> = ({ posts = [] }) => {
       </Head>
       <HeroSection />
       <PostsGrid posts={postsData} />
+      <div className="mt-12"></div>
     </div>
   );
 };
