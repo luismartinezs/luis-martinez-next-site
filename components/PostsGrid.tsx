@@ -20,7 +20,7 @@ const PostsGrid = ({ posts }) => {
             <li key={slug} className="flex justify-center">
               <Card
                 imgProps={{
-                  priority: idx < 9,
+                  priority: idx < 3,
                 }}
                 imgUrl={featuredImage}
                 title={postTitle}
