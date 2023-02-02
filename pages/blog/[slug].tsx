@@ -78,7 +78,7 @@ const PostPage = ({ post = {} }) => {
         />
         <meta name="twitter:image" content={postData.content.socialImage} />
       </Head>
-      <article className="prose break-words dark:prose-invert custom-prose">
+      <article>
         <StoryblokComponent blok={postData.content} />
       </article>
     </>

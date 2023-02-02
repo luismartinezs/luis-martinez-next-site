@@ -3,66 +3,37 @@
 @tailwind utilities;
 
 html {
-  @apply font-sans text-gray-800;
+  @apply font-sans text-gray-900 dark:text-gray-300;
 }
 
 code {
   @apply bg-gray-100 rounded-sm;
 }
 
-@layer components {
-  .custom-prose {
-    /* General styles */
-    @apply prose-slate lg:prose-lg dark:prose-invert mx-auto;
-    /* inline code styles */
-    @apply prose-code:after:content-none prose-code:before:content-none prose-code:text-primary-500 prose-code:bg-primary-50 dark:prose-code:text-primary-200 dark:prose-code:bg-gray-900;
-    /* a styles */
-    @apply prose-a:text-primary-600 hover:prose-a:text-primary-500 dark:prose-a:text-primary-300 dark:hover:prose-a:text-primary-200;
-    /* pre styles (block code) */
-    @apply prose-pre:bg-primary-50 prose-pre:shadow-inner    dark:prose-pre:text-primary-200 dark:prose-pre:bg-gray-900 prose-pre:overflow-x-auto;
-  }
-  .custom-prose b {
-    @apply text-gray-700 dark:text-gray-200;
-  }
-  .custom-prose i {
-    @apply text-gray-600 dark:text-gray-300;
-  }
-}
-
-/* theme-switch */
-button.switch {
-  --width: 52px;
-  @apply rounded-full border border-gray-300 flex items-center justify-between bg-gray-200 dark:bg-gray-600 dark:border-gray-400 transition duration-300;
-  width: var(--width);
-  height: calc(var(--width) / 2);
-}
-
-button.switch span {
-  pointer-events: none;
-}
-
-[role="switch"] > span {
-  @apply p-px h-6 w-6 flex items-center justify-center relative;
-}
-
-[role="switch"] > span > * {
-  @apply h-4 w-4 text-gray-400 dark:text-gray-200;
-}
-
-/* OFF STATE - LIGHT MODE */
-[role="switch"] > :first-child {
-  @apply bg-white rounded-full border text-gray-400 transition-transform dark:bg-gray-800 dark:border-none;
-}
-
-/* ON STATE - DARK MODE */
-[role="switch"][aria-checked="true"] > :first-child {
-  @apply translate-x-[26px];
-}
-
-a {
-  @apply hover:underline text-primary-600 hover:text-primary-500 dark:text-primary-300 dark:hover:text-primary-200;
+.link {
+  @apply text-primary-500 hover:no-underline hover:text-white hover:bg-primary-500 dark:text-primary-300 dark:hover:text-primary-200;
 }
 
 *:focus {
   @apply outline-none ring-offset-2 ring-2 ring-primary-500 ring-offset-primary-100 dark:ring-primary-300 dark:ring-offset-primary-900 rounded;
+}
+
+@layer components {
+  .custom-prose {
+    /* General styles */
+    @apply prose-slate sm:prose-2xl prose-xl dark:prose-invert mx-auto font-sans text-gray-900 dark:text-gray-300;
+    /* inline code styles */
+    @apply prose-code:after:content-none prose-code:before:content-none prose-code:text-primary-500 prose-code:bg-primary-50 dark:prose-code:text-primary-200 dark:prose-code:bg-gray-900;
+    /* a styles */
+    @apply prose-a:text-primary-500 hover:prose-a:text-white hover:prose-a:bg-primary-500 hover:prose-a:no-underline dark:prose-a:text-primary-300 dark:hover:prose-a:text-white;
+    /* pre styles (block code) */
+    @apply prose-pre:bg-primary-50 prose-pre:shadow-inner    dark:prose-pre:text-primary-200 dark:prose-pre:bg-gray-900 prose-pre:overflow-x-auto;
+    @apply prose-headings:font-display prose-h2:text-4xl prose-h1:text-5xl;
+  }
+  .custom-prose b {
+    @apply text-black dark:text-gray-300;
+  }
+  .custom-prose i {
+    @apply text-gray-900 dark:text-gray-300;
+  }
 }

@@ -24,7 +24,7 @@ const SideNote = ({ blok }) => {
     warning: {
       block: "bg-yellow-100 dark:bg-gray-700 border-yellow-500",
       icon: "text-yellow-500",
-    }
+    },
   };
 
   const getIcon = () => {
@@ -40,7 +40,11 @@ const SideNote = ({ blok }) => {
 
   return (
     <BlockWrapper width="text">
-      <div {...storyblokEditable(blok)} key={blok._uid}>
+      <div
+        {...storyblokEditable(blok)}
+        key={blok._uid}
+        className="prose break-words dark:prose-invert custom-prose"
+      >
         <div className={`${classBase.block} ${classMap[_type].block}`}>
           <span className={`${classBase.icon} ${classMap[_type].icon}`}>
             {getIcon()}

@@ -1,7 +1,8 @@
+import { PropsWithChildren } from "react";
+
 import Header from "components/Header";
 import Footer from "components/Footer";
 import TopBand from "components/TopBand";
-import type { PropsWithChildren } from "types/types";
 import CookieModal from "components/CookieModal";
 import ClientOnly from "components/ClientOnly";
 import StickyTop from "components/StickyTop";
@@ -11,7 +12,7 @@ import Link from "next/link";
 const appEnv = process.env.NEXT_PUBLIC_APP_ENV as string;
 const isProd = process.env.NEXT_PUBLIC_APP_ENV === "production";
 
-const Layout: React.FC<Required<PropsWithChildren>> = ({ children }) => {
+const Layout = ({ children }: PropsWithChildren) => {
   const cookieMessage = (
     <p>
       I use cookies for Google Analytics. By clicking on <i>Accept</i>, you

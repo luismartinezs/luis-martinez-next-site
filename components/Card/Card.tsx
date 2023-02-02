@@ -32,12 +32,12 @@ const Card = ({
     rounded-xl
     overflow-hidden
     relative
-    shadow
+    shadow-xl
     shadow-black/30
     transition
     ease-in-out
     hover:scale-[1.02]
-    hover:shadow-lg
+    hover:shadow-2xl
     focus-within:ring-offset-2
     focus-within:ring-2
     focus-within:ring-primary-500
