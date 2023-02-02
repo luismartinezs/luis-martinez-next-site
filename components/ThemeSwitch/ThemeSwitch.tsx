@@ -1,16 +1,19 @@
-import { useEffect } from "react";
+import { useEffect, type Dispatch } from "react";
+import IconSun from "~icons/heroicons-outline/sun.jsx";
+import IconMoon from "~icons/heroicons-outline/moon.jsx";
+
 import {
   useTheme,
   useThemeDispatch,
   type IThemeContext,
   type IThemeAction,
 } from "store/Theme";
-import IconSun from "~icons/heroicons-outline/sun.jsx";
-import IconMoon from "~icons/heroicons-outline/moon.jsx";
+
+import Styles from "./ThemeSwitch.module.scss";
 
 export default function ThemeSwitch(): JSX.Element {
   const theme: IThemeContext = useTheme();
-  const dispatch: React.Dispatch<IThemeAction> = useThemeDispatch();
+  const dispatch: Dispatch<IThemeAction> = useThemeDispatch();
 
   function handleClick() {
     dispatch({
@@ -33,7 +36,7 @@ export default function ThemeSwitch(): JSX.Element {
       type="button"
       role="switch"
       aria-checked={!theme.darkMode}
-      className="switch theme-switch"
+      className={Styles.switch}
       aria-label="toggle theme"
     >
       <span aria-hidden="true">

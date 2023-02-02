@@ -14,10 +14,7 @@ const PostsGrid = ({ posts }) => {
       <h2 className="text-3xl font-semibold text-gray-800 dark:text-white">
         Blog posts
       </h2>
-      <ul
-        // className="flex flex-wrap justify-center gap-4 mt-6 //"
-        className="grid w-full grid-flow-row grid-cols-1 gap-4 mt-6 sm:grid-cols-2 lg:grid-cols-3"
-      >
+      <ul className="grid w-full grid-flow-row grid-cols-1 gap-12 mt-6 md:grid-cols-2 lg:grid-cols-3">
         {sortedPosts.map(
           ({ slug, content: { postTitle, featuredImage, createdAt } }, idx) => (
             <li key={slug} className="flex justify-center">
