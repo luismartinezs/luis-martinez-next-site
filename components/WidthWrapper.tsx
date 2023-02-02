@@ -1,15 +1,19 @@
-import type { BlockWidth } from "types/types";
-import type { PropsWithChildren } from "types/types";
+import { PropsWithChildren } from "react";
 
-type WidthWrapperProps = {
+import type { BlockWidth } from "types/types";
+
+type WidthWrapperProps = PropsWithChildren<{
   width?: BlockWidth;
   hasWidth?: boolean;
   noPadding?: boolean;
-};
+}>;
 
-const WidthWrapper: React.FC<
-  Required<PropsWithChildren> & WidthWrapperProps
-> = ({ width = "block", hasWidth = true, noPadding = false, children }) => {
+const WidthWrapper = ({
+  width = "block",
+  hasWidth = true,
+  noPadding = false,
+  children,
+}: WidthWrapperProps) => {
   const baseClass = "h-full mx-auto width-wrapper";
   const widthClass = () => {
     let _widthClass = "";

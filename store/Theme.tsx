@@ -1,5 +1,10 @@
-import * as React from "react";
-import { useReducer, createContext, useContext } from "react";
+import {
+  useReducer,
+  createContext,
+  useContext,
+  type PropsWithChildren,
+  type Dispatch,
+} from "react";
 
 export interface IThemeContext {
   darkMode: boolean;
@@ -11,7 +16,7 @@ export interface IThemeAction {
 
 export const ThemeContext = createContext<IThemeContext | null>(null);
 export const ThemeDispatchContext =
-  createContext<React.Dispatch<IThemeAction> | null>(null);
+  createContext<Dispatch<IThemeAction> | null>(null);
 
 const initialTheme: Readonly<IThemeContext> = { darkMode: false };
 
@@ -29,11 +34,7 @@ function themeReducer(
   }
 }
 
-interface Props {
-  children?: React.ReactNode;
-}
-
-const ThemeProvider: React.FC<Props> = ({ children }: Props): JSX.Element => {
+const ThemeProvider = ({ children }: PropsWithChildren): JSX.Element => {
   const [theme, dispatch] = useReducer(themeReducer, initialTheme);
 
   return (
@@ -49,8 +50,8 @@ export function useTheme(): Readonly<IThemeContext> {
   return useContext(ThemeContext) as Readonly<IThemeContext>;
 }
 
-export function useThemeDispatch(): React.Dispatch<IThemeAction> {
-  return useContext(ThemeDispatchContext) as React.Dispatch<IThemeAction>;
+export function useThemeDispatch(): Dispatch<IThemeAction> {
+  return useContext(ThemeDispatchContext) as Dispatch<IThemeAction>;
 }
 
 export default ThemeProvider;

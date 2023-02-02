@@ -1,20 +1,21 @@
+import { PropsWithChildren } from "react";
+
 import type { BlockWidth } from "types/types";
 import WidthWrapper from "./WidthWrapper";
-import SectionWrapper from "./SectionWrapper";
-import type { PropsWithChildren } from "types/types";
+import SectionWrapper, { YPaddingSizes } from "components/SectionWrapper";
 
-type BlockWrapperProps = {
+type BlockWrapperProps = PropsWithChildren<{
   width?: BlockWidth;
   noPadding?: boolean;
-  yPadding?: "sm" | "md" | "lg" | "xl";
-};
+  yPadding?: YPaddingSizes;
+}>;
 
-const BlockWrapper: React.FC<PropsWithChildren & BlockWrapperProps> = ({
+const BlockWrapper = ({
   children,
   width = "block",
   noPadding = false,
   yPadding = "md",
-}) => {
+}: BlockWrapperProps) => {
   return (
     <SectionWrapper noPadding={noPadding} size={yPadding}>
       <WidthWrapper width={width}>{children}</WidthWrapper>

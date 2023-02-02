@@ -1,12 +1,12 @@
-import React, { type FC } from "react";
-
+import { PropsWithChildren } from "react";
 import IconMenu from "~icons/heroicons-solid/menu";
 import IconX from "~icons/heroicons-solid/x";
-import { selectIsMenuOpen, setOpen } from "store/menuSlice";
 import { useDispatch, useSelector } from "react-redux";
+
+import { selectIsMenuOpen, setOpen } from "store/menuSlice";
 import OutsideAlerter from "components/OutsideAlerter";
 
-const CollapsibleMenu: FC<{ children: React.ReactNode }> = ({ children }) => {
+const CollapsibleMenu = ({ children }: PropsWithChildren) => {
   const isOpen = useSelector(selectIsMenuOpen);
   const dispatch = useDispatch();
 
@@ -19,9 +19,9 @@ const CollapsibleMenu: FC<{ children: React.ReactNode }> = ({ children }) => {
         >
           <span className="sr-only">Toggle menu</span>
           {isOpen ? (
-            <IconX className="h-8 w-8" />
+            <IconX className="w-8 h-8" />
           ) : (
-            <IconMenu className="h-8 w-8" />
+            <IconMenu className="w-8 h-8" />
           )}
         </button>
         <nav

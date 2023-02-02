@@ -1,0 +1,26 @@
+/* theme-switch */
+.switch {
+  --width: 52px;
+  @apply rounded-full border border-gray-300 flex items-center justify-between bg-gray-200 dark:bg-gray-600 dark:border-gray-300 transition duration-300;
+  width: var(--width);
+  height: calc(var(--width) / 2);
+  span {
+    pointer-events: none;
+  }
+  &[role="switch"] {
+    & > span {
+      @apply p-px h-6 w-6 flex items-center justify-center relative;
+      & > * {
+        @apply h-4 w-4 text-gray-400 dark:text-gray-200;
+      }
+    }
+    /* OFF STATE - LIGHT MODE */
+    & > :first-child {
+      @apply bg-white rounded-full border text-gray-400 transition-transform dark:bg-gray-800 dark:border-none;
+    }
+    /* ON STATE - DARK MODE */
+    &[aria-checked="true"] > :first-child {
+      @apply translate-x-[26px];
+    }
+  }
+}

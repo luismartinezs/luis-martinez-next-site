@@ -1,11 +1,16 @@
 // Reference https://stackoverflow.com/questions/32553158/detect-click-outside-react-component
-import { useRef, useEffect, type RefObject } from "react";
 
-interface IOutsideAlerterProps {
+import {
+  useRef,
+  useEffect,
+  type RefObject,
+  type PropsWithChildren,
+} from "react";
+
+type IOutsideAlerterProps = PropsWithChildren<{
   className?: string;
-  children: React.ReactNode;
   onClickOutside: () => void;
-}
+}>;
 
 // reference https://stackoverflow.com/questions/71193818/react-onclick-argument-of-type-eventtarget-is-not-assignable-to-parameter-of-t
 function assertIsNode(e: EventTarget | null): asserts e is Node {

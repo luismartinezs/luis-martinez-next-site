@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
-import type { PropsWithChildren } from "types/types";
+import { PropsWithChildren } from "react";
 
-const ClientOnly: React.FC<PropsWithChildren> = ({ children }) => {
+import { useState, useEffect } from "react";
+
+const ClientOnly = ({ children }: PropsWithChildren) => {
   const [shouldRender, setRenderState] = useState(false);
   useEffect(() => setRenderState(true), []);
 

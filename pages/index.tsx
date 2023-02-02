@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useStoryblokState } from "@storyblok/react";
 import { getAllPosts } from "lib/storyblok";
 import PostsGrid from "components/PostsGrid";
+import HeroSection from "components/HeroSection";
 
 export async function getStaticProps({ preview = null }) {
   const { posts } = await getAllPosts({
@@ -32,7 +33,9 @@ const Home: NextPage<{ posts: any[] }> = ({ posts = [] }) => {
         <meta name="description" content="Luis Martinez - Web Developer" />
         <link rel="icon" href="/favicon.png" />
       </Head>
+      <HeroSection />
       <PostsGrid posts={postsData} />
+      <div className="mt-12"></div>
     </div>
   );
 };
