@@ -20,6 +20,8 @@ const CloudinaryImage = ({
           src={getImgUrl(src as string)}
           alt={alt as string}
           loader={cloudinaryLoader}
+          width={731}
+          height={412}
           {...rest}
         />
       </div>
