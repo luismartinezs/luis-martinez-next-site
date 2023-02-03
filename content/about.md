@@ -2,9 +2,11 @@
 title: About me - Luis Martinez Web Developer
 ---
 
-I am a web developer with a passion for creating beautiful and functional digital experiences. I have a background in science and IT project management, and my diverse skillset allows me to bring a unique perspective to web development.
+## My favorite tech stack
 
-Technical Skills:
+React / NextJS, Typescript, Vite, tailwindCSS, Mantine.dev
+
+## Skills
 
 - React, VueJS
 - NextJS, NuxtJS
@@ -13,20 +15,32 @@ Technical Skills:
 - NodeJS/Express, Serverless, AWS
 - Google Sheets, Google Apps Script
 
-Before development
+## Work
+
+I work 100% remote for Toptal as a freelance frontend developer and consultant
+
+## Current location
+
+Las Palmas de Gran Canaria, Spain 🌞
+
+## Before coding
+
+I started coding at age 34, before that I was doing other things that now feel like past lives.
 
 - PhD in science
-- IT Project Manager
+- IT Project Manager :game_die:
 - [Card game](https://www.kickstarter.com/projects/rafaelgonzalez/final-boss-the-card-game) creator
-- As a little kid I loved drawing. 🎨 [I still do](https://www.artstation.com/luismartinez).
+- As a little kid I loved drawing. 🎨 [And as a big kid, I do too](https://www.artstation.com/luismartinez).
 
-I like:
+## Offline
 
-- Greek salad
-- Wim hof method
-- Dark souls
-- Jojo's bizarre adventure
+When I'm not coding, I go to the gym, exercise, and try to stay fit and healthy.
 
-My secret regret: not having started learning web development 10 years earlier.
+## Secret regret
 
-Contact: [luismartinezwebdev@gmail.com](mailto:luismartinezwebdev@gmail.com)
+Not having started learning web development 10 years earlier.
+
+## Contact
+
+- Twitter 🐦 [LuisMartinezSu2](https://twitter.com/LuisMartinezSu2)
+- Email 📧 [luismartinezwebdev@gmail.com](mailto:luismartinezwebdev@gmail.com)

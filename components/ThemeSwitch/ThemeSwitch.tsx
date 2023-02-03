@@ -9,7 +9,7 @@ import {
   type IThemeAction,
 } from "store/Theme";
 
-import Styles from "./ThemeSwitch.module.scss";
+import Styles from "./ThemeSwitch.module.css";
 
 export default function ThemeSwitch(): JSX.Element {
   const theme: IThemeContext = useTheme();
@@ -35,12 +35,16 @@ export default function ThemeSwitch(): JSX.Element {
       onClick={handleClick}
       type="button"
       role="switch"
-      aria-checked={!theme.darkMode}
+      aria-checked={!!theme.darkMode}
       className={Styles.switch}
       aria-label="toggle theme"
     >
-      <span aria-hidden="true">
-        {theme.darkMode ? <IconMoon /> : <IconSun />}
+      <span aria-hidden="true" className={Styles.toggler}>
+        {theme.darkMode ? (
+          <IconMoon className={Styles.icon} />
+        ) : (
+          <IconSun className={Styles.icon} />
+        )}
       </span>
     </button>
   );
