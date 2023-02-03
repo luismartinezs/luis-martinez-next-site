@@ -7,28 +7,29 @@ html {
 }
 
 code {
-  @apply bg-gray-100 rounded-sm;
+  @apply rounded-sm bg-gray-100;
 }
 
 .link {
-  @apply text-primary-500 hover:no-underline hover:text-white hover:bg-primary-500 dark:text-primary-300 dark:hover:text-primary-200;
+  @apply text-primary-500 hover:bg-primary-500 hover:text-white hover:no-underline dark:text-primary-300 dark:hover:text-primary-200;
 }
 
 *:focus {
-  @apply outline-none ring-offset-2 ring-2 ring-primary-500 ring-offset-primary-100 dark:ring-primary-300 dark:ring-offset-primary-900 rounded;
+  @apply rounded outline-none ring-2 ring-primary-500 ring-offset-2 ring-offset-primary-100 dark:ring-primary-300 dark:ring-offset-primary-900;
 }
 
 @layer components {
   .custom-prose {
     /* General styles */
-    @apply prose-slate sm:prose-2xl prose-xl dark:prose-invert mx-auto font-sans text-gray-900 dark:text-gray-300;
+    @apply prose-xl prose-slate mx-auto font-sans text-gray-900 dark:prose-invert dark:text-gray-300 sm:prose-2xl;
     /* inline code styles */
-    @apply prose-code:after:content-none prose-code:before:content-none prose-code:text-primary-500 prose-code:bg-primary-50 dark:prose-code:text-primary-200 dark:prose-code:bg-gray-900;
+    @apply prose-code:bg-primary-50 prose-code:text-primary-500 prose-code:before:content-none prose-code:after:content-none dark:prose-code:bg-gray-900 dark:prose-code:text-primary-200;
     /* a styles */
-    @apply prose-a:text-primary-500 hover:prose-a:text-white hover:prose-a:bg-primary-500 hover:prose-a:no-underline dark:prose-a:text-primary-300 dark:hover:prose-a:text-white;
+    @apply prose-a:text-primary-500 hover:prose-a:bg-primary-500 hover:prose-a:text-white hover:prose-a:no-underline dark:prose-a:text-primary-300 dark:hover:prose-a:text-white;
     /* pre styles (block code) */
-    @apply prose-pre:bg-primary-50 prose-pre:shadow-inner    dark:prose-pre:text-primary-200 dark:prose-pre:bg-gray-900 prose-pre:overflow-x-auto;
-    @apply prose-headings:font-display prose-h2:text-4xl prose-h1:text-5xl;
+    @apply prose-pre:overflow-x-auto prose-pre:bg-primary-50    prose-pre:shadow-inner dark:prose-pre:bg-gray-900 dark:prose-pre:text-primary-200;
+    /* heading styles */
+    @apply prose-headings:font-display prose-headings:text-gray-700 prose-h1:text-5xl prose-h2:text-4xl dark:prose-headings:text-white;
   }
   .custom-prose b {
     @apply text-black dark:text-gray-300;

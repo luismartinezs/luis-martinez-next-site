@@ -3,16 +3,16 @@ import { PropsWithChildren } from "react";
 
 const baseClass = "section-wrapper";
 const sizeMap = {
-  sm: "py-4",
-  md: "py-6",
-  lg: "py-10",
-  xl: "py-16",
-  "2xl": "py-20",
-  "3xl": "py-24",
-  "4xl": "py-32",
-  "5xl": "py-40",
-  "6xl": "py-48",
-  "7xl": "py-56",
+  sm: "py-2 md:py-4",
+  md: "py-4 md:py-6",
+  lg: "py-6 md:py-10",
+  xl: "py-10 md:py-16",
+  "2xl": "py-16 md:py-20",
+  "3xl": "py-16 md:py-24",
+  "4xl": "py-16 md:py-32",
+  "5xl": "py-16 md:py-40",
+  "6xl": "py-16 md:py-48",
+  "7xl": "py-16 md:py-56",
 };
 
 export type YPaddingSizes = keyof typeof sizeMap;
