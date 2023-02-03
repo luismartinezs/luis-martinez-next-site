@@ -2,6 +2,7 @@ import { getMarkdownContent } from "lib/markdown";
 import MarkdownContent from "components/MarkdownContent";
 import BlockWrapper from "components/BlockWrapper";
 import HeroTitle from "blocks/HeroTitle";
+import PageLayout from "components/PageLayout";
 
 export async function getStaticProps() {
   return {
@@ -14,14 +15,9 @@ const ResumePage = ({
   content,
 }: ReturnType<typeof getMarkdownContent>) => {
   return (
-    <div>
-      <div className="prose dark:prose-invert custom-prose">
-        <HeroTitle postTitle="Resume" />
-      </div>
-      <BlockWrapper>
-        <MarkdownContent frontmatter={frontmatter} content={content} />
-      </BlockWrapper>
-    </div>
+    <PageLayout title="Resume">
+      <MarkdownContent frontmatter={frontmatter} content={content} />
+    </PageLayout>
   );
 };
 

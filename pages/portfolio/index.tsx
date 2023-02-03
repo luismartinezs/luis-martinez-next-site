@@ -4,6 +4,7 @@ import HeroTitle from "blocks/HeroTitle";
 import BlockWrapper from "components/BlockWrapper";
 import CloudinaryImage from "components/CloudinaryImage";
 import PortfolioItem, { type IPortfolioItem } from "components/PortfolioItem";
+import PageLayout from "components/PageLayout";
 
 const commonImgProps = {
   width: 500,
@@ -77,18 +78,13 @@ const PortfolioPage = () => {
       <Head>
         <title>Portfolio - Luis Martinez Web Developer</title>
       </Head>
-      <div>
-        <div className="prose dark:prose-invert custom-prose">
-          <HeroTitle postTitle="Explore my portfolio" />
+      <PageLayout title="Explore my portfolio">
+        <div className="mb-16 flex flex-col gap-16">
+          {portfolioItems.map((item) => (
+            <PortfolioItem key={item.id} {...item} />
+          ))}
         </div>
-        <BlockWrapper>
-          <div className="flex flex-col space-y-6">
-            {portfolioItems.map((item) => (
-              <PortfolioItem key={item.id} {...item} />
-            ))}
-          </div>
-        </BlockWrapper>
-      </div>
+      </PageLayout>
     </>
   );
 };

@@ -5,7 +5,7 @@ import classnames from "classnames";
 import { cloudinaryLoader, getThumbnailImgUrl } from "lib/image";
 import CardOverlay from "components/CardOverlay";
 
-import Styles from "./Card.module.scss";
+import Styles from "./Card.module.css";
 
 const Card = ({
   imgUrl,
@@ -26,22 +26,22 @@ const Card = ({
   return (
     <div
       className="
+    relative
     h-[300px]
     w-full
     max-w-[500px]
-    rounded-xl
     overflow-hidden
-    relative
+    rounded-xl
     shadow-xl
     shadow-black/30
     transition
     ease-in-out
-    hover:scale-[1.02]
-    hover:shadow-2xl
-    focus-within:ring-offset-2
     focus-within:ring-2
     focus-within:ring-primary-500
+    focus-within:ring-offset-2
     focus-within:ring-offset-primary-100
+    hover:scale-[1.02]
+    hover:shadow-2xl
     dark:shadow-primary-500/30
     dark:focus-within:ring-primary-300
     dark:focus-within:ring-offset-primary-900
@@ -51,7 +51,7 @@ const Card = ({
         <>
           <Image
             src={getThumbnailImgUrl(imgUrl)}
-            className="absolute object-cover object-center w-full h-full"
+            className="absolute h-full w-full object-cover object-center"
             alt=""
             fill
             loader={cloudinaryLoader}
@@ -60,15 +60,15 @@ const Card = ({
           <CardOverlay />
         </>
       ) : (
-        <div className="absolute object-cover w-full h-full bg-black" />
+        <div className="absolute h-full w-full bg-black object-cover" />
       )}
       <Link
         href={href}
-        className="relative flex flex-col justify-between w-full h-full p-5 hover:no-underline"
+        className="relative flex h-full w-full flex-col justify-between p-5 hover:no-underline"
       >
         <h2
           className={classnames(
-            "text-2xl text-white font-display",
+            "font-display text-2xl text-white",
             Styles.textShadow
           )}
         >

@@ -1,0 +1,23 @@
+/* theme-switch */
+.switch {
+  --width: 52px;
+  @apply flex items-center justify-between rounded-full border border-gray-300 bg-gray-300 transition duration-300 focus:rounded-full;
+  width: var(--width);
+  height: calc(var(--width) / 2);
+}
+.switch .toggler {
+  @apply pointer-events-none relative flex h-6 w-6 items-center justify-center rounded-full border border-gray-300 bg-white p-px  text-gray-200 transition-transform;
+}
+.switch .toggler .icon {
+  @apply h-4 w-4 text-gray-400;
+}
+/* ON STATE - DARK MODE */
+.switch[aria-checked="true"] {
+  @apply border-gray-400 bg-gray-600;
+}
+.switch[aria-checked="true"] .toggler {
+  @apply translate-x-[26px] border-gray-400 bg-gray-800 text-gray-300;
+}
+.switch[aria-checked="true"] .toggler .icon {
+  @apply text-gray-400;
+}
