@@ -29,7 +29,7 @@ code {
     /* pre styles (block code) */
     @apply prose-pre:overflow-x-auto prose-pre:bg-primary-50    prose-pre:shadow-inner dark:prose-pre:bg-gray-900 dark:prose-pre:text-primary-200;
     /* heading styles */
-    @apply prose-headings:font-display prose-headings:text-gray-700 prose-h1:text-5xl prose-h2:text-4xl dark:prose-headings:text-white;
+    @apply prose-headings:font-display prose-headings:text-2xl prose-headings:text-gray-700 prose-h1:text-5xl prose-h2:text-4xl prose-h3:text-3xl dark:prose-headings:text-white;
   }
   .custom-prose b {
     @apply text-black dark:text-gray-300;
