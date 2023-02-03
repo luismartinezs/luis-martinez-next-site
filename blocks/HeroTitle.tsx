@@ -4,18 +4,18 @@ import { HeroTitle as HeroTitleComponent } from "components/HeroTitle";
 
 const HeroTitle = ({
   blok,
-  title,
+  postTitle,
   createdAt,
   isPost = false,
 }: {
   blok?: any;
-  title: string;
+  postTitle?: string;
   createdAt?: string;
   isPost?: boolean;
 }) => {
   return (
     <BlockWrapper>
-      <HeroTitleComponent title={title || blok?.title} />
+      <HeroTitleComponent title={blok?.title || postTitle} />
       {isPost && <PostMetadata createdAt={createdAt} />}
     </BlockWrapper>
   );
