@@ -6,6 +6,9 @@ import { cloudinaryLoader, getThumbnailImgUrl } from "lib/image";
 import CardOverlay from "components/CardOverlay";
 
 import Styles from "./Card.module.css";
+import { useState } from "react";
+
+const imgBgColor = "bg-gradient-to-br from-primary-900 to-secondary-900";
 
 const Card = ({
   imgUrl,
@@ -23,31 +26,16 @@ const Card = ({
     "src" | "alt" | "fill" | "loader"
   >;
 }): JSX.Element => {
+  const [imgError, setImgError] = useState(false);
+
   return (
     <div
-      className="
-    relative
-    h-[300px]
-    w-full
-    max-w-[500px]
-    overflow-hidden
-    rounded-xl
-    shadow-xl
-    shadow-black/30
-    transition
-    ease-in-out
-    focus-within:ring-2
-    focus-within:ring-primary-500
-    focus-within:ring-offset-2
-    focus-within:ring-offset-primary-100
-    hover:scale-[1.02]
-    hover:shadow-2xl
-    dark:shadow-primary-500/30
-    dark:focus-within:ring-primary-300
-    dark:focus-within:ring-offset-primary-900
-    "
+      className={classnames(
+        "relative h-[300px] w-full max-w-[500px] overflow-hidden rounded-xl shadow-xl shadow-black/30 transition ease-in-out focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 focus-within:ring-offset-primary-100 hover:scale-[1.02] hover:shadow-2xl dark:shadow-primary-500/30 dark:focus-within:ring-primary-300 dark:focus-within:ring-offset-primary-900",
+        imgBgColor
+      )}
     >
-      {imgUrl ? (
+      {imgUrl && !imgError ? (
         <>
           <Image
             src={getThumbnailImgUrl(imgUrl)}
@@ -56,11 +44,17 @@ const Card = ({
             fill
             loader={cloudinaryLoader}
             {...imgProps}
+            onError={() => setImgError(true)}
           />
           <CardOverlay />
         </>
       ) : (
-        <div className="absolute h-full w-full bg-black object-cover" />
+        <div
+          className={classnames(
+            "absolute h-full w-full  object-cover",
+            imgBgColor
+          )}
+        />
       )}
       <Link
         href={href}
