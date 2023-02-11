@@ -33,15 +33,15 @@ const Header = () => {
       <li
         key={href}
         className={classnames(
-          "pb-2 -mb-2 border-b-4",
+          "-mb-2 border-b-4 pb-2",
           router.asPath === href
             ? "border-b-4 border-primary-500"
-            : "border-transparent hover:border-gray-200"
+            : "border-transparent hover:border-gray-300 dark:hover:border-gray-500"
         )}
       >
         <Link
           href={href}
-          className={classnames("text-gray-600 font-semibold dark:text-white")}
+          className={classnames("font-semibold text-gray-600 dark:text-white")}
         >
           {label}
         </Link>
@@ -50,8 +50,8 @@ const Header = () => {
   });
 
   return (
-    <div className="w-full transition duration-300 bg-white border-b-2 border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-      <header className="container flex items-center justify-between p-4 mx-auto max-w-7xl">
+    <div className="w-full border-b-2 border-gray-200 bg-white transition duration-300 dark:border-gray-700 dark:bg-gray-800">
+      <header className="container mx-auto flex max-w-7xl items-center justify-between p-4">
         <div className="flex items-center">
           <div className="lg:hidden">
             <CollapsibleMenu>
@@ -64,7 +64,7 @@ const Header = () => {
           </Link>
         </div>
         <nav>
-          <ul className="items-center justify-end hidden gap-4 text-sm lg:flex md:space-x-8 md:text-base">
+          <ul className="hidden items-center justify-end gap-4 text-sm md:space-x-8 md:text-base lg:flex">
             {links}
             <ThemeSwitch />
           </ul>
