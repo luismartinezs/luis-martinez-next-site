@@ -28,8 +28,8 @@ Las Palmas de Gran Canaria, Spain 🌞
 I started coding at age 34, before that I was doing other things that now feel like past lives.
 
 - PhD in science
-- IT Project Manager :game_die:
-- [Card game](https://www.kickstarter.com/projects/rafaelgonzalez/final-boss-the-card-game) creator
+- IT Project Manager
+- [Card game](https://www.kickstarter.com/projects/rafaelgonzalez/final-boss-the-card-game) creator 🎲
 - As a little kid I loved drawing. 🎨 [And as a big kid, I do too](https://www.artstation.com/luismartinez).
 
 ## Offline
