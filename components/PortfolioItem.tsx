@@ -1,4 +1,5 @@
 import { type FC } from "react";
+import classnames from "classnames";
 
 export interface IPortfolioItem {
   id: string;
@@ -9,6 +10,9 @@ export interface IPortfolioItem {
   image: JSX.Element;
   imageSide: "left" | "right";
 }
+
+const linkClassOverwrite =
+  "!text-primary-600 hover:!text-white dark:!text-primary-400 dark:hover:!text-gray-900";
 
 const PortfolioItem: FC<IPortfolioItem> = ({
   image,
@@ -41,7 +45,7 @@ const PortfolioItem: FC<IPortfolioItem> = ({
                 href={url}
                 target="_blank"
                 rel="noreferrer"
-                className="link !text-primary-600 dark:!text-primary-400 dark:hover:!text-gray-900"
+                className={classnames("link", linkClassOverwrite)}
               >
                 See project
               </a>
@@ -52,7 +56,7 @@ const PortfolioItem: FC<IPortfolioItem> = ({
                   href={githubUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="link !text-primary-600 hover:!text-white dark:!text-primary-400 dark:hover:!text-gray-900"
+                  className={classnames("link", linkClassOverwrite)}
                 >
                   See code
                 </a>
