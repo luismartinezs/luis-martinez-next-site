@@ -52,7 +52,7 @@ const PortfolioItem: FC<IPortfolioItem> = ({
                   href={githubUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="link !text-primary-600 dark:!text-primary-400 dark:hover:!text-gray-900"
+                  className="link !text-primary-600 hover:!text-white dark:!text-primary-400 dark:hover:!text-gray-900"
                 >
                   See code
                 </a>
