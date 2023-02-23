@@ -56,7 +56,9 @@ const Header = () => {
           <div className="lg:hidden">
             <CollapsibleMenu>
               {links}
-              <ThemeSwitch />
+              <li>
+                <ThemeSwitch />
+              </li>
             </CollapsibleMenu>
           </div>
           <Link href="/" passHref={true}>
@@ -66,7 +68,9 @@ const Header = () => {
         <nav>
           <ul className="hidden items-center justify-end gap-4 text-sm md:space-x-8 md:text-base lg:flex">
             {links}
-            <ThemeSwitch />
+            <li>
+              <ThemeSwitch />
+            </li>
           </ul>
         </nav>
       </header>
