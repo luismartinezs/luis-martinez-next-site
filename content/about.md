@@ -43,5 +43,5 @@ Not having started learning web development 10 years earlier.
 ## Contact
 
 - Twitter 🐦 [LuisMartinezSu2](https://twitter.com/LuisMartinezSu2)
-- LinkedIn 💻 [linkedin.com/in/luismarsu](linkedin.com/in/luismarsu)
+- LinkedIn 💻 [linkedin.com/in/luismarsu](https://www.linkedin.com/in/luismarsu)
 - Email 📧 [luismartinezwebdev@gmail.com](mailto:luismartinezwebdev@gmail.com)
