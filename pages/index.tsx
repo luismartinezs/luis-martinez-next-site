@@ -31,7 +31,6 @@ const Home: NextPage<{ posts: any[] }> = ({ posts = [] }) => {
       <Head>
         <title>Luis Martinez - Web Developer</title>
         <meta name="description" content="Luis Martinez - Web Developer" />
-        <link rel="icon" href="/favicon.png" />
       </Head>
       <HeroSection />
       <PostsGrid posts={postsData} />

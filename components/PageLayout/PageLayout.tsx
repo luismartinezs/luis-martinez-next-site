@@ -5,16 +5,18 @@ const PageLayout = ({
   title,
   children,
 }: {
-  title: string;
+  title?: string;
   children?: React.ReactNode;
 }): JSX.Element => {
   return (
     <div>
-      <BlockWrapper yPadding="lg">
-        <div className=" mt-6 ">
-          <HeroTitle title={title} />
-        </div>
-      </BlockWrapper>
+      {title && (
+        <BlockWrapper yPadding="lg">
+          <div className="mt-6">
+            <HeroTitle title={title} />
+          </div>
+        </BlockWrapper>
+      )}
       <BlockWrapper>{children}</BlockWrapper>
     </div>
   );
