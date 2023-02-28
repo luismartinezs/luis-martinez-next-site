@@ -14,6 +14,7 @@ import { wrapper } from "store/store";
 import MobileMenuHandler from "components/MobileMenuHandler";
 
 import "../styles/globals.css";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const lora = Lora({ subsets: ["latin"], variable: "--font-lora" });
@@ -79,17 +80,55 @@ function MyApp({ Component, ...rest }: AppProps) {
   }, [pageProps, router.pathname]);
 
   return (
-    <div className={classnames(inter.variable, "font-sans", lora.variable)}>
-      {getGtmScript()}
-      <Provider store={store}>
-        <MobileMenuHandler />
-        <ThemeProvider>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </ThemeProvider>
-      </Provider>
-    </div>
+    <>
+      <Head>
+        <meta charSet="utf-8" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <title>Luis Martinez - Web Developer</title>
+        <meta name="description" content="Luis Martinez - Web Developer" />
+        <meta name="keywords" content="Keywords" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/icons/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/icons/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/icons/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link
+          rel="mask-icon"
+          href="/icons/safari-pinned-tab.svg"
+          color="#5654e1"
+        />
+        <meta name="msapplication-TileColor" content="#603cba" />
+        <meta name="theme-color" content="#ffffff" />
+      </Head>
+      <div className={classnames(inter.variable, "font-sans", lora.variable)}>
+        {getGtmScript()}
+        <Provider store={store}>
+          <MobileMenuHandler />
+          <ThemeProvider>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </ThemeProvider>
+        </Provider>
+      </div>
+    </>
   );
 }
 

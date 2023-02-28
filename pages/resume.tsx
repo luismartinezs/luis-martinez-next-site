@@ -1,7 +1,5 @@
 import { getMarkdownContent } from "lib/markdown";
 import MarkdownContent from "components/MarkdownContent";
-import BlockWrapper from "components/BlockWrapper";
-import HeroTitle from "blocks/HeroTitle";
 import PageLayout from "components/PageLayout";
 
 export async function getStaticProps() {

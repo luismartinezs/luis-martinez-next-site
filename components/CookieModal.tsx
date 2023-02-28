@@ -8,7 +8,7 @@ const defaultMessage = (
     find out more about our use of cookies, please see our{" "}
     <Link
       href="/privacy-policy"
-      className="underline text-primary-100 hover:text-primary-200"
+      className="text-primary-100 underline hover:text-primary-200"
     >
       Privacy Policy
     </Link>
@@ -57,7 +57,7 @@ const CookieModal = ({
   }
 
   return (
-    <div className="fixed bottom-0 z-50 w-full text-white bg-primary-500">
+    <div className="fixed bottom-0 z-50 w-full bg-gray-900 text-white">
       <div className="p-4">
         <div className="flex flex-col items-center justify-center space-y-2 lg:flex-row lg:space-y-0 lg:space-x-2">
           <div className="flex items-center justify-center space-x-2">
@@ -68,9 +68,9 @@ const CookieModal = ({
               <div>{message}</div>
             </div>
           </div>
-          <div className="flex justify-end flex-shrink">
+          <div className="flex flex-shrink justify-end">
             <button
-              className="px-3 py-1 text-gray-200 bg-gray-900 rounded hover:bg-gray-800"
+              className="rounded bg-primary-600 px-3 py-1 font-bold text-white hover:bg-primary-700"
               onClick={accept}
             >
               {acceptLabel}

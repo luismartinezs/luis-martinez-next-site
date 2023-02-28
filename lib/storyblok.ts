@@ -1,4 +1,4 @@
-import { storyblokInit, apiPlugin, getStoryblokApi, ISbStoriesParams, ISbResult } from "@storyblok/react";
+import { storyblokInit, apiPlugin, getStoryblokApi, ISbStoriesParams } from "@storyblok/react";
 import StoryblokPage from "blocks/StoryblokPage";
 import Post from "blocks/Post";
 import RichText from "blocks/RichText";
@@ -9,6 +9,8 @@ import SideNote from "blocks/SideNote";
 
 type Version = "draft" | "published";
 type Preview = boolean;
+
+const sbApiKey = process.env.STORYBLOK_API_KEY;
 
 export function initStoryblok() {
   const components = {
@@ -22,7 +24,7 @@ export function initStoryblok() {
   };
 
   storyblokInit({
-    accessToken: process.env.STORYBLOK_API_KEY,
+    accessToken: sbApiKey,
     use: [apiPlugin],
     components,
   });
