@@ -1,8 +1,10 @@
-import { CLOUD_NAME, HOST_IMG_URL, THUMBNAIL_IMG_URL } from 'constants/index'
+import {
+  CLOUD_NAME, GET_HOST_IMG_URL, THUMBNAIL_IMG_URL
+} from 'constants/index'
 import { ImageLoaderProps } from 'next/image';
 
-function getImgUrl(src: string) {
-  return src.startsWith('http') ? src : `${HOST_IMG_URL}/${src}.png`
+function getImgUrl(src: string, transformations?: string) {
+  return src.startsWith('http') ? src : `${GET_HOST_IMG_URL(transformations)}/${src}.png`
 }
 
 function getThumbnailImgUrl(src: string) {

@@ -6,6 +6,7 @@ import YoutubeVideo from "blocks/YoutubeVideo";
 import CloudinaryImage from "blocks/CloudinaryImage";
 import HeroTitle from "blocks/HeroTitle";
 import SideNote from "blocks/SideNote";
+// new block import here
 
 type Version = "draft" | "published";
 type Preview = boolean;
@@ -20,7 +21,8 @@ export function initStoryblok() {
     post: Post,
     CloudinaryImage,
     HeroTitle,
-    SideNote
+    SideNote,
+    // add new block here
   };
 
   storyblokInit({
