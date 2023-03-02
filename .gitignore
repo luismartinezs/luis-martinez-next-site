@@ -43,4 +43,5 @@ next.config.wizardcopy.js
 # NextJS PWA
 **/public/workbox-*.js
 **/public/sw.js
+**/public/sw.js.map
 **/public/fallback-*.js

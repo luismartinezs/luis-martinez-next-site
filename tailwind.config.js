@@ -19,6 +19,10 @@ module.exports = {
         'sans': ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
         'display': ['var(--font-lora)', ...defaultTheme.fontFamily.serif],
       },
+      aspectRatio: {
+        '3/2': '3 / 2',
+      },
+
     },
   },
   plugins: [
