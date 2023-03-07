@@ -24,6 +24,40 @@ export default function plopGenerator(
       }
     ],
   });
+  plop.setGenerator("block", {
+    description: "Storyblok block",
+    prompts: [
+      {
+        type: "input",
+        name: "name",
+        message: "block name",
+      },
+    ],
+    actions: [
+      {
+        type: "add",
+        path: "../blocks/{{pascalCase name}}/index.tsx",
+        templateFile: "templates/block/index.ts.hbs",
+      },
+      {
+        type: "add",
+        path: "../blocks/{{pascalCase name}}/{{pascalCase name}}.tsx",
+        templateFile: "templates/block/block.tsx.hbs",
+      },
+      {
+        type: 'append',
+        path: '../lib/storyblok.ts',
+        pattern: /(\/\/ new block import here)/gi,
+        template: `import {{pascalCase name}} from 'blocks/{{pascalCase name}}';`,
+      },
+      {
+        type: 'append',
+        path: '../lib/storyblok.ts',
+        pattern: /(\/\/ add new block here)/gi,
+        template: `    {{pascalCase name}},`,
+      },
+    ],
+  });
   plop.setGenerator("page", {
     description: "Add a new page",
     prompts: [

@@ -22,6 +22,7 @@ const AboutPage = ({
             alt="Luis Martinez Profile"
             width="400"
             height="400"
+            priority
           />
         </div>
         <p className="custom-prose prose mx-auto pt-12 dark:prose-invert lg:px-12 lg:pt-0">

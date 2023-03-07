@@ -9,9 +9,12 @@ const CloudinaryImage = ({
   ...rest
 }: {
   blok: SbBlokData;
-  rest: Omit<React.ComponentProps<typeof Image>, "src" | "alt" | "loader">;
+  rest: Omit<
+    React.ComponentProps<typeof Image>,
+    "src" | "alt" | "loader" | "priority"
+  >;
 }) => {
-  let { src, alt } = blok;
+  let { src, alt, preload } = blok;
   return (
     <BlockWrapper width="text" noPadding>
       <div {...storyblokEditable(blok)} key={blok._uid}>
@@ -22,6 +25,7 @@ const CloudinaryImage = ({
           loader={cloudinaryLoader}
           width={731}
           height={412}
+          priority={!!preload}
           {...rest}
         />
       </div>
