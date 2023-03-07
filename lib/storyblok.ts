@@ -11,7 +11,7 @@ import SideNote from "blocks/SideNote";
 type Version = "draft" | "published";
 type Preview = boolean;
 
-const sbApiKey = process.env.STORYBLOK_API_KEY;
+const sbApiKey = process.env.NEXT_PUBLIC_STORYBLOK_API_KEY;
 
 export function initStoryblok() {
   const components = {
