@@ -45,3 +45,6 @@ next.config.wizardcopy.js
 **/public/sw.js
 **/public/sw.js.map
 **/public/fallback-*.js
+
+# Local Netlify folder
+.netlify
