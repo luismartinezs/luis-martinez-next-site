@@ -18,6 +18,7 @@ const portfolioItems: Array<IPortfolioItem> = [
       <CloudinaryImage
         src="rotations-screenshot_glpinw"
         alt="Rotations Project Screenshot"
+        priority
         {...commonImgProps}
       />
     ),

@@ -28,7 +28,7 @@ const HeroTitle = ({
       {isPost && (
         <>
           <PostMetadata createdAt={createdAt} />
-          {featuredImage && (
+          {featuredImage && blok.showFeaturedImage && !imgError && (
             <div className="container relative aspect-3/2">
               <Image
                 src={getImgUrl(featuredImage, "w_1200")}
@@ -37,6 +37,7 @@ const HeroTitle = ({
                 fill
                 loader={cloudinaryLoader}
                 onError={() => setImgError(true)}
+                priority
               />
             </div>
           )}
