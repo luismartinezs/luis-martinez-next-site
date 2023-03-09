@@ -39,25 +39,44 @@ function MyApp({ Component, ...rest }: AppProps) {
 
   const gdpr = useGDPRAccepted();
 
+  const getGAScript = () => {
+    if (process.env.NEXT_PUBLIC_APP_ENV !== "production") {
+      return <></>;
+    }
+    if (typeof gdpr !== "undefined" && gdpr === "true") {
+      return (
+        <>
+          <Script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
+          ></Script>
+          <Script id="ga-script" strategy="afterInteractive">
+            {`window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', ${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID});`}
+          </Script>
+        </>
+      );
+    }
+    return <></>;
+  };
+
   const getGtmScript = () => {
     if (process.env.NEXT_PUBLIC_APP_ENV !== "production") {
       return <></>;
     }
     if (typeof gdpr !== "undefined" && gdpr === "true") {
       return (
-        <Script
-          id="gtm"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
+        <Script id="gtm" strategy="afterInteractive">
+          {`
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','${GTM_ID}');
-        `,
-          }}
-        />
+      `}
+        </Script>
       );
     }
     return <></>;
@@ -152,6 +171,7 @@ function MyApp({ Component, ...rest }: AppProps) {
       </Head>
       <div className={classnames(inter.variable, "font-sans", lora.variable)}>
         {getGtmScript()}
+        {getGAScript()}
         <Provider store={store}>
           <MobileMenuHandler />
           <ThemeProvider>
