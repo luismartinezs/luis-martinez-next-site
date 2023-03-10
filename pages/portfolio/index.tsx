@@ -40,7 +40,7 @@ const portfolioItems: Array<IPortfolioItem> = [
         </p>
       </>
     ),
-    url: "https://rotations.vercel.app/",
+    url: "https://rotations-6f39b.firebaseapp.com/",
     imageSide: "left",
   },
   {
