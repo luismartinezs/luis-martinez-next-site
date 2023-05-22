@@ -21,7 +21,7 @@ I work 100% remote for Toptal as a freelance frontend developer and consultant
 
 ## Current location
 
-Las Palmas de Gran Canaria, Spain 🌞
+Between Belgrade and Timisoara
 
 ## Before coding
 

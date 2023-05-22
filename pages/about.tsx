@@ -18,7 +18,7 @@ const AboutPage = ({
       <div className="flex flex-col items-center lg:flex-row">
         <div className="bl-none mx-6 aspect-square min-w-[400px] max-w-[400px] overflow-hidden rounded-3xl shadow-lg lg:mx-0 lg:max-w-[500px] lg:rounded-full">
           <CloudinaryImage
-            src="luis-martinez-profile_ka2cec"
+            src="luis-martinez-profile_xkioit"
             alt="Luis Martinez Profile"
             width="400"
             height="400"
