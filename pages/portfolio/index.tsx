@@ -1,7 +1,5 @@
 import Head from "next/head";
 
-import HeroTitle from "blocks/HeroTitle";
-import BlockWrapper from "components/BlockWrapper";
 import CloudinaryImage from "components/CloudinaryImage";
 import PortfolioItem, { type IPortfolioItem } from "components/PortfolioItem";
 import PageLayout from "components/PageLayout";
@@ -12,6 +10,36 @@ const commonImgProps = {
 };
 
 const portfolioItems: Array<IPortfolioItem> = [
+  {
+    id: "3",
+    image: (
+      <CloudinaryImage
+        src="weather-wardrobe-wizard-app_n2dhmm"
+        alt="React Starter Template Screenshot"
+        priority
+        {...commonImgProps}
+      />
+    ),
+    title: "Weather Wardrobe Wizard",
+    description: (
+      <>
+        <p>
+          This app, built with NextJS, Chakra UI, TypeScript, and Zustand,
+          offers weather forecasts and clothing suggestions based on user
+          location.
+        </p>
+        <p className="mt-1">
+          Utilizing Open Weather API for real-time data, it showcases a
+          mobile-friendly interface with visually appealing weather icons and
+          clothing images. The app is PWA ready and hosted on Netlify, with a
+          focus on usability and client-side logic.
+        </p>
+      </>
+    ),
+    url: "https://weather-wardrobe-wizard.netlify.app/",
+    githubUrl: "https://github.com/luismartinezs/weather-wardrobe-wizard",
+    imageSide: "right",
+  },
   {
     id: "1",
     image: (
