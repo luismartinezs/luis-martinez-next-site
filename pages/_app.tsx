@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import Script from "next/script";
-import { Inter, Lora } from "@next/font/google";
+import { Inter, Lora } from "next/font/google";
 import classnames from "classnames";
 
 import Layout from "components/Layout";
