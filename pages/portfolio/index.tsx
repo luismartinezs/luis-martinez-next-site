@@ -24,15 +24,11 @@ const portfolioItems: Array<IPortfolioItem> = [
     description: (
       <>
         <p>
-          This app, built with NextJS, Chakra UI, TypeScript, and Zustand,
-          offers weather forecasts and clothing suggestions based on user
-          location.
-        </p>
-        <p className="mt-1">
-          Utilizing Open Weather API for real-time data, it showcases a
-          mobile-friendly interface with visually appealing weather icons and
-          clothing images. The app is PWA ready and hosted on Netlify, with a
-          focus on usability and client-side logic.
+          Weather forecasts and clothing suggestions based on user selected
+          location. Built with NextJS/React, this PWA features a mobile-friendly
+          UI and real-time data from the Open Weather API. The app supports
+          multi-language, Stripe payments and Firebase for real-time updates,
+          AI-enriched user experience and real-time error tracking with Sentry.
         </p>
       </>
     ),
