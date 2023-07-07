@@ -19,7 +19,7 @@ const Layout = ({ children }: PropsWithChildren) => {
       consent to this. To find out more about my use of cookies, please see the{" "}
       <Link
         href="/privacy-policy"
-        className="underline text-primary-100 hover:text-primary-200"
+        className="text-primary-100 underline hover:text-primary-200"
       >
         Privacy Policy
       </Link>
@@ -27,7 +27,7 @@ const Layout = ({ children }: PropsWithChildren) => {
   );
 
   return (
-    <div className="flex flex-col justify-between h-screen overflow-x-hidden transition duration-300 dark:bg-gray-800 dark:text-white">
+    <div className="flex h-screen flex-col justify-between overflow-x-hidden transition duration-300 dark:bg-gray-800 dark:text-white">
       <ClientOnly>
         {!isProd && <FloatPill label={appEnv} />}
         <CookieModal
@@ -41,7 +41,7 @@ const Layout = ({ children }: PropsWithChildren) => {
           <TopBand />
           <Header />
         </StickyTop>
-        <main className="w-full mx-auto">{children}</main>
+        <main className="mx-auto w-full">{children}</main>
       </div>
       <Footer />
     </div>
