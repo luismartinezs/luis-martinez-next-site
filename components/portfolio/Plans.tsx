@@ -23,7 +23,7 @@ const plans = [
     title: "Signed-In User",
     ctaLabel: "Sign in to the app",
     ctaHref: "https://weather-wardrobe-wizard.netlify.app/signin",
-    description: "Unlock premium features and save with an annual subscription",
+    description: "Get access to additional free features",
     features: [
       "All Guest features",
       "Cross-device data persistence",
