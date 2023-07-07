@@ -35,6 +35,7 @@ const portfolioItems: Array<IPortfolioItem> = [
     url: "https://weather-wardrobe-wizard.netlify.app/",
     githubUrl: "https://github.com/luismartinezs/weather-wardrobe-wizard",
     imageSide: "right",
+    portfolioPath: "/portfolio/weather",
   },
   {
     id: "1",

@@ -1,5 +1,6 @@
 import { type FC } from "react";
 import classnames from "classnames";
+import Link from "next/link";
 
 export interface IPortfolioItem {
   id: string;
@@ -9,6 +10,7 @@ export interface IPortfolioItem {
   githubUrl?: string;
   image: JSX.Element;
   imageSide: "left" | "right";
+  portfolioPath?: string;
 }
 
 const linkClassOverwrite =
@@ -21,6 +23,7 @@ const PortfolioItem: FC<IPortfolioItem> = ({
   url,
   githubUrl,
   imageSide,
+  portfolioPath,
 }) => {
   return (
     <div className="rounded-xl bg-primary-50 p-10 shadow-xl shadow-primary-500/20 transition duration-300 ease-in-out hover:scale-[1.02] hover:shadow-2xl hover:shadow-primary-500/50 dark:bg-gray-900 dark:shadow-gray-900/20 dark:hover:shadow-gray-900/50">
@@ -40,6 +43,16 @@ const PortfolioItem: FC<IPortfolioItem> = ({
           </div>
           <div className="text-lg sm:text-xl">{description}</div>
           <div className="flex space-x-4 text-lg sm:text-xl lg:flex-col lg:space-x-0 lg:space-y-2">
+            {portfolioPath && (
+              <div>
+                <Link
+                  href={portfolioPath}
+                  className={classnames("link", linkClassOverwrite)}
+                >
+                  Read more
+                </Link>
+              </div>
+            )}
             <div>
               <a
                 href={url}
