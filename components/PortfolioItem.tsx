@@ -42,12 +42,15 @@ const PortfolioItem: FC<IPortfolioItem> = ({
             </h2>
           </div>
           <div className="text-lg sm:text-xl">{description}</div>
-          <div className="flex space-x-4 text-lg sm:text-xl lg:flex-col lg:space-x-0 lg:space-y-2">
+          <div className="flex flex-wrap gap-y-2 gap-x-4 text-lg sm:text-xl lg:flex-col lg:gap-x-0 lg:gap-y-2">
             {portfolioPath && (
               <div>
                 <Link
                   href={portfolioPath}
-                  className={classnames("link", linkClassOverwrite)}
+                  className={classnames(
+                    "link whitespace-nowrap",
+                    linkClassOverwrite
+                  )}
                 >
                   Read more
                 </Link>
