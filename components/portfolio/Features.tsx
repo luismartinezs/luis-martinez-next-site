@@ -26,28 +26,28 @@ const features = [
 
 const Features = () => {
   return (
-    <div className="overflow-hidden bg-white py-24 sm:py-32">
+    <div className="z-20 overflow-hidden py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
           <div className="lg:pr-8 lg:pt-4">
             <div className="lg:max-w-lg">
-              <h2 className="text-base font-semibold leading-7 text-primary-600">
+              <h2 className="text-base font-semibold leading-7 text-primary-600 dark:text-primary-300">
                 Explore a multitude of features designed to cater to your needs
               </h2>
-              <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
                 Cutting-edge features for an enhanced experience
               </p>
-              <p className="mt-6 text-lg leading-8 text-gray-600">
+              <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">
                 A smooth and intuitive user experience. From real-time weather
                 forecasting to AI-powered packing suggestions.
               </p>
-              <dl className="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
+              <dl className="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 dark:text-gray-300 lg:max-w-none">
                 {features.map((feature) => (
                   <div key={feature.name} className="relative pl-9">
                     {feature.icon && (
-                      <dt className="inline font-semibold text-gray-900">
+                      <dt className="inline font-semibold text-gray-900 dark:text-white">
                         <feature.icon
-                          className="absolute left-1 top-1 h-5 w-5 text-primary-600"
+                          className="absolute left-1 top-1 h-5 w-5 text-primary-600 dark:text-primary-400"
                           aria-hidden="true"
                         />
                         {feature.name}

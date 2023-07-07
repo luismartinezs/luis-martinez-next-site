@@ -25,17 +25,19 @@ const Plan = ({ plan }: { plan: Plan }) => {
     features,
   } = plan;
   return (
-    <div className="mx-auto max-w-2xl border-t first:border-0 lg:mx-0 lg:flex lg:max-w-none lg:border-t-0 lg:border-l">
+    <div className="mx-auto max-w-2xl border-t first:border-0 dark:border-gray-600 lg:mx-0 lg:flex lg:max-w-none lg:border-t-0 lg:border-l">
       <div className="-mt-2 p-2 lg:mt-0 lg:w-full lg:max-w-md lg:flex-shrink-0">
         <div className="rounded-2xl py-10 lg:flex lg:flex-col lg:justify-center lg:py-16">
           <div className="mx-auto max-w-xs px-8">
-            <p className="text-base font-semibold text-gray-600">{title}</p>
+            <p className="text-base font-semibold text-gray-600 dark:text-gray-300">
+              {title}
+            </p>
             <p className="mt-6 flex items-baseline gap-x-2">
-              <span className="text-5xl font-bold tracking-tight text-gray-900">
+              <span className="text-5xl font-bold tracking-tight text-gray-900 dark:text-white">
                 {isFree ? "Free" : price}
               </span>
               {recurrence && (
-                <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600">
+                <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600 dark:text-gray-300">
                   / {recurrence}
                 </span>
               )}
@@ -61,10 +63,10 @@ const Plan = ({ plan }: { plan: Plan }) => {
                   <div className="relative pl-9" key={index}>
                     <dt className="inline">
                       <AiFillCheckCircle
-                        className="absolute left-1 top-1 h-5 w-5 text-primary-600"
+                        className="absolute left-1 top-1 h-5 w-5 text-primary-600 dark:text-primary-400"
                         aria-hidden="true"
                       />
-                      <span>{feature}</span>
+                      <span className="dark:text-gray-300">{feature}</span>
                     </dt>
                   </div>
                 ))}
