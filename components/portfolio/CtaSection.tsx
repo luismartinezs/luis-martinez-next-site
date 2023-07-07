@@ -43,7 +43,7 @@ const CtaSection = (): JSX.Element => {
               </a>
             </div>
           </div>
-          <div className="relative mt-16 h-80 lg:mt-8">
+          <div className="relative mt-16 h-[420px] lg:mt-8">
             <CloudinaryImage
               src="weather-wardrobe-wizard-screenshot-002_agjgkn"
               alt="Weather Wardrobe Wizard screenshot"
