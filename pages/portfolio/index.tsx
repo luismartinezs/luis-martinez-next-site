@@ -11,11 +11,40 @@ const commonImgProps = {
 
 const portfolioItems: Array<IPortfolioItem> = [
   {
+    id: "4",
+    image: (
+      <CloudinaryImage
+        src="ai-cook-screenshot_svufq9"
+        alt="AI Cook Screenshot"
+        priority
+        {...commonImgProps}
+      />
+    ),
+    title: "AI Cook",
+    description: (
+      <>
+        <p>
+          AI Cook is an app that provides AI-generated food recipes tailored to
+          available ingredients, kitchen tools, and dietary preferences, its aim
+          is to trivialize mundane meal planning.
+        </p>
+        <p className="mt-2">
+          Built with Next.js and the T3 stack, AI Cook demonstrates the power of
+          modern web development frameworks and technologies in creating a
+          seamless experience, as well, it showcases the potential of AI in
+          everyday tasks.
+        </p>
+      </>
+    ),
+    url: "https://ai-cook.webdevluis.com/",
+    imageSide: "left",
+  },
+  {
     id: "3",
     image: (
       <CloudinaryImage
         src="weather-wardrobe-wizard-app_n2dhmm"
-        alt="React Starter Template Screenshot"
+        alt="Weather Wardrobe Wizard Screenshot"
         priority
         {...commonImgProps}
       />
