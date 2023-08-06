@@ -1,4 +1,4 @@
-Sitemap: https://www.luis-martinez.net/api/make-sitemap
+Sitemap: https://www.webdevluis.com/api/make-sitemap
 
 User-agent: *
 Allow: /*
