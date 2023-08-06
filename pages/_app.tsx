@@ -36,6 +36,9 @@ function MyApp({ Component, ...rest }: AppProps) {
   const { store, props } = wrapper.useWrappedStore(rest);
   const { pageProps } = props;
   const router = useRouter();
+  const canonicalUrl = (
+    `https://www.webdevluis.com` + (router.asPath === "/" ? "" : router.asPath)
+  ).split("?")[0];
 
   const gdpr = useGDPRAccepted();
 
@@ -168,6 +171,7 @@ function MyApp({ Component, ...rest }: AppProps) {
           property="og:image"
           content="https://www.luis-martinez.net/icons/apple-touch-icon.png"
         />
+        <link rel="canonical" href={canonicalUrl} />
       </Head>
       <div className={classnames(inter.variable, "font-sans", lora.variable)}>
         {getGtmScript()}
