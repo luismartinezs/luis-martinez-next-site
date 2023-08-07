@@ -4,7 +4,7 @@ title: About me - Luis Martinez Web Developer
 
 ## My favorite tech stack
 
-React / NextJS, Typescript, Vite, tailwindCSS, Mantine.dev
+My go-to technologies include React, NextJS, Typescript, Vite, tailwindCSS, and Mantine.dev. I've found these tools to be highly versatile, reliable, and suited to the various projects I undertake.
 
 ## Skills
 
@@ -17,11 +17,11 @@ React / NextJS, Typescript, Vite, tailwindCSS, Mantine.dev
 
 ## Work
 
-I work 100% remote for Toptal as a freelance frontend developer and consultant
+I'm currently enjoying my remote work at Toptal, where I contribute as a freelance frontend developer and consultant. My role allows me to collaborate with a diverse range of clients, each presenting unique challenges and learning opportunities.
 
 ## Current location
 
-Between Belgrade and Timisoara
+Roses, Spain
 
 ## Before coding
 
@@ -36,12 +36,8 @@ I started coding at age 34, before that I was doing other things that now feel l
 
 When I'm not coding, I go to the gym, exercise, and try to stay fit and healthy.
 
-## Secret regret
-
-Not having started learning web development 10 years earlier.
-
 ## Contact
 
-- Twitter 🐦 [LuisMartinezSu2](https://twitter.com/LuisMartinezSu2)
+- Twitter (X) ✖️ [LuisMartinezSu2](https://twitter.com/LuisMartinezSu2)
 - LinkedIn 💻 [linkedin.com/in/luismarsu](https://www.linkedin.com/in/luismarsu)
 - Email 📧 [luismartinezwebdev@gmail.com](mailto:luismartinezwebdev@gmail.com)
