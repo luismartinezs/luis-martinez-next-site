@@ -11,6 +11,34 @@ const commonImgProps = {
 
 const portfolioItems: Array<IPortfolioItem> = [
   {
+    id: "5",
+    image: (
+      <CloudinaryImage
+        src="eldenhub-screenshot_wsye0y"
+        alt="Elden Hub Screenshot"
+        priority
+        {...commonImgProps}
+      />
+    ),
+    title: "EldenHub",
+    description: (
+      <>
+        <p>
+          EldenHub (or Elden Ring Checklists) is a Next.js app that provides
+          checklists for the videogame Elden Ring. It uses the browser storage
+          to save user data and the app is fully responsive.
+        </p>
+        <p className="mt-2">
+          The tech stack behind this app is Next.js, React and TailwindCSS. The
+          app is hosted on Vercel and the source code is available on GitHub.
+        </p>
+      </>
+    ),
+    url: "https://eldenringbuilds.vercel.app/",
+    githubUrl: "https://github.com/luismartinezs/elden-ring-builds-checklist",
+    imageSide: "right",
+  },
+  {
     id: "4",
     image: (
       <CloudinaryImage
