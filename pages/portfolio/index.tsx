@@ -161,12 +161,17 @@ const PortfolioPage = () => {
       <Head>
         <title>Portfolio - Luis Martinez Web Developer</title>
       </Head>
-      <PageLayout title="Explore my portfolio">
-        <div className="mb-16 flex flex-col gap-16">
-          {portfolioItems.map((item) => (
-            <PortfolioItem key={item.id} {...item} />
-          ))}
-        </div>
+      <PageLayout
+        title="Explore my portfolio"
+        description="A list of my personal projects (excluding client work)"
+      >
+        <>
+          <div className="mb-16 flex flex-col gap-16">
+            {portfolioItems.map((item) => (
+              <PortfolioItem key={item.id} {...item} />
+            ))}
+          </div>
+        </>
       </PageLayout>
     </>
   );
