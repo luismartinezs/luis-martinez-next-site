@@ -6,6 +6,8 @@ title: Resume - Luis Martinez Web Developer
 
 Name: Luis Martinez Suarez
 
+👉 Contractor work
+
 Frontend developer since 2019
 
 - The tech stack I feel at home with: React, NextJS, Firebase, Tailwind CSS, Mantine.dev, Storyblok (headless CMS)

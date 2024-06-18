@@ -21,7 +21,7 @@ I'm currently enjoying my remote work at Toptal, where I contribute as a freelan
 
 ## Current location
 
-Roses, Spain
+Southeast Asia
 
 ## Before coding
 
@@ -38,6 +38,6 @@ When I'm not coding, I go to the gym, exercise, and try to stay fit and healthy.
 
 ## Contact
 
-- Twitter (X) ✖️ [LuisMartinezSu2](https://twitter.com/LuisMartinezSu2)
-- LinkedIn 💻 [linkedin.com/in/luismarsu](https://www.linkedin.com/in/luismarsu)
-- Email 📧 [luismartinezwebdev@gmail.com](mailto:luismartinezwebdev@gmail.com)
+- X [LuisMartinezSu2](https://twitter.com/LuisMartinezSu2)
+- LinkedIn [linkedin.com/in/luismarsu](https://www.linkedin.com/in/luismarsu)
+- Email [luismartinezwebdev@gmail.com](mailto:luismartinezwebdev@gmail.com)
