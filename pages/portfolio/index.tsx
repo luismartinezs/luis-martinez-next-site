@@ -14,9 +14,33 @@ const portfolioItems: Array<IPortfolioItem> = [
     id: "5",
     image: (
       <CloudinaryImage
+        src="react-ktas-ai-maker_ghgarg"
+        alt="React Katas AI Maker Screenshot"
+        priority
+        {...commonImgProps}
+      />
+    ),
+    title: "React Katas AI Maker",
+    description: (
+      <>
+        <p>
+          React Katas AI Maker is an app that takes React docs as input, gives
+          the user a few options and outputs the full code for an AI generated
+          React Kata, including final code, starting code and README file, to
+          practice the concepts.
+        </p>
+      </>
+    ),
+    url: "https://react-katas-ai-maker.vercel.app/",
+    githubUrl: "https://github.com/luismartinezs/react-katas-ai-workflow",
+    imageSide: "left",
+  },
+  {
+    id: "5",
+    image: (
+      <CloudinaryImage
         src="eldenhub-screenshot_wsye0y"
         alt="Elden Hub Screenshot"
-        priority
         {...commonImgProps}
       />
     ),
@@ -44,7 +68,6 @@ const portfolioItems: Array<IPortfolioItem> = [
       <CloudinaryImage
         src="ai-cook-screenshot_svufq9"
         alt="AI Cook Screenshot"
-        priority
         {...commonImgProps}
       />
     ),
@@ -73,7 +96,6 @@ const portfolioItems: Array<IPortfolioItem> = [
       <CloudinaryImage
         src="weather-wardrobe-wizard-app_n2dhmm"
         alt="Weather Wardrobe Wizard Screenshot"
-        priority
         {...commonImgProps}
       />
     ),
@@ -100,7 +122,6 @@ const portfolioItems: Array<IPortfolioItem> = [
       <CloudinaryImage
         src="rotations-screenshot_glpinw"
         alt="Rotations Project Screenshot"
-        priority
         {...commonImgProps}
       />
     ),
