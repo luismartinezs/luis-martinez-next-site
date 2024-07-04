@@ -320,7 +320,7 @@ export default function ResumePage({ resumeData }: { resumeData: any }) {
             <Tabs.Tab value="experience">Work</Tabs.Tab>
             <Tabs.Tab value="projects">Portfolio</Tabs.Tab>
             <Tabs.Tab value="skills">Skills</Tabs.Tab>
-            <Tabs.Tab value="education">Education</Tabs.Tab>
+            <Tabs.Tab value="education">Edu</Tabs.Tab>
           </Tabs.List>
           <Tabs.Panel value="about">
             <AboutSection resumeData={resumeData} />
