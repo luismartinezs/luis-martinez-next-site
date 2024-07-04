@@ -33,7 +33,7 @@ const PortfolioItem: FC<IPortfolioItem> = ({
         <div className="relative w-full max-w-xs overflow-hidden rounded-lg shadow-lg shadow-primary-500/30 dark:border-2 dark:border-primary-500 dark:shadow-gray-900/30">
           {image}
         </div>
-        <p className="text-gray-700 dark:text-gray-300">{description}</p>
+        <div className="text-gray-700 dark:text-gray-300">{description}</div>
         <div className="flex space-x-4">
           {portfolioPath && (
             <div>
