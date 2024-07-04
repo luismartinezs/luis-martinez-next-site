@@ -1,14 +1,15 @@
+import { createScopedKeydownHandler } from "lib/createScopedKeydownHandler";
 import { cn } from "lib/util";
 import { createContext, useContext, useState } from "react";
 
 type Context = {
-  activeTab: string;
-  setActiveTab: (tab: string) => void;
+  value: string;
+  setValue: (tab: string) => void;
 };
 
 const TabsContext = createContext<Context>({
-  activeTab: "",
-  setActiveTab: () => {},
+  value: "",
+  setValue: () => {},
 });
 
 const TabsProvider = ({
@@ -16,12 +17,12 @@ const TabsProvider = ({
   defaultValue,
 }: {
   children: React.ReactNode;
-  defaultValue: Context["activeTab"];
+  defaultValue: Context["value"];
 }) => {
-  const [activeTab, setActiveTab] = useState(defaultValue);
+  const [value, setValue] = useState(defaultValue);
 
   return (
-    <TabsContext.Provider value={{ activeTab, setActiveTab }}>
+    <TabsContext.Provider value={{ value, setValue }}>
       {children}
     </TabsContext.Provider>
   );
@@ -36,19 +37,33 @@ const TabButton = ({
   tabId,
 }: {
   children: React.ReactNode;
-  tabId: Context["activeTab"];
+  tabId: Context["value"];
 }) => {
-  const { activeTab, setActiveTab } = useTabs();
+  const ctx = useTabs();
+  const isActive = ctx.value === tabId;
 
   return (
     <button
-      onClick={() => setActiveTab(tabId)}
+      role="tab"
+      id={`${tabId}-tab`}
+      onClick={() => ctx.setValue(tabId)}
+      aria-controls={`${tabId}-panel`}
+      aria-selected={isActive ? "true" : "false"}
       className={cn(
-        activeTab === tabId
-          ? "bg-primary-500 font-bold text-white"
+        isActive
+          ? "bg-primary-500 font-bold text-white dark:bg-primary-400 dark:text-black"
           : "bg-gray-200 text-gray-800 dark:bg-gray-900 dark:text-gray-200",
         "rounded px-4 py-2"
       )}
+      tabIndex={isActive || ctx.value === null ? 0 : -1}
+      onKeyDown={createScopedKeydownHandler({
+        siblingSelector: '[role="tab"]',
+        parentSelector: '[role="tablist"]',
+        activateOnFocus: true,
+        loop: true,
+        dir: "ltr",
+        orientation: "horizontal",
+      })}
     >
       {children}
     </button>
@@ -60,18 +75,49 @@ const TabsPanel = ({
   value,
 }: {
   children: React.ReactNode;
-  value: Context["activeTab"];
+  value: Context["value"];
 }) => {
-  const { activeTab } = useTabs();
-  const active = activeTab === value;
+  const ctx = useTabs();
+  const active = ctx.value === value;
 
-  return <div className={cn(active ? "block" : "hidden")}>{children}</div>;
+  return (
+    <div
+      className={cn(active ? "block" : "hidden")}
+      role="tabpanel"
+      id={`${value}-panel`}
+      aria-labelledby={`${value}-tab`}
+    >
+      {children}
+    </div>
+  );
+};
+
+const TabsList = ({
+  children,
+  labelId,
+  orientation = "horizontal",
+}: {
+  children: React.ReactNode;
+  labelId?: string;
+  orientation?: "horizontal" | "vertical";
+}) => {
+  return (
+    <div
+      className="flex space-x-4"
+      role="tablist"
+      aria-labelledby={labelId}
+      aria-orientation={orientation}
+    >
+      {children}
+    </div>
+  );
 };
 
 const Tabs = {
   Provider: TabsProvider,
   Tab: TabButton,
   Panel: TabsPanel,
+  List: TabsList,
 };
 
 export default Tabs;

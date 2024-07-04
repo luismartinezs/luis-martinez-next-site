@@ -1,19 +1,23 @@
 import PageLayout from "components/PageLayout";
 import SectionWrapper from "components/SectionWrapper";
 import Tabs from "components/Tabs";
-import { useTabs } from "components/Tabs/Tabs";
-import { useState } from "react";
+
+function H3({ children }: { children: React.ReactNode }) {
+  return <h3 className="mb-4 text-2xl font-bold">{children}</h3>;
+}
+
+function H4({ children }: { children: React.ReactNode }) {
+  return <h4 className="mb-2 mt-4 text-xl font-semibold">{children}</h4>;
+}
 
 function AboutSection({ resumeData }: { resumeData: any }) {
   return (
     <SectionWrapper>
-      <h2 className="mb-4 text-2xl font-bold">About</h2>
+      <H3>About</H3>
       <p>{resumeData.about}</p>
-      <h3 className="mb-2 mt-4 text-xl font-semibold">
-        Most Amazing Development
-      </h3>
+      <H4>Most Amazing Development</H4>
       <p>{resumeData.mostAmazingDevelopment}</p>
-      <h3 className="mb-2 mt-4 text-xl font-semibold">Preferred Environment</h3>
+      <H4>Preferred Environment</H4>
       <ul className="list-disc pl-5">
         {resumeData.preferredEnvironment.map((item: string, index: number) => (
           <li key={index}>{item}</li>
@@ -26,10 +30,10 @@ function AboutSection({ resumeData }: { resumeData: any }) {
 function ExperienceSection({ workExperience }: { workExperience: any[] }) {
   return (
     <SectionWrapper>
-      <h2 className="mb-4 text-2xl font-bold">Work Experience</h2>
+      <H3>Work Experience</H3>
       {workExperience.map((job, index) => (
         <div key={index} className="mb-6">
-          <h3 className="text-xl font-semibold">{job.position}</h3>
+          <H4>{job.position}</H4>
           <p className="italic">
             {job.company} {job.division ? `- ${job.division}` : ""}
           </p>
@@ -57,10 +61,10 @@ function ExperienceSection({ workExperience }: { workExperience: any[] }) {
 function EducationSection({ education }: { education: any[] }) {
   return (
     <SectionWrapper>
-      <h2 className="mb-4 text-2xl font-bold">Education</h2>
+      <H3>Education</H3>
       {education.map((edu, index) => (
         <div key={index} className="mb-4">
-          <h3 className="text-xl font-semibold">{edu.degree}</h3>
+          <H4>{edu.degree}</H4>
           <p>
             {edu.institution}, {edu.location}
           </p>
@@ -73,15 +77,29 @@ function EducationSection({ education }: { education: any[] }) {
   );
 }
 
-function SkillsSection({ skills }: { skills: any[] }) {
+function SkillsSection({
+  skills,
+  sort = true,
+}: {
+  skills: any[];
+  sort?: boolean;
+}) {
+  const _skills = sort
+    ? skills.sort((a, b) =>
+        a.yearsOfExperience > b.yearsOfExperience ? -1 : 1
+      )
+    : skills;
+
   return (
     <SectionWrapper>
-      <h2 className="mb-4 text-2xl font-bold">Skills & Expertise</h2>
-      <ul className="grid grid-cols-2 gap-2">
-        {skills.map((skill, index) => (
+      <H3>Skills & Expertise</H3>
+      <ul className="grid list-disc grid-cols-1 gap-x-16 pl-5 sm:grid-cols-2">
+        {_skills.map((skill, index) => (
           <li key={index} className="flex justify-between">
-            <span>{skill.name}</span>
-            <span>{skill.yearsOfExperience} years</span>
+            <span className="text-lg font-medium">{skill.name}</span>
+            <span className="text-sm text-gray-500">
+              {skill.yearsOfExperience} years
+            </span>
           </li>
         ))}
       </ul>
@@ -92,10 +110,10 @@ function SkillsSection({ skills }: { skills: any[] }) {
 function ProjectsSection({ projects }: { projects: any[] }) {
   return (
     <SectionWrapper>
-      <h2 className="mb-4 text-2xl font-bold">Projects</h2>
+      <H3>Projects</H3>
       {projects.map((project, index) => (
         <div key={index} className="mb-6">
-          <h3 className="text-xl font-semibold">{project.name}</h3>
+          <H4>{project.name}</H4>
           <p className="italic">{project.type} Project</p>
           {project.url && (
             <a
@@ -123,16 +141,18 @@ export default function ResumePage({ resumeData }: { resumeData: any }) {
   return (
     <PageLayout>
       <div className="container mx-auto p-4">
-        <h1 className="mb-4 text-3xl font-bold">Resume</h1>
-        <h2 className="mb-4 text-2xl font-bold">{resumeData.fullName}</h2>
+        <h1 className="mb-4 font-display text-xl font-bold" id="resume">
+          Resume
+        </h1>
+        <h2 className="mb-4 text-3xl font-bold">{resumeData.fullName}</h2>
         <Tabs.Provider defaultValue="about">
-          <div className="flex gap-4">
+          <Tabs.List labelId="resume">
             <Tabs.Tab tabId="about">About</Tabs.Tab>
             <Tabs.Tab tabId="experience">Experience</Tabs.Tab>
             <Tabs.Tab tabId="education">Education</Tabs.Tab>
             <Tabs.Tab tabId="skills">Skills</Tabs.Tab>
             <Tabs.Tab tabId="projects">Projects</Tabs.Tab>
-          </div>
+          </Tabs.List>
           <Tabs.Panel value="about">
             <AboutSection resumeData={resumeData} />
           </Tabs.Panel>
