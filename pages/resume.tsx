@@ -27,32 +27,50 @@ function AboutSection({ resumeData }: { resumeData: any }) {
   );
 }
 
+function Job({ job }: { job: any }) {
+  const {
+    position,
+    company,
+    division,
+    dateStart,
+    dateEnd,
+    responsibilities,
+    skills,
+  } = job;
+
+  console.log(job);
+
+  return (
+    <div className="mb-6">
+      <H4>{position}</H4>
+      <p className="italic !text-gray-400">
+        {company} {division ? `- ${division}` : ""}{" "}
+        {dateStart && dateEnd && (
+          <span className="!text-gray-400">
+            | {dateStart} - {dateEnd}
+          </span>
+        )}
+      </p>
+      <ul className="mt-2 list-disc pl-5">
+        {responsibilities.map((resp: any, idx: number) => (
+          <li key={idx}>{resp}</li>
+        ))}
+      </ul>
+      {skills && (
+        <div className="mt-2 !text-gray-400">
+          <span>Skills:</span> {skills.join(", ")}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function ExperienceSection({ workExperience }: { workExperience: any[] }) {
   return (
     <SectionWrapper className="prose">
       <H3>Work Experience</H3>
       {workExperience.map((job, index) => (
-        <div key={index} className="mb-6">
-          <H4>{job.position}</H4>
-          <p className="italic">
-            {job.company} {job.division ? `- ${job.division}` : ""}
-          </p>
-          {job.dateStart && job.dateEnd && (
-            <p>
-              {job.dateStart} - {job.dateEnd}
-            </p>
-          )}
-          <ul className="mt-2 list-disc pl-5">
-            {job.responsibilities.map((resp: any, idx: number) => (
-              <li key={idx}>{resp}</li>
-            ))}
-          </ul>
-          {job.skills && (
-            <div className="mt-2">
-              <strong>Skills:</strong> {job.skills.join(", ")}
-            </div>
-          )}
-        </div>
+        <Job key={index} job={job} />
       ))}
     </SectionWrapper>
   );
@@ -69,7 +87,7 @@ function EducationSection({ education }: { education: any[] }) {
             {edu.institution}, {edu.location}
           </p>
           <p>
-            {edu.yearStart} - {edu.yearEnd}
+            {edu.dateStart} - {edu.dateEnd}
           </p>
         </div>
       ))}
