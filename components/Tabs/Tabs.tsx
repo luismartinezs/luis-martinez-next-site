@@ -57,7 +57,7 @@ const TabButton = ({
         isActive
           ? "border-b-4 border-primary-500"
           : "border-b-2 border-gray-200 dark:border-gray-700",
-        "px-3 py-1 dark:text-gray-200 md:px-4 md:py-2 md:text-xl"
+        "px-3 py-1 text-sm dark:text-gray-200 sm:text-base md:px-4 md:py-2 md:text-xl"
       )}
       tabIndex={isActive || ctx.value === null ? 0 : -1}
       onKeyDown={createScopedKeydownHandler({
