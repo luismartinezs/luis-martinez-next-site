@@ -318,7 +318,7 @@ export default function ResumePage({ resumeData }: { resumeData: any }) {
           <Tabs.List labelId="resume">
             <Tabs.Tab value="about">About</Tabs.Tab>
             <Tabs.Tab value="experience">Work</Tabs.Tab>
-            <Tabs.Tab value="projects">Projects</Tabs.Tab>
+            <Tabs.Tab value="projects">Portfolio</Tabs.Tab>
             <Tabs.Tab value="skills">Skills</Tabs.Tab>
             <Tabs.Tab value="education">Education</Tabs.Tab>
           </Tabs.List>
