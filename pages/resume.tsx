@@ -38,8 +38,6 @@ function Job({ job }: { job: any }) {
     skills,
   } = job;
 
-  console.log(job);
-
   return (
     <div className="mb-6">
       <H4>{position}</H4>
