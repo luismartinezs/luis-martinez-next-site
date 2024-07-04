@@ -288,7 +288,7 @@ const ContactInfo = ({
 export default function ResumePage({ resumeData }: { resumeData: any }) {
   return (
     <PageLayout>
-      <div className="container mx-auto p-4">
+      <div className="">
         <div className="mb-6 flex flex-col items-center gap-6 md:flex-row">
           <div className="bl-none order-2 aspect-square min-w-[200px] max-w-[200px] overflow-hidden rounded-lg shadow-lg md:order-1 md:min-w-[150px] md:max-w-[150px] lg:mx-0 lg:max-w-[150px]">
             <CloudinaryImage
@@ -317,7 +317,7 @@ export default function ResumePage({ resumeData }: { resumeData: any }) {
         <Tabs.Provider defaultValue="about">
           <Tabs.List labelId="resume">
             <Tabs.Tab value="about">About</Tabs.Tab>
-            <Tabs.Tab value="experience">Work Experience</Tabs.Tab>
+            <Tabs.Tab value="experience">Work</Tabs.Tab>
             <Tabs.Tab value="projects">Projects</Tabs.Tab>
             <Tabs.Tab value="skills">Skills</Tabs.Tab>
             <Tabs.Tab value="education">Education</Tabs.Tab>
