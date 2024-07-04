@@ -41,6 +41,7 @@ const portfolioItems: Array<IPortfolioItem> = [
       <CloudinaryImage
         src="eldenhub-screenshot_wsye0y"
         alt="Elden Hub Screenshot"
+        priority
         {...commonImgProps}
       />
     ),
@@ -68,6 +69,7 @@ const portfolioItems: Array<IPortfolioItem> = [
       <CloudinaryImage
         src="ai-cook-screenshot_svufq9"
         alt="AI Cook Screenshot"
+        priority
         {...commonImgProps}
       />
     ),
@@ -187,7 +189,7 @@ const PortfolioPage = () => {
         description="A list of my personal projects (excluding client work)"
       >
         <>
-          <div className="mb-16 flex flex-col gap-16">
+          <div className="mb-16 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {portfolioItems.map((item) => (
               <PortfolioItem key={item.id} {...item} />
             ))}

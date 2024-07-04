@@ -14,7 +14,7 @@ const CloudinaryImage = (
   return (
     <Image
       className={classNames(
-        "h-full w-full object-cover object-center",
+        "aspect-square w-full object-cover object-center",
         className
       )}
       src={getImgUrl(src)}
