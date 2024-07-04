@@ -12,7 +12,7 @@ function H4({ children }: { children: React.ReactNode }) {
 
 function AboutSection({ resumeData }: { resumeData: any }) {
   return (
-    <SectionWrapper>
+    <SectionWrapper className="prose">
       <H3>About</H3>
       <p>{resumeData.about}</p>
       <H4>Most Amazing Development</H4>
@@ -29,7 +29,7 @@ function AboutSection({ resumeData }: { resumeData: any }) {
 
 function ExperienceSection({ workExperience }: { workExperience: any[] }) {
   return (
-    <SectionWrapper>
+    <SectionWrapper className="prose">
       <H3>Work Experience</H3>
       {workExperience.map((job, index) => (
         <div key={index} className="mb-6">
@@ -43,7 +43,7 @@ function ExperienceSection({ workExperience }: { workExperience: any[] }) {
             </p>
           )}
           <ul className="mt-2 list-disc pl-5">
-            {job.responsibilities.map((resp, idx) => (
+            {job.responsibilities.map((resp: any, idx: number) => (
               <li key={idx}>{resp}</li>
             ))}
           </ul>
@@ -60,7 +60,7 @@ function ExperienceSection({ workExperience }: { workExperience: any[] }) {
 
 function EducationSection({ education }: { education: any[] }) {
   return (
-    <SectionWrapper>
+    <SectionWrapper className="prose">
       <H3>Education</H3>
       {education.map((edu, index) => (
         <div key={index} className="mb-4">
@@ -93,11 +93,11 @@ function SkillsSection({
   return (
     <SectionWrapper>
       <H3>Skills & Expertise</H3>
-      <ul className="grid list-disc grid-cols-1 gap-x-16 pl-5 sm:grid-cols-2">
+      <ul className="grid list-disc grid-cols-1 gap-x-16 gap-y-2 pl-0 md:grid-cols-2">
         {_skills.map((skill, index) => (
           <li key={index} className="flex justify-between">
             <span className="text-lg font-medium">{skill.name}</span>
-            <span className="text-sm text-gray-500">
+            <span className="whitespace-nowrap text-sm text-gray-500">
               {skill.yearsOfExperience} years
             </span>
           </li>
@@ -109,7 +109,7 @@ function SkillsSection({
 
 function ProjectsSection({ projects }: { projects: any[] }) {
   return (
-    <SectionWrapper>
+    <SectionWrapper className="prose">
       <H3>Projects</H3>
       {projects.map((project, index) => (
         <div key={index} className="mb-6">
@@ -147,11 +147,11 @@ export default function ResumePage({ resumeData }: { resumeData: any }) {
         <h2 className="mb-4 text-3xl font-bold">{resumeData.fullName}</h2>
         <Tabs.Provider defaultValue="about">
           <Tabs.List labelId="resume">
-            <Tabs.Tab tabId="about">About</Tabs.Tab>
-            <Tabs.Tab tabId="experience">Experience</Tabs.Tab>
-            <Tabs.Tab tabId="education">Education</Tabs.Tab>
-            <Tabs.Tab tabId="skills">Skills</Tabs.Tab>
-            <Tabs.Tab tabId="projects">Projects</Tabs.Tab>
+            <Tabs.Tab value="about">About</Tabs.Tab>
+            <Tabs.Tab value="experience">Experience</Tabs.Tab>
+            <Tabs.Tab value="education">Education</Tabs.Tab>
+            <Tabs.Tab value="skills">Skills</Tabs.Tab>
+            <Tabs.Tab value="projects">Projects</Tabs.Tab>
           </Tabs.List>
           <Tabs.Panel value="about">
             <AboutSection resumeData={resumeData} />

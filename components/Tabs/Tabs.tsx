@@ -2,6 +2,10 @@ import { createScopedKeydownHandler } from "lib/createScopedKeydownHandler";
 import { cn } from "lib/util";
 import { createContext, useContext, useState } from "react";
 
+const config = {
+  orientation: "horizontal",
+} as const;
+
 type Context = {
   value: string;
   setValue: (tab: string) => void;
@@ -34,26 +38,24 @@ export function useTabs() {
 
 const TabButton = ({
   children,
-  tabId,
+  value,
 }: {
   children: React.ReactNode;
-  tabId: Context["value"];
+  value: Context["value"];
 }) => {
   const ctx = useTabs();
-  const isActive = ctx.value === tabId;
+  const isActive = ctx.value === value;
 
   return (
     <button
       role="tab"
-      id={`${tabId}-tab`}
-      onClick={() => ctx.setValue(tabId)}
-      aria-controls={`${tabId}-panel`}
+      id={`${value}-tab`}
+      onClick={() => ctx.setValue(value)}
+      aria-controls={`${value}-panel`}
       aria-selected={isActive ? "true" : "false"}
       className={cn(
-        isActive
-          ? "bg-primary-500 font-bold text-white dark:bg-primary-400 dark:text-black"
-          : "bg-gray-200 text-gray-800 dark:bg-gray-900 dark:text-gray-200",
-        "rounded px-4 py-2"
+        isActive ? "border-primary-500" : "border-gray-700",
+        "border-b-2 px-3 py-1 dark:text-gray-200 md:px-4 md:py-2 md:text-xl"
       )}
       tabIndex={isActive || ctx.value === null ? 0 : -1}
       onKeyDown={createScopedKeydownHandler({
@@ -62,7 +64,7 @@ const TabButton = ({
         activateOnFocus: true,
         loop: true,
         dir: "ltr",
-        orientation: "horizontal",
+        orientation: config.orientation,
       })}
     >
       {children}
@@ -86,6 +88,7 @@ const TabsPanel = ({
       role="tabpanel"
       id={`${value}-panel`}
       aria-labelledby={`${value}-tab`}
+      tabIndex={0}
     >
       {children}
     </div>
@@ -95,18 +98,16 @@ const TabsPanel = ({
 const TabsList = ({
   children,
   labelId,
-  orientation = "horizontal",
 }: {
   children: React.ReactNode;
   labelId?: string;
-  orientation?: "horizontal" | "vertical";
 }) => {
   return (
     <div
-      className="flex space-x-4"
+      className="flex"
       role="tablist"
       aria-labelledby={labelId}
-      aria-orientation={orientation}
+      aria-orientation={config.orientation}
     >
       {children}
     </div>

@@ -1,4 +1,5 @@
 // adds vertical padding to a section
+import { cn } from "lib/util";
 import { PropsWithChildren } from "react";
 
 const baseClass = "section-wrapper";
@@ -21,13 +22,17 @@ const SectionWrapper = ({
   children,
   noPadding = false,
   size = "md",
+  className,
 }: PropsWithChildren<{
   noPadding?: boolean;
   size?: keyof typeof sizeMap;
+  className?: string;
 }>) => {
-  const classes = `${baseClass} ${noPadding ? "" : sizeMap[size]}`;
-
-  return <div className={classes}>{children}</div>;
+  return (
+    <div className={cn(baseClass, noPadding ? "" : sizeMap[size], className)}>
+      {children}
+    </div>
+  );
 };
 
 export default SectionWrapper;
