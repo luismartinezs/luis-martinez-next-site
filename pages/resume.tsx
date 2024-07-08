@@ -285,6 +285,52 @@ const ContactInfo = ({
   );
 };
 
+interface Certification {
+  name: string;
+  issuer: string;
+  skills: string[];
+  issueDate: string;
+  expirationDate: string;
+}
+
+function CertificationsSection({
+  certifications,
+}: {
+  certifications: Certification[];
+}) {
+  return (
+    <SectionWrapper className="prose">
+      <h3 className="mb-4 text-2xl font-bold text-gray-700">Certifications</h3>
+      <div className="flex flex-col gap-6">
+        {certifications.map((cert, index) => (
+          <div
+            key={index}
+            className="border-b border-gray-200 pb-4 last:border-b-0"
+          >
+            <h4 className="mb-1 text-xl font-semibold text-gray-700">
+              {cert.name}
+            </h4>
+            <p className="mb-2 text-sm text-gray-600">
+              <span className="font-medium">{cert.issuer}</span> |{" "}
+              {cert.issueDate} - {cert.expirationDate}
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {cert.skills.map((skill, skillIndex) => (
+                <span
+                  key={skillIndex}
+                  className="inline-block rounded-full bg-gray-200 px-3 py-1 text-xs font-medium text-gray-700 transition-colors duration-200 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </SectionWrapper>
+  );
+}
+
 export default function ResumePage({ resumeData }: { resumeData: any }) {
   return (
     <PageLayout>
@@ -320,7 +366,8 @@ export default function ResumePage({ resumeData }: { resumeData: any }) {
             <Tabs.Tab value="experience">Work</Tabs.Tab>
             <Tabs.Tab value="projects">Portfolio</Tabs.Tab>
             <Tabs.Tab value="skills">Skills</Tabs.Tab>
-            <Tabs.Tab value="education">Edu</Tabs.Tab>
+            <Tabs.Tab value="education">Education</Tabs.Tab>
+            <Tabs.Tab value="certifications">Certifications</Tabs.Tab>
           </Tabs.List>
           <Tabs.Panel value="about">
             <AboutSection resumeData={resumeData} />
@@ -336,6 +383,9 @@ export default function ResumePage({ resumeData }: { resumeData: any }) {
           </Tabs.Panel>
           <Tabs.Panel value="projects">
             <ProjectsSection projects={resumeData.projects} />
+          </Tabs.Panel>
+          <Tabs.Panel value="certifications">
+            <CertificationsSection certifications={resumeData.certifications} />
           </Tabs.Panel>
         </Tabs.Provider>
       </div>

@@ -57,7 +57,7 @@ const TabButton = ({
         isActive
           ? "border-b-4 border-primary-500"
           : "border-b-2 border-gray-200 dark:border-gray-700",
-        "px-3 py-1 text-sm dark:text-gray-200 sm:text-base md:px-4 md:py-2 md:text-xl"
+        "flex-1 px-3 py-2 text-sm dark:text-gray-200 sm:text-base md:px-4 md:py-2 md:text-xl"
       )}
       tabIndex={isActive || ctx.value === null ? 0 : -1}
       onKeyDown={createScopedKeydownHandler({
@@ -106,7 +106,7 @@ const TabsList = ({
 }) => {
   return (
     <div
-      className="flex"
+      className="flex flex-wrap"
       role="tablist"
       aria-labelledby={labelId}
       aria-orientation={config.orientation}
