@@ -351,7 +351,7 @@ function CertificationsSection({
               <span className="font-medium">{cert.issuer}</span> |{" "}
               {cert.issueDate} - {cert.expirationDate}
             </p>
-            <PillList items={cert.skills} isToggleable />
+            <PillList items={cert.skills} />
           </div>
         ))}
       </div>
