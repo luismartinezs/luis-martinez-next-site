@@ -1,9 +1,21 @@
 import CloudinaryImage from "components/CloudinaryImage";
 import PageLayout from "components/PageLayout";
+import PillList from "components/PillList";
 import SectionWrapper from "components/SectionWrapper";
+import SimpleList from "components/SimpleList";
 import Tabs from "components/Tabs";
-import { FaSkype, FaStar } from "react-icons/fa";
-import { MdEmail, MdHome, MdLocationOn, MdPhone } from "react-icons/md";
+import { useState } from "react";
+import { FaGithub, FaLinkedin, FaSkype, FaStar } from "react-icons/fa";
+import {
+  MdEmail,
+  MdHome,
+  MdLocationOn,
+  MdPhone,
+  MdExpandMore,
+  MdExpandLess,
+} from "react-icons/md";
+import { FaXTwitter } from "react-icons/fa6";
+import { cn } from "lib/util";
 
 function H3({ children }: { children: React.ReactNode }) {
   return <h3 className="mb-4 text-2xl font-bold text-gray-700">{children}</h3>;
@@ -14,17 +26,6 @@ function H4({ children }: { children: React.ReactNode }) {
     <h4 className="mb-2 mt-4 text-xl font-semibold text-gray-700">
       {children}
     </h4>
-  );
-}
-
-function SimpleList({ label, items }: { label: string; items: string[] }) {
-  return (
-    <div className="mt-2 !text-gray-500 dark:!text-gray-400">
-      <span className="!text-gray-500 dark:!text-gray-400">{label}:</span>{" "}
-      <span className="!text-gray-600 dark:!text-gray-300">
-        {items.join(", ")}
-      </span>
-    </div>
   );
 }
 
@@ -51,6 +52,7 @@ function AboutSection({ resumeData }: { resumeData: any }) {
 }
 
 function Job({ job }: { job: any }) {
+  const [isExpanded, setIsExpanded] = useState(false);
   const {
     position,
     company,
@@ -60,33 +62,50 @@ function Job({ job }: { job: any }) {
     responsibilities,
     skills,
     industries,
+    title,
   } = job;
 
   return (
-    <div className="mb-6">
-      <H4>{position}</H4>
-      <p className="italic !text-gray-500 dark:!text-gray-400">
-        {company} {division ? `- ${division}` : ""}{" "}
-        {dateStart && dateEnd && (
-          <span className="!text-gray-500 dark:!text-gray-400">
-            | {dateStart} - {dateEnd}
-          </span>
-        )}
-      </p>
-      <ul className="mt-2 list-disc pl-5">
-        {responsibilities.map((resp: any, idx: number) => (
-          <li key={idx}>{resp}</li>
-        ))}
-      </ul>
-      {skills && skills.length > 0 && (
-        <SimpleList label="Skills" items={skills} />
-      )}
-      {industries && industries.length > 0 && (
-        <SimpleList label="Industries" items={industries} />
+    <div className="mb-6 border-b border-gray-200 pb-4 last:border-b-0">
+      <div className="flex items-center justify-between">
+        <div>
+          <H4>{position}</H4>
+          {title && <h5>{title}</h5>}
+          <p className="italic !text-gray-500 dark:!text-gray-400">
+            {company} {division ? `- ${division}` : ""}{" "}
+            {dateStart && dateEnd && (
+              <span className="!text-gray-500 dark:!text-gray-400">
+                | {dateStart} - {dateEnd}
+              </span>
+            )}
+          </p>
+        </div>
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="text-primary-600 hover:text-primary-700 focus:outline-none"
+        >
+          {isExpanded ? <MdExpandLess size={24} /> : <MdExpandMore size={24} />}
+        </button>
+      </div>
+      {isExpanded && (
+        <div className="mt-4">
+          <ul className="mt-2 list-disc pl-5">
+            {responsibilities.map((resp: string, idx: number) => (
+              <li key={idx}>{resp}</li>
+            ))}
+          </ul>
+          {skills && skills.length > 0 && (
+            <PillList items={skills} isToggleable />
+          )}
+          {industries && industries.length > 0 && (
+            <SimpleList label="Industries" items={industries} />
+          )}
+        </div>
       )}
     </div>
   );
 }
+
 function ExperienceSection({ workExperience }: { workExperience: any[] }) {
   return (
     <SectionWrapper className="prose">
@@ -188,9 +207,7 @@ function Project({ project }: { project: any }) {
         )}
       </div>
       <p className="mt-2">{description}</p>
-      {skills && skills.length > 0 && (
-        <SimpleList label="Skills" items={skills} />
-      )}
+      {skills && skills.length > 0 && <PillList isToggleable items={skills} />}
     </div>
   );
 }
@@ -207,6 +224,12 @@ function ProjectsSection({ projects }: { projects: any[] }) {
     </SectionWrapper>
   );
 }
+
+const iconMap = {
+  LinkedIn: FaLinkedin,
+  GitHub: FaGithub,
+  X: FaXTwitter,
+};
 
 const ContactInfo = ({
   citizenship,
@@ -231,17 +254,31 @@ const ContactInfo = ({
         <span> - </span>
         {social && social.length > 0 && (
           <div className="flex flex-wrap items-center gap-2">
-            {social.map((item, index) => (
-              <a
-                key={index}
-                href={item.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block rounded-full bg-primary-100 px-2 py-0.5 text-xs text-primary-600 transition-colors duration-200 hover:bg-primary-200 dark:bg-primary-800 dark:text-primary-200 dark:hover:bg-primary-700"
-              >
-                {item.name}
-              </a>
-            ))}
+            {social.map((item, index) => {
+              const Icon = iconMap.hasOwnProperty(item.name)
+                ? iconMap[item.name as keyof typeof iconMap]
+                : undefined;
+
+              return (
+                <a
+                  key={index}
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(
+                    Icon
+                      ? "px-1 text-primary-600 dark:!text-primary-400"
+                      : "inline-block rounded-full bg-primary-100 px-2 py-0.5 text-xs text-primary-600 transition-colors duration-200 hover:bg-primary-200 dark:bg-primary-800 dark:text-primary-200 dark:hover:bg-primary-700"
+                  )}
+                >
+                  {Icon ? (
+                    <Icon className="size-4 dark:!text-primary-400" />
+                  ) : (
+                    item.name
+                  )}
+                </a>
+              );
+            })}
           </div>
         )}
       </div>
@@ -314,16 +351,7 @@ function CertificationsSection({
               <span className="font-medium">{cert.issuer}</span> |{" "}
               {cert.issueDate} - {cert.expirationDate}
             </p>
-            <div className="flex flex-wrap gap-2">
-              {cert.skills.map((skill, skillIndex) => (
-                <span
-                  key={skillIndex}
-                  className="inline-block rounded-full bg-gray-200 px-3 py-1 text-xs font-medium text-gray-700 transition-colors duration-200 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
+            <PillList items={cert.skills} isToggleable />
           </div>
         ))}
       </div>
