@@ -1,3 +1,4 @@
+// cookies not needed with umami
 import { useState, useEffect } from "react";
 import InfoIcon from "components/InfoIcon";
 import Link from "next/link";
@@ -59,7 +60,7 @@ const CookieModal = ({
   return (
     <div className="fixed bottom-0 z-50 w-full bg-gray-900 text-white">
       <div className="p-4">
-        <div className="flex flex-col items-center justify-center space-y-2 lg:flex-row lg:space-y-0 lg:space-x-2">
+        <div className="flex flex-col items-center justify-center space-y-2 lg:flex-row lg:space-x-2 lg:space-y-0">
           <div className="flex items-center justify-center space-x-2">
             <div className="h-8 w-8 min-w-[30px]">
               <InfoIcon />

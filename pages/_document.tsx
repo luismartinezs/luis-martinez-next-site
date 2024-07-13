@@ -1,22 +1,19 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
 
-import { GTM_ID } from "lib/gtm";
-
 class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <Head></Head>
+        <Head>
+          {process.env.NODE_ENV === "production" && (
+            <script
+              defer
+              src="https://cloud.umami.is/script.js"
+              data-website-id="dc5efb05-dee7-403c-af5a-3282a839bf04"
+            ></script>
+          )}
+        </Head>
         <body>
-          <noscript>
-            <iframe
-              title="GTM"
-              src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
-              height="0"
-              width="0"
-              style={{ display: "none", visibility: "hidden" }}
-            ></iframe>
-          </noscript>
           <Main />
           <NextScript />
         </body>
