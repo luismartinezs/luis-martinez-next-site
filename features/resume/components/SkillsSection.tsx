@@ -1,4 +1,5 @@
 import SectionWrapper from "components/SectionWrapper";
+import { sortByStar } from "lib/util";
 import { FaStar } from "react-icons/fa";
 import { Heading } from "./Heading";
 
@@ -12,11 +13,7 @@ export function SkillsSection({
   sort?: boolean;
 }) {
   const sortedSkills = sort
-    ? [...skills].sort((a, b) => {
-        if (a.star && !b.star) return -1;
-        if (!a.star && b.star) return 1;
-        return (b.years || 0) - (a.years || 0);
-      })
+    ? sortByStar(skills)
     : skills;
 
   return (

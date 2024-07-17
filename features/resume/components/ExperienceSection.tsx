@@ -1,7 +1,10 @@
 import PillList from "components/PillList";
 import SectionWrapper from "components/SectionWrapper";
 import SimpleList from "components/SimpleList";
+import Star from "components/Star";
+import { sortByStar } from "lib/util";
 import { useState } from "react";
+import { FaStar } from "react-icons/fa";
 import { MdExpandLess, MdExpandMore } from "react-icons/md";
 import { Heading } from "./Heading";
 
@@ -19,15 +22,19 @@ function Job({ job }: { job: any }) {
     skills,
     industries,
     title,
+    star,
   } = job;
 
   return (
     <div className="mb-6 border-b border-gray-200 pb-4 last:border-b-0">
       <div className="flex items-center justify-between">
         <div>
-          <H4>{position}</H4>
+          <div className="flex items-baseline">
+            <span>{star && <Star />}</span>
+            <H4>{position}</H4>
+          </div>
           {title && <h5>{title}</h5>}
-          <p className="italic !text-gray-500 dark:!text-gray-400">
+          <p className="my-1 italic !text-gray-500 dark:!text-gray-400">
             {company} {division ? `- ${division}` : ""}{" "}
             {dateStart && dateEnd && (
               <span className="!text-gray-500 dark:!text-gray-400">
@@ -50,13 +57,14 @@ function Job({ job }: { job: any }) {
               <li key={idx}>{resp}</li>
             ))}
           </ul>
-          {skills && skills.length > 0 && (
-            <PillList items={skills} isToggleable />
-          )}
+
           {industries && industries.length > 0 && (
             <SimpleList label="Industries" items={industries} />
           )}
         </div>
+      )}
+      {skills && skills.length > 0 && (
+        <PillList items={skills} isToggleable maxItems={5} />
       )}
     </div>
   );
@@ -70,7 +78,7 @@ export function ExperienceSection({
   return (
     <SectionWrapper className="prose">
       <H3>Work Experience</H3>
-      {workExperience.map((job, index) => (
+      {sortByStar(workExperience).map((job, index) => (
         <Job key={index} job={job} />
       ))}
     </SectionWrapper>

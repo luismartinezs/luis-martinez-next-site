@@ -1,16 +1,23 @@
 import PillList from "components/PillList";
 import SectionWrapper from "components/SectionWrapper";
+import Star from "components/Star";
+import { sortByStar } from "lib/util";
 import { Heading } from "./Heading";
 
 const { H3, H4 } = Heading;
 
 function Project({ project }: { project: any }) {
-  const { name, type, url, description, skills, repositoryUrl } = project;
+  const { name, type, url, description, skills, repositoryUrl, star } = project;
 
   return (
     <div className="mb-6 border-b border-gray-500 pb-6">
-      <H4>{name}</H4>
-      <p className="italic text-gray-500 dark:text-gray-400">{type} Project</p>
+      <div className="flex items-baseline">
+        <span>{star && <Star />}</span>
+        <H4>{name}</H4>
+      </div>
+      <p className="my-1 italic text-gray-500 dark:text-gray-400">
+        {type} Project
+      </p>
       <div className="flex space-x-3">
         {url && (
           <a
@@ -44,7 +51,7 @@ function ProjectsSection({ projects }: { projects: any[] }) {
     <SectionWrapper className="prose">
       <H3>Projects</H3>
       <div className="flex flex-col">
-        {projects.map((project, index) => (
+        {sortByStar(projects).map((project, index) => (
           <Project key={index} project={project} />
         ))}
       </div>
