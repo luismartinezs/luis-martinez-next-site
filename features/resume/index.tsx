@@ -6,4 +6,5 @@ export { ProjectsSection } from "./components/ProjectsSection";
 export { SkillsSection } from "./components/SkillsSection";
 export { EducationSection } from "./components/EducationSection";
 export { ExperienceSection } from "./components/ExperienceSection";
+export { HeaderSection } from "./components/HeaderSection";
 export { ResumePage as ResumeContent } from "./components/ResumePage";
