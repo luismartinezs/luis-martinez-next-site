@@ -39,11 +39,13 @@ code {
     /* pre styles (block code) */
     @apply prose-pre:overflow-x-auto prose-pre:bg-primary-50 prose-pre:shadow-inner dark:prose-pre:bg-gray-900 dark:prose-pre:text-primary-200;
     /* heading styles */
-    @apply prose-headings:font-display prose-headings:text-2xl prose-headings:!leading-snug prose-headings:tracking-wide prose-headings:text-gray-700 prose-h1:text-5xl prose-h2:text-4xl prose-h3:text-3xl dark:prose-headings:text-white;
+    @apply prose-h1:font-display prose-h1:text-5xl prose-h1:leading-snug prose-h1:tracking-wide prose-h1:text-gray-700 dark:prose-h1:text-white prose-h2:font-display prose-h2:text-4xl prose-h2:leading-snug prose-h2:tracking-wide prose-h2:text-gray-700 dark:prose-h2:text-white prose-h3:font-display prose-h3:text-3xl prose-h3:leading-snug prose-h3:tracking-wide prose-h3:text-gray-700 dark:prose-h3:text-white prose-h4:font-display prose-h4:text-2xl prose-h4:leading-snug prose-h4:tracking-wide prose-h4:text-gray-700 dark:prose-h4:text-white;
   }
+
   .custom-prose b {
     @apply text-black dark:text-gray-300;
   }
+
   .custom-prose i {
     @apply text-gray-900 dark:text-gray-300;
   }
