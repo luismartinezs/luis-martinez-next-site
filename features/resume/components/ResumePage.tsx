@@ -11,16 +11,10 @@ import {
   SkillsSection,
 } from "features/resume";
 
-interface Filters {
-  skills: Array<string>;
-}
-
 export function ResumePage({
   resumeData,
-  filters,
 }: {
   resumeData: any;
-  filters?: Filters;
 }) {
   return (
     <div>
