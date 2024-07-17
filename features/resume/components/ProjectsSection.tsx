@@ -10,7 +10,7 @@ function Project({ project }: { project: any }) {
   const { name, type, url, description, skills, repositoryUrl, star } = project;
 
   return (
-    <div className="mb-6 border-b border-gray-500 pb-6">
+    <div className="mb-6 border-b border-gray-200 pb-6 dark:border-gray-500">
       <div className="flex items-baseline">
         <span>{star && <Star />}</span>
         <H4>{name}</H4>

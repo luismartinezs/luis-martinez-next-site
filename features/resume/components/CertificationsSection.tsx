@@ -28,7 +28,7 @@ function CertificationsSection({
           ) => (
             <div
               key={index}
-              className="border-b border-gray-200 pb-4 last:border-b-0"
+              className="border-b border-gray-200 pb-4 last:border-b-0 dark:border-gray-500"
             >
               <div className="flex items-baseline">
                 <span>{star && <Star />}</span>

@@ -26,7 +26,7 @@ function Job({ job }: { job: any }) {
   } = job;
 
   return (
-    <div className="mb-6 border-b border-gray-200 pb-4 last:border-b-0">
+    <div className="mb-6 border-b border-gray-200 pb-4 last:border-b-0 dark:border-gray-500">
       <div className="flex items-center justify-between">
         <div>
           <div className="flex items-baseline">
