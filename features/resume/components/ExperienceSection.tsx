@@ -4,7 +4,6 @@ import SimpleList from "components/SimpleList";
 import Star from "components/Star";
 import { sortByStar } from "lib/util";
 import { useState } from "react";
-import { FaStar } from "react-icons/fa";
 import { MdExpandLess, MdExpandMore } from "react-icons/md";
 import { Heading } from "./Heading";
 
