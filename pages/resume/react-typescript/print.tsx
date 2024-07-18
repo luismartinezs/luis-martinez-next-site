@@ -203,6 +203,10 @@ const Resume = ({ resumeData }: { resumeData: any }) => {
     about,
     mostAmazingDevelopment,
     certifications,
+    skills,
+    education,
+    preferredEnvironment,
+    languages,
   } = resumeData;
   return (
     <div className="mx-auto max-w-4xl p-8 dark:text-white">
@@ -217,48 +221,50 @@ const Resume = ({ resumeData }: { resumeData: any }) => {
         <p>{mostAmazingDevelopment}</p>
       </Section>
 
+      <Section title="Preferred Environment">
+        <p>{preferredEnvironment.join(", ")}</p>
+      </Section>
+
       <Contact contact={contact} social={social} />
 
       <Experience experience={resumeData.workExperience} />
 
       <Projects projects={resumeData.projects} />
 
-      <Section title="Skills">
+      <Section title="Key Skills">
         <ul className="list-inside list-disc">
-          <li>CSS (5 years)</li>
-          <li>JavaScript (5 years)</li>
-          <li>HTML5 (5 years)</li>
-          <li>Vue (3 years)</li>
-          <li>React (2 years)</li>
-          <li>Tailwind CSS (4 years)</li>
-          <li>Nuxt.js (2 years)</li>
-          <li>Next.js (2 years)</li>
-          <li>TypeScript (2 years)</li>
-          <li>Web Accessibility (2 years)</li>
+          {skills
+            .filter((skill: any) => !!skill.star)
+            .map((skill: any, index: number) => (
+              <li key={index}>
+                {skill.name} ({skill.years}{" "}
+                {skill.years === 1 ? "year" : "years"})
+              </li>
+            ))}
         </ul>
       </Section>
 
       <Certifications certifications={certifications} />
 
       <Section title="Education">
-        <p>
-          <strong>PhD in Quantum Chemistry</strong> - Ruhr University Bochum,
-          Germany (2009-2014)
-        </p>
-        <p>
-          <strong>Master's Degree in Quantum Chemistry</strong> - University of
-          Barcelona, Spain (2008-2009)
-        </p>
-        <p>
-          <strong>Bachelor's Degree in Chemistry</strong> - University of
-          Barcelona, Spain (2003-2008)
-        </p>
+        {education.map((edu: any, index: number) => (
+          <p key={index}>
+            <strong>
+              {edu.degree} in {edu.field}
+            </strong>{" "}
+            - {edu.institution}, {edu.location} ({edu.dateStart} - {edu.dateEnd}
+            )
+          </p>
+        ))}
       </Section>
 
       <Section title="Languages">
         <ul className="list-inside list-disc">
-          <li>Spanish (Native)</li>
-          <li>English (Professional)</li>
+          {languages.map((lang: any, index: number) => (
+            <li key={index}>
+              {lang.name} ({lang.level})
+            </li>
+          ))}
         </ul>
       </Section>
     </div>
