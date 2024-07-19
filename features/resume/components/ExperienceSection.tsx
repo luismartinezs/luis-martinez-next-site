@@ -46,7 +46,21 @@ function Job({ job }: { job: any }) {
           onClick={() => setIsExpanded(!isExpanded)}
           className="text-primary-600 hover:text-primary-700 focus:outline-none"
         >
-          {isExpanded ? <MdExpandLess size={24} /> : <MdExpandMore size={24} />}
+          {isExpanded ? (
+            <>
+              <span className="sr-only">
+                Collapse {position} responsibilities
+              </span>
+              <MdExpandLess size={24} />
+            </>
+          ) : (
+            <>
+              <span className="sr-only">
+                Expand {position} responsibilities
+              </span>
+              <MdExpandMore size={24} />
+            </>
+          )}
         </button>
       </div>
       {isExpanded && (

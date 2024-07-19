@@ -2,11 +2,33 @@ import { FaGithub, FaLinkedin, FaSkype } from "react-icons/fa";
 import { MdEmail, MdHome, MdLocationOn, MdPhone } from "react-icons/md";
 import { FaXTwitter } from "react-icons/fa6";
 import { cn } from "lib/util";
+import { IconType } from "react-icons";
 
 const iconMap = {
   LinkedIn: FaLinkedin,
   GitHub: FaGithub,
   X: FaXTwitter,
+};
+
+const socialMap: Record<
+  string,
+  {
+    icon: IconType;
+    label: string;
+  }
+> = {
+  LinkedIn: {
+    icon: FaLinkedin,
+    label: "LinkedIn",
+  },
+  GitHub: {
+    icon: FaGithub,
+    label: "GitHub",
+  },
+  X: {
+    icon: FaXTwitter,
+    label: "Twitter",
+  },
 };
 
 const ContactInfo = ({
@@ -33,8 +55,8 @@ const ContactInfo = ({
         {social && social.length > 0 && (
           <div className="flex flex-wrap items-center gap-2">
             {social.map((item, index) => {
-              const Icon = iconMap.hasOwnProperty(item.name)
-                ? iconMap[item.name as keyof typeof iconMap]
+              const Icon = socialMap.hasOwnProperty(item.name)
+                ? socialMap[item.name as keyof typeof socialMap].icon
                 : undefined;
 
               return (
@@ -43,6 +65,11 @@ const ContactInfo = ({
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={
+                    socialMap.hasOwnProperty(item.name)
+                      ? socialMap[item.name as keyof typeof socialMap].label
+                      : item.name
+                  }
                   className={cn(
                     Icon
                       ? "px-1 text-primary-600 dark:!text-primary-400"
