@@ -1,4 +1,3 @@
-import CloudinaryImage from "components/CloudinaryImage";
 import Tabs from "components/Tabs";
 import {
   AboutSection,
@@ -11,11 +10,7 @@ import {
   SkillsSection,
 } from "features/resume";
 
-export function ResumePage({
-  resumeData,
-}: {
-  resumeData: any;
-}) {
+export function ResumePage({ resumeData }: { resumeData: any }) {
   return (
     <div>
       <HeaderSection

@@ -8,3 +8,4 @@ export { EducationSection } from "./components/EducationSection";
 export { ExperienceSection } from "./components/ExperienceSection";
 export { HeaderSection } from "./components/HeaderSection";
 export { ResumePage as ResumeContent } from "./components/ResumePage";
+export * from "./components/ResumePrintContent";
