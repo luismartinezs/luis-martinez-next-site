@@ -19,13 +19,13 @@ const CollapsibleMenu = ({ children }: PropsWithChildren) => {
         >
           <span className="sr-only">Toggle menu</span>
           {isOpen ? (
-            <IconX className="w-8 h-8" />
+            <IconX className="h-8 w-8" />
           ) : (
-            <IconMenu className="w-8 h-8" />
+            <IconMenu className="h-8 w-8" />
           )}
         </button>
         <nav
-          className={`z-20 absolute bg-white dark:bg-gray-800 py-10 pr-16 pl-10 shadow-xl shadow-primary-500/20 rounded-md top-12 ${
+          className={`absolute top-12 z-20 rounded-md bg-white py-10 pl-10 pr-16 shadow-xl shadow-primary-500/20 dark:bg-gray-800 ${
             isOpen ? "flex" : "hidden"
           }`}
         >

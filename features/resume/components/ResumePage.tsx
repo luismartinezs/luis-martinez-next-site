@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Tabs from "components/Tabs";
 import {
   AboutSection,
@@ -9,6 +10,33 @@ import {
   ProjectsSection,
   SkillsSection,
 } from "features/resume";
+
+const tabs = [
+  {
+    label: "About",
+    value: "about",
+  },
+  {
+    label: "Experience",
+    value: "experience",
+  },
+  {
+    label: "Projects",
+    value: "projects",
+  },
+  {
+    label: "Skills",
+    value: "skills",
+  },
+  {
+    label: "Education",
+    value: "education",
+  },
+  {
+    label: "Certifications",
+    value: "certifications",
+  },
+];
 
 export function ResumePage({ resumeData }: { resumeData: any }) {
   return (
@@ -22,14 +50,16 @@ export function ResumePage({ resumeData }: { resumeData: any }) {
         social={resumeData.social}
         contact={resumeData.contact}
       />
-      <Tabs.Provider defaultValue="about">
+      <Tabs.Provider
+        defaultValue="about"
+        tabValues={tabs.map((tab) => tab.value)}
+      >
         <Tabs.List labelId="resume">
-          <Tabs.Tab value="about">About</Tabs.Tab>
-          <Tabs.Tab value="experience">Work</Tabs.Tab>
-          <Tabs.Tab value="projects">Portfolio</Tabs.Tab>
-          <Tabs.Tab value="skills">Skills</Tabs.Tab>
-          <Tabs.Tab value="education">Education</Tabs.Tab>
-          <Tabs.Tab value="certifications">Certifications</Tabs.Tab>
+          {tabs.map((tab) => (
+            <Tabs.Tab key={tab.value} value={tab.value}>
+              {tab.label}
+            </Tabs.Tab>
+          ))}
         </Tabs.List>
         <Tabs.Panel value="about">
           <AboutSection resumeData={resumeData} />

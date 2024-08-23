@@ -1,6 +1,6 @@
 import { createScopedKeydownHandler } from "lib/createScopedKeydownHandler";
 import { cn } from "lib/util";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const config = {
   orientation: "horizontal",
@@ -19,14 +19,28 @@ const TabsContext = createContext<Context>({
 const TabsProvider = ({
   children,
   defaultValue,
+  tabValues,
 }: {
   children: React.ReactNode;
   defaultValue: Context["value"];
+  tabValues: string[];
 }) => {
   const [value, setValue] = useState(defaultValue);
 
+  function handleUpdate(value: string) {
+    setValue(value);
+    window.location.hash = value;
+  }
+
+  useEffect(() => {
+    const hash = window.location.hash.replace("#", "");
+    if (tabValues.includes(hash)) {
+      setValue(hash);
+    }
+  }, [tabValues]);
+
   return (
-    <TabsContext.Provider value={{ value, setValue }}>
+    <TabsContext.Provider value={{ value, setValue: handleUpdate }}>
       {children}
     </TabsContext.Provider>
   );

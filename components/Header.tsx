@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
 import classnames from "classnames";
 
 import CssLogo from "components/CssLogo";
 import ThemeSwitch from "components/ThemeSwitch";
 import CollapsibleMenu from "components/CollapsibleMenu";
+import { useActivePath } from "hooks/useActivePath";
 
 const linksList = [
   {
@@ -26,15 +26,17 @@ const linksList = [
 ];
 
 const Header = () => {
-  const router = useRouter();
+  const activePath = useActivePath();
 
   const links = linksList.map(({ href, label }) => {
+    const isActive = activePath === href;
+
     return (
       <li
         key={href}
         className={classnames(
           "-mb-2 border-b-4 pb-2",
-          router.asPath === href
+          isActive
             ? "border-b-4 border-primary-500"
             : "border-transparent hover:border-gray-300 dark:hover:border-gray-500"
         )}
