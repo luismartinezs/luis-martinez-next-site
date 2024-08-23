@@ -15,50 +15,77 @@ const Section = ({
 
 function SkillList({ skills, max = 10 }: { skills: any[]; max?: number }) {
   if (skills && skills.length > 0) {
-    const skillsToDisplay = max ? skills.slice(0, max) : skills;
+    const skillsToDisplay = max !== 0 ? skills.slice(0, max) : skills;
     return (
       <p className="my-1 text-sm">
         Skills: {skillsToDisplay.join(", ")}
-        {skills.length > max && ", ..."}
+        {/* {skills.length > max && ", ..."} */}
       </p>
     );
   }
   return null;
 }
 
-const Job = ({ job }: { job: any }) => {
+const Job = ({
+  job,
+  maxResponsibilities = 3,
+  maxSkills = 8,
+}: {
+  job: any;
+  maxResponsibilities?: number;
+  maxSkills?: number;
+}) => {
   const {
-    // position,
     company,
-    // division,
+    companyUrl,
     dateStart,
     dateEnd,
     responsibilities,
     skills,
-    // industries,
     title,
     star,
   } = job;
+  const responsibilitiesToDisplay =
+    maxResponsibilities === 0
+      ? responsibilities
+      : responsibilities.slice(0, maxResponsibilities);
+  const companyComponent = companyUrl ? (
+    <a
+      href={companyUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-primary-600 underline hover:text-primary-700"
+    >
+      {company}
+    </a>
+  ) : (
+    <span>{company}</span>
+  );
   return (
-    <div className="mb-4">
-      <p className="text-xl font-semibold">
+    <div className="mb-6">
+      {" "}
+      <p className="mb-2 text-xl font-semibold">
+        {" "}
         {star && <span className="mr-1">★</span>}
         {title}
       </p>
-      <p className="italic">{company}</p>
+      {companyComponent}
       {dateStart && dateEnd && (
-        <p className="text-sm">
+        <p className="mt-1 text-sm">
+          {" "}
           {dateStart} - {dateEnd}
         </p>
       )}
-      <ul className="mt-1 list-inside list-disc">
-        {responsibilities.map((resp: string, index: number) => (
-          <li key={index} className="text-sm">
+      <ul className="mt-2 list-inside list-disc">
+        {" "}
+        {responsibilitiesToDisplay.map((resp: string, index: number) => (
+          <li key={index} className="mb-1 text-sm">
+            {" "}
             {resp}
           </li>
         ))}
       </ul>
-      <SkillList skills={skills} />
+      <SkillList skills={skills} max={maxSkills} />
     </div>
   );
 };
@@ -110,9 +137,11 @@ function Contact({
 function Experience({ experience }: { experience: any[] }) {
   return (
     <Section title="Experience">
-      {sortByStar(experience).map((job, index) => (
-        <Job key={index} job={job} />
-      ))}
+      <div className="flex flex-col gap-4">
+        {sortByStar(experience).map((job, index) => (
+          <Job key={index} job={job} />
+        ))}
+      </div>
     </Section>
   );
 }
@@ -158,9 +187,11 @@ function Project({ project }: { project: any }) {
 function Projects({ projects }: { projects: any[] }) {
   return (
     <Section title="Projects">
-      {sortByStar(projects).map((project, index) => (
-        <Project key={index} project={project} />
-      ))}
+      <div className="flex flex-col gap-4">
+        {sortByStar(projects).map((project, index) => (
+          <Project key={index} project={project} />
+        ))}
+      </div>
     </Section>
   );
 }
