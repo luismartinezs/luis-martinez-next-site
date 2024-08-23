@@ -9,7 +9,7 @@ interface PillListProps {
 
 const PillList = ({
   items,
-  maxItems = 8,
+  maxItems = 8, // set to 0 to show all
   isToggleable,
 }: PillListProps): JSX.Element => {
   const id = useId();
@@ -17,7 +17,9 @@ const PillList = ({
   const shouldToggle = isToggleable && items.length > maxItems;
 
   const displayedItems =
-    shouldToggle && isExpanded ? items : items.slice(0, maxItems);
+    (shouldToggle && isExpanded) || maxItems === 0
+      ? items
+      : items.slice(0, maxItems);
 
   return (
     <div className="flex flex-wrap gap-2" id={id}>
@@ -29,7 +31,7 @@ const PillList = ({
           {item}
         </span>
       ))}
-      {shouldToggle && (
+      {shouldToggle && maxItems !== 0 && (
         <button
           aria-controls={id}
           aria-expanded={isExpanded}

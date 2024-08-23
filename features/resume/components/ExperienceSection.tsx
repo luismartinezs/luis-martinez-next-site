@@ -9,8 +9,18 @@ import { Heading } from "./Heading";
 
 const { H3, H4 } = Heading;
 
-function Job({ job }: { job: any }) {
-  const [isExpanded, setIsExpanded] = useState(false);
+function Job({
+  job,
+  isDisclosure,
+  maxResponsibilities = 3,
+  maxSkills = 5,
+}: {
+  job: any;
+  isDisclosure?: boolean;
+  maxResponsibilities?: number; // set to zero to show all
+  maxSkills?: number; // set to zero to show all
+}) {
+  const [isExpanded, setIsExpanded] = useState(isDisclosure ? false : true);
   const {
     position,
     company,
@@ -23,6 +33,11 @@ function Job({ job }: { job: any }) {
     title,
     star,
   } = job;
+
+  const responsibilitiesToDisplay =
+    maxResponsibilities === 0
+      ? responsibilities
+      : responsibilities.slice(0, maxResponsibilities);
 
   return (
     <div className="mb-6 border-b border-gray-200 pb-4 last:border-b-0 dark:border-gray-500">
@@ -42,42 +57,46 @@ function Job({ job }: { job: any }) {
             )}
           </p>
         </div>
-        <button
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="text-primary-600 hover:text-primary-700 focus:outline-none"
-        >
-          {isExpanded ? (
-            <>
-              <span className="sr-only">
-                Collapse {position} responsibilities
-              </span>
-              <MdExpandLess size={24} />
-            </>
-          ) : (
-            <>
-              <span className="sr-only">
-                Expand {position} responsibilities
-              </span>
-              <MdExpandMore size={24} />
-            </>
-          )}
-        </button>
+        {isDisclosure && (
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="text-primary-600 hover:text-primary-700 focus:outline-none"
+          >
+            {isExpanded ? (
+              <>
+                <span className="sr-only">
+                  Collapse {position} responsibilities
+                </span>
+                <MdExpandLess size={24} />
+              </>
+            ) : (
+              <>
+                <span className="sr-only">
+                  Expand {position} responsibilities
+                </span>
+                <MdExpandMore size={24} />
+              </>
+            )}
+          </button>
+        )}
       </div>
-      {isExpanded && (
+      {(!isDisclosure || isExpanded) && (
         <div className="mt-4">
           <ul className="mt-2 list-disc pl-5">
-            {responsibilities.map((resp: string, idx: number) => (
+            {responsibilitiesToDisplay.map((resp: string, idx: number) => (
               <li key={idx}>{resp}</li>
             ))}
           </ul>
 
           {industries && industries.length > 0 && (
-            <SimpleList label="Industries" items={industries} />
+            <div className="mb-2 text-[0.9rem]">
+              <SimpleList label="Industries" items={industries} />
+            </div>
           )}
         </div>
       )}
       {skills && skills.length > 0 && (
-        <PillList items={skills} isToggleable maxItems={5} />
+        <PillList items={skills} isToggleable maxItems={maxSkills} />
       )}
     </div>
   );
