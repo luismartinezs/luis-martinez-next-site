@@ -3,6 +3,7 @@ import SectionWrapper from "components/SectionWrapper";
 import SimpleList from "components/SimpleList";
 import Star from "components/Star";
 import { sortByStar } from "lib/util";
+import Link from "next/link";
 import { useState } from "react";
 import { MdExpandLess, MdExpandMore } from "react-icons/md";
 import { Heading } from "./Heading";
@@ -24,6 +25,7 @@ function Job({
   const {
     position,
     company,
+    companyUrl,
     division,
     dateStart,
     dateEnd,
@@ -33,6 +35,19 @@ function Job({
     title,
     star,
   } = job;
+
+  const companyComponent = companyUrl ? (
+    <a
+      href={companyUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-primary-600 underline hover:text-primary-700"
+    >
+      {company}
+    </a>
+  ) : (
+    <span>{company}</span>
+  );
 
   const responsibilitiesToDisplay =
     maxResponsibilities === 0
@@ -49,7 +64,7 @@ function Job({
           </div>
           {title && <h5>{title}</h5>}
           <p className="my-1 italic !text-gray-500 dark:!text-gray-400">
-            {company} {division ? `- ${division}` : ""}{" "}
+            {companyComponent} {division ? `- ${division}` : ""}{" "}
             {dateStart && dateEnd && (
               <span className="!text-gray-500 dark:!text-gray-400">
                 | {dateStart} - {dateEnd}
