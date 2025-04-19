@@ -2,7 +2,7 @@ import { storyblokEditable } from "@storyblok/react";
 import RichTextRenderer from "components/RichTextRenderer";
 import BlockWrapper from "components/BlockWrapper";
 
-const RichText = ({ blok }) => {
+const RichText = ({ blok }: { blok: any }) => {
   return (
     <BlockWrapper width="text" noPadding>
       <div

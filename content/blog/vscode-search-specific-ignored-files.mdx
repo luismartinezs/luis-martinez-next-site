@@ -1,0 +1,104 @@
+---
+title: "How to Make VS Code Search Find Specific Gitignored Files"
+metadescription: "Find specific gitignored files in VS Code search without editing .gitignore. Learn how to configure `search.exclude` in workspace settings for precise results."
+date: "2025-04-19"
+slug: "vscode-search-specific-ignored-files"
+tags:
+  - vscode
+  - gitignore
+  - search
+  - configuration
+  - settings
+  - developer tools
+  - workflow
+category: "Development Tips"
+author: "Luis Martinez"
+---
+import HeroTitle from './HeroTitle.tsx';
+import SideNote from './SideNote.tsx';
+import BlockWrapper from './BlockWrapper.tsx'
+
+<HeroTitle
+  title="How to Make VS Code Search Find Specific Gitignored Files"
+/>
+
+<BlockWrapper width="text">
+VS Code search usually hides files listed in your `.gitignore`. This is good for hiding things like `node_modules`.
+
+But sometimes you need VS Code search (`Ctrl+P` or `Ctrl+Shift+F`) to find a *specific* file or folder that is in `.gitignore`.
+
+Here's how to do it without changing your `.gitignore` file.
+
+## The Plan
+
+1.  Tell VS Code search to *stop* using the `.gitignore` file automatically.
+2.  Manually list *only* the files you *still* want hidden inside VS Code's settings.
+
+This means any file *not* listed in the settings will show up in search, even if it's in `.gitignore`.
+
+## How to Do It
+
+Use Workspace Settings. This keeps the changes only for your current project.
+
+1.  Open the Command Palette: `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac).
+2.  Search for and select `Preferences: Open Workspace Settings (JSON)`.
+3.  This opens (or creates) a `.vscode/settings.json` file for your project.
+4.  Add or modify the settings like this:
+
+```json
+{
+  // 1. Stop VS Code search from using .gitignore
+  "search.useIgnoreFiles": false,
+
+  // 2. List ALL patterns you STILL want hidden from search results (Ctrl+Shift+F)
+  "search.exclude": {
+    // Default stuff you likely want hidden
+    "**/node_modules": true,
+    "**/bower_components": true,
+
+    // Add other patterns FROM YOUR .gitignore that you want hidden
+    // For example:
+    "**/dist": true,
+    "**/build": true,
+    "**/*.log": true,
+    "**/coverage": true,
+
+    // --- IMPORTANT ---
+    // DO NOT add the patterns you want VS Code TO FIND here.
+    // Example: If you want 'docs/internal/**/*.md' to be searchable,
+    // make sure it's NOT listed in this 'search.exclude' section.
+    // Because 'search.useIgnoreFiles' is false, these files will now appear.
+  },
+
+  // 3. Optional: Control what's hidden in File Explorer and Ctrl+P Quick Open
+  // You might want the same files hidden here as in 'search.exclude'.
+  // If you want specific files visible in Ctrl+P, DO NOT list them here.
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/*.log": true,
+    "**/coverage": true
+
+    // Again, DO NOT list patterns here that you want to find via Ctrl+P.
+  }
+}
+```
+
+## Explanation
+
+*   `"search.useIgnoreFiles": false`: Makes VS Code search ignore `.gitignore`.
+*   `"search.exclude"`: You must list *everything* you want hidden from **Search Results** (`Ctrl+Shift+F`). Copy patterns from `.gitignore` here (like `node_modules`). **Do not list patterns you want to find.**
+*   `"files.exclude"` (Optional): Hides files from the **File Explorer sidebar** and affects **Quick Open** (`Ctrl+P`). Usually, keep it similar to `search.exclude`. **Do not list patterns you want to find with `Ctrl+P`.**
+
+## Downside
+
+You now manage ignore rules in two places:
+1.  `.gitignore` (for Git).
+2.  `.vscode/settings.json` (for VS Code search/visibility).
+
+If you update `.gitignore`, you might need to update `search.exclude` and `files.exclude` in VS Code settings too.
+
+This setup gives you precise control over which ignored files show up in VS Code search.
+</BlockWrapper>
