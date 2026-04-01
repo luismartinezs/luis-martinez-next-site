@@ -38,11 +38,11 @@ const Card = ({
       {imgUrl && !imgError ? (
         <>
           <Image
-            src={getThumbnailImgUrl(imgUrl)}
+            src={imgUrl.startsWith('/') ? imgUrl : getThumbnailImgUrl(imgUrl)}
             className="absolute h-full w-full object-cover object-center"
             alt=""
             fill
-            loader={cloudinaryLoader}
+            {...(!imgUrl.startsWith('/') && { loader: cloudinaryLoader })}
             {...imgProps}
             onError={() => setImgError(true)}
           />

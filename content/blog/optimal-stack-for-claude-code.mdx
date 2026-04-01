@@ -1,0 +1,318 @@
+---
+title: "The Optimal Tech Stack, Architecture, and DevOps Setup for Building with Claude Code"
+metadescription: "A first-principles analysis of how to structure your codebase, not for humans, but for an AI agent. TypeScript, Astro, Hono, Drizzle, systemd, Caddy — chosen for how Claude Code actually works."
+date: "2026-04-01"
+slug: "optimal-stack-for-claude-code"
+tags:
+  - claude code
+  - ai development
+  - typescript
+  - architecture
+  - devops
+  - hono
+  - astro
+  - drizzle
+  - vertical slice
+category: "Development"
+author: "Luis Martinez"
+featuredImage: "/blog/infographic-claude-code-optimal-architecture.png"
+---
+import HeroTitle from './HeroTitle.tsx';
+import BlockWrapper from './BlockWrapper.tsx'
+
+<HeroTitle
+  title="The Optimal Tech Stack, Architecture, and DevOps Setup for Building with Claude Code"
+/>
+
+![Infographic: optimal architecture for building with Claude Code](/blog/infographic-claude-code-optimal-architecture.png)
+
+<BlockWrapper width="text">
+
+Most advice about AI coding tools says: use the most popular framework. More Stack Overflow answers means better AI output. That intuition is roughly right but incomplete. When you are building with Claude Code specifically, the agent is not just generating code from memory. It is navigating your codebase, reading files, running tools, and operating within a fixed context window. The structure of your codebase directly affects the quality of every edit it makes.
+
+This post is not about best practices. It is about optimizing for how Claude Code actually works, based on first principles and what the leaked Claude Code source confirmed about its internal mechanics.
+
+---
+
+## How Claude Code Actually Works
+
+Before making any architectural decisions, you need to understand what Claude Code is doing under the hood.
+
+Claude Code is not a chatbot that reads your whole codebase. It is an agent that uses a set of tools — file read, bash, grep, string replacement, LSP — to navigate your project and make surgical edits. Every tool call costs tokens. Every file it reads occupies space in a context window. And critically: **the quality of its output degrades as that context window fills up**.
+
+The leaked source confirmed several specific mechanics that should directly inform how you structure your code:
+
+**It uses str_replace, not full rewrites.** The primary edit tool finds a unique string in a file and replaces it. This means it fails on ambiguous patterns. If the same code block appears twice in a file, the edit becomes unpredictable. File size matters less than pattern uniqueness within a file.
+
+**It greps, not reads.** Rather than loading every file in full, Claude Code uses a dedicated Grep tool to locate relevant code before reading. A well-structured, clearly named codebase is easier to grep than a clever, abstract one.
+
+**It has a three-layer memory system.** A lightweight MEMORY.md index of pointers, on-demand topic files, and grepped identifiers from transcripts. Raw files are never fully re-read into context. They are fetched on demand. This means co-located context beats scattered context every time.
+
+**Context window: ~180k usable tokens.** The system prompt, tool definitions, and memory files consume roughly 20k tokens before you write a single line of code. At approximately 4 characters per token, your practical working budget for code is around 140,000-160,000 characters per session.
+
+**Autocompaction triggers at ~13k token buffer.** When context fills, Claude Code compresses conversation history and re-injects recently accessed files at 5,000 tokens each. Files it hasn't touched recently are dropped. This makes file co-location a performance concern, not just an aesthetic one.
+
+---
+
+## First Principle: Information Density
+
+The single most important optimization is maximizing the ratio of relevant logic to total tokens consumed. Every import statement, config file header, re-exported type, and boilerplate comment is a token that contributes no logic. In a multi-file architecture you pay this cost repeatedly. In a single file you pay it once.
+
+This is why the conventional "one file per component" rule, which exists entirely for human navigation, actively hurts AI-assisted development. Claude Code does not navigate a directory tree the way a human does. It pays a tool call cost to open each file. Fewer files means fewer tool calls means more of the context window is occupied by actual logic.
+
+---
+
+## The Tech Stack
+
+### TypeScript, Strict Mode, No Exceptions
+
+TypeScript in strict mode is not just good practice. It mechanically improves Claude's output quality. When Claude generates the next token in a sequence, types constrain the probability space of what it can generate. A typed interface makes hallucinating a wrong method name significantly less likely because the correct token has higher probability given the surrounding context. More types equals better output, not because of convention but because of how prediction works.
+
+Practical rules:
+- `strict: true` in tsconfig
+- Explicit return types on all functions
+- No `any`, ever
+- Zod schemas for all runtime validation, co-located with the types they validate
+
+### Frontend: Astro + Vue + Tailwind
+
+**Astro** handles the static/dynamic split cleanly. Static marketing pages are generated at build time. Interactive app components mount as Vue islands with `client:only="vue"`. One project, one build command, one output folder. Claude never has to reason about two separate frontend deployments.
+
+**Vue SFCs** are naturally Claude-friendly because each `.vue` file is already a cohesion unit. Template, script, and style are co-located. This matches how Claude Code loads context: one file load gives Claude everything it needs to understand and edit that component.
+
+**Tailwind** is mechanically optimal for AI generation. Every class is atomic, explicit, and has appeared millions of times in training data. Claude can predict `flex items-center gap-4` with near certainty. It cannot do the same for your custom CSS class names. Eliminating CSS files removes an entire category of cross-file context lookups.
+
+Never write a CSS file. Not even one.
+
+### Backend: Hono + Bun + Drizzle + PostgreSQL
+
+**Hono** is TypeScript-first in a way that Express is not. Types flow through the request/response cycle explicitly:
+
+```typescript
+// Express — Claude infers types at runtime
+app.post('/api/users', async (req: Request, res: Response) => {
+
+// Hono — types are explicit at the route definition
+app.post('/api/users', zValidator('json', createUserSchema), async (c) => {
+  const body = c.req.valid('json') // fully typed, no inference needed
+```
+
+This is not a style preference. The explicit typing reduces the probability of Claude generating incorrect property accesses, wrong response shapes, and missed validation checks.
+
+**Bun** as the runtime gives you native TypeScript execution (no build step), faster startup, and built-in APIs. It is stable for long-running HTTP servers. The memory leak reports in the Claude Code leak were specific to Bun running as a long-running CLI tool managing concurrent streams and subagents. A very different workload from an HTTP server.
+
+**Drizzle** with a single `schema.ts` file is the most important database decision you can make for Claude Code. When Claude reads one file and understands your entire data model. Every table, every column, every relationship. It can generate correct queries, migrations, and service logic without any additional context. Scattered migrations, multiple schema files, or runtime-inferred schemas all require Claude to do additional work before it can reason about your data.
+
+**PostgreSQL** because it is the most thoroughly represented database in training data. Claude's Postgres knowledge is deep and reliable.
+
+---
+
+## Codebase Architecture
+
+### The Two Phases
+
+The optimal architecture depends on which phase of development you are in. These are genuinely different, and applying the wrong one is costly.
+
+**Phase 1: MVP / One-shot generation**
+
+When building a new app from a spec, optimize for generation, not navigation. The goal is to get working code as fast as possible. The optimal structure is one file, or as few files as possible, grouped internally by feature with explicit section markers.
+
+```typescript
+// ============================================================
+// AUTH
+// ============================================================
+
+// ============================================================
+// PAYMENTS
+// ============================================================
+
+// ============================================================
+// DASHBOARD
+// ============================================================
+```
+
+These markers are not just for human readability. Heading patterns like this appear frequently in training data as organizational markers. They increase the probability that Claude correctly associates subsequent tokens with the right domain. They are a prediction constraint.
+
+The ceiling for this approach is around the Sonnet 4.6 output token limit of 64,000 tokens. Enough for most non-trivial apps. For anything larger, use multiple files but still group by feature rather than by technical layer.
+
+**Phase 2: Iterative development**
+
+Once an MVP is validated and you are building features incrementally, switch to Vertical Slice Architecture. Each feature gets one directory containing everything it needs: route, component, query, types, test.
+
+```
+src/features/
+  auth/
+    route.ts        ← Hono route
+    service.ts      ← business logic
+    schema.ts       ← Zod validation
+    auth.vue        ← Vue component
+    auth.test.ts    ← tests
+  payments/
+    ...
+  dashboard/
+    ...
+```
+
+The key insight is that file size matters less than pattern uniqueness. The str_replace tool fails when the same code pattern appears twice in the same file, not when files are long. A 500-line file with clean, named, non-repeating code is better for Claude Code than five 100-line files with similar structure.
+
+Co-locate an `AI-CONTEXT.md` in each major feature directory describing its purpose, conventions, and rules. Claude Code re-reads CLAUDE.md on every query iteration. A feature-level context file gives it the same benefit for targeted edits.
+
+### The Shared Package Rule
+
+In a monorepo, the shared packages are the highest-leverage investment you can make for Claude Code quality:
+
+```
+packages/
+  db/          # Drizzle schema — single source of truth for all DB types
+  api-types/   # Zod schemas + response types shared between frontend and backend
+  config/      # App constants and product config
+```
+
+When Claude reads `packages/api-types/index.ts`, it knows what every API endpoint accepts and returns. When it reads `packages/db/schema.ts`, it knows your entire data model. These two files give Claude more accurate context than any amount of inline documentation.
+
+Never duplicate types between frontend and backend. Any type that exists in two places is a type that will eventually diverge, and a diverged type is a context that misleads Claude.
+
+---
+
+## DevOps
+
+### The Same Principle Applied to Infrastructure
+
+The same information density rule applies to infrastructure. Claude Code manages your server through bash commands and file edits. The optimal infrastructure is one where the entire running state of your system can be understood by reading a small number of declarative files.
+
+### Process Management: systemd Over PM2
+
+PM2 stores running state in memory. To understand what is running, Claude must execute `pm2 list` and parse table output. To understand how a service is configured, it must read a separate ecosystem config file. The source of truth is split between runtime state and config files.
+
+systemd is declarative. Every service is a `.service` file. The file is the source of truth:
+
+```ini
+[Unit]
+Description=myapp backend
+After=network.target
+
+[Service]
+Type=simple
+User=deploy
+WorkingDirectory=/home/deploy/myapp
+EnvironmentFile=/home/deploy/myapp/.env
+ExecStart=/usr/bin/bun run src/index.ts
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Claude can read this file once and know exactly how the process runs. It can edit it directly. `systemctl status myapp` gives structured, readable output. `systemctl list-units --type=service` gives Claude a complete picture of everything running on the server. This is the declarative infrastructure principle applied to process management.
+
+### Reverse Proxy: Caddy
+
+Caddy over Nginx for one reason: the Caddyfile is readable in a single context load. Nginx configuration sprawls across `sites-available/`, `sites-enabled/`, `conf.d/`, and include directives. Caddy's entire reverse proxy config for multiple projects fits in one file:
+
+```
+myapp.com {
+  handle /api/* {
+    reverse_proxy localhost:3000
+  }
+  handle {
+    root * /var/www/myapp
+    file_server
+  }
+}
+```
+
+TLS is automatic. No certbot, no renewal cron jobs, no certificate files to manage.
+
+### Hosting: VPS Over PaaS
+
+A single Hetzner VPS running 10 projects costs roughly the same per month as one project on a managed PaaS. More importantly for Claude Code, a VPS is a stable, predictable environment. Claude's bash tool has a reliable surface to work with. There are no platform-specific CLI tools to install, no API keys for infrastructure management, and no vendor-specific configuration formats to learn.
+
+The total infrastructure state of a multi-project VPS, from Claude's perspective, is:
+- `/etc/systemd/system/*.service` — all running processes
+- `/etc/caddy/Caddyfile` — all routing
+- `~/shared-infra/SERVER.md` — conventions and project list
+- Individual project `.env` files
+
+Five categories of files. Claude understands your entire server.
+
+### The SERVER.md
+
+This is the most under-appreciated file in this entire setup. Claude Code has no persistent memory of your server across sessions. Without a single reference file, it must infer conventions each time: how projects are named, how services are structured, where env files live, how to deploy a new project.
+
+A `~/shared-infra/SERVER.md` solves this:
+
+```markdown
+# Server Overview
+
+## Projects
+| Project | Domain | Port | Systemd Service |
+|---|---|---|---|
+| myapp | myapp.com | 3000 | myapp.service |
+| otherapp | otherapp.com | 3001 | otherapp.service |
+
+## Conventions
+- Projects live in ~/projects/{name}
+- Systemd services: /etc/systemd/system/{name}.service
+- Static files: /var/www/{name}/
+- Env files: ~/projects/{name}/.env
+
+## Adding a New Project
+1. Clone repo to ~/projects/{name}
+2. Copy .env.example to .env, fill values
+3. Create systemd service file
+4. Add Caddy block for domain
+5. systemctl enable --now {name}
+```
+
+Claude reads this once per session and has your entire server mental model loaded.
+
+### CI/CD: One Workflow File
+
+A single `.github/workflows/deploy.yml` that Claude can read and edit entirely in one context load:
+
+```
+typecheck → build frontend → SSH into VPS → pull → install → restart service
+```
+
+Nothing more for an MVP. The feedback comes back as GitHub Actions log stdout. Claude can read a failed workflow output and self-correct without any additional context.
+
+---
+
+## The Complete Picture
+
+Every decision in this stack follows from the same two principles:
+
+**Principle 1: Full context in one load.** The best edit is the one where Claude has everything it needs in a single context load, with no grepping, no file navigation, no inference. This drives: monorepo with shared packages, feature-grouped files at MVP phase, Caddy over Nginx, systemd over PM2, SERVER.md.
+
+**Principle 2: Types as prediction constraints.** The more explicitly typed your code, the smaller the probability space of what Claude can generate next, and the less likely it is to hallucinate incorrect method names, wrong response shapes, or missing validation. This drives: TypeScript strict mode everywhere, Zod for all validation, Drizzle schema as single source of truth, Hono over Express.
+
+Everything else follows.
+
+---
+
+## Reference: Stack Summary
+
+| Concern | Choice | Reason |
+|---|---|---|
+| Language | TypeScript strict | Types constrain prediction |
+| Frontend framework | Astro 5 | Static/dynamic split, one build |
+| UI framework | Vue 3 client:only | SFC = natural cohesion unit |
+| Styling | Tailwind 4 | Atomic, no CSS files |
+| Data fetching | TanStack Query | Explicit state, well-represented |
+| Backend framework | Hono | TypeScript-first, typed routes |
+| Runtime | Bun | Native TS, fast |
+| Validation | Zod 4 | Runtime types, co-located |
+| ORM | Drizzle | Single schema file |
+| Database | PostgreSQL | Best training data coverage |
+| Architecture (MVP) | Single file, grouped | Full context, one generation pass |
+| Architecture (iterative) | Vertical slices | One task = one file = one load |
+| Process manager | systemd | Declarative, file-based |
+| Reverse proxy | Caddy | Single readable config file |
+| Hosting | Hetzner VPS | Predictable, cheap, CLI-first |
+| CI/CD | GitHub Actions + SSH | One workflow file, readable stdout |
+
+---
+
+*This analysis is based on first-principles reasoning about how LLMs operate, confirmed where possible against the Claude Code source code that was inadvertently leaked on March 31, 2026.*
+
+</BlockWrapper>
