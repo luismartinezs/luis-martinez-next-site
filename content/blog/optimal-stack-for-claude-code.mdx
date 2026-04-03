@@ -32,9 +32,11 @@ import BlockWrapper from './BlockWrapper.tsx'
 
 ---
 
-Most advice about AI coding tools says: use the most popular framework. More Stack Overflow answers means better AI output. That intuition is roughly right but incomplete. When you are building with Claude Code specifically, the agent is not just generating code from memory. It is navigating your codebase, reading files, running tools, and operating within a fixed context window. The structure of your codebase directly affects the quality of every edit it makes.
+Most advice about AI coding tools says: use the most popular framework. More Stack Overflow answers means better AI output. That intuition is roughly right but incomplete. When you are building with Claude Code specifically, the agent is not just generating code from memory — it is navigating your codebase, reading files, running tools, and operating within a fixed context window. The structure of your codebase directly affects the quality of every edit it makes.
 
 This post is not about best practices. It is about optimizing for how Claude Code actually works, based on first principles and what the leaked Claude Code source confirmed about its internal mechanics.
+
+**TL;DR:** Claude Code navigates your codebase via grep and surgical string replacement, not by reading everything. Fewer files means less token overhead, more context for actual logic. Use TypeScript strict mode, Astro + Vue + Tailwind on the frontend, Hono + Bun + Drizzle on the backend, one file per feature slice, and systemd + Caddy on a plain VPS. Everything follows from two principles: full context in one load, and types as prediction constraints.
 
 ---
 
@@ -42,15 +44,15 @@ This post is not about best practices. It is about optimizing for how Claude Cod
 
 Before making any architectural decisions, you need to understand what Claude Code is doing under the hood.
 
-Claude Code is not a chatbot that reads your whole codebase. It is an agent that uses a set of tools. File read, bash, grep, string replacement, LSP. It uses these to navigate your project and make surgical edits. Every tool call costs tokens. Every file it reads occupies space in a context window. And critically: **the quality of its output degrades as that context window fills up**.
+Claude Code is not a chatbot that reads your whole codebase. It is an agent that uses a set of tools — file read, bash, grep, string replacement, LSP — to navigate your project and make surgical edits. Every tool call costs tokens. Every file it reads occupies space in a context window. And critically: **the quality of its output degrades as that context window fills up**.
 
 The leaked source confirmed several specific mechanics that should directly inform how you structure your code:
 
-**It uses str_replace, not full rewrites.** The primary edit tool finds a unique string in a file and replaces it. This means it fails on ambiguous patterns. If the same code block appears twice in a file, the edit becomes unpredictable. File size matters less than pattern uniqueness within a file.
+**It uses str_replace, not full rewrites.** The primary edit tool finds a unique string in a file and replaces it. This means it fails on ambiguous patterns — if the same code block appears twice in a file, the edit becomes unpredictable. File size matters less than pattern uniqueness within a file.
 
 **It greps, not reads.** Rather than loading every file in full, Claude Code uses a dedicated Grep tool to locate relevant code before reading. A well-structured, clearly named codebase is easier to grep than a clever, abstract one.
 
-**It has a three-layer memory system.** A lightweight MEMORY.md index of pointers, on-demand topic files, and grepped identifiers from transcripts. Raw files are never fully re-read into context. They are fetched on demand. This means co-located context beats scattered context every time.
+**It has a three-layer memory system.** A lightweight MEMORY.md index of pointers, on-demand topic files, and grepped identifiers from transcripts. Raw files are never fully re-read into context — they are fetched on demand. This means co-located context beats scattered context every time.
 
 **Context window: ~180k usable tokens.** The system prompt, tool definitions, and memory files consume roughly 20k tokens before you write a single line of code. At approximately 4 characters per token, your practical working budget for code is around 140,000–160,000 characters per session.
 
@@ -68,9 +70,9 @@ This is why the conventional "one file per component" rule, which exists entirel
 
 ## The Tech Stack
 
-### TypeScript, Strict Mode, No Exceptions
+### TypeScript — Strict Mode, No Exceptions
 
-TypeScript in strict mode is not just good practice. It mechanically improves Claude's output quality. When Claude generates the next token in a sequence, types constrain the probability space of what it can generate. A typed interface makes hallucinating a wrong method name significantly less likely because the correct token has higher probability given the surrounding context. More types equals better output, not because of convention but because of how prediction works.
+TypeScript in strict mode is not just good practice — it mechanically improves Claude's output quality. When Claude generates the next token in a sequence, types constrain the probability space of what it can generate. A typed interface makes hallucinating a wrong method name significantly less likely because the correct token has higher probability given the surrounding context. More types equals better output, not because of convention but because of how prediction works.
 
 Practical rules:
 - `strict: true` in tsconfig
@@ -82,7 +84,7 @@ Practical rules:
 
 **Astro** handles the static/dynamic split cleanly. Static marketing pages are generated at build time. Interactive app components mount as Vue islands with `client:only="vue"`. One project, one build command, one output folder. Claude never has to reason about two separate frontend deployments.
 
-**Vue SFCs** are naturally Claude-friendly because each `.vue` file is already a cohesion unit. Template, script, and style are co-located. This matches how Claude Code loads context: one file load gives Claude everything it needs to understand and edit that component.
+**Vue SFCs** are naturally Claude-friendly because each `.vue` file is already a cohesion unit — template, script, and style are co-located. This matches how Claude Code loads context: one file load gives Claude everything it needs to understand and edit that component.
 
 **Tailwind** is mechanically optimal for AI generation. Every class is atomic, explicit, and has appeared millions of times in training data. Claude can predict `flex items-center gap-4` with near certainty. It cannot do the same for your custom CSS class names. Eliminating CSS files removes an entire category of cross-file context lookups.
 
@@ -103,9 +105,9 @@ app.post('/api/users', zValidator('json', createUserSchema), async (c) => {
 
 This is not a style preference. The explicit typing reduces the probability of Claude generating incorrect property accesses, wrong response shapes, and missed validation checks.
 
-**Bun** as the runtime gives you native TypeScript execution (no build step), faster startup, and built-in APIs. It is stable for long-running HTTP servers. The memory leak reports in the Claude Code leak were specific to Bun running as a long-running CLI tool managing concurrent streams and subagents. A very different workload from an HTTP server.
+**Bun** as the runtime gives you native TypeScript execution (no build step), faster startup, and built-in APIs. It is stable for long-running HTTP servers. The memory leak reports in the Claude Code leak were specific to Bun running as a long-running CLI tool managing concurrent streams and subagents — a very different workload from an HTTP server.
 
-**Drizzle** with a single `schema.ts` file is the most important database decision you can make for Claude Code. When Claude reads one file and understands your entire data model. Every table, every column, every relationship. It can generate correct queries, migrations, and service logic without any additional context. Scattered migrations, multiple schema files, or runtime-inferred schemas all require Claude to do additional work before it can reason about your data.
+**Drizzle** with a single `schema.ts` file is the most important database decision you can make for Claude Code. When Claude reads one file and understands your entire data model — every table, every column, every relationship — it can generate correct queries, migrations, and service logic without any additional context. Scattered migrations, multiple schema files, or runtime-inferred schemas all require Claude to do additional work before it can reason about your data.
 
 **PostgreSQL** because it is the most thoroughly represented database in training data. Claude's Postgres knowledge is deep and reliable.
 
@@ -117,7 +119,7 @@ This is not a style preference. The explicit typing reduces the probability of C
 
 The optimal architecture depends on which phase of development you are in. These are genuinely different, and applying the wrong one is costly.
 
-**Phase 1: MVP / One-shot generation**
+**Phase 1 — MVP / One-shot generation**
 
 When building a new app from a spec, optimize for generation, not navigation. The goal is to get working code as fast as possible. The optimal structure is one file, or as few files as possible, grouped internally by feature with explicit section markers.
 
@@ -137,11 +139,11 @@ When building a new app from a spec, optimize for generation, not navigation. Th
 
 These markers are not just for human readability. Heading patterns like this appear frequently in training data as organizational markers. They increase the probability that Claude correctly associates subsequent tokens with the right domain. They are a prediction constraint.
 
-The ceiling for this approach is around the Sonnet 4.6 output token limit of 64,000 tokens. Enough for most non-trivial apps. For anything larger, use multiple files but still group by feature rather than by technical layer.
+The ceiling for this approach is around the Sonnet 4.6 output token limit of 64,000 tokens — enough for most non-trivial apps. For anything larger, use multiple files but still group by feature rather than by technical layer.
 
-**Phase 2: Iterative development**
+**Phase 2 — Iterative development**
 
-Once an MVP is validated and you are building features incrementally, switch to Vertical Slice Architecture. The critical distinction from conventional VSA is that each slice is **one file**, not one directory. Everything a feature needs (route, service logic, Zod validation, types) lives in a single file.
+Once an MVP is validated and you are building features incrementally, switch to Vertical Slice Architecture. The critical distinction from conventional VSA is that each slice is **one file**, not one directory. Everything a feature needs — route, service logic, Zod validation, types — lives in a single file.
 
 ```
 src/features/
@@ -150,13 +152,13 @@ src/features/
   dashboard.ts     ← everything dashboard in one file
 ```
 
-Vue components follow the same principle, but naturally. Each `.vue` SFC is already a single-file cohesion unit containing template, script, and style together.
+Vue components follow the same principle, but naturally — each `.vue` SFC is already a single-file cohesion unit containing template, script, and style together.
 
-The reason one file per slice beats one directory per slice is the same reason it beats layered architecture: **one task touches one feature, one feature loads one file**. When Claude edits auth logic, it reads `auth.ts` and has everything (the route definition, the validation schema, the service function, the types) in a single context load. With a directory-per-slice approach, Claude must open `route.ts`, grep for the service in `service.ts`, check the schema in `schema.ts`. Three tool calls before it has made a single edit.
+The reason one file per slice beats one directory per slice is the same reason it beats layered architecture: **one task touches one feature, one feature loads one file**. When Claude edits auth logic, it reads `auth.ts` and has everything — the route definition, the validation schema, the service function, the types — in a single context load. With a directory-per-slice approach, Claude must open `route.ts`, grep for the service in `service.ts`, check the schema in `schema.ts`. Three tool calls before it has made a single edit.
 
-The key constraint is pattern uniqueness, not file length. The str_replace tool fails when the same code pattern appears twice in the same file, not when files are long. A 500-line file with clean, explicitly named, non-repeating code is better for Claude Code than five 100-line files with similar structure. Split a slice into multiple files only when patterns within it start repeating. Not before.
+The key constraint is pattern uniqueness, not file length. The str_replace tool fails when the same code pattern appears twice in the same file, not when files are long. A 500-line file with clean, explicitly named, non-repeating code is better for Claude Code than five 100-line files with similar structure. Split a slice into multiple files only when patterns within it start repeating — not before.
 
-Add a single `src/features/AI-CONTEXT.md` describing the conventions for all slices. What each file is responsible for, naming rules, how cross-slice dependencies are handled. Claude Code re-reads CLAUDE.md on every query iteration; this file gives it the same benefit scoped to the features layer without requiring a directory per feature.
+Add a single `src/features/AI-CONTEXT.md` describing the conventions for all slices — what each file is responsible for, naming rules, how cross-slice dependencies are handled. Claude Code re-reads CLAUDE.md on every query iteration; this file gives it the same benefit scoped to the features layer without requiring a directory per feature.
 
 ### The Shared Package Rule
 
@@ -311,6 +313,34 @@ Everything else follows.
 | Reverse proxy | Caddy | Single readable config file |
 | Hosting | Hetzner VPS | Predictable, cheap, CLI-first |
 | CI/CD | GitHub Actions + SSH | One workflow file, readable stdout |
+
+---
+
+## Frequently Asked Questions
+
+### Why Astro + Vue instead of Next.js + React?
+
+Next.js and React are not wrong choices — they have enormous training data coverage and Claude handles them well. The issue is architectural. Next.js blends server and client code in ways that create ambiguity for Claude: Server Components, Client Components, server actions, and API routes all coexist in the same files with implicit boundaries. Claude has to infer which execution context it is in before it can generate correct code. Astro's static-only mode eliminates this ambiguity entirely. Static pages are static. Interactive components are explicitly marked `client:only="vue"`. There is no blurred boundary. Vue SFCs add another layer of clarity: template, script, and style are co-located in one file, which is the single-file cohesion principle applied at the component level. If you are already invested in Next.js and React, the architecture principles in this post still apply — use strict TypeScript, co-locate related code, use Tailwind, keep shared types in one place. The framework matters less than the structure.
+
+### Does this architecture work with React or other frontend frameworks?
+
+Yes. The principles are framework-agnostic. What matters is that your components are self-contained cohesion units (React `.tsx` files work fine for this), you are not writing CSS files, and you are not splitting code across layers for a single feature. The specific recommendation of Vue + Astro comes from Vue SFCs being naturally single-file and Astro's clean static/dynamic boundary. But a React developer can apply the same principles: one file per feature slice, Tailwind only, strict TypeScript, shared types package.
+
+### Should I use a single file for the entire backend even for a large app?
+
+Only at the MVP phase, and only until the output token ceiling becomes a constraint. Sonnet 4.6 has a 64k output token limit, which is enough for most initial builds. Once you are iterating on a validated product, switch to one file per feature slice: `auth.ts`, `payments.ts`, `dashboard.ts`. Each file contains its Hono route, service logic, Zod schemas, and types. The goal is not to minimize file count forever — it is to ensure that any single task Claude performs touches exactly one file. That is when context is most efficient.
+
+### What if I want to use Prisma instead of Drizzle?
+
+Prisma and Drizzle serve the same purpose here: a single schema file that gives Claude your complete data model in one read. Prisma's `schema.prisma` is equally good for this. The choice between them is largely a preference question. Drizzle has the slight edge because the schema is TypeScript, so types flow naturally into the rest of your codebase without a generation step. But if you know Prisma well, the architectural benefit is identical.
+
+### Why a VPS over Railway, Fly.io, or Vercel?
+
+For Claude Code specifically, the VPS wins because the entire infrastructure state lives in files Claude can read and edit directly: systemd service files, a Caddyfile, a SERVER.md. On managed platforms, infrastructure state is split between a CLI, a dashboard, and platform-specific configuration formats. Claude cannot read a Railway dashboard. It can read `/etc/systemd/system/myapp.service`. The cost argument is also real — a 4GB Hetzner VPS runs 10 projects for roughly the same monthly cost as one project on a managed PaaS. That said, if you are deploying a single project and want zero server management, Railway or Fly.io are reasonable. The architecture and code structure recommendations in this post apply regardless of where you deploy.
+
+### Does this work for mobile apps too?
+
+The backend and shared package principles apply directly. Hono as the API, Drizzle schema as the single source of truth, `@repo/api-types` shared between mobile and backend. For the mobile layer, React Native and Expo are well-covered in training data and Claude handles them reliably. The one-file-per-slice principle applies to React Native screens the same way it applies to Vue components — each screen is a cohesion unit that should contain its own data fetching, local state, and layout without reaching into shared layer files for routine operations.
 
 ---
 

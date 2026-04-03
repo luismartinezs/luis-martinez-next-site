@@ -29,9 +29,7 @@ const Footer = () => {
               className="underline hover:text-primary-500 hover:no-underline dark:hover:text-primary-400"
             >
               Luis Martinez Suarez
-            </Link>{" "}
-            - Built with NextJS, TailwindCSS and StoryblokCMS. Deployed with
-            Netlify.
+            </Link>
           </span>
         </div>
       </div>
