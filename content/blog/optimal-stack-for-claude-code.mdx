@@ -28,6 +28,10 @@ import BlockWrapper from './BlockWrapper.tsx'
 
 <BlockWrapper width="text">
 
+*A first-principles analysis of how to structure your codebase, not for humans, but for an AI agent.*
+
+---
+
 Most advice about AI coding tools says: use the most popular framework. More Stack Overflow answers means better AI output. That intuition is roughly right but incomplete. When you are building with Claude Code specifically, the agent is not just generating code from memory. It is navigating your codebase, reading files, running tools, and operating within a fixed context window. The structure of your codebase directly affects the quality of every edit it makes.
 
 This post is not about best practices. It is about optimizing for how Claude Code actually works, based on first principles and what the leaked Claude Code source confirmed about its internal mechanics.
@@ -38,7 +42,7 @@ This post is not about best practices. It is about optimizing for how Claude Cod
 
 Before making any architectural decisions, you need to understand what Claude Code is doing under the hood.
 
-Claude Code is not a chatbot that reads your whole codebase. It is an agent that uses a set of tools — file read, bash, grep, string replacement, LSP — to navigate your project and make surgical edits. Every tool call costs tokens. Every file it reads occupies space in a context window. And critically: **the quality of its output degrades as that context window fills up**.
+Claude Code is not a chatbot that reads your whole codebase. It is an agent that uses a set of tools. File read, bash, grep, string replacement, LSP. It uses these to navigate your project and make surgical edits. Every tool call costs tokens. Every file it reads occupies space in a context window. And critically: **the quality of its output degrades as that context window fills up**.
 
 The leaked source confirmed several specific mechanics that should directly inform how you structure your code:
 
@@ -48,7 +52,7 @@ The leaked source confirmed several specific mechanics that should directly info
 
 **It has a three-layer memory system.** A lightweight MEMORY.md index of pointers, on-demand topic files, and grepped identifiers from transcripts. Raw files are never fully re-read into context. They are fetched on demand. This means co-located context beats scattered context every time.
 
-**Context window: ~180k usable tokens.** The system prompt, tool definitions, and memory files consume roughly 20k tokens before you write a single line of code. At approximately 4 characters per token, your practical working budget for code is around 140,000-160,000 characters per session.
+**Context window: ~180k usable tokens.** The system prompt, tool definitions, and memory files consume roughly 20k tokens before you write a single line of code. At approximately 4 characters per token, your practical working budget for code is around 140,000–160,000 characters per session.
 
 **Autocompaction triggers at ~13k token buffer.** When context fills, Claude Code compresses conversation history and re-injects recently accessed files at 5,000 tokens each. Files it hasn't touched recently are dropped. This makes file co-location a performance concern, not just an aesthetic one.
 
@@ -137,25 +141,22 @@ The ceiling for this approach is around the Sonnet 4.6 output token limit of 64,
 
 **Phase 2: Iterative development**
 
-Once an MVP is validated and you are building features incrementally, switch to Vertical Slice Architecture. Each feature gets one directory containing everything it needs: route, component, query, types, test.
+Once an MVP is validated and you are building features incrementally, switch to Vertical Slice Architecture. The critical distinction from conventional VSA is that each slice is **one file**, not one directory. Everything a feature needs (route, service logic, Zod validation, types) lives in a single file.
 
 ```
 src/features/
-  auth/
-    route.ts        ← Hono route
-    service.ts      ← business logic
-    schema.ts       ← Zod validation
-    auth.vue        ← Vue component
-    auth.test.ts    ← tests
-  payments/
-    ...
-  dashboard/
-    ...
+  auth.ts          ← Hono route + service logic + Zod schemas + types
+  payments.ts      ← everything payments in one file
+  dashboard.ts     ← everything dashboard in one file
 ```
 
-The key insight is that file size matters less than pattern uniqueness. The str_replace tool fails when the same code pattern appears twice in the same file, not when files are long. A 500-line file with clean, named, non-repeating code is better for Claude Code than five 100-line files with similar structure.
+Vue components follow the same principle, but naturally. Each `.vue` SFC is already a single-file cohesion unit containing template, script, and style together.
 
-Co-locate an `AI-CONTEXT.md` in each major feature directory describing its purpose, conventions, and rules. Claude Code re-reads CLAUDE.md on every query iteration. A feature-level context file gives it the same benefit for targeted edits.
+The reason one file per slice beats one directory per slice is the same reason it beats layered architecture: **one task touches one feature, one feature loads one file**. When Claude edits auth logic, it reads `auth.ts` and has everything (the route definition, the validation schema, the service function, the types) in a single context load. With a directory-per-slice approach, Claude must open `route.ts`, grep for the service in `service.ts`, check the schema in `schema.ts`. Three tool calls before it has made a single edit.
+
+The key constraint is pattern uniqueness, not file length. The str_replace tool fails when the same code pattern appears twice in the same file, not when files are long. A 500-line file with clean, explicitly named, non-repeating code is better for Claude Code than five 100-line files with similar structure. Split a slice into multiple files only when patterns within it start repeating. Not before.
+
+Add a single `src/features/AI-CONTEXT.md` describing the conventions for all slices. What each file is responsible for, naming rules, how cross-slice dependencies are handled. Claude Code re-reads CLAUDE.md on every query iteration; this file gives it the same benefit scoped to the features layer without requiring a directory per feature.
 
 ### The Shared Package Rule
 
@@ -233,7 +234,7 @@ The total infrastructure state of a multi-project VPS, from Claude's perspective
 - `~/shared-infra/SERVER.md` — conventions and project list
 - Individual project `.env` files
 
-Five categories of files. Claude understands your entire server.
+Four categories of files. Claude understands your entire server.
 
 ### The SERVER.md
 
