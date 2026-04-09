@@ -28,7 +28,7 @@ import BlockWrapper from './BlockWrapper.tsx'
 
 *A multi-day experiment in context engineering, multi-agent pipelines, and the gap between "good enough" and genuinely excellent AI output.*
 
-**TL;DR:** I built multi-agent pipelines and knowledge bases to make LLM output world-class across three domains: code debugging, landing page copy, and UI design. The knowledge base made debugging worse (the model already knew more than my KB). For copy, routing by visitor awareness level beat any universal prompt. For UI, single-pass generation defaults to Tailwind generics, and iterative revision fixes elements but not coherence. The fix is a design system definition phase before screen generation. The biggest finding: a better model with the wrong configuration underperforms a weaker model with the right one.
+**TL;DR:** I spent $15 and 500+ LLM calls trying to systematically push AI output from good to world-class across three domains. The most humbling finding: my hand-built debugging knowledge base made the model *worse* at debugging. It already knew more than I was teaching it. For landing page copy, no single prompt won everywhere. The trick was routing, picking the right strategy for each visitor type. For UI design, iterative revision improved individual elements but couldn't crack visual coherence without a design system defined upfront. The thread connecting all three: a weaker model with the right setup beat a stronger model with the wrong one.
 
 ---
 
@@ -36,11 +36,13 @@ import BlockWrapper from './BlockWrapper.tsx'
 
 It started with a landing page CTA.
 
-I was building Menu Decoder, a travel app that helps people with dietary restrictions navigate foreign menus. I asked Claude to write the copy. It produced:
+I was building <a href="https://hellosafelyfed.appforgelabs.com/menu-decoder" target="_blank" rel="noopener noreferrer">Menu Decoder<span className="sr-only"> (link opens in a new window)</span></a>, a travel app that helps people with dietary restrictions navigate foreign menus. I asked Claude to write the copy. It produced:
 
 > **Ready to get started?**
 > Try the app and see what it can do for you.
 > *Try Menu Decoder*
+
+![The generic CTA Claude generated. Could be for any product.](/blog/ai-experiment-generic-cta.webp)
 
 This is technically fine. It is also completely useless. It could be the CTA for a weather app, a recipe tool, a budgeting spreadsheet. It has no relationship to the specific fear a person with a peanut allergy feels when staring at a Thai menu they can't read.
 
@@ -49,6 +51,8 @@ I asked Claude to try again, this time focused on what the app actually solves. 
 > **Scan any menu. Know what's safe.**
 > Point your camera at a foreign menu and get instant allergen alerts in your language.
 > *Scan a Menu Now*
+
+![Same model, better direction. The copy now speaks to the actual fear.](/blog/ai-experiment-specific-cta.webp)
 
 Better. Obviously better. But I hadn't changed the model or the context. I had just given it better direction. Which raised the question that consumed the next several days:
 
@@ -182,6 +186,21 @@ Four conditions, same functional spec, one variable changed per condition:
 
 **full_brief:** Product context + style direction + explicit anti-patterns. The standout difference from reference_style: solid full-height color blocks for safety badges (bright green, amber, red) filling the right side of each dish row. The design comment at the top of the generated file read: *"The safety badge must be the dominant visual element in each row."* It was executed.
 
+<div style={{display: 'flex', gap: '1rem', justifyContent: 'center', margin: '2rem 0'}}>
+  <figure style={{margin: 0, textAlign: 'center', flex: '1', maxWidth: '33%'}}>
+    <img src="/blog/ai-experiment-ui-bare-default.webp" alt="bare: default Tailwind output" style={{maxHeight: '520px', width: 'auto', margin: '0 auto', display: 'block', borderRadius: '8px'}} />
+    <figcaption style={{fontSize: '0.85rem', color: '#9ca3af', marginTop: '0.5rem'}}>bare</figcaption>
+  </figure>
+  <figure style={{margin: 0, textAlign: 'center', flex: '1', maxWidth: '33%'}}>
+    <img src="/blog/ai-experiment-ui-reference-style.webp" alt="reference_style: dark, flat, no shadows" style={{maxHeight: '520px', width: 'auto', margin: '0 auto', display: 'block', borderRadius: '8px'}} />
+    <figcaption style={{fontSize: '0.85rem', color: '#9ca3af', marginTop: '0.5rem'}}>reference_style</figcaption>
+  </figure>
+  <figure style={{margin: 0, textAlign: 'center', flex: '1', maxWidth: '33%'}}>
+    <img src="/blog/ai-experiment-ui-full-brief.webp" alt="full_brief: bold safety color blocks" style={{maxHeight: '520px', width: 'auto', margin: '0 auto', display: 'block', borderRadius: '8px'}} />
+    <figcaption style={{fontSize: '0.85rem', color: '#9ca3af', marginTop: '0.5rem'}}>full_brief</figcaption>
+  </figure>
+</div>
+
 The activating variable is visual style direction, not product understanding. Telling the model what the user feels does nothing. Telling the model what the screen should look like does everything.
 
 ### Test 2: The Feedback Loop
@@ -195,6 +214,21 @@ The revision instructions were excellent:
 *"Replace small right-aligned pill badges with full-height color blocks that fill the entire right portion of each dish row. Apply the safety color to a div with `absolute right-0 top-0 h-full w-20` containing centered white text."*
 
 The model executed both instructions. The layout improved measurably. And then something interesting happened: the visual coherence degraded. Locally correct decisions (FAB moved up, badges widened) produced a globally incoherent layout. A card container appeared around the dish list for no clear reason. The viewfinder got compressed awkwardly. The design started to feel assembled from competing decisions rather than designed from a unified logic.
+
+<div style={{display: 'flex', gap: '1rem', justifyContent: 'center', margin: '2rem 0'}}>
+  <figure style={{margin: 0, textAlign: 'center', flex: '1', maxWidth: '33%'}}>
+    <img src="/blog/ai-experiment-ui-revision-pass0.webp" alt="Pass 0: initial generation" style={{maxHeight: '520px', width: 'auto', margin: '0 auto', display: 'block', borderRadius: '8px'}} />
+    <figcaption style={{fontSize: '0.85rem', color: '#9ca3af', marginTop: '0.5rem'}}>Pass 0: initial</figcaption>
+  </figure>
+  <figure style={{margin: 0, textAlign: 'center', flex: '1', maxWidth: '33%'}}>
+    <img src="/blog/ai-experiment-ui-revision-pass1.webp" alt="Pass 1: color blocks added, FAB still overlaps" style={{maxHeight: '520px', width: 'auto', margin: '0 auto', display: 'block', borderRadius: '8px'}} />
+    <figcaption style={{fontSize: '0.85rem', color: '#9ca3af', marginTop: '0.5rem'}}>Pass 1: fixes applied</figcaption>
+  </figure>
+  <figure style={{margin: 0, textAlign: 'center', flex: '1', maxWidth: '33%'}}>
+    <img src="/blog/ai-experiment-ui-revision-pass2.webp" alt="Pass 2: viewfinder crushed, layout lost coherence" style={{maxHeight: '520px', width: 'auto', margin: '0 auto', display: 'block', borderRadius: '8px'}} />
+    <figcaption style={{fontSize: '0.85rem', color: '#9ca3af', marginTop: '0.5rem'}}>Pass 2: coherence lost</figcaption>
+  </figure>
+</div>
 
 The score went from 5.2 to 6.4 and then stopped moving.
 
