@@ -108,17 +108,37 @@ export const getStaticProps: GetStaticProps<PostPageProps> = async ({
   };
 };
 
-const LocalPostPage: NextPage<LocalProps> = ({ frontmatter, mdxSource }) => (
+const LocalPostPage: NextPage<LocalProps> = ({ frontmatter, mdxSource }) => {
+  const [url, setUrl] = useState("https://www.luis-martinez.net");
+  useEffect(() => {
+    setUrl(window.location.href);
+  }, []);
+  const ogImage = frontmatter.featuredImage
+    ? `https://www.luis-martinez.net${frontmatter.featuredImage}`
+    : undefined;
+  return (
   <>
     <Head>
       <title>{frontmatter.title || "Blog Post"}</title>
       <meta name="description" content={frontmatter.metadescription || ""} />
+      <meta property="og:url" content={url} />
+      <meta property="og:type" content="article" />
+      <meta property="og:title" content={frontmatter.title || "Blog Post"} />
+      <meta property="og:description" content={frontmatter.metadescription || ""} />
+      {ogImage && <meta property="og:image" content={ogImage} />}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta property="twitter:domain" content="luis-martinez.net" />
+      <meta property="twitter:url" content={url} />
+      <meta name="twitter:title" content={frontmatter.title || "Blog Post"} />
+      <meta name="twitter:description" content={frontmatter.metadescription || ""} />
+      {ogImage && <meta name="twitter:image" content={ogImage} />}
     </Head>
     <article className="prose break-words dark:prose-invert custom-prose">
       <MDXRemote {...mdxSource} components={mdxComponents} />
     </article>
   </>
-);
+  );
+};
 
 const StoryblokPostPage: NextPage<StoryblokProps> = ({ post }) => {
   const [url, setUrl] = useState("https://www.luis-martinez.net");

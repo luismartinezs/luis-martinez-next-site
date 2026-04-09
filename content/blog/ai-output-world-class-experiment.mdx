@@ -1,6 +1,6 @@
 ---
 title: "I Tried to Make AI Output World-Class. Here's What Actually Happened."
-metadescription: "A three-month experiment in context engineering, multi-agent pipelines, and the gap between good enough and genuinely excellent AI output. 500+ LLM calls, $15 in API fees, and five findings that changed how I build."
+metadescription: "A multi-day experiment in context engineering, multi-agent pipelines, and the gap between good enough and genuinely excellent AI output. 500+ LLM calls, $15 in API fees, and five findings that changed how I build."
 date: "2026-04-09"
 slug: "ai-output-world-class-experiment"
 tags:
@@ -22,9 +22,13 @@ import BlockWrapper from './BlockWrapper.tsx'
   title="I Tried to Make AI Output World-Class. Here's What Actually Happened."
 />
 
+![Cover image: AI output world-class experiment](/blog/ai-output-world-class-experiment.webp)
+
 <BlockWrapper width="text">
 
-*A three-month experiment in context engineering, multi-agent pipelines, and the gap between "good enough" and genuinely excellent AI output.*
+*A multi-day experiment in context engineering, multi-agent pipelines, and the gap between "good enough" and genuinely excellent AI output.*
+
+**TL;DR:** I built multi-agent pipelines and knowledge bases to make LLM output world-class across three domains: code debugging, landing page copy, and UI design. The knowledge base made debugging worse (the model already knew more than my KB). For copy, routing by visitor awareness level beat any universal prompt. For UI, single-pass generation defaults to Tailwind generics, and iterative revision fixes elements but not coherence. The fix is a design system definition phase before screen generation. The biggest finding: a better model with the wrong configuration underperforms a weaker model with the right one.
 
 ---
 
@@ -46,7 +50,7 @@ I asked Claude to try again, this time focused on what the app actually solves. 
 > Point your camera at a foreign menu and get instant allergen alerts in your language.
 > *Scan a Menu Now*
 
-Better. Obviously better. But I hadn't changed the model or the context. I had just given it better direction. Which raised the question that consumed the next several months:
+Better. Obviously better. But I hadn't changed the model or the context. I had just given it better direction. Which raised the question that consumed the next several days:
 
 **Is there a systematic process for making AI produce genuinely excellent output? Or does it always require a human expert to point it in the right direction?**
 
@@ -58,7 +62,7 @@ My initial assumption was straightforward: LLMs are generalists. They know a lot
 
 So I set out to build what I called a "latent space activator," a framework that would, through careful context engineering, transform a generalist LLM into a domain expert capable of producing top 1% output.
 
-I started with code debugging, then landing page copy, then UI design. The experiment ran for several months, 500+ LLM calls, and cost roughly $15 in API fees.
+I started with code debugging, then landing page copy, then UI design. The experiment ran for several days, 500+ LLM calls, and cost roughly $15 in API fees.
 
 The results were not what I expected.
 
@@ -72,11 +76,11 @@ Code debugging has a property that makes it ideal for experimentation: ground tr
 
 I built a three-layer pipeline:
 
-1. **Knowledge Base** — four markdown files encoding debugging expertise from first principles: what a bug actually is (a divergence between mental model and system reality), eight root cause classes with correct and incorrect fixes, anti-patterns, decision trees.
+1. **Knowledge Base:** four markdown files encoding debugging expertise from first principles. What a bug actually is (a divergence between mental model and system reality), eight root cause classes with correct and incorrect fixes, anti-patterns, decision trees.
 
-2. **Latent Space Activator** — a system prompt that encoded not just knowledge but reasoning process: classify before diagnosing, form falsifiable hypotheses, reason from invariants not symptoms.
+2. **Latent Space Activator:** a system prompt that encoded not just knowledge but reasoning process. Classify before diagnosing, form falsifiable hypotheses, reason from invariants not symptoms.
 
-3. **Multi-Agent Pipeline** — Generator produces a diagnosis, Critic adversarially challenges it, Arbitrator resolves the dispute. The theory was that adversarial review would improve output quality.
+3. **Multi-Agent Pipeline:** Generator produces a diagnosis, Critic adversarially challenges it, Arbitrator resolves the dispute. The theory was that adversarial review would improve output quality.
 
 I tested this against eight code problems (quadratic complexity bugs, mutable default arguments, race conditions, closure capture issues) across four models and four configurations, 356 runs total.
 
@@ -112,11 +116,11 @@ Landing page copy has a property that makes it structurally different from code:
 
 Instead of A/B testing, I built a judge. An LLM scoring output on five dimensions:
 
-- **Visitor emotional accuracy** — does the copy name the actual fear the visitor arrives with?
-- **Specificity** — is this copy specific to this product, or could it be any competitor's?
-- **Mechanism clarity** — does the visitor understand HOW the product solves the problem?
-- **CTA-awareness match** — does the call to action ask for the right level of commitment?
-- **Interchangeability** — could this copy be used by a competitor unchanged?
+- **Visitor emotional accuracy:** does the copy name the actual fear the visitor arrives with?
+- **Specificity:** is this copy specific to this product, or could it be any competitor's?
+- **Mechanism clarity:** does the visitor understand HOW the product solves the problem?
+- **CTA-awareness match:** does the call to action ask for the right level of commitment?
+- **Interchangeability:** could this copy be used by a competitor unchanged?
 
 Six products, four configurations, 30+ runs. Products included Moz, Crazy Egg, GoHenry, Smart Insights, Sunshine.co.uk, and Course Hero, all drawn from documented conversion case studies with real lift numbers, not taste-based selection.
 
@@ -256,11 +260,7 @@ The code debugging findings have a different application: they suggest that for 
 
 ---
 
-## The Infrastructure
-
-Everything described here is open source and in a single repository. The ablation runner, JSONL trace registry, multimodal judge, routing pipeline, and Playwright screenshot infrastructure are all domain-agnostic. If you want to test whether a KB helps or hurts your specific pipeline, or measure the contribution of a multi-agent layer, the tooling is there.
-
-The total cost to run all experiments described in this post: $15 in API fees and 8 hours of compute time across several months of iteration.
+The total cost to run all experiments described in this post: $15 in API fees and 8 hours of compute time across several days of iteration.
 
 The most expensive insight: sometimes the best thing you can do is get out of the way.
 
