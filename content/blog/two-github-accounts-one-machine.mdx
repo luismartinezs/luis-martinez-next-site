@@ -1,0 +1,666 @@
+---
+title: "How to Use Two GitHub Accounts on One Machine Without Switching Anything"
+metadescription: "Set up a personal and a work GitHub account on the same computer, scoped by folder. Git identity, SSH keys, commit signing and the gh CLI all follow the directory automatically."
+date: "2026-08-23"
+slug: "two-github-accounts-one-machine"
+tags:
+  - git
+  - github
+  - ssh
+  - gh cli
+  - commit signing
+  - dotfiles
+  - workflow
+category: "Development"
+author: "Luis Martinez"
+featuredImage: "/blog/two-github-accounts-one-machine.webp"
+---
+import HeroTitle from './HeroTitle.tsx';
+import BlockWrapper from './BlockWrapper.tsx'
+
+<HeroTitle
+  title="How to Use Two GitHub Accounts on One Machine Without Switching Anything"
+/>
+
+![Two separate key paths leaving one laptop for two different folders](/blog/two-github-accounts-one-machine.webp)
+
+<BlockWrapper width="text">
+
+Tl,dr:
+
+*   One default GitHub account. A second account that takes over for every repo under one folder.
+*   No switching. No `git config user.email` per clone. No "oops, pushed to work as my personal self".
+*   Three separate things have to agree: your git identity, your SSH key, and the `gh` CLI. They live in three different places and none of them know about each other.
+*   Two traps will silently break this and give you no error message. Both are at the bottom, with proof.
+*   There is a copy-paste prompt at the end of each part, if you want an agent to just do it.
+
+## Why is this so annoying?
+
+You have a personal GitHub account. Then you get a client, or a job, and now you have a work GitHub account too.
+
+So you clone the work repo and push.
+
+And the commit shows up under your personal name and email.
+
+Or worse, it doesn't show up at all, because your personal SSH key has no access to the work org, and git yells at you about a repository that "does not exist".
+
+The usual fix you land on is `git config user.email work@example.com` in every work clone.
+
+That works until you forget once.
+
+I wanted a rule instead:
+
+> Everything under `~/dev/work` is the work account. Everything else is me.
+
+No thinking. No switching. Just a folder.
+
+Here's how to build that from nothing.
+
+## Why is this three problems and not one?
+
+This is the part that trips people up, so it's worth 30 seconds of your time.
+
+When you push to GitHub, three completely independent systems get involved.
+
+1.  **Identity.** The name and email baked into the commit object. This is just text. Git does not verify it. Lives in `~/.gitconfig`.
+2.  **Transport.** The SSH key that proves to GitHub who you are. This is what actually decides whether your push is allowed. Lives in `~/.ssh/config`.
+3.  **The API.** The `gh` CLI, for `gh pr create`, `gh repo view` and friends. Its own token, its own keyring. Knows nothing about your git config or your SSH setup.
+
+You can get all three wrong independently.
+
+Think about how bad that is. Your commit can be *authored* as your work self, while being *pushed* with your personal key, while `gh pr create` fails because it's talking to GitHub as a third identity.
+
+So we configure all three. And we make all three key off the same folder.
+
+There's a fourth thing, commit signing, which is really a sub-problem of identity. I'll cover it. Get it wrong and GitHub stamps "Unverified" on every commit you make, and you will not know why.
+
+## Part 1: How do you set it up from scratch?
+
+Assume your machine is completely fresh. Nothing configured.
+
+I'll use these placeholders. Swap in your own:
+
+*   `personal-user` and `work-user`: the two GitHub usernames
+*   `personal@example.com` and `work@example.com`: the two emails
+*   `~/dev/work`: the folder that belongs to the work account
+
+### 1. Make two SSH keys
+
+One key per account. GitHub will NOT let two accounts share a key.
+
+```bash
+ssh-keygen -t ed25519 -C "personal@example.com" -f ~/.ssh/id_ed25519
+ssh-keygen -t ed25519 -C "work@example.com"     -f ~/.ssh/id_ed25519_work
+```
+
+Add each of your public keys to its own GitHub account, under **Settings → SSH and GPG keys → New SSH key**, key type **Authentication**.
+
+```bash
+cat ~/.ssh/id_ed25519.pub       # paste into personal-user
+cat ~/.ssh/id_ed25519_work.pub  # paste into work-user
+```
+
+### 2. Write `~/.ssh/config`
+
+This is your default. It pins your personal key for github.com.
+
+```
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+```
+
+That last line is not optional, and it's the one you'll leave out.
+
+Why does it matter? Without it, SSH offers every key in your agent, in agent order, and GitHub accepts the first valid one. Both of your keys are valid.
+
+So the account you land on depends on which key you happened to load first.
+
+It will work for weeks and then break on a Tuesday.
+
+### 3. Write a second SSH config, for work only
+
+Create `~/.ssh/config-work`:
+
+```
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_work
+  IdentitiesOnly yes
+```
+
+Yes, it declares `Host github.com` again.
+
+That's the whole point. This file is going to *replace* `~/.ssh/config` for work repos, not get merged into it.
+
+Lock both down:
+
+```bash
+chmod 600 ~/.ssh/config ~/.ssh/config-work
+```
+
+### 4. Write `~/.gitconfig`
+
+Your default identity, plus one conditional include at the bottom.
+
+```ini
+[user]
+	name = Your Name
+	email = personal@example.com
+
+[init]
+	defaultBranch = main
+
+# Always reach GitHub over SSH, never HTTPS, so the KEY decides the account
+# instead of a cached token.
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+
+# Work account override. This is LAST on purpose: git applies config in file
+# order, so whatever is in here wins inside that folder.
+[includeIf "gitdir:/home/you/dev/work/"]
+	path = /home/you/dev/work/.gitconfig-work
+```
+
+Three things you should know about that `includeIf`:
+
+*   **Use an absolute path.** `~` works in newer git versions. Absolute paths always work.
+*   **Keep the trailing slash.** `gitdir:/home/you/dev/work/` matches that folder and everything below it. Drop the slash and you're matching a filename pattern instead, and it gets weird.
+*   **It matches where the REPO is, not where you are.** So `git -C ~/dev/work/thing status` from anywhere still gets you the work identity. That's good, and it's why the folder rule is reliable.
+
+It also doesn't leak into look-alike folders. `~/dev/work-notes` and `~/dev/workX` stay personal.
+
+I tested that one. It's exact.
+
+### 5. Write `~/dev/work/.gitconfig-work`
+
+The override. Identity, SSH key, and signing.
+
+```ini
+[user]
+	name = Your Name
+	email = work@example.com
+
+# Pin the work SSH key for every git network operation in this tree.
+# -F REPLACES ~/.ssh/config, so the personal key is not even a candidate.
+[core]
+	sshCommand = ssh -F /home/you/.ssh/config-work
+
+# Sign with the work SSH key, not your personal GPG key.
+[gpg]
+	format = ssh
+[user]
+	signingkey = /home/you/.ssh/id_ed25519_work.pub
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
+```
+
+That `core.sshCommand` line is doing the heavy lifting here.
+
+It's the only mechanism I found that is genuinely airtight. The obvious alternatives are not, and I put both of them in the traps section at the bottom, with the output that proves it.
+
+### 6. Make commit signing actually verify
+
+If you turn on signing, do it properly or turn it off.
+
+Half-configured signing is worse than none. GitHub renders "Unverified" on every commit, and most people never work out why.
+
+Here's the rule GitHub uses: the signing key must be registered on the account, AND it must be associated with the email in the commit.
+
+So go to the **work** account's **Settings → SSH and GPG keys → New SSH key** and add the work public key a SECOND time, this time with key type **Signing Key**.
+
+```bash
+cat ~/.ssh/id_ed25519_work.pub
+```
+
+Same key, added twice. Once as Authentication, once as Signing. GitHub treats those as two different things.
+
+This is the step you are most likely to miss in the whole setup.
+
+You can check what's registered without even logging in, because it's public:
+
+```bash
+curl -s https://api.github.com/users/work-user/ssh_signing_keys
+```
+
+Empty array? Then GitHub will mark your commits Unverified, no matter how correct your local config is.
+
+While you're here, teach git to verify SSH signatures locally too. Otherwise `git log --show-signature` just shrugs at you. Create `~/.config/git/allowed_signers`:
+
+```
+work@example.com ssh-ed25519 AAAAC3Nz...paste the key part here
+```
+
+And point git at it in `~/.gitconfig`:
+
+```ini
+[gpg "ssh"]
+	allowedSignersFile = /home/you/.config/git/allowed_signers
+```
+
+### 7. Make the gh CLI follow the folder too
+
+Log into both of your accounts. `gh` supports this natively and keeps both tokens around:
+
+```bash
+gh auth login   # do this twice, once per account
+gh auth status  # should list both
+```
+
+But `gh` has no idea what folder you're in. It uses whichever account is globally "active".
+
+So in a work repo you get this:
+
+```
+$ gh repo view
+GraphQL: Could not resolve to a Repository with the name 'work-user/thing'
+```
+
+It's asking as your personal self, which cannot see the repo.
+
+Now you will say: just use `gh auth switch`, Luis!
+
+Sure. But that's global mutable state you have to remember to flip back, which is exactly the thing we're trying to get rid of.
+
+Better: a tiny wrapper on your `PATH` that picks the account per invocation. Put this at `~/.local/bin/gh`, and make sure `~/.local/bin` comes before `/usr/bin` in your `PATH`:
+
+```bash
+#!/bin/bash
+# Pick the GitHub account per invocation, mirroring the git folder rule.
+
+GH_BIN=/usr/bin/gh
+WORK_TREE="$HOME/dev/work"
+WORK_ACCOUNT=work-user
+# Owners belonging to the work account, for when a repo is named explicitly.
+WORK_OWNERS='work-user|SomeWorkOrg'
+
+use_work=0
+[[ "$(pwd -P)/" == "$WORK_TREE/"* ]] && use_work=1
+[[ $* =~ (^|[[:space:]=/])($WORK_OWNERS)/ ]] && use_work=1
+[[ $GH_REPO =~ ^($WORK_OWNERS)/ ]] && use_work=1
+
+# Exclude `gh auth ...` so login/logout/status keep working on the real
+# account list instead of on an injected token.
+if [[ $use_work -eq 1 && "$1" != "auth" ]]; then
+    token=$("$GH_BIN" auth token -u "$WORK_ACCOUNT" 2>/dev/null)
+    if [[ -n "$token" ]]; then
+        GH_TOKEN="$token" exec "$GH_BIN" "$@"
+    fi
+    echo "gh: no stored token for $WORK_ACCOUNT" >&2
+fi
+
+exec "$GH_BIN" "$@"
+```
+
+```bash
+chmod +x ~/.local/bin/gh
+```
+
+`GH_TOKEN` is scoped to that one process. Your globally active account is never touched, so there's no state to forget to reset.
+
+The `WORK_OWNERS` check is there for a case the folder rule genuinely can't cover: `gh pr list -R SomeWorkOrg/thing`, run from your home directory. There's no repo folder to look at, so we match on the owner name instead.
+
+And notice it's a shell script on `PATH`, not an alias or a shell function. That matters more than it looks. It keeps working inside scripts, inside Makefiles, in non-interactive shells, and when your editor or your AI agent shells out to `gh`.
+
+### 8. Verify it, properly
+
+Do not trust "it didn't error".
+
+Check what actually goes over the wire.
+
+```bash
+# Which account does each tree authenticate as?
+ssh -T git@github.com                          # -> Hi personal-user!
+ssh -F ~/.ssh/config-work -T git@github.com    # -> Hi work-user!
+```
+
+```bash
+# Which identity does each repo resolve to?
+git -C ~/dev/work/some-repo config user.email  # -> work@example.com
+git -C ~/code/personal-thing config user.email # -> personal@example.com
+```
+
+```bash
+# Which key is actually OFFERED? This is the real test.
+ssh -F ~/.ssh/config-work -v -T git@github.com 2>&1 | grep 'Offering public key'
+```
+
+You want exactly ONE line there, naming the work key. If you see two, `IdentitiesOnly` is missing somewhere.
+
+```bash
+# Real write access, without changing anything on the server.
+git -C ~/dev/work/some-repo push --dry-run origin HEAD
+```
+
+```bash
+# gh follows the folder?
+(cd ~/dev/work && gh api user --jq .login)   # -> work-user
+(cd ~ && gh api user --jq .login)            # -> personal-user
+```
+
+And a signing check, in a throwaway repo inside the work tree:
+
+```bash
+mkdir -p ~/dev/work/tmp-check && cd ~/dev/work/tmp-check
+git init -q && git commit -q --allow-empty -m "check"
+git log -1 --format='%an <%ae> sig:%G?'
+# -> Your Name <work@example.com> sig:G
+cd .. && rm -rf tmp-check
+```
+
+`sig:G` means good signature. `sig:N` means not signed. Anything else, something's off.
+
+### Can an agent just do part 1 for me?
+
+It can. Paste this into Claude Code, Codex, or whatever you use. It's written so the agent verifies things instead of assuming them.
+
+```text
+Set up two GitHub accounts on this machine, scoped by folder. I want a default
+account, plus a second account that automatically takes over for every repo
+under one specific folder. No manual switching, ever.
+
+Ask me for these first, then do the work:
+  - default GitHub username + email
+  - second GitHub username + email
+  - the absolute path of the folder that belongs to the second account
+
+Configure all three layers so they agree:
+
+1. IDENTITY. In ~/.gitconfig set the default user.name/user.email. At the very
+   BOTTOM of the file add an includeIf with a "gitdir:" condition pointing at
+   the folder (absolute path, trailing slash) and loading a .gitconfig-work
+   file inside it, which overrides user.email.
+
+2. TRANSPORT. Generate a separate ed25519 key per account if they do not exist.
+   In ~/.ssh/config pin the default key to Host github.com and include
+   "IdentitiesOnly yes". Then create a SEPARATE file ~/.ssh/config-work that
+   also declares Host github.com but points at the second key, again with
+   IdentitiesOnly yes. In .gitconfig-work set:
+       core.sshCommand = ssh -F /absolute/path/to/.ssh/config-work
+   Do NOT try to solve this with url.insteadOf rewriting and do NOT try to
+   solve it with "ssh -i". Both silently fail. Verify why before trusting it:
+     - insteadOf rules do not chain, and when two rules match the same prefix
+       length the global one wins, so an https:// remote inside the work tree
+       still resolves to the default key.
+     - "ssh -i key" does NOT override IdentityFile from ssh_config, they are
+       additive and the config entry gets offered first.
+   Prove both of these on this machine and show me the output.
+
+3. SIGNING. In .gitconfig-work use SSH signing (gpg.format = ssh,
+   user.signingkey = the work .pub, commit.gpgsign = true) so the signing
+   identity matches the commit identity. Set gpg.ssh.allowedSignersFile
+   globally and write the allowed_signers entry. Then TELL me to add that
+   public key to the second GitHub account a second time with key type
+   "Signing Key" (not just Authentication), and check via
+   https://api.github.com/users/USERNAME/ssh_signing_keys whether it landed.
+
+4. gh CLI. Log in to both accounts. Install a wrapper script on PATH (before
+   the real gh) that picks the account per invocation: if the working directory
+   is inside the work folder, or an explicitly named repo owner belongs to the
+   work account, run the real gh with GH_TOKEN set from
+   `gh auth token -u WORK_USER`. Exclude `gh auth ...` from the wrapper. Never
+   call `gh auth switch`, the globally active account must stay untouched.
+
+Also check ~/.git-credentials. If a bare `[credential] helper = store` exists,
+it will silently copy tokens out of the keyring into a plaintext file. Scope it
+away from github.com and tell me if a stale token is sitting there.
+
+Back up every file you touch before editing, and tell me where the backups are.
+
+Then VERIFY and show me the output of each, do not just tell me it worked:
+  - ssh -T git@github.com, and with -F the work config, showing two different
+    "Hi <user>!" responses
+  - `ssh -v ... | grep 'Offering public key'` for both, proving exactly ONE key
+    is offered in each case
+  - git config user.email resolved inside and outside the folder
+  - git push --dry-run against a real repo in each tree
+  - gh api user --jq .login from inside and outside the folder
+  - a signed test commit in a throwaway repo inside the work tree, showing
+    sig:G and the correct author email, then delete it
+  - that look-alike sibling folders (e.g. the folder name plus a suffix) do NOT
+    inherit the work identity
+
+Report anything that does not pass instead of glossing over it.
+```
+
+## How do you add a third account?
+
+Once you have the pattern, another account is mechanical. Say a second client, `client-user`, living in `~/dev/client`.
+
+Four steps. All of them copies of what you already have.
+
+**1. A key.**
+
+```bash
+ssh-keygen -t ed25519 -C "client@example.com" -f ~/.ssh/id_ed25519_client
+```
+
+Add your public key to that GitHub account twice: once as **Authentication**, once as **Signing Key**.
+
+**2. An SSH config for it.** `~/.ssh/config-client`:
+
+```
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_client
+  IdentitiesOnly yes
+```
+
+**3. A git config for it.** `~/dev/client/.gitconfig-client`:
+
+```ini
+[user]
+	name = Your Name
+	email = client@example.com
+[core]
+	sshCommand = ssh -F /home/you/.ssh/config-client
+[gpg]
+	format = ssh
+[user]
+	signingkey = /home/you/.ssh/id_ed25519_client.pub
+[commit]
+	gpgsign = true
+```
+
+**4. One more `includeIf`**, appended to `~/.gitconfig` after the existing one:
+
+```ini
+[includeIf "gitdir:/home/you/dev/client/"]
+	path = /home/you/dev/client/.gitconfig-client
+```
+
+Does the order matter? Only if the folders are nested. Last match wins. If they're siblings, order is irrelevant.
+
+Then add the account to the `gh` wrapper. With three accounts a lookup table reads better than a chain of ifs:
+
+```bash
+#!/bin/bash
+GH_BIN=/usr/bin/gh
+CWD="$(pwd -P)/"
+account=""
+
+case "$CWD" in
+  "$HOME/dev/work/"*)   account=work-user ;;
+  "$HOME/dev/client/"*) account=client-user ;;
+esac
+
+# Explicitly named owners override the folder rule.
+[[ $* =~ (^|[[:space:]=/])(work-user|SomeWorkOrg)/ ]]      && account=work-user
+[[ $* =~ (^|[[:space:]=/])(client-user|ClientOrg)/ ]]      && account=client-user
+
+if [[ -n "$account" && "$1" != "auth" ]]; then
+    token=$("$GH_BIN" auth token -u "$account" 2>/dev/null)
+    [[ -n "$token" ]] && GH_TOKEN="$token" exec "$GH_BIN" "$@"
+fi
+
+exec "$GH_BIN" "$@"
+```
+
+Don't forget `gh auth login` for the new account. Otherwise the wrapper finds no token and quietly falls through to your default.
+
+That failure is silent. Which is exactly why the version back in part 1 prints a warning.
+
+### Can an agent do part 2 too?
+
+```text
+This machine already has multi-account GitHub set up: a default account, plus
+per-folder overrides driven by "includeIf gitdir:" entries in ~/.gitconfig,
+each loading a .gitconfig-NAME that sets user.email and
+core.sshCommand = ssh -F ~/.ssh/config-NAME, plus a gh wrapper on PATH that
+picks the account per invocation.
+
+Read those existing files first and follow the pattern exactly. Do not
+redesign it and do not touch the accounts that already work.
+
+Add one more account. Ask me for:
+  - the new GitHub username + email
+  - the absolute path of the folder it should own
+  - any GitHub org names belonging to it
+
+Then:
+  1. Generate ~/.ssh/id_ed25519_NEW if it does not exist, chmod 600.
+  2. Create ~/.ssh/config-NEW declaring Host github.com with that key and
+     IdentitiesOnly yes, chmod 600.
+  3. Create the folder's .gitconfig-NEW with user.name/user.email,
+     core.sshCommand pointing at config-NEW, and SSH commit signing
+     (gpg.format = ssh, user.signingkey = the .pub, commit.gpgsign = true).
+     Add the key to ~/.config/git/allowed_signers.
+  4. Append one more includeIf to ~/.gitconfig. If the new folder is nested
+     inside an existing scoped folder, place it AFTER that one, since last
+     match wins. Say which case applies.
+  5. Extend the gh wrapper with the new folder and its owners. Refactor to a
+     lookup table if it is getting long. Keep the `gh auth` exclusion and keep
+     the warning when no token is found.
+
+Tell me to run `gh auth login` for the new account, and to add the public key to
+that GitHub account TWICE: once as an Authentication key, once as a Signing Key.
+
+Back up what you edit. Then verify and show real output:
+  - ssh -F ~/.ssh/config-NEW -T git@github.com returns the new username
+  - `ssh -v ... | grep 'Offering public key'` shows exactly ONE key
+  - git config user.email in the new folder, and confirm the PRE-EXISTING
+    accounts still resolve correctly (regression check, this is the point)
+  - gh api user --jq .login from the new folder and from the old ones
+  - a signed empty commit in a throwaway repo in the new folder shows sig:G
+    with the right email, then delete it
+```
+
+## What are the two traps?
+
+Both of these look correct. Both are recommended all over the internet. Both silently do the wrong thing.
+
+I only found them because I tested the output instead of trusting the config.
+
+### Trap 1: why don't `insteadOf` rewrites chain?
+
+The classic advice for this problem is a fake SSH host alias plus URL rewriting:
+
+```
+Host github.com-work
+  HostName github.com
+  IdentityFile ~/.ssh/id_ed25519_work
+```
+
+```ini
+[url "git@github.com-work:"]
+	insteadOf = git@github.com:
+```
+
+That works for `git@` remotes. It does not work for `https://` remotes.
+
+And here's the thing. It fails *quietly*.
+
+If you also have the common global rewrite `https://github.com/` to `git@github.com:`, then inside your work folder an https remote gets rewritten once, to `git@github.com:`, and stops. Git does not run the rewrite a second time to catch the work rule.
+
+So it goes out on your personal key.
+
+You'd think adding an `https://` rule to the work config would fix it. It doesn't. Both rules match the same prefix, and on a tie the global one wins:
+
+```
+inside the work folder:
+  https://github.com/Org/repo.git  ->  git@github.com:Org/repo.git   (personal key)
+```
+
+Piling more rules into the work file won't save you either, because you can't make your rule *more specific*. The owner varies.
+
+### Trap 2: why doesn't `ssh -i` override `ssh_config`?
+
+So your next idea is to skip URL rewriting entirely and just force the key:
+
+```ini
+[core]
+	sshCommand = ssh -i ~/.ssh/id_ed25519_work -o IdentitiesOnly=yes
+```
+
+Looks bulletproof, right?
+
+It is not. `-i` and `IdentityFile` from `ssh_config` are **additive**, not overriding, and the config entry gets offered first:
+
+```
+$ ssh -i ~/.ssh/id_ed25519_work -o IdentitiesOnly=yes -T git@github.com
+Hi personal-user!
+```
+
+Read that again. You explicitly passed the work key, with `IdentitiesOnly`, and you got the personal account.
+
+`-F` is the ONLY flag that's actually authoritative, because it replaces the config file rather than adding to it:
+
+```
+$ ssh -F ~/.ssh/config-work -T git@github.com
+Hi work-user!
+```
+
+That's why the setup above uses a whole second SSH config file instead of a one-line flag. It's slightly more machinery.
+
+It's also the difference between working and appearing to work.
+
+## What is that token doing in `.git-credentials`?
+
+Go look at this file:
+
+```bash
+cat ~/.git-credentials
+```
+
+If you find a GitHub token sitting in there, it probably arrived by accident.
+
+Git's credential protocol runs every configured helper. When one of them answers successfully, git then calls `store` on the rest of the chain. So if you have a bare `[credential] helper = store` sitting alongside the `gh` credential helper, `store` will faithfully copy `gh`'s OAuth token out of your keyring and write it into a plaintext file in your home directory.
+
+Nobody chose that. It just happens.
+
+Why care, in a multi-account setup? Two reasons. It's a plaintext credential, often world readable. And it's ONE account's token being handed out for whatever host matches, which is precisely the cross-contamination you're trying to prevent.
+
+If you follow the setup above, all your GitHub traffic goes over SSH and that file is never consulted for github.com. Scope `store` to only the host that actually needs it, and delete the stale line:
+
+```bash
+chmod 600 ~/.git-credentials
+```
+
+## So what do you actually get?
+
+*   `git clone` a work repo into the work folder, and it just works. Right identity, right key, verified signature.
+*   `gh pr create` in a work repo opens the PR as your work self.
+*   Your personal repos are completely untouched by any of it.
+*   Nothing to switch, so nothing to forget to switch back.
+
+The whole thing is five files and about sixty lines.
+
+In short: the config was the easy part. Most of the work was finding out that the two most-recommended approaches don't actually work.
+
+## Resources
+
+*   https://git-scm.com/docs/git-config#_conditional_includes - the `includeIf` docs, including `gitdir` matching rules
+*   https://git-scm.com/docs/git-config#Documentation/git-config.txt-urlltbasegtinsteadOf - `insteadOf`, and the "longest match wins" rule that causes trap 1
+*   https://man.openbsd.org/ssh_config - `IdentityFile` and `IdentitiesOnly`, worth reading the exact wording on additive behaviour
+*   https://docs.github.com/en/authentication/managing-commit-signature-verification/about-commit-signature-verification - why Authentication and Signing keys are different things
+*   https://cli.github.com/manual/gh_auth_switch - the official multi-account story for `gh`, if you'd rather switch than wrap
+
+Set it up once and stop thinking about it. Ganbatte!
+
+</BlockWrapper>
