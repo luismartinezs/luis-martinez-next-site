@@ -1,0 +1,93 @@
+/* Proportions are tuned for a 170px-wide badge. Scale the px values together
+   if you resize it. */
+.root {
+  font-family: proxima-nova, Arial, Helvetica, sans-serif;
+  --hex: polygon(50% 0, 100% 24%, 100% 76%, 50% 100%, 0 76%, 0 24%);
+  --ink: #204ecf;
+  line-height: 1;
+}
+
+/* Blue outer hexagon, acts as the border for the inner one */
+.frame {
+  display: block;
+  background: #25a9ef;
+  padding: 5px;
+  clip-path: var(--hex);
+}
+
+.badge {
+  width: 170px;
+  padding: 20px 0 34px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  text-align: center;
+  background: radial-gradient(circle at 20% -10%, #00c3ff -80%, #fff 30%),
+    radial-gradient(circle at -20% 20%, #00c3ff -80%, #fff 30%),
+    radial-gradient(circle at 70% 100%, #00c3ff -80%, #fff 30%),
+    radial-gradient(circle at 120% 80%, #00c3ff -80%, #fff 30%);
+  /* Explicit white base: multiply blends the bottom layer with the
+     background-color, which would otherwise be the footer showing through. */
+  background-color: #fff;
+  background-blend-mode: multiply;
+  clip-path: var(--hex);
+  box-shadow: 0 14px 28px rgba(6, 30, 96, 0.22);
+}
+
+.stars {
+  width: 54px;
+}
+
+.title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.divider {
+  width: 102px;
+  height: 1px;
+  background: #25a9ef;
+}
+
+.label {
+  font-size: 14px;
+  margin-bottom: -5px;
+}
+
+.wordmark {
+  width: 85px;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 17px;
+  border-radius: 6px;
+  background: #296bff;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.cta:hover {
+  background: #1d55d8;
+}
+
+/* globals.css compiles `html { @apply dark:text-gray-300 }` down to
+   `html.dark *`, which at (0,1,1) overrides any single-class colour rule on
+   every element. These descendant selectors are (0,2,0) so the badge keeps its
+   own palette in both themes. */
+.root .badge,
+.root .title,
+.root .label {
+  color: var(--ink);
+}
+
+.root .cta,
+.root .cta:hover {
+  color: #fff;
+}
