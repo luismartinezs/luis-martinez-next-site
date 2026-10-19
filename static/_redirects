@@ -1,0 +1,3 @@
+# Netlify redirects (ignored by other hosts). The old Next.js site served its sitemap from an API route
+# that robots.txt pointed at; keep that URL working for crawlers that cached it.
+/api/make-sitemap  /sitemap.xml  301

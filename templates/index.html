@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="block block--hero">
+  <div class="container">
+    <p class="hero__kicker">Hello, my name is Luis</p>
+    <h1 class="hero__title">I code websites.</h1>
+    <p class="hero__lede">
+      I'm a front-end developer and I code web applications. I work for Toptal as a freelancer.
+      When I have time I build <a href="{{ get_url(path='@/portfolio/_index.md') }}">personal projects</a> and write articles.
+    </p>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="articles-heading">
+  <div class="container">
+    <h2 id="articles-heading" class="sr-only">Articles</h2>
+    {%- set blog = get_section(path="blog/_index.md") %}
+    <ul class="post-grid">
+      {%- for post in blog.pages %}
+      {{<post_card post={post} eager={loop.index <= 3} />}}
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+{% endblock content %}

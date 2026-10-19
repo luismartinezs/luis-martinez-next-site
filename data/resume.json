@@ -1,0 +1,1648 @@
+{
+  "fullName": "Luis Martinez Suarez",
+  "jobTitle": "Web Developer | Information Technology | PhD in Science",
+  "about": "A Senior Frontend Developer with extensive experience in React and Vue, specializing in web accessibility and modern styling updates. Eager to leverage expertise in frontend development and best coding practices to contribute to innovative web solutions as a Front End Web Developer.",
+  "mostAmazingDevelopment": "A component library that allows non-technical content creators to create and edit landing pages using the Storyblok CMS",
+  "languages": [
+    {
+      "name": "Spanish",
+      "level": "Native"
+    },
+    {
+      "name": "English",
+      "level": "Professional"
+    }
+  ],
+  "availability": "Full-time",
+  "social": [
+    {
+      "name": "LinkedIn",
+      "url": "https://www.linkedin.com/in/luismarsu"
+    },
+    {
+      "name": "GitHub",
+      "url": "https://github.com/luismartinezs"
+    },
+    {
+      "name": "X",
+      "url": "https://x.com/LuisMartinezSu2"
+    }
+  ],
+  "citizenship": "Spain",
+  "contact": {
+    "email": "luismartinezwebdev@gmail.com",
+    "location": "Thailand",
+    "skype": "luismartinezsuarez1984"
+  },
+  "preferredEnvironment": [
+    "React",
+    "Typescript",
+    "Tailwind CSS",
+    "Next.js",
+    "Vue",
+    "Nuxt.js",
+    "Visual Studio Code (VS Code)"
+  ],
+  "education": [
+    {
+      "degree": "PhD",
+      "field": "Quantum Chemistry",
+      "institution": "Ruhr University Bochum",
+      "location": "Bochum, Germany",
+      "dateStart": "2009-10",
+      "dateEnd": "2014-02"
+    },
+    {
+      "degree": "Master's Degree",
+      "field": "Quantum Chemistry",
+      "institution": "University of Barcelona",
+      "location": "Barcelona, Spain",
+      "dateStart": "2008-10",
+      "dateEnd": "2009-09"
+    },
+    {
+      "degree": "Bachelor's Degree",
+      "field": "Chemistry",
+      "institution": "University of Barcelona",
+      "location": "Barcelona, Spain",
+      "dateStart": "2003-10",
+      "dateEnd": "2008-06"
+    }
+  ],
+  "workExperience": [
+    {
+      "position": "Frontend Developer",
+      "title": "Senior Frontend Developer - Nuxt.js / Sanity Performance Specialist",
+      "company": "Toptal",
+      "companyUrl": "https://www.toptal.com/",
+      "dateStart": "2025-09",
+      "dateEnd": "Present",
+      "responsibilities": [
+        "Closed a 3-month performance sprint (Oct-Dec 2025) of 18+ optimization PRs against a September baseline audit, removing unused WebGL/GLSL bundling, moving GSAP and Google Maps off the global bundle, and converting decorative assets to WebP.",
+        "Replaced an ad-hoc 39-line lazy-loader with NuxtImg/Sanity provider integration site-wide across ~20 components in a single 66-file PR, restoring responsive sizes, WebP auto-format, and below-fold lazy loading.",
+        "Split homepage and slug-page GROQ queries into above-the-fold critical and below-the-fold lazy buckets across 9 commits, shrinking the blocking payload that gated LCP on every CMS-driven page.",
+        "Restructured the full Aeonik Pro font family into a subsetted woff+woff2 layout, added Anaheim with Latin, Latin-Ext, and Vietnamese subsets, and preloaded above-the-fold weights from the Sanity CDN.",
+        "Configured Vercel edge caching for videos, PDFs, images, fonts, and captions with 7 to 30 day TTLs, eliminating cold-cache fetches for repeat visitors and cutting redundant origin transfer.",
+        "Diagnosed and shipped a 4-commit Core Web Vitals fix (prerender/ISR conflict, browser cache headers, animation threshold, asset caching) that moved all 10 indexed URLs in Google Search Console from 'Needs improvement' to 'Good' within 48 hours.",
+        "Built an HMAC-verified Sanity webhook to Vercel ISR revalidation route, cutting content publish-to-live propagation from up to 60 minutes down to 2-3 minutes and saving an estimated $40/month in ISR write costs.",
+        "Sustained 100% production uptime since November 2025 and a Sentry performance score of 93 (7-day rolling) by January 2026 while running a 24/7 two-shift coverage rotation on an FDA-regulated pharma marketing site."
+      ],
+      "industries": [
+        "Health & Nutrition Products"
+      ],
+      "skills": [
+        "Nuxt.js",
+        "Vue",
+        "Sanity",
+        "Sanity Studio",
+        "GROQ",
+        "TypeScript",
+        "JavaScript",
+        "Vercel",
+        "ISR",
+        "Core Web Vitals",
+        "Web Performance",
+        "Lighthouse",
+        "GSAP",
+        "WebGL",
+        "WebP",
+        "Lazy Loading",
+        "Font Subsetting",
+        "CDN",
+        "Edge Caching",
+        "HMAC",
+        "Webhooks",
+        "Sentry",
+        "Google Search Console",
+        "React",
+        "Frontend",
+        "Frontend Development",
+        "Content Management Systems (CMS)",
+        "Dynamic Websites",
+        "Remote Work"
+      ]
+    },
+    {
+      "position": "Frontend Developer",
+      "title": "Senior Frontend Developer - Web Accessibility / WCAG 2 Consultant",
+      "company": "Toptal",
+      "companyUrl": "https://www.toptal.com/",
+      "dateStart": "2023-08",
+      "dateEnd": "2025-08",
+      "responsibilities": [
+        "Performed an accessibility audit of the full public site and fixed all existing accessibility issues, enhancing user experience for individuals with disabilities.",
+        "Updated the admin section of the site from a legacy styling to the newer styling of the public pages, filling the gaps to match the modern styling when necessary.",
+        "Revamped Vue 2 widget across the board: by updating dependencies, refactoring and improving the code, auditing and fixing crossbrowser issues.",
+        "Updated the style guide to include the visual changes derived from the accessibility improvements in public pages and new design tokens from the admin pages.",
+        "Timely and effectively communicated with management and the backend team to solve issues cooperatively through comments in github issues.",
+        "Adapted to working on the frontend of a PHP application, an unfamiliar language, and learned autonomously to work with the PHP framework maintaining a high quality standard and requesting feedback from reviewers when necessary."
+      ],
+      "skills": [
+        "Web Accessibility",
+        "WCAG 2",
+        "HTML",
+        "CSS",
+        "Less",
+        "Bootstrap",
+        "PHP"
+      ]
+    },
+    {
+      "position": "Frontend Developer",
+      "title": "Senior Frontend Developer - Vue / Nuxt.js Specialist",
+      "company": "Toptal",
+      "companyUrl": "https://www.toptal.com/",
+      "dateStart": "2023-03",
+      "dateEnd": "2023-05",
+      "responsibilities": [
+        "Streamlined the front-end Nuxt codebase, reducing component size and thus boosting the maintainability of the code.",
+        "Developed and instituted a best coding practices document, which served as the team's blueprint for consistent and efficient code development, resulting in a more maintainable codebase.",
+        "Identified and rectified Vuex store misuses, transitioning inappropriate actions to getters using Vuex best practices.",
+        "Delivered key features, including an enhanced web search via region and campaign filters, more usable date range selection, and dynamic campaign pages, increasing site usability.",
+        "Expanded end-to-end testing coverage to the most critical use cases of the web search, significantly reducing bug occurrences and improving overall product quality and developer productivity.",
+        "Handled successfully the codebase ownership transition from a departing developer in two weeks, taking proactive ownership of the front-end code.",
+        "Helped onboard a new front-end developer by introducing him to the key aspects of the codebase and thoroughly reviewing his code.",
+        "Used Jira for task management and Slack for communication."
+      ],
+      "skills": [
+        "Vue",
+        "Nuxt.js",
+        "JavaScript",
+        "Frontend",
+        "CSS",
+        "Travel",
+        "Booking Systems",
+        "User Interface (UI)",
+        "User Experience (UX)",
+        "TestCafe",
+        "APIs",
+        "Vuex"
+      ]
+    },
+    {
+      "position": "Accessibility Consultant",
+      "title": "Accessibility Consultant - React / Typescript Specialist",
+      "company": "Toptal",
+      "companyUrl": "https://www.toptal.com/",
+      "dateStart": "2022-09",
+      "dateEnd": "2023-03",
+      "responsibilities": [
+        "Improved the accessibility of a React app by identifying, prioritizing, and resolving issues, resulting in a fully accessible application with no reported issues in the final audit.",
+        "Identified additional accessibility issues proactively beyond the initial audit, ensuring a comprehensive resolution of all important issues",
+        "Completed the project successfully within the allocated time frame, meeting client needs and expectations.",
+        "Wrote clean and well-documented pull requests, resulting in efficient reviews and easier ticket resolution.",
+        "Communicated daily and effectively with the client, providing regular updates and addressing any concerns in a timely manner."
+      ],
+      "skills": [
+        "React",
+        "TypeScript",
+        "Web Accessibility",
+        "WCAG 2",
+        "HTML5",
+        "CSS",
+        "JavaScript",
+        "Selenium",
+        "UI Testing",
+        "RxJS",
+        "Sass",
+        "Jest",
+        "Frontend Development",
+        "ECMAScript (ES6)",
+        "Testing"
+      ]
+    },
+    {
+      "position": "Frontend Developer",
+      "title": "Frontend Developer - Vue / Nuxt.js Specialist",
+      "company": "Passionate People",
+      "companyUrl": "https://passionatepeople.io/",
+      "dateStart": "2021-10",
+      "dateEnd": "2022-06",
+      "responsibilities": [
+        "Maintained a Nuxt.js internal platform using Nuxt.js 2, Composition API, Tailwind CSS, Sanity, and Storybook, successfully migrating Options API components to Composition API and enhancing existing features, which improved code maintainability and performance.",
+        "Prepared the Nuxt.js-based platform for a live conference by manually testing main user flows, identifying and fixing bugs, and enhancing site layout, ensuring a smooth and error-free user experience during the event.",
+        "Maintained a back-end platform written in Node.js with serverless infrastructure and integrated it with the Sanity client. Tested existing endpoints manually and created new endpoints for reading and editing data from the database, which enhanced data accessibility and system reliability."
+      ],
+      "industries": [
+        "Startups",
+        "Software",
+        "Consulting"
+      ],
+      "skills": [
+        "Nuxt.js",
+        "Vue",
+        "Tailwind CSS",
+        "Node.js",
+        "Storyblok",
+        "Storybook",
+        "Visual Studio Code",
+        "CSS",
+        "HTML",
+        "ESLint",
+        "Git",
+        "GitLab CI/CD",
+        "HTML DOM",
+        "HTML5",
+        "CSS3",
+        "NPM",
+        "JSON",
+        "Babel",
+        "YARN",
+        "Webpack 4",
+        "Lodash",
+        "Cloudflare",
+        "Linux",
+        "Ubuntu Linux",
+        "Ubuntu",
+        "UI Frameworks",
+        "Wireframing",
+        "Web UX",
+        "Flexbox",
+        "Slack",
+        "Remote Work",
+        "Sanity",
+        "Frontend",
+        "Startups",
+        "UI Components",
+        "Content Management Systems (CMS)",
+        "API Integration"
+      ]
+    },
+    {
+      "position": "Frontend Developer",
+      "title": "Frontend Developer - Vue / Nuxt.js and Tailwind CSS Specialist",
+      "company": "Jobsrepublic",
+      "companyUrl": "https://jobsrepublic.com/",
+      "dateStart": "2020-06",
+      "dateEnd": "2021-09",
+      "responsibilities": [
+        "Developed a Nuxt component library styled with Tailwind CSS from scratch and connected it to the Storyblok CMS. The product was used by content managers to create landing pages from scratch in a matter of days without the help of the development team.",
+        "Adapted components from the Tailwind UI template library to suit the design needs.",
+        "Audited every component of the UI in terms of accessibility, on-page technical SEO, and performance to achieve a high Lighthouse rank.",
+        "Obtained feedback from content managers to improve the CMS, updating existing components to include more features and releasing new components, following a weekly release cycle.",
+        "Performed basic operations on a PostgreSQL database, running simple queries to find and edit data.",
+        "Used Jira as a ticketing system and Slack as a communication tool."
+      ],
+      "skills": [
+        "Nuxt.js",
+        "Vue",
+        "Tailwind CSS",
+        "Storyblok",
+        "CSS",
+        "HTML",
+        "Visual Studio Code (VS Code)",
+        "Agile Software Development",
+        "Adobe Photoshop",
+        "PostgreSQL",
+        "ESLint",
+        "Git",
+        "GitLab CI/CD",
+        "HTML DOM",
+        "HTML5",
+        "CSS3",
+        "CSS Grid",
+        "NPM",
+        "Vuex",
+        "JSON",
+        "Babel",
+        "Bash",
+        "Vite",
+        "Lodash",
+        "Amazon S3 (AWS S3)",
+        "Amazon Elastic Container Service (Amazon ECS)",
+        "Amazon Route 53",
+        "Linux",
+        "Ubuntu Linux",
+        "Ubuntu",
+        "UI Frameworks",
+        "Web UX",
+        "Flexbox",
+        "Jira",
+        "Slack",
+        "Scrum",
+        "Remote Work",
+        "Frontend",
+        "Startups",
+        "UI Components",
+        "Content Management Systems (CMS)",
+        "UI Design",
+        "API Integration",
+        "Frontend Development",
+        "ECMAScript (ES6)",
+        "REST APIs",
+        "JavaScript Libraries",
+        "Responsive Layout",
+        "UI Libraries",
+        "APIs"
+      ]
+    },
+    {
+      "position": "Frontend Developer",
+      "title": "Frontend Developer - Vue and Nuxt.js Specialist",
+      "company": "Jobsrepublic",
+      "companyUrl": "https://jobsrepublic.com/",
+      "dateStart": "2019-10",
+      "dateEnd": "2020-06",
+      "responsibilities": [
+        "Evolved the codebase, adding new pages, implementing design changes, improving accessibility and performance, and creating a more SEO-friendly URL structure with crawlable pagination and performance.",
+        "Maintained a multisite codebase built with Nuxt.js. Some of these sites were big portals with a large amount of traffic of up to 100,000 monthly visitors.",
+        "Helped build the front end of a dashboard app using Vue 3 and Tailwind UI. Marketers used the app to add and edit entries to a PostgreSQL database via a custom-built form.",
+        "Maintained a Node.js and Express.js back end used to capture form submissions.",
+        "Performed basic operations on a PostgreSQL database, running simple queries to find and edit data.",
+        "Configured and deployed new sites with different branding, changing the color theme and logo. That involved adding a new entry to a PostgreSQL database and setting content in a config file in the front end.",
+        "Deployed the sites to AWS using pre-established internal protocols. The AWS services used were Amazon ECS, EC2 load balancers, Amazon Route 53, and AWS Certificate Manager (ACM).",
+        "Used Jira as a ticketing system and Slack as a communication tool.",
+        "Created logos for new sites following customer requirements using Adobe Photoshop."
+      ],
+      "skills": [
+        "Nuxt.js",
+        "Vue",
+        "Bootstrap",
+        "Node.js",
+        "Express.js",
+        "Agile Software Development",
+        "CSS",
+        "HTML",
+        "Vue 2",
+        "PostgreSQL",
+        "ESLint",
+        "SCSS",
+        "Sass",
+        "Git",
+        "GitLab CI/CD",
+        "HTML DOM",
+        "HTML5",
+        "CSS3",
+        "NPM",
+        "Vuex",
+        "JSON",
+        "Babel",
+        "Bootstrap 4",
+        "Bash",
+        "Webpack 4",
+        "Visual Studio Code (VS Code)",
+        "Lodash",
+        "Amazon S3 (AWS S3)",
+        "Amazon Elastic Container Service (Amazon ECS)",
+        "Amazon Route 53",
+        "Linux",
+        "Ubuntu Linux",
+        "Ubuntu",
+        "UI Frameworks",
+        "Web UX",
+        "Flexbox",
+        "Auth0",
+        "AWS Certificate Manager",
+        "Elastic Load Balancers",
+        "Jira",
+        "Slack",
+        "Scrum",
+        "Remote Work",
+        "OAuth 2",
+        "Zapier",
+        "Frontend",
+        "Startups",
+        "UI Components",
+        "API Integration",
+        "UI Testing",
+        "Frontend Development",
+        "ECMAScript (ES6)",
+        "REST APIs",
+        "JavaScript Libraries",
+        "Responsive Layout",
+        "UI Libraries",
+        "APIs"
+      ]
+    },
+    {
+      "position": "Junior Frontend Developer",
+      "title": "Junior Frontend Developer - Vue.js and Data Visualization",
+      "company": "Jobsrepublic",
+      "companyUrl": "https://jobsrepublic.com/",
+      "dateStart": "2019-02",
+      "dateEnd": "2019-10",
+      "responsibilities": [
+        "Developed the front end of a single-page application showing data representations related to social media campaigns and landing pages, namely, KPIs of conversion funnels, plots of magnitude versus time, and tabular data.",
+        "Redesigned the app's front end using UI best practices and Figma as a design tool.",
+        "Contributed to the dashboard app, a single-page application built with Vue 2, Auth0 for authentication, TestCafe for E2E tests, BootstrapVue, and multi-language, and followed coding best practices.",
+        "Coordinated with the back-end team to develop features following Scrum and Agile methodologies. Used CI/CD best practices for weekly deployments to staging and production environments.",
+        "Developed integrations between tools to optimize internal tasks, including Google Apps Script, SendGrid, Trello, Zapier, lambda functions, and Serverless.",
+        "Performed basic operations on a PostgreSQL database, running simple queries to find and edit data.",
+        "Used Jira as a ticketing system and Slack as a communication tool."
+      ],
+      "skills": [
+        "Nuxt.js",
+        "Vue",
+        "Bootstrap",
+        "SCSS",
+        "Auth0",
+        "Amazon Elastic Container Service (Amazon ECS)",
+        "Vue 2",
+        "Vuex",
+        "Figma",
+        "PostgreSQL",
+        "ESLint",
+        "Sass",
+        "Git",
+        "GitLab CI/CD",
+        "Jest",
+        "TestCafe",
+        "HTML DOM",
+        "HTML5",
+        "CSS3",
+        "Visual Studio Code (VS Code)",
+        "NPM",
+        "JSON",
+        "Babel",
+        "Bootstrap 4",
+        "Bash",
+        "Webpack 4",
+        "Lodash",
+        "Serverless",
+        "Google Apps Script",
+        "Linux",
+        "Ubuntu Linux",
+        "Ubuntu",
+        "UI Frameworks",
+        "Spreadsheets",
+        "Wireframing",
+        "Wireframe to Product",
+        "Web UX",
+        "Flexbox",
+        "Jira",
+        "Slack",
+        "Scrum",
+        "AWS Lambda",
+        "Serverless Framework",
+        "Zapier",
+        "Frontend",
+        "Startups",
+        "UI Components",
+        "UI Design",
+        "Data Visualization",
+        "API Integration",
+        "UI Testing",
+        "Frontend Development",
+        "ECMAScript (ES6)",
+        "Testing",
+        "UX Design",
+        "REST APIs",
+        "JavaScript Libraries",
+        "Responsive Layout",
+        "Component Libraries",
+        "UI Libraries",
+        "APIs"
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Web Accessibility",
+      "issuer": "Udacity",
+      "skills": [
+        "A11Y",
+        "Front-end",
+        "Accessibility",
+        "WCAG 2",
+        "Front-end Development"
+      ],
+      "issueDate": "2020",
+      "expirationDate": "Present"
+    },
+    {
+      "name": "The Complete Junior to Senior Web Developer Roadmap",
+      "issuer": "Udemy",
+      "skills": [
+        "React",
+        "Redux",
+        "TypeScript",
+        "Docker",
+        "Redis",
+        "Amazon Web Services (AWS)",
+        "CI/CD Pipelines",
+        "SSH",
+        "Performance",
+        "Front-end",
+        "Front-end Development",
+        "JavaScript Libraries"
+      ],
+      "issueDate": "2019",
+      "expirationDate": "Present"
+    },
+    {
+      "name": "Frontend Development Libraries",
+      "issuer": "freeCodeCamp",
+      "skills": [
+        "React",
+        "Redux",
+        "JavaScript",
+        "Front-end",
+        "Front-end Development",
+        "JavaScript Libraries"
+      ],
+      "issueDate": "2018",
+      "expirationDate": "Present"
+    },
+    {
+      "name": "JavaScript Algorithms and Data Structures",
+      "issuer": "freeCodeCamp",
+      "skills": [
+        "JavaScript",
+        "Front-end",
+        "Front-end Development",
+        "ECMAScript (ES6)ECMAScript (ES6)"
+      ],
+      "issueDate": "2018",
+      "expirationDate": "Present"
+    },
+    {
+      "name": "Responsive Web Design",
+      "issuer": "freeCodeCamp",
+      "skills": [
+        "HTML",
+        "CSS",
+        "Bootstrap",
+        "Flexbox",
+        "Front-end",
+        "Front-end Development",
+        "User Interface (UI)",
+        "Responsive Layout"
+      ],
+      "issueDate": "2018",
+      "expirationDate": "Present"
+    }
+  ],
+  "skills": [
+    {
+      "star": true,
+      "name": "CSS",
+      "years": 5
+    },
+    {
+      "star": true,
+      "name": "JavaScript",
+      "years": 5
+    },
+    {
+      "star": true,
+      "name": "HTML5",
+      "years": 5
+    },
+    {
+      "star": true,
+      "name": "Vue",
+      "years": 3
+    },
+    {
+      "star": true,
+      "name": "React",
+      "years": 2
+    },
+    {
+      "name": "Storyblok",
+      "years": 2
+    },
+    {
+      "star": true,
+      "name": "Tailwind CSS",
+      "years": 4
+    },
+    {
+      "name": "Firebase",
+      "years": 1
+    },
+    {
+      "name": "Adobe Photoshop",
+      "years": 5
+    },
+    {
+      "name": "APIs",
+      "years": 5
+    },
+    {
+      "name": "ECMAScript (ES6)",
+      "years": 5
+    },
+    {
+      "star": true,
+      "name": "Front-end Development",
+      "years": 5
+    },
+    {
+      "star": true,
+      "name": "Web Development",
+      "years": 5
+    },
+    {
+      "name": "JavaScript Libraries",
+      "years": 5
+    },
+    {
+      "name": "Responsive Layout",
+      "years": 5
+    },
+    {
+      "name": "Responsive Web Design (RWD)",
+      "years": 5
+    },
+    {
+      "name": "Testing",
+      "years": 5
+    },
+    {
+      "name": "User Interface (UI)",
+      "years": 5
+    },
+    {
+      "name": "Agile Software Development",
+      "years": 3
+    },
+    {
+      "name": "API Integration",
+      "years": 3
+    },
+    {
+      "name": "Babel",
+      "years": 3
+    },
+    {
+      "name": "Bash",
+      "years": 3
+    },
+    {
+      "name": "CSS3",
+      "years": 5
+    },
+    {
+      "name": "ESLint",
+      "years": 5
+    },
+    {
+      "name": "Flexbox",
+      "years": 5
+    },
+    {
+      "name": "Front-end",
+      "years": 5
+    },
+    {
+      "name": "Git",
+      "years": 5
+    },
+    {
+      "name": "GitHub",
+      "years": 5
+    },
+    {
+      "name": "GitLab",
+      "years": 3
+    },
+    {
+      "name": "HTML",
+      "years": 5
+    },
+    {
+      "name": "HTML DOM",
+      "years": 5
+    },
+    {
+      "name": "Jira",
+      "years": 3
+    },
+    {
+      "name": "JSON",
+      "years": 5
+    },
+    {
+      "name": "Linux",
+      "years": 5
+    },
+    {
+      "name": "Lodash",
+      "years": 3
+    },
+    {
+      "name": "NPM",
+      "years": 5
+    },
+    {
+      "name": "Remote Work",
+      "years": 4
+    },
+    {
+      "name": "REST APIs",
+      "years": 3
+    },
+    {
+      "name": "Scrum",
+      "years": 3
+    },
+    {
+      "name": "Slack",
+      "years": 5
+    },
+    {
+      "name": "Spreadsheets",
+      "years": 3
+    },
+    {
+      "name": "Ubuntu",
+      "years": 5
+    },
+    {
+      "name": "Ubuntu Linux",
+      "years": 5
+    },
+    {
+      "name": "UI Components",
+      "years": 5
+    },
+    {
+      "name": "UI Frameworks",
+      "years": 5
+    },
+    {
+      "name": "Visual Studio Code (VS Code)",
+      "years": 5
+    },
+    {
+      "name": "Vue 2",
+      "years": 3
+    },
+    {
+      "name": "Vuex",
+      "years": 3
+    },
+    {
+      "name": "Web UX",
+      "years": 3
+    },
+    {
+      "name": "Webpack 4",
+      "years": 3
+    },
+    {
+      "name": "Wireframe to Product",
+      "years": 3
+    },
+    {
+      "name": "Wireframing",
+      "years": 3
+    },
+    {
+      "name": "Amazon Elastic Container Service (Amazon ECS)",
+      "years": 2
+    },
+    {
+      "name": "Amazon Route 53",
+      "years": 2
+    },
+    {
+      "name": "Amazon S3 (AWS S3)",
+      "years": 2
+    },
+    {
+      "name": "Auth0",
+      "years": 2
+    },
+    {
+      "name": "Bootstrap",
+      "years": 4
+    },
+    {
+      "name": "Bootstrap 4",
+      "years": 3
+    },
+    {
+      "name": "Bootstrap 3",
+      "years": 1
+    },
+    {
+      "name": "Component Libraries",
+      "years": 2
+    },
+    {
+      "name": "Content Management Systems (CMS)",
+      "years": 2
+    },
+    {
+      "name": "Jest",
+      "years": 2
+    },
+    {
+      "star": true,
+      "name": "Nuxt.js",
+      "years": 2
+    },
+    {
+      "name": "PostgreSQL",
+      "years": 2
+    },
+    {
+      "name": "SCSS",
+      "years": 3
+    },
+    {
+      "name": "Startups",
+      "years": 2
+    },
+    {
+      "name": "TestCafe",
+      "years": 2
+    },
+    {
+      "name": "UI Libraries",
+      "years": 2
+    },
+    {
+      "name": "UI Testing",
+      "years": 2
+    },
+    {
+      "name": "Zapier",
+      "years": 2
+    },
+    {
+      "name": "A11Y",
+      "years": 2
+    },
+    {
+      "name": "Accessibility",
+      "years": 2
+    },
+    {
+      "name": "Adobe After Effects",
+      "years": 1
+    },
+    {
+      "name": "Adobe Illustrator",
+      "years": 1
+    },
+    {
+      "name": "Amazon Web Services (AWS)",
+      "years": 1
+    },
+    {
+      "name": "AWS Certificate Manager",
+      "years": 1
+    },
+    {
+      "name": "AWS Lambda",
+      "years": 1
+    },
+    {
+      "name": "Blender",
+      "years": 1
+    },
+    {
+      "name": "CI/CD Pipelines",
+      "years": 1
+    },
+    {
+      "name": "Cloud Firestore",
+      "years": 1
+    },
+    {
+      "name": "Cloudflare",
+      "years": 1
+    },
+    {
+      "name": "Cloudflare Workers",
+      "years": 1
+    },
+    {
+      "name": "CSS Grid",
+      "years": 1
+    },
+    {
+      "name": "Data Visualization",
+      "years": 1
+    },
+    {
+      "name": "Docker",
+      "years": 1
+    },
+    {
+      "name": "Elastic Load Balancers",
+      "years": 1
+    },
+    {
+      "name": "Express.js",
+      "years": 1
+    },
+    {
+      "name": "Figma",
+      "years": 1
+    },
+    {
+      "name": "Firebase Authentication",
+      "years": 1
+    },
+    {
+      "name": "Firebase Hosting",
+      "years": 1
+    },
+    {
+      "name": "Full-stack",
+      "years": 1
+    },
+    {
+      "name": "GitLab CI/CD",
+      "years": 1
+    },
+    {
+      "name": "Google Apps Script",
+      "years": 1
+    },
+    {
+      "name": "JSX",
+      "years": 2
+    },
+    {
+      "name": "Mantine",
+      "years": 1
+    },
+    {
+      "name": "Netlify",
+      "years": 2
+    },
+    {
+      "star": true,
+      "name": "Next.js",
+      "years": 2
+    },
+    {
+      "name": "Node.js",
+      "years": 1
+    },
+    {
+      "name": "OAuth 2",
+      "years": 1
+    },
+    {
+      "name": "Performance",
+      "years": 1
+    },
+    {
+      "name": "React Components",
+      "years": 2
+    },
+    {
+      "name": "React Hooks",
+      "years": 2
+    },
+    {
+      "name": "React Query",
+      "years": 1
+    },
+    {
+      "name": "React Redux",
+      "years": 1
+    },
+    {
+      "name": "React Testing Library",
+      "years": 1
+    },
+    {
+      "name": "Redis",
+      "years": 1
+    },
+    {
+      "name": "Redux",
+      "years": 1
+    },
+    {
+      "name": "RxJS",
+      "years": 1
+    },
+    {
+      "name": "Sanity Studio",
+      "years": 1
+    },
+    {
+      "name": "Sass",
+      "years": 1
+    },
+    {
+      "name": "Search Engine Optimization (SEO)",
+      "years": 1
+    },
+    {
+      "name": "Sentry",
+      "years": 1
+    },
+    {
+      "name": "Serverless",
+      "years": 1
+    },
+    {
+      "name": "Serverless Framework",
+      "years": 1
+    },
+    {
+      "name": "SSH",
+      "years": 1
+    },
+    {
+      "name": "Storybook",
+      "years": 1
+    },
+    {
+      "star": true,
+      "name": "TypeScript",
+      "years": 2
+    },
+    {
+      "name": "TypeScript 2",
+      "years": 2
+    },
+    {
+      "name": "TypeScript 3",
+      "years": 2
+    },
+    {
+      "name": "UI Design",
+      "years": 1
+    },
+    {
+      "name": "UX Design",
+      "years": 1
+    },
+    {
+      "name": "Vite",
+      "years": 1
+    },
+    {
+      "name": "Vitest",
+      "years": 1
+    },
+    {
+      "name": "Vue 3",
+      "years": 1
+    },
+    {
+      "name": "WCAG 2",
+      "years": 2
+    },
+    {
+      "name": "Yarn",
+      "years": 1
+    },
+    {
+      "name": "Booking Systems"
+    },
+    {
+      "name": "Chakra UI",
+      "years": 1
+    },
+    {
+      "name": "Firebase Cloud Functions"
+    },
+    {
+      "name": "i18n"
+    },
+    {
+      "name": "Less"
+    },
+    {
+      "name": "Multilingual Websites"
+    },
+    {
+      "name": "OpenAI API",
+      "years": 2
+    },
+    {
+      "name": "PHP"
+    },
+    {
+      "name": "Playwright"
+    },
+    {
+      "name": "Progressive Web Applications (PWA)",
+      "years": 2
+    },
+    {
+      "name": "Recharts"
+    },
+    {
+      "name": "Selenium"
+    },
+    {
+      "name": "Stripe API",
+      "years": 1
+    },
+    {
+      "name": "User Experience (UX)"
+    },
+    {
+      "name": "Vercel",
+      "years": 2
+    },
+    {
+      "star": true,
+      "name": "Web Accessibility",
+      "years": 2
+    },
+    {
+      "name": "Zustand",
+      "years": 1
+    }
+  ],
+  "projects": [
+    {
+      "name": "Nuxt + Sanity Performance and Core Web Vitals Overhaul",
+      "type": "Corporate",
+      "description": "Three-month performance sprint (Oct-Dec 2025) on an FDA-regulated pharma marketing site built with Nuxt 4, Sanity, and Vercel. Closed 18+ optimization PRs against a September baseline audit. Removed unused WebGL/GLSL bundling, moved GSAP and Google Maps off the global bundle, and converted decorative assets to WebP. Replaced an ad-hoc 39-line lazy-loader with NuxtImg/Sanity provider integration site-wide across ~20 components in a single 66-file PR, restoring responsive sizes, WebP auto-format, and below-fold lazy loading. Split homepage and slug-page GROQ queries into above-the-fold critical and below-the-fold lazy buckets across 9 commits, shrinking the blocking payload that gated LCP on every CMS-driven page. Restructured the full Aeonik Pro font family into a subsetted woff+woff2 layout, added Anaheim with Latin, Latin-Ext, and Vietnamese subsets, and preloaded above-the-fold weights from the Sanity CDN. Configured Vercel edge caching for videos, PDFs, images, fonts, and captions with 7 to 30 day TTLs. Diagnosed and shipped a 4-commit Core Web Vitals fix (prerender/ISR conflict, browser cache headers, animation threshold, asset caching) that moved all 10 indexed URLs in Google Search Console from 'Needs improvement' to 'Good' within 48 hours.",
+      "skills": [
+        "Nuxt.js",
+        "Vue",
+        "Sanity",
+        "GROQ",
+        "TypeScript",
+        "Vercel",
+        "ISR",
+        "Core Web Vitals",
+        "Web Performance",
+        "WebGL",
+        "GSAP",
+        "WebP",
+        "Lazy Loading",
+        "Font Subsetting",
+        "Edge Caching",
+        "CDN",
+        "Google Search Console"
+      ]
+    },
+    {
+      "name": "Sanity-to-Vercel ISR Revalidation Webhook",
+      "type": "Corporate",
+      "description": "Built an HMAC-verified Sanity webhook to Vercel ISR revalidation route on a Nuxt 4 marketing site. Replaced time-based revalidation with on-demand invalidation, cutting content publish-to-live propagation from up to 60 minutes down to 2-3 minutes and saving an estimated $40/month in ISR write costs. Included signature verification and selective path invalidation driven by the Sanity document type and slug.",
+      "skills": [
+        "Sanity",
+        "Vercel",
+        "ISR",
+        "Webhooks",
+        "HMAC",
+        "Nuxt.js",
+        "TypeScript",
+        "Node.js"
+      ]
+    },
+    {
+      "name": "Production Support for an FDA-Regulated Pharma Marketing Site",
+      "type": "Corporate",
+      "description": "Ongoing 24/7 two-shift coverage rotation on a Nuxt 4 + Sanity + Vercel pharma marketing site under FDA-regulated content constraints. Sustained 100% production uptime since November 2025 and a Sentry performance score of 93 (7-day rolling) by January 2026. Diagnosed a 5-day silent GA4 tracking blackout (CSP blocking regional endpoints, missing nonce on inline gtag init), rebuilt CSP with wildcards, wired violations to Sentry, and added a Playwright check asserting window.gtag on every merge. Audited 1.66 TB of monthly Vercel egress and identified hardcoded MP4 patient videos as the dominant cost driver.",
+      "skills": [
+        "Nuxt.js",
+        "Sanity",
+        "Vercel",
+        "Sentry",
+        "Playwright",
+        "Content Security Policy",
+        "Google Analytics 4",
+        "Production Support",
+        "Incident Response",
+        "On-Call"
+      ]
+    },
+    {
+      "name": "Maintenance Agents",
+      "type": "Personal",
+      "description": "Autonomous monitoring system for client websites. Scheduled agents built with Bun and Croner pull data from Sentry, Vercel, and Sanity, hand it to Claude for analysis via the Claude Code CLI (no API key, leveraging the Claude Pro/Max subscription), and post Telegram alerts when something needs attention. Agents are strictly read-only observers; any remediation is left to human approval. The suite covers Sentry triage, dependency hygiene, vulnerability scanning, security-header posture (CSP, HSTS, X-Frame-Options), broken-link patrol, asset-weight audit, Sanity housekeeping, and uptime monitoring. A Hono dashboard provides run history and status. Deployed on a Hetzner VPS managed with PM2.",
+      "skills": [
+        "Bun",
+        "Hono",
+        "TypeScript",
+        "PostgreSQL",
+        "Claude Code CLI",
+        "AI Agents",
+        "Cron Scheduling",
+        "Sentry",
+        "Vercel API",
+        "Sanity",
+        "Telegram Bot API",
+        "PM2",
+        "Hetzner",
+        "Observability",
+        "Zod"
+      ]
+    },
+    {
+      "name": "HelloSafelyFed",
+      "type": "Personal",
+      "url": "https://hellosafelyfed.appforgelabs.com/",
+      "description": "Hub-and-spoke food-safety platform that hosts multiple consumer-facing tools (menu-decoder, dishscout, tinyplates) under a single Google OAuth + magic-link auth, shared Stripe billing, and a credit-based API gating model. Built as a Bun monorepo with Vertical Slice Architecture on the backend: Express 5 with per-feature modules, a static Astro + Vue (TanStack Query) frontend, an Expo React Native shell, and a shared package layer (@repo/api-types, @repo/db, @repo/config) that prevents the data layer from leaking into the contract layer. Ships with custom architecture audit scripts (VSA cross-slice violations, FCIS purity, code-entropy) that run as part of the build pipeline. PostgreSQL + Drizzle, Redis for sessions and rate limiting, deployed via PM2 on a shared Hetzner VPS.",
+      "skills": [
+        "Bun",
+        "Monorepo",
+        "Express",
+        "Astro",
+        "Vue",
+        "TanStack Query",
+        "TypeScript",
+        "Vertical Slice Architecture",
+        "PostgreSQL",
+        "Drizzle ORM",
+        "Redis",
+        "Stripe",
+        "RevenueCat",
+        "Google OAuth",
+        "Magic Link Auth",
+        "React Native",
+        "Expo",
+        "PM2",
+        "Architecture Audits"
+      ]
+    },
+    {
+      "name": "Shop Appforgelabs",
+      "type": "Personal",
+      "url": "https://shop.appforgelabs.com/",
+      "description": "Digital storefront for templates and downloadable products with both one-time purchases and a credit-based top-up model. Stripe-backed checkout for products and credit packs, subscription support, signed download URLs for owned products, and per-IP API rate limiting. Categorized product catalog (templates section and category index pages) and a blog with category routing for SEO. Built as a Bun monorepo: Express 5 backend with per-feature slices (auth, credits, downloads, owned-products, payments, rate-limit), static Astro + Vue frontend, PostgreSQL + Drizzle, Redis-backed sessions and rate limiting, PM2 on a Hetzner VPS.",
+      "skills": [
+        "Bun",
+        "Monorepo",
+        "Express",
+        "Astro",
+        "Vue",
+        "TypeScript",
+        "PostgreSQL",
+        "Drizzle ORM",
+        "Redis",
+        "Stripe",
+        "E-commerce",
+        "Credits System",
+        "Subscriptions",
+        "Rate Limiting",
+        "Signed URLs",
+        "PM2",
+        "Hetzner"
+      ]
+    },
+    {
+      "name": "Vsevochart (Vampire Survivors Companion)",
+      "type": "Personal",
+      "url": "https://www.vsevochart.com",
+      "repositoryUrl": "https://github.com/luismartinezs/vampire-survivors-chart",
+      "description": "A companion chart for the videogame Vampire Survivors, showing weapons, passives, and evolution paths in a single searchable view. Around 20,000 monthly visitors. Built with Next.js 15, React 19, Tailwind 4, and Zustand, with Fuse.js powering fuzzy search across hundreds of game items. Game art is pipeline-converted from PNG sprite sheets into CSS background-position icons at build time, keeping the runtime asset footprint small. Hardened with a strict Content Security Policy, X-Frame-Options, and Referrer-Policy headers.",
+      "skills": [
+        "React",
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Zustand",
+        "Radix UI",
+        "Fuse.js",
+        "Vitest",
+        "CSS Sprites",
+        "Vercel"
+      ]
+    },
+    {
+      "name": "Elden Survivors",
+      "type": "Personal",
+      "url": "https://elden-survivors.vercel.app",
+      "repositoryUrl": "https://github.com/luismartinezs/elden-survivors",
+      "description": "A 'Bullet Heaven' (Vampire Survivors-style) roguelite built on a custom game engine. Auto-firing weapons, horde survival, and RPG stat progression, rendered as code-drawn neon geometry directly on HTML5 Canvas with no graphics library. The engine runs in two modes from the same code: a browser canvas renderer for play, and a headless renderer that runs the full simulation in Node, enabling automated balance testing via Monte Carlo runs and performance benchmarking outside the render loop. Built with React 19, TypeScript, and Vite, with Tweakpane for runtime tuning and dependency-cruiser to enforce module boundaries.",
+      "skills": [
+        "React",
+        "TypeScript",
+        "Vite",
+        "HTML5 Canvas",
+        "Game Development",
+        "Custom Game Engine",
+        "Headless Simulation",
+        "Performance Optimization",
+        "Tweakpane",
+        "Zod",
+        "Vercel"
+      ]
+    },
+    {
+      "name": "Shared Infrastructure Platform",
+      "type": "Personal",
+      "description": "Multi-tenant persistence layer that hosts every personal and client application on a single Hetzner VPS, keeping per-project hosting cost near zero. Postgres 18 and Redis 8 run in Docker with ports bound to 127.0.0.1 only; remote admin goes through SSH tunnels rather than exposed ports. A single provisioning script (create-app-db.sh) generates a per-app Postgres user, database, and random password and returns a ready-to-use DATABASE_URL; each app is assigned a distinct Redis DB index for isolation. Hard memory caps (1.5G Postgres, 512M Redis) prevent any one app from starving the others. Includes a documented disaster-recovery runbook (pg_dumpall + clean reinit + restore) and an in-place minor-version upgrade path. Powers Maintenance Agents, HelloSafelyFed, Shop Appforgelabs, and several other projects on the same machine.",
+      "skills": [
+        "Docker",
+        "Docker Compose",
+        "PostgreSQL",
+        "Redis",
+        "Multi-Tenancy",
+        "VPS Operations",
+        "Bash Scripting",
+        "SSH Tunneling",
+        "Disaster Recovery",
+        "Linux",
+        "Hetzner",
+        "Cost Optimization",
+        "DevOps"
+      ]
+    },
+    {
+      "name": "Income Statement",
+      "type": "Personal",
+      "description": "Personal finance snapshot tool. A CLI command pulls balances from Mercury, Wise, Kraken, Interactive Brokers (Flex Query), and CoinGecko for crypto pricing, converts everything to EUR, and persists each snapshot in PostgreSQL via Drizzle. Accounts without automated fetchers (Santander, Degiro, and similar) fall back to an interactive terminal prompt during the snapshot run, so a single command captures a full picture across automated and manual sources. A Vue 3 frontend backed by a Hono API charts the time series. Each provider's quirky response shape is parsed and normalized through Zod schemas.",
+      "skills": [
+        "Bun",
+        "Hono",
+        "TypeScript",
+        "Vue",
+        "PostgreSQL",
+        "Drizzle ORM",
+        "Tailwind CSS",
+        "Vite",
+        "Zod",
+        "Financial APIs",
+        "Crypto",
+        "CLI Development"
+      ]
+    },
+    {
+      "name": "Rico Rico",
+      "type": "Personal",
+      "url": "https://ricorico.vercel.app/",
+      "repositoryUrl": "https://github.com/luismartinezs/restaurant-reservation-system",
+      "description": "Rico Rico is a demo frontend for a restaurant-reservation booking platform that connects diners with its partner restaurants. The site is built with React/Next.js with Typescript, Mantine and TailwindCSS, and uses Supabase for database and authentication. Images for restaurants are generated using Stable Diffusion models. Integration with the Storyblok CMS allows editors to create custom landing pages for restaurants",
+      "skills": [
+        "React",
+        "TypeScript",
+        "Next.js",
+        "Tailwind CSS",
+        "Mantine",
+        "Storyblok CMS",
+        "Supabase",
+        "AI image generation",
+        "Vercel"
+      ]
+    },
+    {
+      "name": "Telegram AI Bot Project Bulldozer",
+      "type": "Personal",
+      "url": "https://t.me/ProjectBullzoderBot",
+      "description": "The Bulldozer Telegram bot is a multi-functional chatbot integrated with Telegram, OpenAI, Stripe, and Cloudflare. It handles user conversations, subscriptions, and invoicing. It supports conversation aware chat and images. It is deployed via Cloudflare Workers and connects to a SQLite database",
+      "skills": [
+        "Telegram Bot Development",
+        "TypeScript",
+        "Stripe Integration",
+        "OpenAI Integration",
+        "Serverless Architecture",
+        "SQLite",
+        "Webhooks",
+        "Cloudflare Workers",
+        "JavaScript",
+        "API Development",
+        "Cloudflare D1 Database",
+        "Ngrok",
+        "Zod",
+        "DevOps"
+      ]
+    },
+    {
+      "name": "React Katas AI Maker",
+      "type": "Personal",
+      "url": "https://react-katas-ai-maker.vercel.app/",
+      "repositoryUrl": "https://github.com/luismartinezs/react-katas-ai-workflow",
+      "description": "React Katas AI Maker is an app that takes React docs as input, gives the user a few options and outputs the full code for an AI generated React Kata, including final code, starting code and README file, to practice the concepts.",
+      "skills": [
+        "React",
+        "Next.js",
+        "Tailwind CSS",
+        "TypeScript",
+        "Vercel",
+        "shadcn/ui",
+        "OpenAI API"
+      ]
+    },
+    {
+      "name": "Checklist App for Elden Ring",
+      "type": "Personal",
+      "url": "https://eldenringbuilds.vercel.app",
+      "repositoryUrl": "https://github.com/luismartinezs/react-katas-ai-workflow",
+      "description": "A personal project built from scratch with Next.js, React and Tailwind CSS, with currently around 100 daily users. It shows a checklist of items for the videogame Elden Ring. The user can create a profile and persist the checked items. The app is fully client side so the data is stored in the browser.",
+      "skills": [
+        "React",
+        "Next.js",
+        "Tailwind CSS",
+        "TypeScript",
+        "Vercel",
+        "PWA"
+      ]
+    },
+    {
+      "name": "Improving Accessibility and Styles of a PHP Website",
+      "type": "Corporate",
+      "description": "This is a website to view and publish data samples related to scientific publications. As the front-end and accessibility developer, I performed accessibility audits, created GitHub issues, and fixed existing issues. I also updated the admin pages from legacy to modern styles and updated the style guide to include these updates. Finally, I revamped and improved the accessibility of a Vue widget used to upload large files.",
+      "skills": [
+        "HTML",
+        "CSS",
+        "Javascript",
+        "Accessibility",
+        "PHP",
+        "jQuery",
+        "Bootstrap"
+      ]
+    },
+    {
+      "name": "Travel Booking Websites Improvement",
+      "type": "Corporate",
+      "description": "Onboarded as a front-end developer, I championed major improvements in the Nuxt.js a codebase for travel website allowing package bookings.\n\nI targeted large, complex components and initiated a shift towards smaller, single-responsibility modules, vastly enhancing code clarity and maintenance. I corrected Vuex store misuses, transitioned actions to getters, and refactored while shipping features delivery timelines. I delivered features such as advanced web search filters and dynamic campaign pages, boosting user experience. I also filled gaps in end-to-end testing, solidifying the codebase against potential bugs.\n\nThe engagement culminated in a handover to a new developer, leaving behind a substantially improved and streamlined codebase.",
+      "skills": [
+        "Vue",
+        "Nuxt.js",
+        "Vuex"
+      ]
+    },
+    {
+      "name": "Improving Accessibility in a React App",
+      "type": "Corporate",
+      "description": "This project involved improving the accessibility of a React app for a client. After an initial accessibility audit, we identified several tickets that needed to be fixed. I worked on these tickets in a separate branch and made sure to submit pull requests that were easy to understand and review. Once the important tickets were completed, I conducted a full accessibility audit of the app to identify additional issues. I grouped these issues into new tickets and prioritized them based on their importance. Then I worked on the most important tickets to fix them. As a result, the app became fully accessible, and a second accessibility audit resulted in essentially zero issues reported. My contributions to this project helped ensure that the app was usable and accessible to a broader audience.",
+      "skills": [
+        "React",
+        "TypeScript",
+        "JavaScript",
+        "Accessibility",
+        "WCAG 2",
+        "HTML5",
+        "CSS",
+        "Sass",
+        "RxJS"
+      ]
+    },
+    {
+      "name": "Habits App",
+      "type": "Personal",
+      "url": "https://rotations-6f39b.firebaseapp.com/",
+      "description": "A web app built with React, Firebase, TailwindCSS, and Mantine.dev and bootstrapped from my React starter template. The server state was handled with React-Query, and the global client state was conducted with Redux Toolkit. It allows the user to schedule habits. For example, the user may create a routine titled 'water the plants' with a recurrence of one day.",
+      "skills": [
+        "React",
+        "TypeScript",
+        "Firebase",
+        "Mantine",
+        "Redux Toolkit",
+        "Tailwind CSS",
+        "Vite",
+        "ESLint",
+        "plop"
+      ]
+    },
+    {
+      "name": "Weather Wardrobe Wizard",
+      "type": "Personal",
+      "url": "https://weather-wardrobe-wizard.netlify.app/",
+      "repositoryUrl": "https://github.com/luismartinezs/weather-wardrobe-wizard",
+      "description": "The Weather Wardrobe Wizard sends users weather forecasts and corresponding clothing suggestions. Users can toggle between metric and imperial units, list and image view of clothing, and light and dark themes. Selections are locally stored for guest users, while signed-in users have persistent data stored in Firebase. Premium users enjoy AI-powered packing recommendations from OpenAI. The application was developed with Next.js, React, TypeScript, and Zustand and combines weather forecasts with clothing advice. OpenWeather API powers the real-time data, and the UI is crafted with Chakra UI. Firebase Firestore handles real-time database updates, while Stripe facilitates payments for premium services. Multi-language support and error tracking with Sentry are other key features.",
+      "skills": [
+        "React",
+        "TypeScript",
+        "Next.js",
+        "OpenAI API",
+        "Chakra UI",
+        "Zustand",
+        "React Query",
+        "Immer",
+        "React Hook Form",
+        "Firebase",
+        "internationalization",
+        "Recharts",
+        "Stripe",
+        "Sentry",
+        "Jest",
+        "Testing Library",
+        "Playwright"
+      ]
+    },
+    {
+      "name": "Trello Scope Tracker",
+      "type": "Personal",
+      "repositoryUrl": "https://github.com/luismartinezs/trello-scope-tracker",
+      "description": "A cloud function deployed on AWS with the serverless framework intercepting webhooks from Trello. When a Trello card is moved to a specific list in the Trello board, the cloud function receives a webhook that triggers a zap from Zapier. This zap appends a value to a Google Sheets spreadsheet.",
+      "skills": [
+        "Serverless",
+        "Javascript",
+        "Node.js",
+        "Google Sheets"
+      ]
+    },
+    {
+      "name": "My Personal Website",
+      "type": "Personal",
+      "url": "https://www.webdevluis.com/",
+      "repositoryUrl": "https://github.com/luismartinezs/luis-martinez-next-site",
+      "description": "A website built in Next.js in static site generation mode, enabling loading times to speed up. The site is styled using Tailwind CSS and Storyblok CMS as a content editor, and it is deployed to Netlify.",
+      "skills": [
+        "React",
+        "Next.js",
+        "Tailwind CSS",
+        "Storyblok CMS",
+        "Netlify"
+      ]
+    },
+    {
+      "name": "Vue Admin Dashboard Maintenance",
+      "type": "Corporate",
+      "description": "Contribution to the migration of an admin dashboard from Backbone to Vue 2. Maintained the project for two years. The admin dashboard was a complex web app whose main two features were managing the landing page content where users could apply and managing the applicants themselves through multiple application stages.",
+      "skills": [
+        "Vue",
+        "Vuex",
+        "Vue Router",
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ]
+    },
+    {
+      "name": "Content Editor Dashboard",
+      "type": "Corporate",
+      "description": "Contributed to creating a content editor dashboard powered by Vue 3 and Vite. The dashboard was used to create and edit new entries in the database and set them as \"published.\" My main contribution was to develop the form to interact with those entries.",
+      "skills": [
+        "Vue",
+        "Vite",
+        "Tailwind CSS",
+        "JavaScript",
+        "HTML",
+        "CSS"
+      ]
+    },
+    {
+      "name": "Landing Page Editor",
+      "type": "Corporate",
+      "description": "A Nuxt component library built for Jobsrepublic was integrated with the Storyblok CMS so that content managers could create and edit new landing pages from scratch. Every component included team brainstorming with the content creators to cater to their needs, a development phase and accessibility, and performance and SEO audit to achieve a high lighthouse rank. Changes requested by the team were implemented often within the same day. Tailwind CSS was used for styling, and the UI design was adapted from that provided by the Tailwind UI template library. Each landing page was its own multipage site.",
+      "skills": [
+        "Nuxt.js",
+        "Vue",
+        "Tailwind CSS",
+        "Storyblok CMS",
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ]
+    },
+    {
+      "name": "Multi-site Codebase Maintenance",
+      "type": "Corporate",
+      "description": "Maintained a multi-site codebase built with Nuxt.js. One of these sites was a big portal with a large traffic of up to 100,000 monthly visitors. Evolved the codebase, adding new pages, implementing design changes, improving accessibility, performance, and creating a more SEO-friendly URL structure with crawlable pagination and performance.",
+      "skills": [
+        "Nuxt.js",
+        "Vue",
+        "Bootstrap",
+        "Storyblok CMS",
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ]
+    },
+    {
+      "name": "Conversion Tracker App",
+      "type": "Corporate",
+      "description": "A single-page application built for Jobsrepublic, with data visualization related to social media campaigns and landing pages, namely, KPIs of conversion funnels, plots of a magnitude versus time, and tabular data. The app was built from scratch to production-ready with Vue 2, Auth0 for authentication, multi-language, and E2E tests with the TestCafe testing library. The data was consumed from a REST API built by the back-end team. The layout used a customized Vue Bootstrap theme. At the start of the project, coding best practices were established and documented.",
+      "skills": [
+        "Vue",
+        "Bootstrap",
+        "Auth0",
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "i18n",
+        "TestCafe",
+        "E2E Testing"
+      ]
+    },
+    {
+      "name": "AthleanX Home Workout App",
+      "type": "Personal",
+      "url": "https://ahtleanx-home-workout.netlify.app/",
+      "repositoryUrl": "https://github.com/luismartinezs/ahtleanx-home-workout-app",
+      "description": "A progressive web application for mobile devices that helps with workouts at home. The app is a static single-page application developed with Vue 2 that behaves like a native mobile app. I designed and created the UI from scratch using Figma and Tailwind CSS.",
+      "skills": [
+        "Vue 2",
+        "Tailwind CSS",
+        "Figma",
+        "Vuex",
+        "Vue router",
+        "ESLint",
+        "PWA",
+        "UI Design",
+        "Mobile Web Development",
+        "Frontend Development",
+        "ECMAScript (ES6)"
+      ]
+    }
+  ],
+  "keywords": [
+    "React",
+    "Vue",
+    "Information Technology",
+    "Tailwind CSS",
+    "CMS",
+    "TypeScript",
+    "Next.js",
+    "Nuxt.js",
+    "Frontend",
+    "WCAG",
+    "Web",
+    "Developer",
+    "Accessibility",
+    "Code",
+    "Development"
+  ]
+}

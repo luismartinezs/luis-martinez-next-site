@@ -1,0 +1,33 @@
+# Public URLs of the previous Next.js site (captured 2026-10-19). Each must still resolve in the build,
+# either as a page or as a redirect page (Zola alias). Host-level redirects live in static/_redirects.
+/
+/about
+/portfolio
+/portfolio/weather
+/resume
+/resume/print
+/resume/react-typescript
+/resume/react-typescript/print
+/blog/a11y
+/blog/ai-output-world-class-experiment
+/blog/anki
+/blog/anki-vscode
+/blog/decoding-firestores-cache-strategies
+/blog/default-function-parameters
+/blog/do-you-need-a-phd
+/blog/efficient-use-react-useeffect-best-practices
+/blog/firebase-hosting-environments-react-vite
+/blog/fix-import-meta-env-unexpected-token-error-in-vite
+/blog/fix-typescript-cannot-find-module-declaration-error-mdx-react
+/blog/flatten-type-typescript-tutorial-beginners
+/blog/from-jobless-to-junior-frontend-developer-in-5-months
+/blog/nextjs-functional-components-creategetinitialprops
+/blog/optimal-stack-for-claude-code
+/blog/postgres-function-syntax-dollar-quoting-explained
+/blog/starcraft-lessons
+/blog/transfer-money-from-toptal-pay-to-european-bank-account-2023
+/blog/two-github-accounts-one-machine
+/blog/typescript-object-types-extracting-types-from-keys-and-values
+/blog/typescript-pick-implementation
+/blog/vscode-search-specific-ignored-files
+/blog/web-accessibility-guidelines-2022-update

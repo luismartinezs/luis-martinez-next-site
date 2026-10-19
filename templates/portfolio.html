@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+{{<page_header title={section.title} description={section.description} />}}
+<section class="block">
+  <div class="container">
+    <ul class="portfolio-grid">
+      {%- for item in section.extra.items %}
+      {%- set img = get_image_metadata(path=item.image) %}
+      <li class="portfolio-item">
+        <h2 class="portfolio-item__title">{{ item.title }}</h2>
+        <img class="portfolio-item__image" src="{{ get_url(path=item.image) }}" width="{{ img.width }}" height="{{ img.height }}" alt="{{ item.alt }}"{% if loop.index > 3 %} loading="lazy" decoding="async"{% endif %}>
+        <div class="portfolio-item__body">
+          {%- for paragraph in item.description %}
+          <p>{{ paragraph }}</p>
+          {%- endfor %}
+        </div>
+        <p class="portfolio-item__links">
+          {%- if item.read_more %}<a class="link" href="{{ get_url(path=item.read_more) }}">Read more<span class="sr-only"> about {{ item.title }}</span></a>{% endif %}
+          <a class="link" href="{{ item.url }}">See project<span class="sr-only">: {{ item.title }}</span></a>
+          {%- if item.github_url %}<a class="link" href="{{ item.github_url }}">See code<span class="sr-only"> of {{ item.title }}</span></a>{% endif %}
+        </p>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+{% endblock content %}

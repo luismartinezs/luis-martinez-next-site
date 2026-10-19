@@ -1,0 +1,125 @@
+{%- set page_title = config.title -%}
+{%- set page_description = config.description -%}
+{%- set og_type = "website" -%}
+{%- set twitter_card = "summary" -%}
+{%- set og_image = get_url(path="icons/android-chrome-512x512.png") -%}
+{%- if page is defined -%}
+  {%- set page_title = page.extra.seo_title or (page.title ~ " - Luis Martinez") -%}
+  {%- set page_description = page.description or config.description -%}
+  {%- if page.extra.featured_image -%}
+    {%- set og = resize_image(path=page.colocated_path ~ page.extra.featured_image, width=1200, height=630, op="fill", format="jpg", quality=80) -%}
+    {%- set og_image = og.url -%}
+    {%- set og_type = "article" -%}
+    {%- set twitter_card = "summary_large_image" -%}
+  {%- endif -%}
+{%- elif section is defined and section.title -%}
+  {%- set page_title = section.extra.seo_title or (section.title ~ " - Luis Martinez") -%}
+  {%- set page_description = section.description or config.description -%}
+{%- endif -%}
+{%- set url_here = current_url or config.base_url -%}
+{%- set path_here = current_path or "" -%}
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{{ page_title }}</title>
+  <meta name="description" content="{{ page_description }}">
+  <link rel="canonical" href="{{ url_here }}">
+
+  <meta property="og:site_name" content="Luis Martinez - Web Developer">
+  <meta property="og:type" content="{{ og_type }}">
+  <meta property="og:url" content="{{ url_here }}">
+  <meta property="og:title" content="{{ page_title }}">
+  <meta property="og:description" content="{{ page_description }}">
+  <meta property="og:image" content="{{ og_image }}">
+  <meta name="twitter:card" content="{{ twitter_card }}">
+  <meta name="twitter:creator" content="{{ config.extra.twitter }}">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ get_url(path='icons/favicon-32x32.png') }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ get_url(path='icons/favicon-16x16.png') }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ get_url(path='icons/apple-touch-icon.png') }}">
+  <link rel="mask-icon" href="{{ get_url(path='icons/safari-pinned-tab.svg') }}" color="#5654e1">
+  <link rel="manifest" href="{{ get_url(path='site.webmanifest') }}">
+  <meta name="msapplication-config" content="{{ get_url(path='browserconfig.xml') }}">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="alternate" type="application/atom+xml" title="Luis Martinez - Articles" href="{{ get_url(path='atom.xml', trailing_slash=false) }}">
+
+  <link rel="preload" href="{{ get_url(path='fonts/inter-latin-wght-normal.woff2') }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ get_url(path='fonts/lora-latin-wght-normal.woff2') }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ get_url(path='css/site.css', cachebust=true) }}">
+  <link rel="stylesheet" href="{{ get_url(path='giallo-light.css') }}" id="giallo-light">
+  <link rel="stylesheet" href="{{ get_url(path='giallo-dark.css') }}" id="giallo-dark" media="not all">
+  {#- Applies the saved or system theme before first paint; site.js owns the toggle afterwards. #}
+  <script>
+    document.documentElement.classList.remove("no-js");
+    try {
+      var stored = localStorage.getItem("dark-mode");
+      var dark = stored !== null ? JSON.parse(stored) === true : matchMedia("(prefers-color-scheme: dark)").matches;
+      if (dark) {
+        document.documentElement.classList.add("dark");
+        document.getElementById("giallo-dark").media = "all";
+        document.getElementById("giallo-light").media = "not all";
+      }
+    } catch (e) {}
+  </script>
+  <script src="{{ get_url(path='js/site.js', cachebust=true) }}" defer></script>
+  {%- if config.mode == "build" %}
+  <script src="https://js.sentry-cdn.com/{{ config.extra.sentry_loader_key }}.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="{{ config.extra.umami_website_id }}"></script>
+  {%- endif %}
+  {% block head %}{% endblock head %}
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div class="site-top">
+    <div class="top-band" aria-hidden="true"><span></span><span></span></div>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <div class="site-header__start">
+          <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-toggle>
+            <span class="sr-only">Toggle menu</span>
+            {{<icons.menu cls="icon menu-toggle__open" />}}
+            {{<icons.close cls="icon menu-toggle__close" />}}
+          </button>
+          <a class="logo" href="{{ get_url(path='/') }}" aria-label="Luis Martinez, home">
+            <span class="logo__frame" aria-hidden="true"><span>M</span></span>
+          </a>
+        </div>
+        <div class="site-header__end">
+          <nav aria-label="Main">
+            <ul class="site-nav" id="site-nav">
+              {%- for item in config.extra.nav %}
+              {%- set active = path_here == item.path or (item.path != "/" and path_here[:item.path | length] == item.path) %}
+              <li><a href="{{ get_url(path=item.path) }}"{% if active %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
+              {%- endfor %}
+            </ul>
+          </nav>
+          <button class="theme-switch" type="button" role="switch" aria-checked="false" aria-label="Dark theme" data-theme-toggle>
+            <span class="theme-switch__thumb" aria-hidden="true">
+              {{<icons.sun cls="icon theme-switch__sun" />}}
+              {{<icons.moon cls="icon theme-switch__moon" />}}
+            </span>
+          </button>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <main id="main-content" tabindex="-1">
+    {% block content %}{% endblock content %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <ul class="site-footer__social">
+        <li><a href="{{ config.extra.github }}">{{<icons.github label="GitHub profile" />}}</a></li>
+        <li><a href="{{ config.extra.x }}">{{<icons.x label="X (Twitter) profile" />}}</a></li>
+        <li><a href="{{ config.extra.linkedin }}">{{<icons.linkedin label="LinkedIn profile" />}}</a></li>
+        <li><a href="{{ get_url(path='atom.xml', trailing_slash=false) }}" class="site-footer__feed">RSS</a></li>
+      </ul>
+      <p>© 2019-{{ now() | date(format="%Y") }} <a href="{{ get_url(path='/') }}">Luis Martinez Suarez</a></p>
+    </div>
+  </footer>
+</body>
+</html>

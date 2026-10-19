@@ -1,0 +1,43 @@
+base_url = "https://www.webdevluis.com"
+title = "Luis Martinez - Web Developer"
+description = "Articles on web development, TypeScript, accessibility and building software with AI agents, by Luis Martinez."
+default_language = "en"
+author = "Luis Martinez"
+
+minify_html = true
+generate_feeds = true
+feed_filenames = ["atom.xml"]
+generate_sitemap = true
+generate_robots_txt = true
+
+[markdown]
+lazy_async_image = true
+bottom_footnotes = true
+# `> [!NOTE]` and `> [!WARNING]` render as side notes (the old Storyblok SideNote block).
+github_alerts = true
+
+[markdown.highlighting]
+error_on_missing_language = true
+style = "class"
+light_theme = "github-light"
+dark_theme = "github-dark"
+
+[link_checker]
+internal_level = "error"
+external_level = "warn"
+
+[extra]
+twitter = "@LuisMartinezSu2"
+github = "https://github.com/luismartinezs"
+linkedin = "https://www.linkedin.com/in/luismarsu/"
+x = "https://twitter.com/LuisMartinezSu2"
+umami_website_id = "dc5efb05-dee7-403c-af5a-3282a839bf04"
+# Sentry loader key: the public key of the browser DSN. The loader fetches the SDK only after an error.
+sentry_loader_key = "d1b0c12fb5524fa583d24ce3daf935c6"
+
+nav = [
+  { path = "/", label = "Home" },
+  { path = "/portfolio/", label = "Portfolio" },
+  { path = "/about/", label = "About" },
+  { path = "/resume/", label = "Resume" },
+]
