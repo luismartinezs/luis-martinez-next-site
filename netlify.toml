@@ -6,6 +6,9 @@
 [build.environment]
   ZOLA_VERSION = "0.23.6"
   NODE_VERSION = "24"
+  # The Next.js runtime plugin is still attached to this Netlify site from its Next.js days.
+  # Skip it until it is removed in the dashboard (Project configuration > Build & deploy > Plugins).
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
 
 [context.deploy-preview]
   command = "./build --base-url $DEPLOY_PRIME_URL"
