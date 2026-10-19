@@ -2,5 +2,8 @@
   "enabledMcpjsonServers": [
     "sargon-umami",
     "sargon-resend"
-  ]
+  ],
+  "permissions": {
+    "allow": ["Bash(gh pr merge:*)"]
+  }
 }
