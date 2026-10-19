@@ -1,6 +1,12 @@
----
-title: About me - Luis Martinez Web Developer
----
++++
+title = "About Luis Martínez"
+description = "Web developer with a background in science and IT project management."
+template = "about.html"
+
+[extra]
+seo_title = "About me - Luis Martinez Web Developer"
+intro = "I am a web developer with a passion for creating beautiful, accessible and functional digital experiences. I have a background in science and IT project management, and my diverse skillset allows me to bring a unique perspective to web development."
++++
 
 ## My favorite tech stack
 

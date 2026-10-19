@@ -1,6 +1,0 @@
-Sitemap: https://www.webdevluis.com/api/make-sitemap
-
-User-agent: *
-Allow: /*
-
-Disallow: /api/*

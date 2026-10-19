@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Production build: compile TypeScript, then let Zola render the site into public/.
+set -euo pipefail
+cd "$(dirname "$0")"
+
+if [[ ! -x node_modules/.bin/tsc ]]; then
+  npm ci --no-audit --no-fund
+fi
+node_modules/.bin/tsc -p tsconfig.json
+zola build "$@"

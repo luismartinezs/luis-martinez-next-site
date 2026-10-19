@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="block">
+  <div class="container">
+    {%- set variants = [{"url": p.permalink, "label": p.title} for p in section.pages] %}
+    {{<resume.render d={load_data(path=section.extra.data)} variants={variants} photo_url={get_url(path="images/profile-cropped.webp")} />}}
+  </div>
+</div>
+{% endblock content %}

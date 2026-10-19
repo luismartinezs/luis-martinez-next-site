@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Refresh the vendored resume data from github.com/luismartinezs/resume-json (main).
+set -euo pipefail
+cd "$(dirname "$0")/.."
+base="https://raw.githubusercontent.com/luismartinezs/resume-json/main/json"
+curl -fsSL "$base/resume.json" -o data/resume.json
+curl -fsSL "$base/react-typescript.json" -o data/resume-react-typescript.json
+git diff --stat -- data/

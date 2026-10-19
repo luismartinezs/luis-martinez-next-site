@@ -1,0 +1,217 @@
+{#- Tera components shared by the page templates. Components only see the arguments passed to them. -#}
+
+{#- ===== Icons: inline SVG, paths from iconify (mdi, heroicons, fa6-brands). Decorative unless `label` is set. ===== -#}
+
+{% component icons.svg(viewbox: string, cls: string = "icon", label: string = "") %}<svg class="{{ cls }}" viewBox="{{ viewbox }}" xmlns="http://www.w3.org/2000/svg" {% if label %}role="img" aria-label="{{ label }}"{% else %}aria-hidden="true" focusable="false"{% endif %}>{{ body | safe }}</svg>{% endcomponent icons.svg %}
+
+{% component icons.github(cls: string = "icon", label: string = "") %}{% <icons.svg viewbox="0 0 24 24" cls label> %}<path fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"/>{% </icons.svg> %}{% endcomponent icons.github %}
+
+{% component icons.x(cls: string = "icon", label: string = "") %}{% <icons.svg viewbox="0 0 512 512" cls label> %}<path fill="currentColor" d="M389.2 48h70.6L305.6 224.2L487 464H345L233.7 318.6L106.5 464H35.8l164.9-188.5L26.8 48h145.6l100.5 132.9zm-24.8 373.8h39.1L151.1 88h-42z"/>{% </icons.svg> %}{% endcomponent icons.x %}
+
+{% component icons.linkedin(cls: string = "icon", label: string = "") %}{% <icons.svg viewbox="0 0 24 24" cls label> %}<path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37z"/>{% </icons.svg> %}{% endcomponent icons.linkedin %}
+
+{% component icons.email(cls: string = "icon", label: string = "") %}{% <icons.svg viewbox="0 0 24 24" cls label> %}<path fill="currentColor" d="m20 8l-8 5l-8-5V6l8 5l8-5m0-2H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2"/>{% </icons.svg> %}{% endcomponent icons.email %}
+
+{% component icons.location(cls: string = "icon", label: string = "") %}{% <icons.svg viewbox="0 0 24 24" cls label> %}<path fill="currentColor" d="M12 11.5A2.5 2.5 0 0 1 9.5 9A2.5 2.5 0 0 1 12 6.5A2.5 2.5 0 0 1 14.5 9a2.5 2.5 0 0 1-2.5 2.5M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7"/>{% </icons.svg> %}{% endcomponent icons.location %}
+
+{% component icons.sun(cls: string = "icon") %}{% <icons.svg viewbox="0 0 24 24" cls> %}<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0a4 4 0 0 1 8 0"/>{% </icons.svg> %}{% endcomponent icons.sun %}
+
+{% component icons.moon(cls: string = "icon") %}{% <icons.svg viewbox="0 0 24 24" cls> %}<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 0 1 8.646 3.646A9.003 9.003 0 0 0 12 21a9 9 0 0 0 8.354-5.646"/>{% </icons.svg> %}{% endcomponent icons.moon %}
+
+{% component icons.menu(cls: string = "icon") %}{% <icons.svg viewbox="0 0 20 20" cls> %}<path fill="currentColor" fill-rule="evenodd" d="M3 5a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1m0 5a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1m0 5a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1" clip-rule="evenodd"/>{% </icons.svg> %}{% endcomponent icons.menu %}
+
+{% component icons.close(cls: string = "icon") %}{% <icons.svg viewbox="0 0 20 20" cls> %}<path fill="currentColor" fill-rule="evenodd" d="M4.293 4.293a1 1 0 0 1 1.414 0L10 8.586l4.293-4.293a1 1 0 1 1 1.414 1.414L11.414 10l4.293 4.293a1 1 0 0 1-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 0 1-1.414-1.414L8.586 10L4.293 5.707a1 1 0 0 1 0-1.414" clip-rule="evenodd"/>{% </icons.svg> %}{% endcomponent icons.close %}
+
+{% component icons.check(cls: string = "icon") %}{% <icons.svg viewbox="0 0 20 20" cls> %}<path fill="currentColor" fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16a8 8 0 0 0 0 16m3.707-9.293a1 1 0 0 0-1.414-1.414L9 10.586L7.707 9.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0z" clip-rule="evenodd"/>{% </icons.svg> %}{% endcomponent icons.check %}
+
+{% component icons.external(cls: string = "icon") %}{% <icons.svg viewbox="0 0 20 20" cls> %}<g fill="currentColor"><path d="M11 3a1 1 0 1 0 0 2h2.586l-6.293 6.293a1 1 0 1 0 1.414 1.414L15 6.414V9a1 1 0 1 0 2 0V4a1 1 0 0 0-1-1z"/><path d="M5 5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3a1 1 0 1 0-2 0v3H5V7h3a1 1 0 0 0 0-2z"/></g>{% </icons.svg> %}{% endcomponent icons.external %}
+
+{% component icons.star(cls: string = "icon") %}{% <icons.svg viewbox="0 0 20 20" cls> %}<path fill="currentColor" d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 0 0 .95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 0 0-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 0 0-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 0 0-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 0 0 .951-.69z"/>{% </icons.svg> %}{% endcomponent icons.star %}
+
+{#- ===== Layout ===== -#}
+
+{% component page_header(title: string, description: string = "") %}
+<header class="block block--page-header">
+  <div class="container">
+    <h1 class="page-title">{{ title }}</h1>
+    {%- if description %}
+    <p class="page-lede">{{ description }}</p>
+    {%- endif %}
+  </div>
+</header>
+{% endcomponent page_header %}
+
+{% component post_card(post, eager: bool = false) %}
+<li class="post-card">
+  {%- if post.extra.featured_image %}
+  {%- set thumb = resize_image(path=post.colocated_path ~ post.extra.featured_image, width=640, height=400, op="fill", format="webp", quality=78) %}
+  <img class="post-card__image" src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" alt=""{% if eager %} fetchpriority="high"{% else %} loading="lazy" decoding="async"{% endif %}>
+  {%- endif %}
+  <a class="post-card__link" href="{{ post.permalink }}">
+    <h2 class="post-card__title">{{ post.extra.card_title or post.title }}</h2>
+    <time class="post-card__date" datetime="{{ post.date }}">{{ post.date }}</time>
+  </a>
+</li>
+{% endcomponent post_card %}
+
+{#- ===== Resume ===== -#}
+
+{% component resume.pills(items, max: integer = 8) %}
+{%- if max > 0 and items | length > max %}
+<ul class="pills">
+  {%- for item in items[:max] %}<li>{{ item }}</li>{% endfor %}
+</ul>
+<details class="pills-more">
+  <summary>+{{ items | length - max }} more</summary>
+  <ul class="pills">
+    {%- for item in items[max:] %}<li>{{ item }}</li>{% endfor %}
+  </ul>
+</details>
+{%- else %}
+<ul class="pills">
+  {%- for item in items %}<li>{{ item }}</li>{% endfor %}
+</ul>
+{%- endif %}
+{% endcomponent resume.pills %}
+
+{% component resume.job(job) %}
+<article class="resume-entry">
+  <h4>{% if job.star %}{{<icons.star cls="icon resume-star" />}}{% endif %}{{ job.position }}</h4>
+  {%- if job.title %}<p class="resume-entry__subtitle">{{ job.title }}</p>{% endif %}
+  <p class="resume-entry__meta">
+    {%- if job.companyUrl %}<a href="{{ job.companyUrl }}">{{ job.company }}</a>{% else %}{{ job.company }}{% endif %}
+    {%- if job.division %} - {{ job.division }}{% endif %}
+    {%- if job.dateStart and job.dateEnd %} | {{ job.dateStart }} - {{ job.dateEnd }}{% endif %}
+  </p>
+  {%- set resp = job.responsibilities or [] %}
+  <ul class="resume-entry__list">
+    {%- for r in resp[:3] %}<li>{{ r }}</li>{% endfor %}
+  </ul>
+  {%- if resp | length > 3 %}
+  <details class="resume-more">
+    <summary>Show {{ resp | length - 3 }} more</summary>
+    <ul class="resume-entry__list">
+      {%- for r in resp[3:] %}<li>{{ r }}</li>{% endfor %}
+    </ul>
+  </details>
+  {%- endif %}
+  {%- if job.industries %}<p class="resume-entry__industries"><span>Industries:</span> {{ job.industries | join(sep=", ") }}</p>{% endif %}
+  {%- if job.skills %}{{<resume.pills items={job.skills} max={5} />}}{% endif %}
+</article>
+{% endcomponent resume.job %}
+
+{% component resume.project(project) %}
+<article class="resume-entry">
+  <h4>{% if project.star %}{{<icons.star cls="icon resume-star" />}}{% endif %}{{ project.name }}</h4>
+  <p class="resume-entry__meta">{{ project.type }} Project</p>
+  {%- if project.url or project.repositoryUrl %}
+  <p class="resume-entry__links">
+    {%- if project.url %}<a href="{{ project.url }}">View website<span class="sr-only">: {{ project.name }}</span></a>{% endif %}
+    {%- if project.repositoryUrl %}<a href="{{ project.repositoryUrl }}">View repo<span class="sr-only">: {{ project.name }}</span></a>{% endif %}
+  </p>
+  {%- endif %}
+  <p>{{ project.description }}</p>
+  {%- if project.skills %}{{<resume.pills items={project.skills} />}}{% endif %}
+</article>
+{% endcomponent resume.project %}
+
+{% component resume.render(d, variants, photo_url: string) %}
+<div class="resume">
+  <header class="resume-header">
+    <img class="resume-header__photo" src="{{ photo_url }}" width="150" height="150" alt="Luis Martinez">
+    <div>
+      <h1 class="resume-header__label">Resume</h1>
+      <p class="resume-header__name">{{ d.fullName }}</p>
+      <p class="resume-header__title">{{ d.jobTitle }}</p>
+    </div>
+  </header>
+
+  <div class="resume-contact">
+    <p>
+      {%- if d.citizenship %}<span><span class="muted">Citizenship</span> <strong>{{ d.citizenship }}</strong></span>{% endif %}
+      {%- for s in d.social %}
+      <a href="{{ s.url }}">{% if s.name == "LinkedIn" %}{{<icons.linkedin label="LinkedIn" />}}{% elif s.name == "GitHub" %}{{<icons.github label="GitHub" />}}{% elif s.name == "X" %}{{<icons.x label="X (Twitter)" />}}{% else %}{{ s.name }}{% endif %}</a>
+      {%- endfor %}
+    </p>
+    <p>
+      {%- if d.contact.email %}<span>{{<icons.email />}} <a href="mailto:{{ d.contact.email }}">{{ d.contact.email }}</a></span>{% endif %}
+      {%- if d.contact.location %}<span>{{<icons.location />}} {{ d.contact.location }}</span>{% endif %}
+    </p>
+  </div>
+
+  <nav class="resume-nav no-print" aria-label="Resume sections">
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+    </ul>
+    <p class="resume-nav__actions">
+      {%- for v in variants %}<a href="{{ v.url }}">{{ v.label }}</a>{% endfor %}
+      <button type="button" class="button" data-print>Print / save as PDF</button>
+    </p>
+  </nav>
+
+  <section id="about" class="resume-section">
+    <h3>About</h3>
+    <p>{{ d.about }}</p>
+    {%- if d.mostAmazingDevelopment %}
+    <h4>Most Amazing Development</h4>
+    <p>{{ d.mostAmazingDevelopment }}</p>
+    {%- endif %}
+    {%- if d.preferredEnvironment %}
+    <h4>Preferred Environment</h4>
+    {{<resume.pills items={d.preferredEnvironment} max={0} />}}
+    {%- endif %}
+  </section>
+
+  {#- Starred entries come first, source order otherwise (as the old sortByStar did). #}
+  <section id="experience" class="resume-section">
+    <h3>Work Experience</h3>
+    {%- for j in d.workExperience %}{% if j.star %}{{<resume.job job={j} />}}{% endif %}{% endfor %}
+    {%- for j in d.workExperience %}{% if not j.star %}{{<resume.job job={j} />}}{% endif %}{% endfor %}
+  </section>
+
+  <section id="projects" class="resume-section">
+    <h3>Projects</h3>
+    {%- for p in d.projects %}{% if p.star %}{{<resume.project project={p} />}}{% endif %}{% endfor %}
+    {%- for p in d.projects %}{% if not p.star %}{{<resume.project project={p} />}}{% endif %}{% endfor %}
+  </section>
+
+  <section id="skills" class="resume-section">
+    <h3>Skills &amp; Expertise</h3>
+    <ul class="skills">
+      {%- for starred in [true, false] %}
+      {%- for s in d.skills %}
+      {%- if (s.star or false) == starred %}
+      <li><span>{% if s.star %}{{<icons.star cls="icon resume-star" />}}{% endif %}{{ s.name }}</span>{% if s.years is defined %}<span class="muted">{{ s.years }} {{ "year" if s.years == 1 else "years" }}</span>{% endif %}</li>
+      {%- endif %}
+      {%- endfor %}
+      {%- endfor %}
+    </ul>
+  </section>
+
+  <section id="education" class="resume-section">
+    <h3>Education</h3>
+    {%- for e in d.education %}
+    <article class="resume-entry">
+      <h4>{{ e.degree }} in {{ e.field }}</h4>
+      <p class="resume-entry__meta">{{ e.institution }}, {{ e.location }} | {{ e.dateStart }} - {{ e.dateEnd }}</p>
+    </article>
+    {%- endfor %}
+  </section>
+
+  <section id="certifications" class="resume-section">
+    <h3>Certifications</h3>
+    {%- for c in d.certifications %}
+    <article class="resume-entry">
+      <h4>{% if c.star %}{{<icons.star cls="icon resume-star" />}}{% endif %}{{ c.name }}</h4>
+      <p class="resume-entry__meta"><strong>{{ c.issuer }}</strong> | {{ c.issueDate }} - {{ c.expirationDate }}</p>
+      {%- if c.skills %}{{<resume.pills items={c.skills} max={0} />}}{% endif %}
+    </article>
+    {%- endfor %}
+  </section>
+</div>
+{% endcomponent resume.render %}

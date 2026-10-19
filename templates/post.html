@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block head %}
+  <meta property="article:published_time" content="{{ page.date }}">
+{% endblock head %}
+
+{% block content %}
+<article class="post">
+  <header class="block">
+    <div class="container">
+      <h1 class="page-title">{{ page.title }}</h1>
+      <p class="post__meta"><span>Post published on</span> <time datetime="{{ page.date }}">{{ page.date }}</time></p>
+      {%- if page.extra.featured_image and page.extra.show_featured_image %}
+      {%- set hero = resize_image(path=page.colocated_path ~ page.extra.featured_image, width=1200, height=800, op="fill", format="webp", quality=80) %}
+      <img class="post__hero" src="{{ hero.url }}" width="{{ hero.width }}" height="{{ hero.height }}" alt="{{ page.extra.featured_alt or '' }}" fetchpriority="high">
+      {%- endif %}
+    </div>
+  </header>
+  <div class="container">
+    <div class="prose">
+      {{ page.content | safe }}
+    </div>
+  </div>
+</article>
+{% endblock content %}

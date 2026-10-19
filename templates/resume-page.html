@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="block">
+  <div class="container">
+    {%- set parent = get_section(path=page.ancestors | last) %}
+    {{<resume.render d={load_data(path=page.extra.data)} variants={[{"url": parent.permalink, "label": "General resume"}]} photo_url={get_url(path="images/profile-cropped.webp")} />}}
+  </div>
+</div>
+{% endblock content %}

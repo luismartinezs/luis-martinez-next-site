@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Authoritative gate: static checks, a production build, then invariants on the built output
+# (every legacy URL still resolves, SEO tags present, no broken local references).
+set -euo pipefail
+cd "$(dirname "$0")"
+
+./check
+./build
+python3 -I scripts/verify_output.py public tests/legacy-urls.txt

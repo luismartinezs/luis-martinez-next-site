@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+{{<page_header title={page.title} />}}
+<section class="block">
+  <div class="container">
+    <div class="about-intro">
+      <img class="about-intro__photo" src="{{ get_url(path='images/profile.webp') }}" width="400" height="400" alt="Luis Martinez" fetchpriority="high">
+      <p class="about-intro__text">{{ page.extra.intro }}</p>
+    </div>
+    <div class="prose">
+      {{ page.content | safe }}
+    </div>
+  </div>
+</section>
+{% endblock content %}

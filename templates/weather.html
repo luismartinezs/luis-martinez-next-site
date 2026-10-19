@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{#- Showcase page for a portfolio project; copy kept from the original landing page. -#}
+{% block content %}
+{%- set app_url = "https://weather-wardrobe-wizard.netlify.app/" -%}
+{%- set features = [
+  ["Real-time Weather Forecasts", "Search for any location and get an 8-day weather forecast with a user-friendly chart showing temperature variations."],
+  ["Clothing Suggestions", "Based on the weather forecast, get suggested clothing items displayed as a list or image grid. You can easily select and deselect items"],
+  ["Weather Alerts", "Stay informed about extreme weather conditions with timely alerts"],
+] -%}
+<div class="showcase">
+  <section class="showcase__hero">
+    <div class="showcase__glow" aria-hidden="true"></div>
+    <h1>Your Personalized Weather Guide</h1>
+    <p>Get real-time weather forecasts and clothing suggestions for any location. Available in English and Spanish, and enriched with AI.</p>
+  </section>
+
+  <section class="showcase__split">
+    <div>
+      <p class="showcase__kicker">Explore a multitude of features designed to cater to your needs</p>
+      <h2>Cutting-edge features for an enhanced experience</h2>
+      <p>A smooth and intuitive user experience. From real-time weather forecasting to AI-powered packing suggestions.</p>
+      <dl class="showcase__features">
+        {%- for f in features %}
+        <div>
+          <dt>{{<icons.check />}} {{ f[0] }}</dt>
+          <dd>{{ f[1] }}</dd>
+        </div>
+        {%- endfor %}
+      </dl>
+    </div>
+    {%- set m = get_image_metadata(path="images/portfolio/weather-features.webp") %}
+    <img src="{{ get_url(path='images/portfolio/weather-features.webp') }}" width="{{ m.width }}" height="{{ m.height }}" alt="Weather Wardrobe Wizard forecast screen" loading="lazy" decoding="async">
+  </section>
+
+  <section class="showcase__split showcase__split--alt">
+    {%- set m = get_image_metadata(path="images/portfolio/weather-ai.webp") %}
+    <img src="{{ get_url(path='images/portfolio/weather-ai.webp') }}" width="{{ m.width }}" height="{{ m.height }}" alt="Weather Wardrobe Wizard AI packing suggestions" loading="lazy" decoding="async">
+    <div>
+      <p class="showcase__kicker">Unlock the Future of Wardrobe Planning with AI</p>
+      <h2>AI-Powered Packing Suggestions, Just For You</h2>
+      <p>Our premium service integrates OpenAI, offering you custom packing suggestions based on location and weather forecasts</p>
+      <p>Let AI take your weather readiness to the next level</p>
+    </div>
+  </section>
+
+  <section class="showcase__plans">
+    <h2>Designed for Every User</h2>
+    <p>Choose between Guest, Signed-In, or Premium users and enjoy a range of features tailored to your preferences and needs.</p>
+    <ul>
+      <li>
+        <h3>Guest User</h3>
+        <p class="showcase__price">Free</p>
+        <a class="button" href="{{ app_url }}">Try it out {{<icons.external />}}</a>
+        <p class="showcase__plan-lede">Enjoy our basic features without any costs</p>
+        <ul>
+          {%- for f in ["Access to current weather forecasts", "Clothing suggestions", "Metric/Imperial unit toggle", "Light/Dark theme option", "In-app weather alerts", "Persistent browser data"] %}
+          <li>{{<icons.check />}} {{ f }}</li>
+          {%- endfor %}
+        </ul>
+      </li>
+      <li>
+        <h3>Signed-In User</h3>
+        <p class="showcase__price">Free</p>
+        <a class="button" href="{{ app_url }}signin">Sign in to the app {{<icons.external />}}</a>
+        <p class="showcase__plan-lede">Get access to additional free features</p>
+        <ul>
+          {%- for f in ["All Guest features", "Cross-device data persistence", "Recent locations history (up to 10)", "Push notifications for weather alerts", "Email, Google, or GitHub sign-in options"] %}
+          <li>{{<icons.check />}} {{ f }}</li>
+          {%- endfor %}
+        </ul>
+      </li>
+      <li>
+        <h3>Premium User</h3>
+        <p class="showcase__price">€8 <span>/ month</span></p>
+        <a class="button" href="{{ app_url }}plans">See plans {{<icons.external />}}</a>
+        <p class="showcase__plan-lede">Experience our full range of features and maximize your weather tracking</p>
+        <ul>
+          {%- for f in ["All Signed-In features", "AI-powered packing recommendations"] %}
+          <li>{{<icons.check />}} {{ f }}</li>
+          {%- endfor %}
+        </ul>
+      </li>
+    </ul>
+  </section>
+
+  <section class="showcase__cta">
+    <div>
+      <h2>Take Control of Your Weather Journey Now!</h2>
+      <p>Don't let the weather catch you off guard. Start planning your attire with precision and ease today!</p>
+      <a class="button button--light" href="{{ app_url }}">Get started {{<icons.external />}}</a>
+    </div>
+    {%- set m = get_image_metadata(path="images/portfolio/weather-cta.webp") %}
+    <img src="{{ get_url(path='images/portfolio/weather-cta.webp') }}" width="{{ m.width }}" height="{{ m.height }}" alt="Weather Wardrobe Wizard home screen" loading="lazy" decoding="async">
+  </section>
+</div>
+{% endblock content %}

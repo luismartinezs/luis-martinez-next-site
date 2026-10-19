@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Fast static checks: TypeScript types and Zola's internal link/anchor checker.
+set -euo pipefail
+cd "$(dirname "$0")"
+
+if [[ ! -x node_modules/.bin/tsc ]]; then
+  npm ci --no-audit --no-fund
+fi
+node_modules/.bin/tsc -p tsconfig.json --noEmit
+zola check --skip-external-links
