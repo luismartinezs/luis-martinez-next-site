@@ -15,7 +15,7 @@ No framework runtime, no CMS: content is Markdown in this repo.
 
 | Command | What it does |
 |---|---|
-| `./dev` | Compile TS and serve with live reload on http://localhost:8932 |
+| `./dev` | Compile TS and serve with live reload on http://localhost:8942 |
 | `./build` | Production build into `public/` |
 | `./check` | Typecheck + Zola internal link/anchor check |
 | `./verify` | `./check`, `./build`, then output invariants (legacy URLs, sitemap, SEO tags, local refs) |

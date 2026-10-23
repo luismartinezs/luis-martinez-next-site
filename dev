@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Local preview on the port reserved for this app (http://localhost:8932).
+# Local preview on this app's registered port (doctrine ports.md, block 8940): http://localhost:8942.
 # Recompile TypeScript with `node_modules/.bin/tsc -p tsconfig.json --watch` in another shell when editing src/.
 set -euo pipefail
 cd "$(dirname "$0")"
@@ -8,4 +8,4 @@ if [[ ! -x node_modules/.bin/tsc ]]; then
   npm ci --no-audit --no-fund
 fi
 node_modules/.bin/tsc -p tsconfig.json
-exec zola serve --interface 127.0.0.1 --port 8932 --base-url localhost
+exec zola serve --interface 127.0.0.1 --port 8942 --base-url localhost
