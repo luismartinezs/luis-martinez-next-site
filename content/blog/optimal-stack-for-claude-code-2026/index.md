@@ -534,3 +534,6 @@ Happy shipping (again)!
 - [https://github.com/launchbadge/sqlx](https://github.com/launchbadge/sqlx) sqlx, compile-time checked SQL for Rust
 - [https://github.com/askama-rs/askama](https://github.com/askama-rs/askama) Askama, type-checked HTML templates for Rust
 - [https://caddyserver.com](https://caddyserver.com) Caddy, the reverse proxy with automatic HTTPS
+
+> [!NOTE]
+> This post was written with help from AI (Claude).

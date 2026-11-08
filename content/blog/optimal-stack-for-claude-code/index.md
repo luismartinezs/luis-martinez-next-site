@@ -442,3 +442,6 @@ The one-file-per-slice principle applies to React Native screens the same way it
 Happy shipping!
 
 *This analysis is based on first-principles reasoning about how LLMs operate, confirmed where possible against the Claude Code source code that was inadvertently leaked on March 31, 2026.*
+
+> [!NOTE]
+> This post was written with help from AI (Claude).

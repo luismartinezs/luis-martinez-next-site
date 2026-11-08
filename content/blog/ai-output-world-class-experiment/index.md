@@ -287,3 +287,6 @@ The most expensive insight: sometimes the best thing you can do is get out of th
 
 *Built with Claude Code, OpenRouter, Bun, and Astro.*
 *Experiments run on Gemini Flash 2.0, DeepSeek R1, Qwen3 Coder, and Claude Sonnet 4.5.*
+
+> [!NOTE]
+> This post was written with help from AI (Claude).

@@ -833,3 +833,6 @@ In short: the config was the easy part. Most of the work was finding out that th
 *   https://cli.github.com/manual/gh_auth_switch - the official multi-account story for `gh`, if you'd rather switch than wrap
 
 Set it up once and stop thinking about it. Ganbatte!
+
+> [!NOTE]
+> This post was written with help from AI (Claude).
