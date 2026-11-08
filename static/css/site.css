@@ -1227,6 +1227,116 @@ html.dark .prose .chart .sk-sim { fill: #0c0c10; }
 .prose .chart .sk-spark { fill: none; stroke: var(--viz-accent); stroke-width: 1.2; }
 .prose .chart .sk-div { stroke: var(--viz-line); }
 
+/* Step flow: an <ol class="flow"> of steps on a vertical line, one marker per kind of step
+   (.mk-agent filled dot, .mk-check ring with a tick, .mk-you diamond), with .flow-group labels.
+   First used by blog/optimal-stack-for-claude-code-2026. */
+.prose .chart .flow {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/* The line is drawn per row so it ends at the last marker however its text wraps.
+   Marker centre: row padding (0.4rem) + marker offset (0.3rem) + half the marker (7px). */
+.prose .chart .flow li::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 10.5px;
+  width: 1px;
+  background: var(--viz-line);
+}
+.prose .chart .flow li:first-child::before {
+  top: 0.5em;
+}
+.prose .chart .flow li:last-child::before {
+  bottom: auto;
+  height: calc(0.7rem + 7px);
+}
+.prose .chart .flow li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 22px minmax(0, 11.5rem) minmax(0, 1fr);
+  column-gap: 0.85rem;
+  align-items: start;
+  margin: 0;
+  padding: 0.4rem 0;
+}
+.prose .chart .flow b {
+  font-weight: 600;
+  color: var(--viz-ink);
+}
+.prose .chart .flow li > span:last-child {
+  font-size: 0.95rem;
+}
+.prose .chart .flow .flow-group {
+  display: block;
+  padding: 1rem 0 0.1rem calc(22px + 0.85rem);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--viz-muted);
+}
+.prose .chart .flow .flow-group:first-child {
+  padding-top: 0;
+}
+.prose .chart .mk {
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 14px;
+  height: 14px;
+  justify-self: center;
+  margin-top: 0.3rem;
+  border-radius: 50%;
+  /* A ring of the card colour cuts the vertical line around each marker. */
+  box-shadow: 0 0 0 3px var(--viz-surface);
+}
+.prose .chart .mk-agent {
+  background: var(--viz-b);
+}
+.prose .chart .mk-check {
+  border: 1.5px solid var(--viz-ink-2);
+  background: var(--viz-surface);
+}
+.prose .chart .mk-check::after {
+  content: "";
+  position: absolute;
+  left: 3.5px;
+  top: 1px;
+  width: 3px;
+  height: 6px;
+  border: solid var(--viz-ink-2);
+  border-width: 0 1.5px 1.5px 0;
+  transform: rotate(45deg);
+}
+.prose .chart .mk-you {
+  width: 10px;
+  height: 10px;
+  margin-top: calc(0.3rem + 2px);
+  border-radius: 1px;
+  background: var(--viz-accent);
+  transform: rotate(45deg);
+}
+.prose .chart .flow-legend {
+  margin: 1rem 0 0;
+}
+.prose .chart .flow-legend .mk {
+  margin-top: 0;
+  box-shadow: none;
+}
+@media (max-width: 36rem) {
+  .prose .chart .flow li {
+    grid-template-columns: 22px minmax(0, 1fr);
+  }
+  .prose .chart .flow li > span:last-child {
+    grid-column: 2;
+  }
+}
+
 .prose .chart .callouts {
   display: grid;
   grid-template-columns: 1fr 1fr;

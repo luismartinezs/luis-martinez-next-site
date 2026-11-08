@@ -278,9 +278,24 @@ The rule:
 
 The loop I want for every change:
 
-```text
-requirement → change → static checks → targeted tests → run the real app → evidence → commit
-```
+<figure class="chart">
+  <p class="fig-title">The life of a change</p>
+  <p class="fig-sub">What has to happen before the agent may call a change done</p>
+  <ol class="flow">
+    <li class="flow-group">Before any code</li>
+    <li><span class="mk mk-you"></span><b>Requirement</b><span>You write down what should observably happen. The agent builds against that, not against its own guess.</span></li>
+    <li class="flow-group">The agent's loop</li>
+    <li><span class="mk mk-agent"></span><b>Change</b><span>One coherent change, in the project's existing stack</span></li>
+    <li><span class="mk mk-check"></span><b>Static checks</b><span><code>./check</code>: types, lint, the compiler. Fast, and it can't be talked into a pass</span></li>
+    <li><span class="mk mk-check"></span><b>Targeted tests</b><span><code>./test</code> for what changed, against a real PostgreSQL</span></li>
+    <li><span class="mk mk-agent"></span><b>Run the real app</b><span><code>./dev</code>, then Playwright or a browser. Does it actually do the thing?</span></li>
+    <li><span class="mk mk-agent"></span><b>Evidence</b><span>Output, logs, a screenshot. Something you can check, not "it should work"</span></li>
+    <li class="flow-group">The gate</li>
+    <li><span class="mk mk-check"></span><b>./verify, then commit</b><span>Quiet when green, detailed when red. Red goes back to Change</span></li>
+  </ol>
+  <div class="legend flow-legend"><span><span class="mk mk-agent"></span>the agent works</span><span><span class="mk mk-check"></span>a machine checks</span><span><span class="mk mk-you"></span>you decide</span></div>
+  <figcaption>Three steps are checks a machine runs. "The agent said it works" is not one of them.</figcaption>
+</figure>
 
 Every repository exposes the same small set of scripts:
 
