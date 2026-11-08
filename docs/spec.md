@@ -9,7 +9,7 @@ Freshness: rebuild on publication. No private data anywhere.
 
 | Route | Source | Template | Notes |
 |---|---|---|---|
-| `/` | `content/_index.md` + all posts | `index.html` | Hero + post cards, newest first |
+| `/` | `content/_index.md` + all posts | `index.html` | Hero + post list (title and date rows), newest first |
 | `/blog/<slug>/` | `content/blog/<slug>/index.md` | `post.html` | Page bundle; images colocated |
 | `/blog/` | — | — | Not rendered (`render = false`); posts are listed on `/` |
 | `/about/` | `content/about.md` | `about.html` | |

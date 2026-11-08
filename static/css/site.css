@@ -608,78 +608,50 @@ html.dark .hero__lede a:hover {
   .hero__lede { font-size: 1.875rem; }
 }
 
-.post-grid {
+.post-list {
   list-style: none;
   padding: 0;
   margin-top: 1.5rem;
   margin-bottom: 3rem;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 3rem;
+  border-top: 1px solid var(--border);
 }
-@media (min-width: 768px) {
-  .post-grid { grid-template-columns: repeat(2, 1fr); }
+.post-row {
+  border-bottom: 1px solid var(--border);
 }
-@media (min-width: 1024px) {
-  .post-grid { grid-template-columns: repeat(3, 1fr); }
+.post-row__link {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1.5rem;
+  padding: 1rem 0.5rem;
+  color: var(--text);
+  text-decoration: none;
+  transition: background-color 0.15s ease-in-out;
 }
-
-.post-card {
-  position: relative;
-  width: 100%;
-  max-width: 500px;
-  height: 300px;
-  margin-inline: auto;
-  overflow: hidden;
-  border-radius: 0.75rem;
-  background: linear-gradient(to bottom right, var(--indigo-900), var(--fuchsia-900));
-  box-shadow: var(--card-shadow);
-  transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+.post-row__link:hover {
+  background: var(--surface);
 }
-.post-card:hover {
-  transform: scale(1.02);
+.post-row__link:hover .post-row__title {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }
-.post-card:focus-within {
+.post-row__link:focus-visible {
   outline: 2px solid var(--focus);
   outline-offset: 2px;
 }
-.post-card__image {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.post-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(180deg, rgb(0 0 0 / 0.63) 0%, rgb(0 0 0 / 0.29) 42.19%, rgb(0 0 0 / 0) 54.69%, rgb(0 0 0 / 0) 90.62%, rgb(0 0 0 / 0.33) 100%);
-}
-.post-card__link {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  padding: 1.25rem;
-  color: #fff;
-  text-decoration: none;
-  text-shadow: 0 0 4px rgb(0 0 0 / 0.8), 0 0 6px rgb(0 0 0 / 0.6);
-}
-.post-card__link:focus-visible {
-  outline: none;
-}
-.post-card__title {
+.post-row__title {
+  flex: 1 1 20rem;
   font-family: var(--font-display);
-  font-weight: 400;
-  font-size: 1.5rem;
-  line-height: 2rem;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  color: var(--heading);
 }
-.post-card__date {
-  text-align: right;
+.post-row__date {
+  flex: none;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
 }
 
 /* ---------- post ---------- */

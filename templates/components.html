@@ -41,18 +41,14 @@
 </header>
 {% endcomponent page_header %}
 
-{% component post_card(post, eager: bool = false) %}
-<li class="post-card">
-  {%- if post.extra.featured_image %}
-  {%- set thumb = resize_image(path=post.colocated_path ~ post.extra.featured_image, width=640, height=400, op="fill", format="webp", quality=78) %}
-  <img class="post-card__image" src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" alt=""{% if eager %} fetchpriority="high"{% else %} loading="lazy" decoding="async"{% endif %}>
-  {%- endif %}
-  <a class="post-card__link" href="{{ post.permalink }}">
-    <h2 class="post-card__title">{{ post.extra.card_title or post.title }}</h2>
-    <time class="post-card__date" datetime="{{ post.date }}">{{ post.date }}</time>
+{% component post_row(post) %}
+<li class="post-row">
+  <a class="post-row__link" href="{{ post.permalink }}">
+    <span class="post-row__title">{{ post.title }}</span>
+    <time class="post-row__date" datetime="{{ post.date }}">{{ post.date }}</time>
   </a>
 </li>
-{% endcomponent post_card %}
+{% endcomponent post_row %}
 
 {#- Table of contents for a post: top-level headings with their direct subheadings, from Zola's page.toc.
     Rendered as a sticky rail beside the article on wide screens and a collapsible block above it otherwise
