@@ -1035,6 +1035,473 @@ html.dark .prose blockquote:is(.markdown-alert-note, .markdown-alert-warning)::b
   color: var(--text-strong);
 }
 
+/* ---------- data posts: charts, cards, verdict table, FAQ, jargon tooltips ----------
+   Raw HTML blocks inside Markdown (first used by blog/dropping-the-framework-web-performance).
+   Two series: --viz-b (indigo, the site primary) and --viz-c (orange, distinct from indigo
+   for colour-blind readers). --viz-accent (fuchsia, the site secondary) marks limits and deltas.
+   Tooltips come from [data-tip] attributes, wired up by initTips() in site.ts. */
+
+:root {
+  --viz-surface: var(--slate-50);
+  --viz-surface-2: #fff;
+  --viz-line: var(--slate-200);
+  --viz-axis: var(--slate-300);
+  --viz-ink: var(--slate-900);
+  --viz-ink-2: var(--slate-600);
+  --viz-muted: var(--slate-500);
+  --viz-accent: #a21caf; /* fuchsia-700 */
+  --viz-b: var(--indigo-600);
+  --viz-b-soft: rgb(79 70 229 / 0.1);
+  --viz-c: #c2410c; /* orange-700 */
+  --viz-c-soft: rgb(194 65 12 / 0.1);
+  --viz-on-series: #fff; /* labels drawn inside a series bar */
+  --viz-claim: var(--slate-400);
+  --viz-up: rgb(22 163 74 / 0.22);
+  --viz-dn: rgb(220 38 38 / 0.2);
+  --viz-good: #15803d;
+  --viz-bad: #b91c1c;
+  --viz-mixed: #b45309;
+  --viz-tip-bg: var(--slate-900);
+  --viz-tip-text: #fff;
+}
+html.dark {
+  --viz-surface: var(--slate-900);
+  --viz-surface-2: var(--slate-800);
+  --viz-line: var(--slate-700);
+  --viz-axis: var(--slate-600);
+  --viz-ink: #fff;
+  --viz-ink-2: var(--slate-300);
+  --viz-muted: var(--slate-400);
+  --viz-accent: #e879f9; /* fuchsia-400 */
+  --viz-b: var(--indigo-400);
+  --viz-b-soft: rgb(129 140 248 / 0.16);
+  --viz-c: #fb923c; /* orange-400 */
+  --viz-c-soft: rgb(251 146 60 / 0.16);
+  --viz-on-series: var(--slate-900);
+  --viz-claim: var(--slate-500);
+  --viz-up: rgb(34 197 94 / 0.3);
+  --viz-dn: rgb(248 113 113 / 0.3);
+  --viz-good: #4ade80;
+  --viz-bad: #f87171;
+  --viz-mixed: #fbbf24;
+  --viz-tip-bg: var(--slate-100);
+  --viz-tip-text: var(--slate-900);
+}
+
+/* Jargon: dotted underline, definition in a tooltip on hover, focus or tap. */
+.prose .term {
+  border-bottom: 1.5px dotted var(--viz-muted);
+  cursor: help;
+}
+.prose .term:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+.viz-tip {
+  position: fixed;
+  z-index: 50;
+  max-width: 300px;
+  padding: 0.6rem 0.8rem;
+  border-radius: 0.5rem;
+  background: var(--viz-tip-bg);
+  color: var(--viz-tip-text);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  box-shadow: 0 8px 28px rgb(0 0 0 / 0.3);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.12s, transform 0.12s;
+}
+.viz-tip.is-on {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .viz-tip { transition: none; }
+}
+
+/* Figure card */
+.prose .chart {
+  margin-block: 2.5rem;
+  padding: 1.5rem 1.5rem 1.25rem;
+  border: 1px solid var(--viz-line);
+  border-radius: 0.75rem;
+  background: var(--viz-surface);
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  color: var(--viz-ink-2);
+}
+.prose .chart > * + * {
+  margin-top: 0;
+}
+.prose .chart .fig-title {
+  margin: 0 0 0.25rem;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--viz-ink);
+}
+.prose .chart .fig-sub {
+  margin: 0 0 1.1rem;
+  font-size: 0.9rem;
+}
+.prose .chart figcaption {
+  margin-top: 1rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--viz-line);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  text-align: left;
+  color: var(--viz-ink-2);
+}
+.prose .chart figcaption b {
+  color: var(--viz-ink);
+}
+.prose .chart svg.viz {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  font-family: inherit;
+}
+.prose .chart .legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.4rem;
+  margin: 0 0 0.9rem;
+  font-size: 0.875rem;
+}
+.prose .chart .legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.prose .chart :is(.legend, .tile) i {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+.prose .chart .sw-b { background: var(--viz-b); }
+.prose .chart .sw-c { background: var(--viz-c); }
+.prose .chart .sw-claim { background: var(--viz-claim); }
+
+/* SVG roles */
+.prose .chart .ax { stroke: var(--viz-axis); stroke-width: 1; }
+.prose .chart .gl { stroke: var(--viz-line); stroke-width: 1; }
+.prose .chart .tk { fill: var(--viz-muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+.prose .chart .lb { fill: var(--viz-ink-2); font-size: 13.5px; }
+.prose .chart .lb-strong { fill: var(--viz-ink); font-size: 13.5px; font-weight: 600; }
+.prose .chart .val { fill: var(--viz-ink); font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.prose .chart .val-in { fill: var(--viz-on-series); font-size: 13px; font-weight: 650; }
+.prose .chart .note { fill: var(--viz-muted); font-size: 12px; }
+.prose .chart .fb { fill: var(--viz-b); }
+.prose .chart .fc { fill: var(--viz-c); }
+.prose .chart .fclaim { fill: var(--viz-claim); }
+.prose .chart .sb { stroke: var(--viz-b); }
+.prose .chart .sc { stroke: var(--viz-c); }
+.prose .chart .cap { stroke: var(--viz-accent); stroke-width: 1.5; stroke-dasharray: 4 4; }
+.prose .chart .capt { fill: var(--viz-accent); font-size: 12px; font-weight: 600; }
+.prose .chart .ring { stroke: var(--viz-surface); stroke-width: 2; }
+.prose .chart svg [data-tip]:hover { filter: brightness(1.15); }
+
+/* Dashboard sketch (first figure). The simulation panel stays dark in both themes. */
+.prose .chart .sk-frame { fill: var(--viz-surface-2); stroke: var(--viz-line); }
+.prose .chart .sk-bar { fill: var(--viz-line); }
+.prose .chart .sk-url { fill: var(--viz-surface); }
+.prose .chart .sk-sim { fill: #16161c; }
+html.dark .prose .chart .sk-sim { fill: #0c0c10; }
+.prose .chart .sk-spring { fill: none; stroke: rgb(240 239 236 / 0.28); stroke-width: 1; }
+.prose .chart .sk-node { fill: #f0efec; stroke: #0c0c10; stroke-width: 1.5; }
+.prose .chart .sk-cursor { fill: #f0efec; stroke: #0c0c10; stroke-width: 1; }
+.prose .chart .sk-lab { fill: var(--viz-muted); font-size: 10.5px; letter-spacing: 0.14em; font-weight: 600; }
+.prose .chart .sk-head { fill: var(--viz-muted); font-size: 10px; letter-spacing: 0.06em; font-weight: 600; }
+.prose .chart .sk-sym { fill: var(--viz-ink); font-size: 11px; font-weight: 600; }
+.prose .chart .sk-cell { fill: var(--viz-ink-2); font-size: 11px; font-variant-numeric: tabular-nums; }
+.prose .chart .sk-up { fill: var(--viz-up); }
+.prose .chart .sk-dn { fill: var(--viz-dn); }
+.prose .chart .sk-sel { fill: var(--viz-b-soft); }
+.prose .chart .sk-spark { fill: none; stroke: var(--viz-accent); stroke-width: 1.2; }
+.prose .chart .sk-div { stroke: var(--viz-line); }
+
+.prose .chart .callouts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1.1rem;
+}
+.prose .chart .callouts div {
+  padding: 0.9rem 1rem;
+  border-radius: 0.5rem;
+  background: var(--viz-surface-2);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.prose .chart .callouts b {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--viz-ink);
+}
+
+/* Stat tiles */
+.prose .chart .tiles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.9rem;
+}
+.prose .chart .tile {
+  padding: 1rem 1.1rem;
+  border-radius: 0.5rem;
+  background: var(--viz-surface-2);
+}
+.prose .chart .tile .k {
+  margin-bottom: 0.6rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+.prose .chart .tile .pair {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem;
+  align-items: baseline;
+}
+.prose .chart .tile .pair span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.prose .chart .tile .pair b {
+  font-size: 1.5rem;
+  font-weight: 650;
+  color: var(--viz-ink);
+}
+.prose .chart .tile .d {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--viz-accent);
+}
+
+/* 2x2 mix-and-match grid */
+.prose .chart .mix {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr;
+  gap: 0.6rem;
+  align-items: stretch;
+}
+.prose .chart .mix .h {
+  align-self: end;
+  padding-bottom: 0.25rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-align: center;
+  color: var(--viz-muted);
+}
+.prose .chart .mix .r {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 0.4rem;
+  font-size: 0.875rem;
+  line-height: 1.35;
+  text-align: right;
+}
+.prose .chart .mix .cell {
+  padding: 1.1rem 0.6rem;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+.prose .chart .mix .cell b {
+  display: block;
+  font-size: 1.9rem;
+  font-weight: 650;
+  line-height: 1.1;
+  color: var(--viz-ink);
+}
+.prose .chart .mix .cell small { font-size: 0.8rem; }
+.prose .chart .mix .cb { background: var(--viz-b-soft); box-shadow: inset 0 0 0 1.5px var(--viz-b); }
+.prose .chart .mix .cc { background: var(--viz-c-soft); box-shadow: inset 0 0 0 1.5px var(--viz-c); }
+
+/* Files-touched blocks */
+.prose .chart .files {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem 1.1rem;
+  align-items: center;
+}
+.prose .chart .files .who {
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+.prose .chart .files .who b {
+  display: block;
+  color: var(--viz-ink);
+}
+.prose .chart .sq {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.prose .chart .sq i {
+  display: block;
+  width: 22px;
+  height: 28px;
+  border-radius: 4px;
+}
+.prose .chart .sq.b i { background: var(--viz-b); }
+.prose .chart .sq.c i { background: var(--viz-c); }
+.prose .chart .sq i.maybe { opacity: 0.4; }
+.prose .chart .files .num {
+  grid-column: 2;
+  margin-top: -0.5rem;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 600px) {
+  .prose .chart {
+    padding: 1.25rem 0.9rem 1rem;
+    overflow-x: auto;
+  }
+  /* Keep chart labels legible: below this width the SVG scrolls sideways inside the card. */
+  .prose .chart svg.viz {
+    min-width: 540px;
+  }
+  .prose .chart :is(.callouts, .tiles) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Two contestant cards side by side */
+.prose .versus {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.1rem;
+  margin-block: 2.25rem;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+.prose .versus .side {
+  padding: 1.25rem 1.25rem 0.5rem;
+  border: 1px solid var(--viz-line);
+  border-top: 4px solid var(--viz-b);
+  border-radius: 0.75rem;
+  background: var(--viz-surface);
+}
+.prose .versus .side.c {
+  border-top-color: var(--viz-c);
+}
+.prose .versus h3 {
+  margin: 0 0 0.2rem;
+  font-size: 1.3rem;
+}
+.prose .versus .tag {
+  margin: 0 0 0.8rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--viz-muted);
+}
+.prose .versus ul {
+  margin: 0 0 0.75rem;
+  padding-left: 1.1em;
+}
+@media (max-width: 680px) {
+  .prose .versus { grid-template-columns: 1fr; }
+}
+
+/* Verdict table with status chips */
+.prose .tbl-wrap {
+  margin-block: 2rem 2.5rem;
+  overflow-x: auto;
+  border: 1px solid var(--viz-line);
+  border-radius: 0.75rem;
+  font-size: 1rem;
+}
+.prose .tbl-wrap table {
+  display: table;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+.prose .tbl-wrap :is(th, td) {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--viz-line);
+}
+.prose .tbl-wrap th {
+  background: var(--viz-surface);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--viz-muted);
+}
+.prose .tbl-wrap tr:last-child td { border-bottom: 0; }
+.prose .tbl-wrap td { color: var(--viz-ink-2); }
+.prose .tbl-wrap td:first-child {
+  min-width: 12rem;
+  font-weight: 550;
+  color: var(--viz-ink);
+}
+.prose .chip {
+  display: inline-block;
+  margin-bottom: 0.4rem;
+  padding: 0.1rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.prose .chip.no { color: var(--viz-bad); box-shadow: inset 0 0 0 1.5px var(--viz-bad); }
+.prose .chip.yes { color: var(--viz-good); box-shadow: inset 0 0 0 1.5px var(--viz-good); }
+.prose .chip.meh { color: var(--viz-mixed); box-shadow: inset 0 0 0 1.5px var(--viz-mixed); }
+.prose .chip.na { color: var(--viz-muted); box-shadow: inset 0 0 0 1.5px var(--viz-muted); }
+/* Phones: stack each row so nothing is cut off. */
+@media (max-width: 600px) {
+  .prose .tbl-wrap thead { display: none; }
+  .prose .tbl-wrap tr { display: block; border-bottom: 1px solid var(--viz-line); }
+  .prose .tbl-wrap tr:last-child { border-bottom: 0; }
+  .prose .tbl-wrap td { display: block; min-width: 0; border-bottom: 0; }
+  .prose .tbl-wrap td:first-child { padding-bottom: 0.25rem; }
+  .prose .tbl-wrap td:last-child { padding-top: 0.25rem; }
+}
+
+/* FAQ accordion */
+.prose .faq details {
+  padding-block: 0.25rem;
+  border-bottom: 1px solid var(--border);
+}
+.prose .faq details:first-of-type {
+  border-top: 1px solid var(--border);
+}
+.prose .faq summary {
+  position: relative;
+  padding: 0.9rem 2.25rem 0.9rem 0;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--heading);
+}
+.prose .faq summary::-webkit-details-marker {
+  display: none;
+}
+.prose .faq summary::after {
+  content: "+";
+  position: absolute;
+  top: 0.65rem;
+  right: 0.4rem;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+.prose .faq details[open] summary::after {
+  content: "\2013";
+}
+.prose .faq details p {
+  margin: 0 0 1.1em;
+}
+
 /* ---------- about ---------- */
 
 .about-intro {

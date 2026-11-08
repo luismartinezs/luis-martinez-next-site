@@ -31,6 +31,10 @@ Freshness: rebuild on publication. No private data anywhere.
   (`page.toc`). ≥ 1280px: sticky left rail, scroll-spy marks the current section (`aria-current`) and shows
   only its subheadings. Narrower: a collapsible "Contents" block above the text, closed by default.
   Without JS it is open everywhere with every entry shown. Hidden in print.
+- Data posts: charts, cards, a verdict table and a FAQ are raw HTML blocks in the post's Markdown, styled by
+  the "data posts" section of `site.css` (`--viz-*` tokens, light and dark). Elements with `data-tip` (chart
+  marks, `.term` jargon) show a tooltip on hover, focus or tap (`initTips` in `site.ts`); without JS the
+  charts and text still read in full, only the extra details are missing.
 - Code highlighting: Zola/giallo with `github-light`/`github-dark` CSS classes; the theme toggle switches
   which stylesheet is active.
 - Analytics: Umami (cookieless). Browser errors: Sentry loader script (lazy-loads the SDK on first error).

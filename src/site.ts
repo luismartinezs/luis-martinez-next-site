@@ -134,7 +134,75 @@ function initToc(): void {
   update();
 }
 
+// Tooltips for [data-tip] elements in post figures and jargon (.term). Shown on hover, keyboard focus
+// and tap; Escape, scrolling or tapping elsewhere hides it. Pages without [data-tip] skip all of this.
+function initTips(): void {
+  if (!document.querySelector("[data-tip]")) return;
+  const tip = document.createElement("div");
+  tip.className = "viz-tip";
+  tip.setAttribute("role", "tooltip");
+  tip.id = "viz-tip";
+  document.body.append(tip);
+  let current: Element | null = null;
+
+  const targetOf = (event: Event): Element | null =>
+    event.target instanceof Element ? event.target.closest("[data-tip]") : null;
+
+  const show = (el: Element, x?: number): void => {
+    tip.textContent = el.getAttribute("data-tip");
+    tip.classList.add("is-on");
+    if (current && current !== el) current.removeAttribute("aria-describedby");
+    el.setAttribute("aria-describedby", tip.id);
+    current = el;
+    const r = el.getBoundingClientRect();
+    const left = Math.min(window.innerWidth - tip.offsetWidth - 12, Math.max(12, (x ?? r.left + r.width / 2) - tip.offsetWidth / 2));
+    const top = r.top - tip.offsetHeight - 10 > 8 ? r.top - tip.offsetHeight - 10 : r.bottom + 10;
+    tip.style.left = `${left}px`;
+    tip.style.top = `${top}px`;
+  };
+  const hide = (): void => {
+    tip.classList.remove("is-on");
+    current?.removeAttribute("aria-describedby");
+    current = null;
+  };
+
+  // Hover is mouse-only: a tap also fires pointerover, and the click handler below owns taps.
+  document.addEventListener("pointerover", (event) => {
+    if (event.pointerType !== "mouse") return;
+    const el = targetOf(event);
+    if (el) show(el, event.clientX);
+    else if (current) hide();
+  });
+  document.addEventListener("focusin", (event) => {
+    const el = targetOf(event);
+    if (el) show(el);
+  });
+  document.addEventListener("focusout", hide);
+  // A press on the element whose tip was already open closes it; any other press opens its own tip
+  // (focus from the same tap may have opened it already, so the state is read before the press).
+  let openBeforePress = false;
+  document.addEventListener("pointerdown", (event) => {
+    openBeforePress = current !== null && targetOf(event) === current;
+  });
+  document.addEventListener("click", (event) => {
+    const el = targetOf(event);
+    if (el && !openBeforePress) show(el, event.clientX);
+    else hide();
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") hide();
+  });
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (current && !current.matches(":focus")) hide();
+    },
+    { passive: true },
+  );
+}
+
 initTheme();
 initMenu();
 initPrint();
 initToc();
+initTips();
