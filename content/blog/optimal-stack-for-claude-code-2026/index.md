@@ -83,22 +83,48 @@ Two stacks, both optimized by agents who knew what they were doing:
 
 The app: a 2,000-row live market grid taking 120,000 updates per second, next to a particle simulation of up to 2 million particles.
 
-Results:
+Both held 240 fps with zero missed frames. So the question became: what did each one cost?
 
-- Both held 240 fps with zero missed frames.
-- Zero DX used about 13% less main-thread work and shipped a 9× smaller bundle (21 KB vs 196 KB gzipped).
-- Building it from scratch cost the agents the same: 6.73M vs 6.82M weighted tokens.
-- Then I had fresh agents add a feature that cuts across layers (sortable columns plus a sector highlight), 4 runs per side. Zero DX was about 40% cheaper: 0.54M vs 0.93M weighted tokens (medians).
-- Every good-DX run touched 14 to 15 files. Every zero-DX run touched 4.
-
-The total code was about the same size in bytes (64 KB vs 55 KB). The difference was 27 files vs 6.
+<figure class="chart">
+  <p class="fig-title">Same cost to build, cheaper to change</p>
+  <p class="fig-sub">Agent cost in weighted tokens. The feature was sortable columns plus a sector highlight, 4 fresh-agent runs per side.</p>
+  <div class="legend"><span><i class="sw-b"></i>Good DX</span><span><i class="sw-c"></i>Zero DX</span></div>
+  <div class="tiles">
+    <div class="tile"><div class="k">Building it from scratch</div><div class="pair"><span><i class="sw-b"></i><b>6.73M</b></span><span><i class="sw-c"></i><b>6.82M</b></span></div><div class="d">about equal</div></div>
+    <div class="tile"><div class="k">Adding one feature (median)</div><div class="pair"><span><i class="sw-b"></i><b>0.93M</b></span><span><i class="sw-c"></i><b>0.54M</b></span></div><div class="d">about 40% less</div></div>
+    <div class="tile"><div class="k">Code shipped to the browser, gzipped</div><div class="pair"><span><i class="sw-b"></i><b>196 KB</b></span><span><i class="sw-c"></i><b>21 KB</b></span></div><div class="d">9× smaller</div></div>
+    <div class="tile"><div class="k">Main-thread work, ms per second</div><div class="pair"><span><i class="sw-b"></i><b>333</b></span><span><i class="sw-c"></i><b>291</b></span></div><div class="d">13% less</div></div>
+  </div>
+  <p class="fig-sub flow-sub2">Code files each run touched to add the feature</p>
+  <div class="files">
+    <div class="who"><b>Good DX</b>14–15 files</div>
+    <div class="sq b" aria-label="14 to 15 files"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="maybe"></i></div>
+    <div class="who"><b>Zero DX</b>4 files</div>
+    <div class="sq c" aria-label="4 files"><i></i><i></i><i></i><i></i></div>
+  </div>
+  <figcaption>Both codebases were about the same size in bytes (64 KB vs 55 KB). The difference was <b>27 files vs 6</b>.</figcaption>
+</figure>
 
 So the framework didn't make the agent faster to build, and it made the agent SLOWER to change things. The cost tracked file count and indirection, not code size.
 
-Two more findings worth knowing:
+Two more findings worth knowing.
 
-- **The gap came from the DOM layer, not from Rust.** Swapping the simulation implementation changed nothing on the main thread.
-- **Expertise beat the stack.** The good-DX side's first correct build spent about 600 ms per second on the main thread. After cross-review it got down to about 335. That improvement was bigger than the final gap between the two stacks.
+**The gap came from the DOM layer, not from Rust.** Swapping the simulation implementation changed nothing on the main thread.
+
+**Expertise beat the stack.** This one I didn't expect:
+
+<figure class="chart">
+  <p class="fig-title">Expertise beat the stack</p>
+  <p class="fig-sub">Main-thread work, ms per second. Lower is better.</p>
+  <div class="hbars">
+    <span class="hb-l">Good DX, first correct build</span><span class="hb-t"><i class="b faint" style="width:100%"></i></span><b>~600</b>
+    <span class="hb-l">Good DX, after cross-review</span><span class="hb-t"><i class="b" style="width:55.5%"></i></span><b>333</b>
+    <span class="hb-l">Zero DX, final</span><span class="hb-t"><i class="c" style="width:48.5%"></i></span><b>291</b>
+  </div>
+  <figcaption>Fixes found in cross-review saved about <b>265 ms/s</b>. Switching the whole stack saved about <b>40</b> more.</figcaption>
+</figure>
+
+I wrote the full experiment up in [Dropping the framework barely sped up my app. Here's what did.](@/blog/dropping-the-framework-web-performance/index.md)
 
 Now the caveats, because they matter.
 
@@ -333,29 +359,46 @@ The bones stayed: one VPS, Caddy, systemd, PostgreSQL. How releases get there ch
 
 ### Why no GitHub Actions anymore?
 
-The old pipeline:
-
-```text
-typecheck → build frontend → SSH into VPS → git pull → install → restart service
-```
-
-Two problems. It builds on the production server. And it puts GitHub between you and your own server.
+The old pipeline had two problems. It installed and ran from source on the production server. And it put GitHub between you and your own server.
 
 The new one runs from the agent's working environment:
 
-```text
-commit
-→ ./deploy
-→ refuse if the working tree is dirty
-→ ./verify
-→ build an immutable release locally
-→ upload it to the VPS
-→ run migrations
-→ switch the "current" symlink
-→ restart the backend
-→ readiness check
-→ public smoke test
-```
+<figure class="chart">
+  <p class="fig-title">Where each deploy step runs</p>
+  <p class="fig-sub">April's GitHub Actions pipeline next to November's <code>./deploy</code></p>
+  <div class="flow-pair">
+    <div>
+      <p class="flow-head">April 2026</p>
+      <ol class="flow compact">
+        <li class="flow-group">GitHub Actions runner</li>
+        <li><span class="mk mk-check"></span><b>Typecheck</b></li>
+        <li><span class="mk mk-agent"></span><b>Build the frontend</b></li>
+        <li class="flow-group">On the VPS, over SSH</li>
+        <li><span class="mk mk-prod"></span><b>git pull</b><span>source code lands on production</span></li>
+        <li><span class="mk mk-prod"></span><b>Install dependencies</b><span>the package registry is in the deploy path</span></li>
+        <li><span class="mk mk-agent"></span><b>Restart the service</b><span>and hope</span></li>
+      </ol>
+    </div>
+    <div>
+      <p class="flow-head">November 2026</p>
+      <ol class="flow compact">
+        <li class="flow-group">On your machine</li>
+        <li><span class="mk mk-check"></span><b>Refuse a dirty working tree</b><span>every release is an exact commit</span></li>
+        <li><span class="mk mk-check"></span><b>./verify</b></li>
+        <li><span class="mk mk-agent"></span><b>Build an immutable release</b><span>binaries, static files, migrations, VERSION, MANIFEST</span></li>
+        <li class="flow-group">On the VPS</li>
+        <li><span class="mk mk-agent"></span><b>Upload the release</b></li>
+        <li><span class="mk mk-check"></span><b>Run migrations</b><span>a failure stops the deploy</span></li>
+        <li><span class="mk mk-agent"></span><b>Switch the current symlink, restart</b></li>
+        <li class="flow-group">From outside</li>
+        <li><span class="mk mk-check"></span><b>Readiness check</b><span><code>/api/healthz</code> returns 200</span></li>
+        <li><span class="mk mk-check"></span><b>Public smoke test</b><span>the real URL, as a user</span></li>
+      </ol>
+    </div>
+  </div>
+  <div class="legend flow-legend"><span><span class="mk mk-agent"></span>a step</span><span><span class="mk mk-check"></span>a check that can stop the deploy</span><span><span class="mk mk-prod"></span>building from source on production</span></div>
+  <figcaption>In April, production pulled source and installed packages. Now it only receives a finished release, with checks before and after.</figcaption>
+</figure>
 
 The server never runs `git pull`, `npm install` or a build. It receives a finished artifact: binaries, static files, migrations, plus a `VERSION` (the commit SHA) and a `MANIFEST` (checksums, toolchain versions, target).
 
@@ -365,16 +408,19 @@ The governing principle: production should be simpler than development.
 
 ### How do releases and rollbacks work?
 
-```text
-/srv/apps/myapp/
-  releases/
-    <commit-a>/
-    <commit-b>/
-    <commit-c>/
-  current -> releases/<commit-c>
-```
+<figure class="chart">
+  <p class="fig-title">Deploy and rollback move one symlink</p>
+  <p class="fig-sub">Releases sit side by side in <code>/srv/apps/myapp/releases/</code>, one folder per commit</p>
+  <div class="rel-rows">
+    <span class="rel-label">Deploy <code>c</code></span>
+    <div class="rel"><span>commit-a</span><span>commit-b</span><span class="on">commit-c<em>current</em></span></div>
+    <span class="rel-label">Roll back</span>
+    <div class="rel"><span>commit-a</span><span class="on">commit-b<em>current</em></span><span>commit-c</span></div>
+  </div>
+  <figcaption>systemd and Caddy only ever point at <code>/srv/apps/myapp/current</code>. A deploy moves the link to the new release and restarts. A rollback moves it back. Release <code>c</code> stays on disk.</figcaption>
+</figure>
 
-systemd and Caddy point at `current`. Deploy is a symlink switch plus a restart. Rollback is switching it back.
+Nothing is copied or rebuilt to roll back, so it takes seconds.
 
 One honest limit: a symlink can't undo a destructive database migration. So migrations are expand/contract (add the new column, migrate, remove the old one later) whenever rollback matters.
 
@@ -382,19 +428,31 @@ And keep old hashed assets reachable for a while after a deploy, or users with a
 
 ### What does the server run?
 
-```text
-Ubuntu LTS
-Caddy
-systemd
-PostgreSQL
-Tailscale (admin SSH)
-Vector → Axiom (logs)
-Sentry (browser errors)
-External uptime monitoring
-Cloudflare R2 (backups)
-```
+<figure class="chart">
+  <p class="fig-title">One box, and what lives off it</p>
+  <p class="fig-sub">One Ubuntu LTS VPS for many small products</p>
+  <div class="infra">
+    <div class="infra-box infra-vps">
+      <p class="infra-h">On the VPS</p>
+      <div class="layer"><b>Caddy</b><span>TLS, static files, routes <code>/api</code> to the backends</span></div>
+      <div class="layer"><b>Your apps</b><span>Static files and binaries from the current release; one Unix user and one <code>/etc/&lt;app&gt;/</code> secrets file each</span></div>
+      <div class="layer"><b>systemd</b><span>One service per backend, timers for scheduled jobs</span></div>
+      <div class="layer"><b>PostgreSQL</b><span>One database and one role per app</span></div>
+    </div>
+    <div class="infra-box infra-off">
+      <p class="infra-h">Off the box</p>
+      <div class="layer"><b>Axiom</b><span>Logs, shipped from journald by Vector</span></div>
+      <div class="layer"><b>Sentry</b><span>Errors from users' browsers</span></div>
+      <div class="layer"><b>Uptime monitor</b><span>Probes the public URLs and <code>/api/healthz</code></span></div>
+      <div class="layer"><b>Cloudflare R2</b><span>Nightly <code>pg_dump</code> of each database</span></div>
+      <div class="layer"><b>Tailscale</b><span>Admin SSH over a private network</span></div>
+    </div>
+  </div>
+  <p class="nots"><span>Not by default</span><s>PM2</s><s>Docker deploys</s><s>Kubernetes</s><s>Redis</s><s>Message brokers</s><s>CI/CD platforms</s></p>
+  <figcaption>What has to keep running sits on the box. What has to survive the box going down sits off it.</figcaption>
+</figure>
 
-Not by default: PM2, Docker deployments, Kubernetes, Redis, message brokers, CI/CD platforms. Add one when a concrete requirement shows up.
+Add any of the struck-out ones when a concrete requirement shows up. Not before.
 
 systemd still runs every backend. The unit got stricter:
 
@@ -435,16 +493,16 @@ That table is wrong the day someone forgets to update it.
 
 Now SERVER.md explains the structure and how to find the truth. For anything you can query, it documents the command instead of the answer:
 
-```text
-systemctl
-journalctl
-psql
-ss
-df / free
-caddy validate
-curl
-readlink /srv/apps/<app>/current
-```
+| Question | Command that answers it |
+|---|---|
+| Is the app running? | `systemctl status myapp` |
+| What did it log? | `journalctl -u myapp` |
+| What's in the database? | `psql` |
+| What's listening on which port? | `ss -ltnp` |
+| Disk and memory? | `df -h`, `free -h` |
+| Is the proxy config valid? | `caddy validate --config /etc/caddy/Caddyfile` |
+| Does the app answer? | `curl -fsS https://myapp.com/api/healthz` |
+| Which release is live? | `readlink /srv/apps/myapp/current` |
 
 Live truth beats documentation.
 
