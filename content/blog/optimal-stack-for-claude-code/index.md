@@ -11,6 +11,9 @@ tags = ["claude code", "ai development", "typescript", "architecture", "devops",
 category = "Development"
 +++
 
+> [!WARNING]
+> This post is outdated. My stack changed a lot since April 2026: Rust on the backend, plain DOM and CSS in the browser, Zola for static sites, and deploys without GitHub Actions. Read the updated version: [The Optimal Stack for Building with Claude Code (November 2026 Update)](@/blog/optimal-stack-for-claude-code-2026/index.md).
+
 *A first-principles analysis of how to structure your codebase, not for humans, but for an AI agent.*
 
 ---
