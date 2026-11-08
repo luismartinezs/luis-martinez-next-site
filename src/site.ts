@@ -70,6 +70,71 @@ function initPrint(): void {
   });
 }
 
+// Post table of contents (components.html post_toc). On wide screens it is an always-open sticky rail;
+// on narrow screens it starts collapsed. Scroll-spy marks the section being read with aria-current.
+function initToc(): void {
+  const toc = document.querySelector<HTMLDetailsElement>("[data-toc]");
+  if (!toc) return;
+  const wide = window.matchMedia("(min-width: 1280px)");
+  const syncOpen = (): void => {
+    toc.open = wide.matches;
+  };
+  syncOpen();
+  wide.addEventListener("change", syncOpen);
+  toc.querySelector("summary")?.addEventListener("click", (event) => {
+    if (wide.matches) event.preventDefault();
+  });
+
+  const entries = [...toc.querySelectorAll<HTMLAnchorElement>("a[href^='#']")].flatMap((link) => {
+    const heading = document.getElementById(decodeURIComponent(link.hash.slice(1)));
+    return heading ? [{ link, heading }] : [];
+  });
+  if (entries.length === 0) return;
+  toc.dataset.spy = "";
+
+  let current: (typeof entries)[number] | undefined;
+  const update = (): void => {
+    // The current section is the last heading that has scrolled up to just under the sticky header
+    // (where a TOC click lands it); at the very bottom of the page it is the last heading, so short
+    // closing sections can still be reached.
+    const line = (document.querySelector(".site-top")?.getBoundingClientRect().height ?? 0) + 48;
+    const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+    let next = entries[0];
+    for (const entry of entries) {
+      if (atBottom || entry.heading.getBoundingClientRect().top <= line) next = entry;
+      else break;
+    }
+    if (!next || next === current) return;
+    current?.link.removeAttribute("aria-current");
+    for (const li of toc.querySelectorAll(".is-current")) li.classList.remove("is-current");
+    next.link.setAttribute("aria-current", "location");
+    next.link.closest(".toc__list > li")?.classList.add("is-current");
+    current = next;
+
+    // Keep the marked link visible when the rail itself scrolls (long TOCs on short screens).
+    if (wide.matches && toc.scrollHeight > toc.clientHeight) {
+      const top = next.link.offsetTop;
+      const bottom = top + next.link.offsetHeight;
+      if (top < toc.scrollTop) toc.scrollTop = top - 8;
+      else if (bottom > toc.scrollTop + toc.clientHeight) toc.scrollTop = bottom - toc.clientHeight + 8;
+    }
+  };
+
+  let queued = false;
+  const schedule = (): void => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => {
+      queued = false;
+      update();
+    });
+  };
+  window.addEventListener("scroll", schedule, { passive: true });
+  window.addEventListener("resize", schedule);
+  update();
+}
+
 initTheme();
 initMenu();
 initPrint();
+initToc();

@@ -16,10 +16,20 @@
       {%- endif %}
     </div>
   </header>
+  {#- Posts with at least two headings get a table of contents; short posts keep the plain single column. #}
+  {%- if page.toc | length > 1 %}
+  <div class="post__body">
+    {{<post_toc toc={page.toc} />}}
+    <div class="prose">
+      {{ page.content | safe }}
+    </div>
+  </div>
+  {%- else %}
   <div class="container">
     <div class="prose">
       {{ page.content | safe }}
     </div>
   </div>
+  {%- endif %}
 </article>
 {% endblock content %}

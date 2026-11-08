@@ -54,6 +54,28 @@
 </li>
 {% endcomponent post_card %}
 
+{#- Table of contents for a post: top-level headings with their direct subheadings, from Zola's page.toc.
+    Rendered as a sticky rail beside the article on wide screens and a collapsible block above it otherwise
+    (see .post__body in site.css). site.ts adds scroll-spy; without JS every entry shows and nothing is marked. -#}
+{% component post_toc(toc) %}
+<details class="toc" open data-toc>
+  <summary class="toc__label">Contents</summary>
+  <nav aria-label="Table of contents">
+    <ol class="toc__list">
+      {%- for h in toc %}
+      <li><a href="#{{ h.id }}">{{ h.title }}</a>
+        {%- if h.children %}
+        <ol>
+          {%- for c in h.children %}<li><a href="#{{ c.id }}">{{ c.title }}</a></li>{% endfor %}
+        </ol>
+        {%- endif %}
+      </li>
+      {%- endfor %}
+    </ol>
+  </nav>
+</details>
+{% endcomponent post_toc %}
+
 {#- ===== Resume ===== -#}
 
 {% component resume.pills(items, max: integer = 8) %}

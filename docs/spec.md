@@ -27,6 +27,10 @@ Freshness: rebuild on publication. No private data anywhere.
 - Theme: light/dark toggle, stored in `localStorage["dark-mode"]` (same key as the old site); with no stored
   choice the system preference applies. Applied before first paint by an inline script in `base.html`.
 - Mobile (< 1024px): nav collapses behind a menu button; without JS the links show inline.
+- Post table of contents: posts with 2+ headings list their top-level headings and direct subheadings
+  (`page.toc`). ≥ 1280px: sticky left rail, scroll-spy marks the current section (`aria-current`) and shows
+  only its subheadings. Narrower: a collapsible "Contents" block above the text, closed by default.
+  Without JS it is open everywhere with every entry shown. Hidden in print.
 - Code highlighting: Zola/giallo with `github-light`/`github-dark` CSS classes; the theme toggle switches
   which stylesheet is active.
 - Analytics: Umami (cookieless). Browser errors: Sentry loader script (lazy-loads the SDK on first error).
