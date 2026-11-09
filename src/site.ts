@@ -1,5 +1,5 @@
-// Progressive enhancement for the static site: theme switch, mobile menu, resume printing.
-// Every page works without this script; it only wires up the three controls.
+// Progressive enhancement for the static site: theme switch, mobile menu, resume printing and tabs,
+// post TOC, tooltips. Every page works without this script; it only wires up those controls.
 
 const THEME_KEY = "dark-mode"; // same key and JSON boolean format as the old Next.js site
 
@@ -134,6 +134,91 @@ function initToc(): void {
   update();
 }
 
+// Resume sections (components.html resume.render). Without JS the [data-tabs] list is jump links to
+// sections further down the page. Here it becomes an ARIA tablist (WAI-ARIA APG tabs, automatic
+// activation): one section shows at a time, arrow keys/Home/End move between tabs, and Tab goes from
+// the selected tab into its panel. The URL hash names the selected tab, so /resume/#skills opens Skills
+// as it did on the old site. Print CSS shows every panel.
+function initTabs(): void {
+  for (const list of document.querySelectorAll<HTMLElement>("[data-tabs]")) {
+    const entries = [...list.querySelectorAll<HTMLAnchorElement>("a[href^='#']")].flatMap((tab) => {
+      const panel = document.getElementById(decodeURIComponent(tab.hash.slice(1)));
+      return panel ? [{ tab, panel }] : [];
+    });
+    const first = entries[0];
+    if (!first) continue;
+
+    list.setAttribute("role", "tablist");
+    for (const item of list.children) item.setAttribute("role", "presentation");
+    for (const { tab, panel } of entries) {
+      tab.id ||= `${panel.id}-tab`;
+      tab.setAttribute("role", "tab");
+      tab.setAttribute("aria-controls", panel.id);
+      panel.setAttribute("role", "tabpanel");
+      panel.setAttribute("aria-labelledby", tab.id);
+      panel.tabIndex = 0;
+    }
+
+    const select = (selected: (typeof entries)[number]): void => {
+      for (const entry of entries) {
+        const on = entry === selected;
+        entry.tab.setAttribute("aria-selected", String(on));
+        entry.tab.tabIndex = on ? 0 : -1;
+        entry.panel.hidden = !on;
+      }
+    };
+    const fromHash = (): (typeof entries)[number] | undefined =>
+      entries.find((entry) => `#${entry.panel.id}` === decodeURIComponent(location.hash));
+
+    // A hash naming a section selects it and brings the tabs into view: the browser's own jump to
+    // that section happened before the other sections were hidden, so it now points elsewhere.
+    const openFromHash = (): void => {
+      const entry = fromHash();
+      if (!entry) return;
+      select(entry);
+      list.scrollIntoView({ block: "start" });
+    };
+    select(first);
+    openFromHash();
+    // The browser repeats its fragment jump while the page is still loading; correct it once more after.
+    if (document.readyState !== "complete" && fromHash()) {
+      window.addEventListener("load", () => fromHash() && list.scrollIntoView({ block: "start" }), { once: true });
+    }
+    window.addEventListener("hashchange", openFromHash);
+
+    const activate = (entry: (typeof entries)[number], focus: boolean): void => {
+      select(entry);
+      if (focus) entry.tab.focus();
+      // replaceState: no scroll jump and no history entry per tab, but the URL can still be shared.
+      history.replaceState(history.state, "", `#${entry.panel.id}`);
+    };
+
+    list.addEventListener("click", (event) => {
+      const entry = entries.find((e) => e.tab.contains(event.target as Node));
+      // Modified clicks keep their link behaviour (open the section in a new tab or window).
+      if (!entry || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      activate(entry, false);
+    });
+    list.addEventListener("keydown", (event) => {
+      const index = entries.findIndex((e) => e.tab === document.activeElement);
+      if (index < 0) return;
+      const last = entries.length - 1;
+      const target = {
+        ArrowRight: index === last ? 0 : index + 1,
+        ArrowLeft: index === 0 ? last : index - 1,
+        Home: 0,
+        End: last,
+        " ": index, // links do not activate on Space by default; tabs should
+      }[event.key];
+      const entry = target === undefined ? undefined : entries[target];
+      if (!entry) return;
+      event.preventDefault();
+      activate(entry, true);
+    });
+  }
+}
+
 // Tooltips for [data-tip] elements in post figures and jargon (.term). Shown on hover, keyboard focus
 // and tap; Escape, scrolling or tapping elsewhere hides it. Pages without [data-tip] skip all of this.
 function initTips(): void {
@@ -205,4 +290,5 @@ initTheme();
 initMenu();
 initPrint();
 initToc();
+initTabs();
 initTips();

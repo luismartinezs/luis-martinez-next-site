@@ -59,7 +59,8 @@ on every page, no broken local `src`/`href`, and no leftovers of the old stack i
   Text parity against the live site was checked per post (≥ 97% word-sequence match; differences are the
   date line and syntax-highlighter tokenisation).
 - **Behaviour changes:** URLs now end in `/` (canonical updated; hosts redirect the slashless form).
-  Resume tabs became one page with section links; the print page became print CSS.
+  Resume tabs are links to page sections that site.js turns into ARIA tabs (all sections show without JS
+  and on paper); the print page became print CSS.
   YouTube embeds dropped `cc_lang_pref=nl` and `disablekb=1`. Cookie banner removed (Umami is cookieless).
 - **Rollback:** the previous Next.js build stays deployable from git history (`main` before the merge);
   on Netlify, republish the last Next.js deploy from the Deploys list.

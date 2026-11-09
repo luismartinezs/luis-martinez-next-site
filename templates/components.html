@@ -157,8 +157,15 @@
     </p>
   </div>
 
-  <nav class="resume-nav no-print" aria-label="Resume sections">
-    <ul>
+  {#- Without JS the list is jump links to the sections below; site.js (initTabs) turns it into an
+      ARIA tablist with the sections as its panels. The actions come first so that Tab moves straight
+      from the selected tab into its panel. #}
+  <div class="resume-nav no-print">
+    <p class="resume-nav__actions">
+      {%- for v in variants %}<a href="{{ v.url }}">{{ v.label }}</a>{% endfor %}
+      <button type="button" class="button" data-print>Print / save as PDF</button>
+    </p>
+    <ul class="resume-tabs" aria-label="Resume sections" data-tabs>
       <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
@@ -166,11 +173,7 @@
       <li><a href="#education">Education</a></li>
       <li><a href="#certifications">Certifications</a></li>
     </ul>
-    <p class="resume-nav__actions">
-      {%- for v in variants %}<a href="{{ v.url }}">{{ v.label }}</a>{% endfor %}
-      <button type="button" class="button" data-print>Print / save as PDF</button>
-    </p>
-  </nav>
+  </div>
 
   <section id="about" class="resume-section">
     <h3>About</h3>
